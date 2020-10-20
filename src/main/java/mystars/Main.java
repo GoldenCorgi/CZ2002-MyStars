@@ -1,3 +1,5 @@
+package mystars;
+
 import java.util.Scanner;
 
 public class Main {
