@@ -36,10 +36,10 @@ jobs:
       - name: Install dos2unix (LINUX)
         if: runner.os == 'Linux'
         run: sudo apt-get install dos2unix
-        
+
       - name: Install dos2unix (MacOS)
         if: always() && runner.os == 'macOS'
-        run: sudo apt-get install dos2unix
+        run: sudo brew install dos2unix
 
       - name: Perform IO redirection test (*NIX)
         if: runner.os == 'Linux'
