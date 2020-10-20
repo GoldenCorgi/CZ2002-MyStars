@@ -4,6 +4,7 @@
 cd "${0%/*}"
 
 cd ..
+./gradlew clean shadowJar
 
 cd text-ui-test
 
