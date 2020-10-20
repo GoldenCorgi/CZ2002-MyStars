@@ -39,7 +39,7 @@ jobs:
 
       - name: Install dos2unix (MacOS)
         if: always() && runner.os == 'macOS'
-        run: sudo brew install dos2unix
+        run: brew install dos2unix
 
       - name: Perform IO redirection test (*NIX)
         if: runner.os == 'Linux'
