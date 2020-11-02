@@ -1,5 +1,8 @@
 package mystars.login;
 
+import mystars.StarsException;
+import mystars.Storage;
+
 import java.io.Console;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -8,10 +11,14 @@ import java.util.Scanner;
 public class Login {
     Scanner sc = new Scanner(System.in);
     UserList users;
-    public Login(UserList users) {
+    Storage storage;
+    public Login(UserList users, Storage storage) {
         this.users = users;
+        this.storage = storage;
     }
-    public UserList run() {
+    public String run() throws StarsException {
+        int role;
+        String rolename = "";
         boolean validated = false;
         while (!validated) {
             Console console = System.console();
@@ -22,8 +29,11 @@ public class Login {
 
 //            System.out.println(dtf.format(now)); // removing this line until i figure out how to adapt datetime into my testing framework
             System.out.println("Select user type: ");
+            // TODO add error handling for not 1/2
             System.out.println("1. Student      2. Admin");
-            int role = sc.nextInt();
+            role = sc.nextInt();
+            if (role == 1){rolename="Student";}
+            if (role == 2){rolename="Admin";}
             // TODO add role
 //            UserList users = new UserList();
 
@@ -45,7 +55,8 @@ public class Login {
                 validated = true;
             }
         }
-        return users;
+        storage.saveUsers(users);
+        return rolename;
         //char[] pw = console.readPassword("Enter password: ");
 
         //String password = new String(pw);

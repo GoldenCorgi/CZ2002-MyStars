@@ -4,4 +4,5 @@ Enter your username:
 You are registering as a new user {USERNAME}
 Enter your password: 
 You have registered as a new user!
+Welcome Admin
 Terminating Program!

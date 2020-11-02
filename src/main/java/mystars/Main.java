@@ -27,9 +27,22 @@ public class Main {
             userInterface.showLoadingError();
             users = new UserList();
         }
-        Login login = new Login(users);
-        users = login.run();
-        storage.saveUsers(users);
+        Login login = new Login(users, storage);
+        String rolename = login.run();
+
+
+        if (rolename.equals("Student")) {
+            // TODO add student actions
+            System.out.println("Welcome Student");
+        }
+        else if (rolename.equals("Admin")) {
+            // TODO add admin actions
+            System.out.println("Welcome Admin");
+        }
+        else {
+            System.out.println("Unknown Role");
+        }
+
 
         System.out.println("Terminating Program!");
     }
