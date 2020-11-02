@@ -1,7 +1,7 @@
-Select user type:
+Select user type: 
 1. Student      2. Admin
-Enter your username:
+Enter your username: 
 You are registering as a new user {USERNAME}
-Enter your password:
+Enter your password: 
 You have registered as a new user!
 Terminating Program!

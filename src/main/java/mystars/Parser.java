@@ -1,4 +1,4 @@
-package mystars.parser;
+package mystars;
 import mystars.login.User;
 
 import java.time.LocalDate;

@@ -2,7 +2,6 @@ package mystars;
 
 import mystars.login.User;
 import mystars.login.UserList;
-import mystars.parser.Parser;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
