@@ -63,6 +63,7 @@ public class Main {
 //                case 7: System.out.println("Program terminating...");break;
 //            }
 //        } while (choice<7);
+        System.out.println("Terminating Program!");
     }
 
 }
