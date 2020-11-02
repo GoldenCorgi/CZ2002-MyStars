@@ -7,12 +7,14 @@ import java.util.Scanner;
 
 public class Login {
     private String username, password;
-    private int user;
     Scanner sc = new Scanner(System.in);
     String[][] studentAcc = {{"andy", "super"}, {"sally", "cz2002"}};
     String[][] adminAcc = {{"betty", "star"}, {"sally", "oodp"}};
-
-    public Login() {
+    UserList users;
+    public Login(UserList users) {
+        this.users = users;
+    }
+    public void run() {
         boolean validated = false;
         while (!validated) {
             Console console = System.console();
@@ -25,7 +27,7 @@ public class Login {
             System.out.println("Select user type: ");
             System.out.println("1. Student      2. Admin");
             int user = sc.nextInt();
-            UserList users = new UserList();
+//            UserList users = new UserList();
 
             System.out.println("Enter your username: ");
             String username = sc.next();
@@ -33,7 +35,7 @@ public class Login {
                 System.out.println("Welcome back {USERNAME}");
                 System.out.println("Enter your password: ");
                 String password = sc.next();
-                validated = users.validatePassword(username, password)
+                validated = users.validatePassword(username, password);
 
             } else {
                 System.out.println("You are registering as a new user {USERNAME}");
