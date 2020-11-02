@@ -1,5 +1,7 @@
 package mystars.login;
 
+import java.time.format.DateTimeFormatter;
+
 /**
  * User class.
  */
@@ -29,6 +31,15 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+    /**
+     * Returns the <code>User</code> object as a String for printing or writing to a file.
+     *
+     * @return User's details as a String in a particular format.
+     */
+    @Override
+    public String toString() {
+        return (username + ", " + password);
     }
 
 

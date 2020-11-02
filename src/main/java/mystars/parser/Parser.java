@@ -21,9 +21,10 @@ public class Parser {
         String username = record.substring(0, record.indexOf(", "));
         // Deletes first comma separator.
         record.delete(0, record.indexOf(", ") + 2);
-        String password = record.substring(0, record.indexOf(", "));
-        // Deletes second comma separator.
-        record.delete(0, record.indexOf(", ") + 2);
+        String password = record.toString();
+//        String password = record.substring(0, record.indexOf(", "));
+//        // Deletes second comma separator.
+//        record.delete(0, record.indexOf(", ") + 2);
         return new User(username, password);
     }
 
@@ -43,13 +44,13 @@ public class Parser {
 //        return appointment;
 //    }
 
-    /**
-     * Reads and parse command.
-     *
-     * @param fullCommand Input string.
-     * @return Command to be ran.
-     * @throws RexException if command does not exist.
-     */
+//    /**
+//     * Reads and parse command.
+//     *
+//     * @param fullCommand Input string.
+//     * @return Command to be ran.
+//     * @throws RexException if command does not exist.
+//     */
 //    public static Command parse(String fullCommand) throws RexException {
 //        assert fullCommand != null && !fullCommand.equals("") : "No command to parse!";
 //
