@@ -9,13 +9,13 @@ import java.time.LocalDate;
 public class Parser {
 
     /**
-     * Reads inputted patient details and return the patient.
+     * Reads inputted user details and return the user.
      *
-     * @param line Input line to parse to patient details.
-     * @return User object with patient details.
+     * @param line Input line to parse to user details.
+     * @return User object with user details.
      */
     public static User readUser(String line) {
-        assert line != null && !line.equals("") : "No patients to read!";
+        assert line != null && !line.equals("") : "No users to read!";
 
         StringBuilder record = new StringBuilder(line);
         String username = record.substring(0, record.indexOf(", "));

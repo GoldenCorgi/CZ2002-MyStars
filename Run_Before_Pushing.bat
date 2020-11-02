@@ -4,7 +4,7 @@
 ECHO [1/2] GENERATING DOCUMENTATION USING JAVADOC
 
 cd docs
-javadoc -sourcepath ../src/main/java mystars
+javadoc -sourcepath ../src/main/java -subpackages mystars
 
 ECHO [2/2] RUNNING TEST CASES
 
