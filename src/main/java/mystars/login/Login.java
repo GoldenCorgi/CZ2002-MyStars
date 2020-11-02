@@ -20,7 +20,7 @@ public class Login {
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
 
 
-            System.out.println(dtf.format(now));
+//            System.out.println(dtf.format(now)); // removing this line until i figure out how to adapt datetime into my testing framework
             System.out.println("Select user type: ");
             System.out.println("1. Student      2. Admin");
             int role = sc.nextInt();

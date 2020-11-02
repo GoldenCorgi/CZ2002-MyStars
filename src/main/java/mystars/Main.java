@@ -19,11 +19,11 @@ public class Main {
         UserList users;
 
         try {
-            logger.log(Level.INFO, "going to load users");
+//            logger.log(Level.INFO, "going to load users");
             users = new UserList(storage.loadUsers());
-            logger.log(Level.INFO, "loaded users");
+//            logger.log(Level.INFO, "loaded users");
         } catch (StarsException e) {
-            logger.log(Level.INFO, "No users found. Creating new users list.");
+//            logger.log(Level.INFO, "No users found. Creating new users list.");
             userInterface.showLoadingError();
             users = new UserList();
         }
