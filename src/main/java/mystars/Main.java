@@ -1,5 +1,4 @@
 package mystars;
-import mystars.UserInterface;
 import mystars.login.Login;
 import mystars.login.UserList;
 
@@ -13,7 +12,6 @@ import java.util.logging.Logger;
 public class Main {
 
     public static void main(String[] args) throws StarsException {
-        final UserInterface userInterface = new UserInterface();
         Logger logger = Logger.getLogger("MyStars");
         final Storage storage = new Storage("data");
         UserList users;
@@ -24,10 +22,11 @@ public class Main {
 //            logger.log(Level.INFO, "loaded users");
         } catch (StarsException e) {
 //            logger.log(Level.INFO, "No users found. Creating new users list.");
-            userInterface.showLoadingError();
+            System.out.println("Error loading user file.");
             users = new UserList();
         }
         Login login = new Login(users, storage);
+        // TODO return user class instead, so can get their username and role
         String rolename = login.run();
 
 

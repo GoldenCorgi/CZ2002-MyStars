@@ -9,6 +9,7 @@ public class User {
 
     private String username;
     private String password;
+    // TODO update role /student/admin
     private String role;
 
     public User(String username, String password) {

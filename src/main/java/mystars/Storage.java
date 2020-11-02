@@ -25,6 +25,28 @@ public class Storage {
     private static final String DOCTORS_FILE = "doctors.txt";
     private final String folder;
 
+
+    /**
+     * Reads inputted user details and return the user.
+     *
+     * @param line Input line to parse to user details.
+     * @return User object with user details.
+     */
+    private static User readUser(String line) {
+        // TODO move over to storage, as it's only used there
+        assert line != null && !line.equals("") : "No users to read!";
+
+        StringBuilder record = new StringBuilder(line);
+        String username = record.substring(0, record.indexOf(", "));
+        // Deletes first comma separator.
+        record.delete(0, record.indexOf(", ") + 2);
+        String password = record.toString();
+//        String password = record.substring(0, record.indexOf(", "));
+//        // Deletes second comma separator.
+//        record.delete(0, record.indexOf(", ") + 2);
+        return new User(username, password);
+    }
+
     /**
      * Initializes path of folder and file.
      *
@@ -54,7 +76,7 @@ public class Storage {
                         break;
                     }
 
-                    User user = Parser.readUser(line);
+                    User user = readUser(line);
                     users.add(user);
                 }
             } catch (IOException e) {
