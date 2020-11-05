@@ -33,18 +33,22 @@ public class Storage {
      * @return User object with user details.
      */
     private static User readUser(String line) {
-        // TODO move over to storage, as it's only used there
         assert line != null && !line.equals("") : "No users to read!";
 
         StringBuilder record = new StringBuilder(line);
-        String username = record.substring(0, record.indexOf(", "));
+        String username = record.substring(0, record.indexOf("||"));
         // Deletes first comma separator.
-        record.delete(0, record.indexOf(", ") + 2);
+        record.delete(0, record.indexOf("||") + 2);
+        String role = record.substring(0, record.indexOf("||"));
+        record.delete(0, record.indexOf("||") + 2);
+        String salt = record.substring(0, record.indexOf("||"));
+        record.delete(0, record.indexOf("||") + 2);
         String password = record.toString();
+
 //        String password = record.substring(0, record.indexOf(", "));
 //        // Deletes second comma separator.
 //        record.delete(0, record.indexOf(", ") + 2);
-        return new User(username, password);
+        return new User(username, password,role,salt);
     }
 
     /**

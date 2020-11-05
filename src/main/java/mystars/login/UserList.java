@@ -57,11 +57,11 @@ public class UserList {
     /**
      * Adds a new user with given details to <code>users</code> ArrayList.
      *
-     * @param username        Name of the user.
-     * @param password        Password of the user.
+     * @param username Name of the user.
+     * @param password Password of the user.
      */
-    public void addNewUser(String username, String password) {
-        addUser(new User(username, password));
+    public void addNewUser(String username, String password, String role) {
+        addUser(new User(username, password, role));
     }
 
 
@@ -90,7 +90,35 @@ public class UserList {
                 return i;
             }
         }
+
         return -1;
+    }
+
+    /**
+     * Finds username entered by the user from the user list.
+     * Returns 2 if accurate.
+     * Returns 1 if user found but role mismatch
+     * Return 0 if user not found
+     *
+     * @param username The username entered by the user.
+     * @param role     The role entered by the user.
+     * @return index of the user with the Password; -1 otherwise.
+     */
+    public int ValidateUser(String username, String role) {
+        assert username != null && !username.equals("") : "Cannot get user of null username";
+        assert role != null && !role.equals("") : "Cannot get role of null role";
+
+        for (int i = 0; i < getSize(); i++) {
+            if (getUserUsingIndex(i).getName().equals(username)) {
+                if (users.get(i).getRole().equals(role)) {
+                    return 2;
+                } else {
+                    return 1;
+                }
+            }
+        }
+
+        return 0;
     }
 
     /**
@@ -103,7 +131,7 @@ public class UserList {
     public Boolean validatePassword(String username, String password) {
         int idx = getExistingUser(username);
         /** TODO PASSWORD HASHING **/
-        return this.users.get(idx).getPasswordHash() == password;
+        return this.users.get(idx).validatePassword(password);
     }
 
 }
