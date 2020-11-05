@@ -3,7 +3,7 @@ Select user type:
 Enter your username: 
 You are registering as a new user - user
 Couldn't get Console instance - Do not run in an IDE
-Enter your not so secret password:
+Enter your not so secret password: 
 You have registered as a new user!
 Welcome Admin
 Terminating Program!
