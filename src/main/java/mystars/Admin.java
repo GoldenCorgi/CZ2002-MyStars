@@ -1,6 +1,7 @@
 package mystars;
 
 import java.io.Serializable;
+import java.util.Scanner;
 
 public class Admin implements Serializable {
     private static final long serialVersionUID = 26;
@@ -16,7 +17,11 @@ public class Admin implements Serializable {
         this.name = name;
     }
 
-    public void addStudent() {}
+    public void addStudent(Scanner sc) {
+        System.out.println("Enter Student's name:");
+        String name = sc.next();
+        System.out.println("Enter the ");
+    }
 
     public void addCourses() {}
 
