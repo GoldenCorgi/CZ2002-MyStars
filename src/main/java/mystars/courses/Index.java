@@ -13,7 +13,7 @@ public class Index {
 
     public Index(int numberOfSlots) {
         this.numberOfSlots = numberOfSlots;
-        this.addedStudents = Arrays.asList(new Student[numberOfSlots]);
+        //this.addedStudents = Arrays.asList(new Student[numberOfSlots]);
     }
 
     public boolean isFull() {
