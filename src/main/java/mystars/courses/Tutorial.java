@@ -1,8 +1,8 @@
 package mystars.courses;
-
 import mystars.Student;
 
 import java.io.Serializable;
+
 public class Tutorial extends CourseComponent{
     private static final long serialVersionUID = 22;
 
