@@ -5,7 +5,7 @@ import mystars.Student;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Courses implements Serializable {
+public class Course implements Serializable{
     private static final long serialVersionUID = 20;
     private String courseName;
     private ArrayList<courseComponent> courseComponents = new ArrayList<CourseComponent>();
