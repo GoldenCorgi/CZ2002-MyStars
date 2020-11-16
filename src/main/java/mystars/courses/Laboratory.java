@@ -2,7 +2,7 @@ package mystars.courses;
 
 import mystars.Student;
 
-public class Laboratory extends CoursesComponent {
+public class Laboratory extends CourseComponent {
     private static final long serialVersionUID = 25;
 
     /**
@@ -28,7 +28,7 @@ public class Laboratory extends CoursesComponent {
      */
     @Override
     public boolean registerStudent(Student s, int indexNumber) {
-        return this.listOfIndexes.get(indexNumber - 1).registerStudent(s);
+        return this.listOfIndexes.get(indexNumber - 1).addStudent(s);
     }
 
     /**

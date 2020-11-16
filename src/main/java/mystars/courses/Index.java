@@ -13,7 +13,7 @@ public class Index implements Serializable {
     // Assuming this number is fixed and no changes will be made during the
     // semester.
     private int numberOfVacancies;
-    private List<Student> registeredStudents = null;
+    private List<Student> addedStudents = null;
 
     /**
      * The constructor for a Group object.
@@ -23,7 +23,7 @@ public class Index implements Serializable {
     public Index(int numberOfSlots) {
         this.numberOfSlots = numberOfSlots;
         this.numberOfVacancies = numberOfSlots;
-        this.registeredStudents = Arrays.asList(new Student[numberOfSlots]);
+        this.addedStudents = Arrays.asList(new Student[numberOfSlots]);
         // Fix the length of the list of student to the number of slots during the
         // creation of the object.
         // Cannot call add() method to add elements. Must use set(). Otherwise an
@@ -36,11 +36,11 @@ public class Index implements Serializable {
      * @param s The student object.
      * @return true upon successful registration, false if the group is full.
      */
-    public boolean registerStudent(Student s) {
+    public boolean addStudent(Student s) {
         if (this.isFull()) {
             return false;
         } else {
-            this.registeredStudents.set(this.numberOfSlots - this.numberOfVacancies, s);
+            this.addedStudents.set(this.numberOfSlots - this.numberOfVacancies, s);
             this.numberOfVacancies--;
             // Assuming 12 slots and 12 vacancies, then the first student to be added is at
             // index 12 - 12 = 0.
@@ -59,9 +59,9 @@ public class Index implements Serializable {
         }
         for (int i = 0; i < this.numberOfSlots - this.numberOfVacancies; i++) {
             if (i == 0) {
-                System.out.printf("| %-15s | %-25s |\n", indexNo, this.registeredStudents.get(i).getStudentName());
+                System.out.printf("| %-15s | %-25s |\n", indexNo, this.addedStudents.get(i).getStudentName());
             } else {
-                System.out.printf("|                 | %-25s |\n", this.registeredStudents.get(i).getStudentName());
+                System.out.printf("|                 | %-25s |\n", this.addedStudents.get(i).getStudentName());
             }
         }
         System.out.println("+-----------------+---------------------------+");
@@ -101,6 +101,6 @@ public class Index implements Serializable {
      * @return the list of registered students under a group.
      */
     public List<Student> getRegisteredStudents() {
-        return this.registeredStudents;
+        return this.addedStudents;
     }
 }

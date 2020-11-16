@@ -18,7 +18,7 @@ public class Lecture extends CourseComponent {
      */
     public Lecture(int numberOfVacancies) {
         super("Lectures", 1);
-        this.listIndex.set(0, new Index(numberOfVacancies));
+        this.listOfIndexes.set(0, new Index(numberOfVacancies));
     }
 
     /**
@@ -34,8 +34,8 @@ public class Lecture extends CourseComponent {
      * @return true upon successful registration, false otherwise.
      */
     @Override
-    public boolean registerStudent(Student s, int indexNo) {
-        return this.listIndex.get(0).registerStudent(s);
+    public boolean addStudent(Student s, int indexNo) {
+        return this.listOfIndexes.get(0).addStudent(s);
         // Since only 1 lecture group is assumed, students are always added to group 1
         // which is at index 0.
     }
@@ -47,7 +47,7 @@ public class Lecture extends CourseComponent {
      */
     @Override
     public boolean haveVacancies() {
-        return !this.listIndex.get(0).isFull();
+        return !this.listOfIndexes.get(0).isFull();
     }
 
     /**
@@ -59,6 +59,6 @@ public class Lecture extends CourseComponent {
         System.out.println("| Index           | Name                      |");
         System.out.println("+-----------------+---------------------------+");
 
-        this.listIndex.get(0).printStudentList("Lecture");
+        this.listOfIndexes.get(0).printStudentList("Lecture");
     }
 }

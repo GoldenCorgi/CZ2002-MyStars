@@ -8,9 +8,9 @@ public class Admin implements Serializable {
     private String name;
 
     /**
-     * The constructor for a professor.
+     * The constructor for an admin.
      *
-     * @param name The name of the professor.
+     * @param name The name of the admin.
      */
 
     public Admin(String name) {

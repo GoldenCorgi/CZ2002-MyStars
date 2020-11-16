@@ -7,16 +7,16 @@ import mystars.Student;
 
 public abstract class CourseComponent implements Serializable {
     private String component;
-    private int numOfIndex;
-    List<Index> listIndex = null;
+    private int numberOfIndexes;
+    List<Index> listOfIndexes = null;
 
-    public CourseComponent(String component, int numOfGroups){
+    public CourseComponent(String component, int numOfIndexes){
         this.component = component;
-        this.numOfIndex = numOfGroups;
-        this.listIndex = Arrays.asList(new Index [numOfGroups]);
+        this.numberOfIndexes = numOfIndexes;
+        this.listOfIndexes = Arrays.asList(new Index [numOfIndexes]);
     }
 
-    public abstract boolean addStudent(Student stud);
+    public abstract boolean addStudent(Student s);
 
     public abstract boolean hasVacancy();
 
@@ -26,12 +26,12 @@ public abstract class CourseComponent implements Serializable {
         return this.component;
     }
 
-    public int getNumOfIndex() {
-        return this.numOfIndex;
+    public int getNumberOfIndexes() {
+        return this.numberOfIndexes;
     }
 
     public List<Index> getListIndex() {
-        return this.listIndex;
+        return this.listOfIndexes;
     }
 
 
