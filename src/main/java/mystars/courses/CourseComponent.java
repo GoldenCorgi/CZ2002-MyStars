@@ -5,12 +5,12 @@ import java.util.Arrays;
 import java.util.List;
 import mystars.Student;
 
-public abstract class CoursesComponent implements Serializable {
+public abstract class CourseComponent implements Serializable {
     private String component;
     private int numOfIndex;
     List<Index> listIndex = null;
 
-    public CoursesComponent(String component, int numOfGroups){
+    public CourseComponent(String component, int numOfGroups){
         this.component = component;
         this.numOfIndex = numOfGroups;
         this.listIndex = Arrays.asList(new Index [numOfGroups]);
@@ -33,9 +33,6 @@ public abstract class CoursesComponent implements Serializable {
     public List<Index> getListIndex() {
         return this.listIndex;
     }
-
-
-
 
 
 
