@@ -1,19 +1,19 @@
 package mystars.courses;
 
-import java.io.Serializable;
+//import java.io.Serializable;
 import java.util.List;
 import java.util.Arrays;
 import mystars.Student;
+import
 
-public class Index implements Serializable {
-    private static final long serialVersionUID = -2445920414804040966L;
+public class Index {
     private int numberOfSlots;
     private int numberOfVacancies;
+    private int indexName;
     private List<Student> addedStudents = null;
 
     public Index(int numberOfSlots) {
         this.numberOfSlots = numberOfSlots;
-        this.numberOfVacancies = numberOfSlots;
         this.addedStudents = Arrays.asList(new Student[numberOfSlots]);
     }
 
@@ -22,7 +22,7 @@ public class Index implements Serializable {
     }
 
     public int getNumberOfVacancies() {
-        return this.numberOfVacancies;
+        return (this.numberOfVacancies)-addedStudents.size();
     }
 
     public int getNumberOfSlots() {

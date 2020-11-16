@@ -5,30 +5,16 @@ import mystars.Student;
 public class Laboratory extends CourseComponent {
     private static final long serialVersionUID = 25;
 
-    /**
-     * Constructor to create a Laboratory object.
-     *
-     * @param numberOfIndexes number of Indexes of a lab
-     * @param slotsPerIndex  number of total slots per lab Index
-     */
-    public Laboratory(int numberOfIndexes, int slotsPerIndexes) {
+    public Laboratory(int numberOfIndexes, int slotsPerIndex) {
         super("Laboratory", numberOfIndexes);
         for (int i = 0; i < numberOfIndexes; i++) {
-            this.listOfIndexes.set(i, new Index(slotsPerIndex));
+            this.listOfIndex.set(i, new Index(slotsPerIndex));
         }
     }
 
-    /**
-     * This method is used to register a student under a lab index.
-     *
-     * @param s           The student object.
-     * @param indexNumber The index number of the lab index which the student
-     *                    wants to register.
-     * @return true upon successful registration, false otherwise.
-     */
     @Override
     public boolean registerStudent(Student s, int indexNumber) {
-        return this.listOfIndexes.get(indexNumber - 1).addStudent(s);
+        return this.listOfIndex.get(indexNumber - 1).addStudent(s);
     }
 
     /**

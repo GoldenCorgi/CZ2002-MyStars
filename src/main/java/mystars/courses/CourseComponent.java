@@ -11,12 +11,12 @@ public abstract class CourseComponent {
     public CourseComponent(String componentName, int numberOfIndexes) {
         this.componentName = componentName;
         this.numberOfIndexes = numberOfIndexes;
-        this.listOfIndex = Arrays.asList(new Index[numberOfIndexes]);
+        //this.listOfIndex = Arrays.asList(new Index[numberOfIndexes]);
     }
 
     public abstract boolean haveVacancies();
 
-    public abstract void printStudentList();
+//    public abstract void printStudentList();
 
     public String getName() {
         return this.componentName;
