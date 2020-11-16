@@ -2,8 +2,8 @@ package mystars.courses;
 
 import mystars.Student;
 
-import java.io.Serializable
-public class Tutorial extends courseComponent{
+import java.io.Serializable;
+public class Tutorial extends CourseComponent{
     private static final long serialVersionUID = 22;
 
     /**
@@ -29,7 +29,7 @@ public class Tutorial extends courseComponent{
      */
     @Override
     public boolean registerStudent(Student s, int indexNumber) {
-        return this.listOfIndexes.get(IndexesNumber - 1).registerStudent(s);
+        return this.listOfIndexes.get(indexNumber - 1).addStudent(s);
     }
 
     /**
@@ -41,7 +41,7 @@ public class Tutorial extends courseComponent{
     @Override
     public boolean haveVacancies() {
         boolean bn = false;
-        for (Indexes g : this.listOfIndexes) {
+        for (Index g : this.listOfIndexes) {
             bn |= (!g.isFull());
         }
         return bn;

@@ -8,13 +8,13 @@ import java.util.ArrayList;
 public class Course implements Serializable{
     private static final long serialVersionUID = 20;
     private String courseName;
-    private ArrayList<courseComponent> courseComponents = new ArrayList<CourseComponent>();
+    private ArrayList<CourseComponent> courseComponent = new ArrayList<CourseComponent>();
 
     public Course(String courseName, int lectureVacancies) {
         this.courseName = courseName;
 
         CourseComponent lecture = new Lecture(lectureVacanies);
-        courseComponents.add(lecture);
+        courseComponent.add(lecture);
     }
 
     /**
@@ -28,10 +28,10 @@ public class Course implements Serializable{
      */
 
     public Course(String courseName, int lectureVacancies, int numberOfTutorialGroups, int slotsPerTutGroup) {
-        this(courseName, courseCoordinator, lectureVacancies);
+        this(courseName, lectureVacancies);
 
         CourseComponent tutorial = new Tutorial(numberOfTutorialGroups, slotsPerTutGroup);
-        courseComponents.add(tutorial);
+        courseComponent.add(tutorial);
     }
 
     /**
@@ -51,7 +51,7 @@ public class Course implements Serializable{
         this(courseName, courseCoordinator, lectureVacancies, numberOfTutorialGroups, slotsPerTutGroup);
 
         CourseComponent lab = new Laboratory(numberOfLabGroups, slotsPerLabGroup);
-        courseComponents.add(lab);
+        CourseComponent.add(lab);
     }
 
     /**
@@ -62,7 +62,7 @@ public class Course implements Serializable{
      */
 
     public void registerStudent(Student s) {
-        this.courseComponents.get(0).registerStudent(s, 1);
+        this.courseComponent.get(0).addStudent(s, 1);
     }
 
     /**
@@ -75,8 +75,8 @@ public class Course implements Serializable{
      */
 
     public void registerStudent(Student s, int tutGroup) {
-        this.registerStudent(s);
-        this.courseComponents.get(1).registerStudent(s, tutGroup);
+        this.addStudent(s);
+        this.courseComponent.get(1).addStudent(s, tutGroup);
     }
 
     /**
@@ -91,18 +91,15 @@ public class Course implements Serializable{
      */
 
     public void registerStudent(Student s, int tutGroup, int labGroup) {
-        this.resgisterStudent(s, tutGroup);
-        this.courseComponents.get(2).registerStudent(s, labGroup);
+        this.addedStudents(s, tutGroup);
+        this.courseComponent.get(2).addStudent(s, labGroup);
     }
 
     public boolean haveVacancies() {
         boolean vacant = true;
-        for (CourseComponent cc : this.courseComponents) {
+        for (CourseComponent cc : this.courseComponent) {
             vacant &= cc.haveVacancies();
         }
         return vacant;
     }
-
-
-
 }
