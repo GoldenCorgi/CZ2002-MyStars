@@ -7,14 +7,18 @@ public class Lecture extends CourseComponent {
     private int timing;
     private String venue;
     private int indexNo;
+    private int numberOfVacancies;
 
 
     public Lecture(int numberOfVacancies) {
-        super("Lecture", 1);
-        this.listOfIndexes.set(0, new Index(numberOfVacancies));
+       this.numberOfVacancies = numberOfVacancies;
     }
 
+    public int getNumberOfVacancies() {
+        return numberOfVacancies;
+    }
 
+    public int getCourseCode();
 
     public Lecture(int courseCode, int indexNo, int timing, String venue){
         super(courseCode, indexNo, timing, venue);
