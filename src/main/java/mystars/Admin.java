@@ -17,12 +17,6 @@ public class Admin implements Serializable {
         this.name = name;
     }
 
-    public void addStudent(Scanner sc) {
-        System.out.println("Enter Student's name:");
-        String name = sc.next();
-        System.out.println("Enter the ");
-    }
-
     public void addCourses() {}
 
     public void updateCourses() {}
