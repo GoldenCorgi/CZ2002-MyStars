@@ -6,7 +6,7 @@ public class Lecture extends CourseComponent {
     private int courseCode;
     private int timing;
     private String venue;
-    private int indexNo;
+    private int indexName;
     private int numberOfVacancies;
 
 

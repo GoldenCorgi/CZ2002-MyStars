@@ -4,7 +4,6 @@ package mystars.courses;
 import java.util.List;
 import java.util.Arrays;
 import mystars.Student;
-import
 
 public class Index {
     private int numberOfSlots;
