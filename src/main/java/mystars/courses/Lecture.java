@@ -5,7 +5,7 @@ import mystars.Student;
 /**
  * The Lecture class extends CourseComponent abstract class.
  */
-public class Lectures extends CourseComponent {
+public class Lecture extends CourseComponent {
     // This Lecture class assumes there is only one Lecture group as it is normally
     // the case.
 
@@ -16,7 +16,7 @@ public class Lectures extends CourseComponent {
      *
      * @param numberOfVacancies Number of vacancies for a lecture group.
      */
-    public Lectures(int numberOfVacancies) {
+    public Lecture(int numberOfVacancies) {
         super("Lectures", 1);
         this.listIndex.set(0, new Index(numberOfVacancies));
     }
