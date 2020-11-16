@@ -39,7 +39,11 @@ public class Course implements Serializable{
      */
 
     public Course(String courseName, int courseCode, int courseVacancies, int numberOfIndexes, int slotsPerIndex, boolean isTutorialOnly) {
-        this(courseName, courseCode, courseVacancies);
+        this.courseName = courseName;
+        this.courseCode = courseCode;
+
+        CourseComponent lecture = new Lecture(courseVacancies);
+        courseComponents.add(lecture);
 
         if (isTutorialOnly) {
             CourseComponent tutorial = new Tutorial(numberOfIndexes, slotsPerIndex);
@@ -62,7 +66,14 @@ public class Course implements Serializable{
      */
 
     public Course(String courseName, int courseCode, int courseVacancies, int numberOfIndexes, int slotsPerIndex) {
-        this(courseName, courseCode, courseVacancies, numberOfIndexes, slotsPerIndex);
+        this.courseName = courseName;
+        this.courseCode = courseCode;
+
+        CourseComponent lecture = new Lecture(courseVacancies);
+        courseComponents.add(lecture);
+
+        CourseComponent tutorial = new Tutorial(numberOfIndexes, slotsPerIndex);
+        courseComponents.add(tutorial);
 
         CourseComponent laboratory = new Laboratory(numberOfIndexes, slotsPerIndex);
         courseComponents.add(laboratory);
