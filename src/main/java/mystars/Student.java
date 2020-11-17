@@ -3,6 +3,16 @@ package mystars;
 import java.io.Serializable;
 import java.util.HashMap;
 
+// in the main function, create another student class for the peer, to swap index for peer
+
+// check if current index is not equal to newCourseIndex
+// check if peerStudID and peerPassword is valid
+// put oldCourseIndex to temp int, add newCourseIndex to studCourses
+// put temp int to peerStudCourses
+
+
+
+
 public class Student implements Serializable {
 
     private String matricNo, studentName, studentEmail, studentGender, studentNationality;
@@ -33,8 +43,9 @@ public class Student implements Serializable {
     public String getStudentNationality() {
         return this.studentNationality;
     }
-    public Boolean hasCourse(String courseCode) {
-        return (this.studentCourses.get(courseCode) != null);
+
+    public boolean hasCourse(String courseCode) {
+        return (this.studentCourses.containsKey(courseCode));
     }
 
     public void addCourse(String courseCode, String courseIndex) {
