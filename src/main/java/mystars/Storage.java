@@ -1,12 +1,10 @@
 package mystars;
 
+import mystars.courses.Course;
 import mystars.login.User;
 import mystars.login.UserList;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -20,7 +18,7 @@ public class Storage {
     private static final String READ_ERROR = "Error reading file.";
     private static final String DIRECTORY_ERROR = "Error creating directory.";
     private static final String WRITE_ERROR = "Error writing file.";
-    private static final String MODULES_FILE = "modules.txt";
+    private static final String COURSES_SERIALIZABLE_FILE_NAME = "courses.dat";
     private static final String USERS_FILE = "users.txt";
     private static final String DOCTORS_FILE = "doctors.txt";
     private final String folder;
@@ -48,7 +46,7 @@ public class Storage {
 //        String password = record.substring(0, record.indexOf(", "));
 //        // Deletes second comma separator.
 //        record.delete(0, record.indexOf(", ") + 2);
-        return new User(username, password,role,salt);
+        return new User(username, password, role, salt);
     }
 
     /**
@@ -229,4 +227,68 @@ public class Storage {
 //
 //        writeToFile(doctorsFileContent, DOCTORS_FILE);
 //    }
+
+    public static ArrayList<Course> loadCourses() {
+        String filename = Paths.get("data", COURSES_SERIALIZABLE_FILE_NAME).normalize().toString();
+        ArrayList<Course> pDetails = null;
+        FileInputStream fis = null;
+        ObjectInputStream in = null;
+        try {
+            fis = new FileInputStream(filename);
+            in = new ObjectInputStream(fis);
+            pDetails = (ArrayList) in.readObject();
+            in.close();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        } catch (ClassNotFoundException ex) {
+            ex.printStackTrace();
+        }
+        // print out the size
+        //System.out.println(" Details Size: " + pDetails.size());
+        //System.out.println();
+        return pDetails;
+    }
+
+        public static void saveCourses(ArrayList<Course> list) {
+        String filename = Paths.get("data", COURSES_SERIALIZABLE_FILE_NAME).normalize().toString();
+        FileOutputStream fos = null;
+        ObjectOutputStream out = null;
+        try {
+            fos = new FileOutputStream(filename);
+            out = new ObjectOutputStream(fos);
+            out.writeObject(list);
+            out.close();
+            //	System.out.println("Object Persisted");
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public static void main(String[] args) {
+        ArrayList<Course> list = new ArrayList<>();
+        try	{
+            // read from serialized file the list of professors
+            String path = Paths.get("data", COURSES_SERIALIZABLE_FILE_NAME).normalize().toString();
+//            System.out.println(path);
+            list = Storage.loadCourses();
+            for (int i = 0 ; i < list.size() ; i++) {
+                Course p = (Course)list.get(i);
+                System.out.println("name is " + p.getCourseName() );
+                System.out.println("contact is " + p.getCourseCode() );
+            }
+            // write to serialized file - update/insert/delete
+            // example - add one more professor
+            Course p = new Course("oodp i guess","cz2002","SCSE", 21);
+            // add to list
+            list.add(p);
+            // list.remove(p);  // remove if p equals object in the list
+
+            Storage.saveCourses(list);
+
+        }  catch ( Exception e ) {
+            System.out.println( "Exception >> " + e.getMessage() );
+        }
+    }
+
+
 }

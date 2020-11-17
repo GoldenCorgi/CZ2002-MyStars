@@ -58,7 +58,8 @@ public class User {
                 spec.clearPassword();
             }
         }
-        public static boolean verifyPassword (String password, String hash, String salt) {
+
+        public static boolean verifyPassword(String password, String hash, String salt) {
             String optEncrypted = hashPassword(password, salt);
             if (optEncrypted.equals("")) return false;
             return optEncrypted.equals(hash);
@@ -66,6 +67,7 @@ public class User {
 
 
     }
+
     private String username;
     private String password;
     // TODO update role /student/admin
@@ -77,6 +79,7 @@ public class User {
         setNewPassword(password);
         setRole(role);
     }
+
     public User(String username, String password, String role, String salt) {
         setName(username);
         this.password = (password);
@@ -87,6 +90,7 @@ public class User {
     public String getName() {
         return this.username;
     }
+
     public String getRole() {
         return this.role;
     }
@@ -94,23 +98,26 @@ public class User {
     public void setName(String name) {
         this.username = name;
     }
+
     public void setRole(String role) {
         this.role = role;
     }
 
-    /** TODO HASHING **/
+    /**
+     * TODO HASHING
+     **/
     public String getPasswordHash() {
         return this.password;
     }
 
     public void setNewPassword(String password) {
         this.salt = PasswordHandler.generateSalt();
-        this.password = PasswordHandler.hashPassword(password,this.salt);
+        this.password = PasswordHandler.hashPassword(password, this.salt);
     }
 
     public boolean validatePassword(String input_password) {
 
-        return PasswordHandler.verifyPassword(input_password,this.password,this.salt);
+        return PasswordHandler.verifyPassword(input_password, this.password, this.salt);
     }
 
     /**
@@ -120,7 +127,7 @@ public class User {
      */
     @Override
     public String toString() {
-        return (username + "||" + role + "||" + salt + "||"+ password);
+        return (username + "||" + role + "||" + salt + "||" + password);
     }
 
 

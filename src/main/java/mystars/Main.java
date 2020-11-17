@@ -1,11 +1,9 @@
 package mystars;
+
 import mystars.login.Login;
 import mystars.login.UserList;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Scanner;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
@@ -75,10 +73,8 @@ public class Main {
                         System.out.println("Program terminating..");
 
                 }
-            } while(choice < 7);
-        }
-
-        else if (rolename.equals("Admin")) {
+            } while (choice < 7);
+        } else if (rolename.equals("Admin")) {
             // TODO add admin actions
             System.out.println("Welcome Admin");
             Admin Admin1 = new Admin();
@@ -124,10 +120,8 @@ public class Main {
                         System.out.println("Program terminating..");
 
                 }
-            } while(choice < 8);
-        }
-
-        else {
+            } while (choice < 8);
+        } else {
             System.out.println("Unknown Role");
         }
 
