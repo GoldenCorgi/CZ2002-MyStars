@@ -43,69 +43,32 @@ public class Main {
             System.out.println("(5) Change Index Number of Course");
             System.out.println("(6) Swop Index Number with Another Student");
             System.out.println("(7) Exit");
-            Student Student1 = new Student();
             Scanner sc = new Scanner(System.in);
+            Student Student1 = new Student();
+
             do {
-                System.out.println("Enter the number of your choice: ");
-                choice = sc.nextInt();
+                choice = Student1.getChoice(sc);
                 switch (choice) {
                     case 1:
-                        System.out.println("Please enter index number: ");
-                        int index = sc.nextInt();
-                        String indexNum = String.valueOf(index);
-                        System.out.println("Enter 'OK' to confirm add course");
-                        String confirm1 = sc.nextLine();
-                        Student1.addCourse(indexNum, confirm1);
+                        Student1.addCourse();
                         break;
                     case 2:
-                        System.out.println("These are the courses that you have registered:");
-                        //Display the course index, course code, and status of the course
-                        HashMap coursesRegistered = Student1.getCourses();
-                        System.out.println(coursesRegistered);
-                        System.out.println("Enter what Course Index you want to drop: ");
-                        int index1 = sc.nextInt();
-                        String indexNum1 = String.valueOf(index1);
-                        System.out.println("Enter 'OK' to confirm drop course");
-                        String confirm2 = sc.nextLine();
-                        Student1.dropCourse(indexNum1, confirm2);
+                        Student1.dropCourse();
                         break;
                     case 3:
                         Student1.getCourses();
                         break;
                     case 4:
-                        System.out.println("Enter Course Index: ");
-                        int index2 = sc.nextInt();
-                        String indexNum2 = String.valueOf(index2);
-
+                        // use courses class to check vacancies of index
                         break;
                     case 5:
-                        System.out.println("Enter Current Index: ");
-                        int index3 = sc.nextInt();
-                        String indexNum3 = String.valueOf(index3);
-                        System.out.println("Enter New Index: ");
-                        int index4 = sc.nextInt();
-                        String indexNum4 = String.valueOf(index4);
-                        System.out.println("Enter 'OK' to confirm drop course");
-                        String confirm3 = sc.nextLine();
-                        Student1.changeIndex(indexNum3, indexNum4, confirm3);
+                        Student1.changeIndex();
 
                         break;
                     case 6:
-                        System.out.println("Enter Your Index: ");
-                        int index5 = sc.nextInt();
-                        String indexNum5 = String.valueOf(index5);
-                        System.out.println("Enter Peer's Username: ");
-                        String peerUN = sc.nextLine();
-                        System.out.println("Enter Peer's Password: ");
-                        String peerPW = sc.nextLine();
-                        System.out.println("Enter Peer's Index: ");
-                        int index6 = sc.nextInt();
-                        String indexNum6 = String.valueOf(index6);
-                        System.out.println("Enter 'OK' to confirm drop course");
-                        String confirm4 = sc.nextLine();
-                        // check if peerStudID and peerPassword is valid
-                        Student1.swapIndex(indexNum5, indexNum6, confirm4);
-
+                        String peerUserName = Student1.swapIndex();
+                        Student Student2 = new Student();
+                        //Student2.swapIndex(oldIndex, newIndex); -- need to do method overloading i think?
 
                         break;
                     case 7:

@@ -1,10 +1,14 @@
 package mystars;
 
+import mystars.courses.Course;
+import mystars.courses.Courses;
+
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Set;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Scanner;
 
 public class Student {
     private String matricNo;
@@ -15,10 +19,18 @@ public class Student {
     // private HashMap<String, Object> studCourses= new HashMap<>(); use Course as object?
     private final int MAXCOURSES=6;
 
+    //Scanner scanner = new Scanner(System.in);
+
     public Student() {}
 
     //public String getStudName(studServerName) {return studName;}
     //public String getMatricNo(studServerName) { return matricNo;}
+
+    public int getChoice(Scanner sc){
+        System.out.println("Enter the number of your choice: ");
+        int choice = sc.nextInt();
+        return choice;
+    }
 
     public boolean hasCourse(String courseCode) {
         if (studCourses.containsKey(courseCode)){
@@ -26,46 +38,52 @@ public class Student {
         }
         else { return false;}
     }
-    public void addCourse(String courseIndex, String confirmInput) {
+    public void addCourse() {
         //if (courseIndex) in txt file (ie. valid)
         // extract courseCode from the .txt file using courseIndex as key
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Please enter index number: ");
+        int index = sc.nextInt();
+        String courseIndex = String.valueOf(index);
         // getCourseCode using courseIndex from Courses class?
-        // hasVacancies check using Courses class?
-        //hasVacancy = courseList.hasVacancies(courseIndex)
+//        // hasVacancies check using Courses class?
+//        //hasVacancy = courseList.hasVacancies(courseIndex)
         boolean hasVacancy = true;
-        //courseCode = courseList.getCourseCode(courseIndex);
+//        //courseCode = courseList.getCourseCode(courseIndex);
         String courseCode = "CZ2002";
         if(!hasCourse(courseCode)) {
             if (hasVacancy) {
                 if (numberOfCoursesRegistered <= MAXCOURSES) {
                     //display the index info
-                    System.out.println("Enter 'OK' to confirm add course");
-                    boolean confirmation = Confirmation(confirmInput);
-                    if(confirmation) {
+                    System.out.println("Enter '1' to confirm add course: ");
+                    int confirm = sc.nextInt();
+                    boolean confirmed = Confirmation(confirm);
+                    if(confirmed) {
                         System.out.println("This index has now been added to your courses!");
                         studCourses.put(courseCode, courseIndex);
                         // reduce vacancy of this index
                     }
-                    else{
-                        System.out.println("This index is not added.");
-                    }
                 }
             }
+            else{
+                System.out.println("Course has already been added");
+            }
         }
-        //} // do i need to input an else failed statement?
     }
 
-    public boolean Confirmation(String confirm) {
-        if(confirm.toUpperCase() == "OK") { return true; }
+    public boolean Confirmation(int confirm) {
+        if(confirm==1) { return true; }
         else { return false;}
     }
 
-    public void dropCourse(String courseIndex, String confirmInput) {
+    public void dropCourse() {
+        Scanner sc = new Scanner(System.in);
         System.out.println("These are the courses that you have registered:");
+        this.getCourses();
         //Display the course index, course code, and status of the course
         System.out.println("Enter what Course Index you want to drop: ");
-        //Scanner sc = new Scanner(System.in);
-        //courseIndex = sc.nextInt();
+        int index = sc.nextInt();
+        String courseIndex = String.valueOf(index);
         //if (courseIndex) in list of studCourses
         // extract courseCode from the .txt file using courseIndex as key
 
@@ -73,8 +91,10 @@ public class Student {
         String courseCode = "CZ2002";
         if(hasCourse(courseCode)) {
             //display the index info (course index, course code, course type, course status)
-            boolean confirmation = Confirmation(confirmInput);
-            if(confirmation) {
+            System.out.println("Enter 1 to confirm drop course");
+            int confirm = sc.nextInt();
+            boolean confirmed = Confirmation(confirm);
+            if(confirmed) {
                 System.out.println("This index has now been dropped!");
                 studCourses.remove(courseCode, courseIndex);
                 // reduce vacancy of this index
@@ -96,6 +116,7 @@ public class Student {
             System.out.print("Course code is: "+ mapEntry.getKey() + " & Course index is: ");
             System.out.println(mapEntry.getValue());
         }
+        System.out.print("All courses registered displayed");
 
         return studCourses;
 
@@ -127,7 +148,14 @@ public class Student {
 //                courseIndex, getNumCourseIndexAvail);
 //    }
 
-    public void changeIndex(String oldIndex, String newIndex, String confirmInput){
+    public void changeIndex(){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter Current Index: ");
+        int indexCur = sc.nextInt();
+        String oldIndex = String.valueOf(indexCur);
+        System.out.println("Enter New Index: ");
+        int indexN = sc.nextInt();
+        String newIndex = String.valueOf(indexN);
         // from Courses class, getCourseCode of newIndex
         String courseCodeNew="CZ2002";
         //courseCodeNew = courseList.getCourseCode(oldIndex);
@@ -137,9 +165,11 @@ public class Student {
         if (!studCourses.containsValue(newIndex)){
             // display course info of old index
             // display course info of new index
-            boolean confirmation = Confirmation(confirmInput);
-            if(confirmation) {
-                System.out.println("Index Number" + oldIndex+ " changed to "+ newIndex);
+            System.out.println("Enter 1 to confirm change course index: ");
+            int confirm = sc.nextInt();
+            boolean confirmed = Confirmation(confirm);
+            if(confirmed) {
+                System.out.println("Index Number " + oldIndex+ " changed to "+ newIndex);
                 studCourses.values().remove(oldIndex);
                 studCourses.put(courseCodeNew, newIndex);
             }
@@ -152,34 +182,45 @@ public class Student {
 
     }
 
-    public void swapIndex(String oldCourseIndex, String newCourseIndex, String confirmInput){
+    public String swapIndex() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter Your Index: ");
+        int index1 = sc.nextInt();
+        String oldCourseIndex = String.valueOf(index1);
+        System.out.println("Enter Peer's Username: ");
+        String peerUN = sc.nextLine();
+        System.out.println("Enter Peer's Password: ");
+        String peerPW = sc.nextLine();
+        System.out.println("Enter Peer's Index: ");
+        int index2 = sc.nextInt();
+        String newCourseIndex = String.valueOf(index2);
         // from Courses class, getCourseCode of newIndex
-        String courseCode="CZ2002";
+        String courseCode = "CZ2002";
         //courseCode = courseList.getCourseCode(oldIndex);
-        if (!oldCourseIndex.equals(newCourseIndex)){
-            boolean confirmation = Confirmation(confirmInput);
-            if(confirmation) {
+        if (!oldCourseIndex.equals(newCourseIndex)) {
+            System.out.println("Enter 1 to confirm swap course:");
+            int confirm = sc.nextInt();
+            boolean confirmed = Confirmation(confirm);
+            if (confirmed) {
                 // increase vacancy of oldIndex using Courses class
                 // decrease vacancy of newIndex using Courses class
                 studCourses.values().remove(oldCourseIndex);
-                studCourses.put(courseCode,newCourseIndex);
-                System.out.println("Index Number" + oldCourseIndex+ " changed to "+ newCourseIndex);
-            }
-            else{
+                studCourses.put(courseCode, newCourseIndex);
+                System.out.println("Index Number " + oldCourseIndex + " changed to " + newCourseIndex);
+            } else {
                 System.out.println("This index is not changed.");
+                peerUN = "No swap";
             }
-            // increase vacancy of oldIndex using Courses class
-            // decrease vacancy of newIndex using Courses class
-            studCourses.values().remove(oldCourseIndex);
-            studCourses.put(courseCode,newCourseIndex);
-
         }
+        return peerUN;
+    }}
+
         // in the main function, create another student class for the peer, to swap index for peer
 
         // check if current index is not equal to newCourseIndex
         // check if peerStudID and peerPassword is valid
         // put oldCourseIndex to temp int, add newCourseIndex to studCourses
         // put temp int to peerStudCourses
-    }
-}
+
+
 
