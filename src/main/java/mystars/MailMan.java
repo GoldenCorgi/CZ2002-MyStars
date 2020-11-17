@@ -18,7 +18,7 @@ public class MailMan {
 
     public static void main(String[] args) {
         MailMan ma = new MailMan();
-        ma.sendMail("do u want to eat raydy", "whattohec@gmail.com");
+        ma.sendMail("test2", "whattohec@gmail.com");
     }
 
 

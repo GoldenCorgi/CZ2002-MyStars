@@ -1,7 +1,5 @@
 package mystars.courses;
 
-import mystars.Student;
-
 public class Lecture extends CourseComponent {
     private int courseCode;
     private int timing;
@@ -19,12 +17,14 @@ public class Lecture extends CourseComponent {
         return numberOfVacancies;
     }
 
-    public boolean haveVacancies(){
-        if (numberOfVacancies==0)
+    public boolean haveVacancies() {
+        if (numberOfVacancies == 0)
             return false;
         else
             return true;
-    };
+    }
+
+    ;
 
 //    void timing(int timing){
 //        this.timing = timing;

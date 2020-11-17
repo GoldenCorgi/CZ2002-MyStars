@@ -1,9 +1,10 @@
 package mystars.courses;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.List;
 
-public abstract class CourseComponent {
+public abstract class CourseComponent implements Serializable  {
     private String componentName;
     private int numberOfIndexes; // How many lectures/tutorials/labs groups for one course.
     List<Index> listOfIndex = null;

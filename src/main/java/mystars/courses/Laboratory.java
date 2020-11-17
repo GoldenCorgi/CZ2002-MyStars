@@ -1,7 +1,5 @@
 package mystars.courses;
 
-import mystars.Student;
-
 public class Laboratory extends CourseComponent {
     private static final long serialVersionUID = 25;
 

@@ -1,16 +1,13 @@
 package mystars.courses;
-import mystars.Student;
 
-import java.io.Serializable;
-
-public class Tutorial extends CourseComponent{
+public class Tutorial extends CourseComponent {
     private static final long serialVersionUID = 22;
 
     /**
      * Constructor to create a Tutorial object.
      *
      * @param numberOfIndexes number of Indexes of a tutorial
-     * @param slotsPerIndex  number of total slots per tutorial index
+     * @param slotsPerIndex   number of total slots per tutorial index
      */
     public Tutorial(int numberOfIndexes, int slotsPerIndex) {
         super("Tutorial", numberOfIndexes);

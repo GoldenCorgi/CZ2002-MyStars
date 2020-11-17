@@ -1,11 +1,13 @@
 package mystars.courses;
 
 //import java.io.Serializable;
-import java.util.List;
-import java.util.Arrays;
+
 import mystars.Student;
 
-public class Index {
+import java.io.Serializable;
+import java.util.List;
+
+public class Index implements Serializable {
     private int numberOfSlots;
     private int numberOfVacancies;
     private String indexName;
@@ -21,7 +23,7 @@ public class Index {
     }
 
     public int getNumberOfVacancies() {
-        return (this.numberOfVacancies)-addedStudents.size();
+        return (this.numberOfVacancies) - addedStudents.size();
     }
 
     public int getNumberOfSlots() {

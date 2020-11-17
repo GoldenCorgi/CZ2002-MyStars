@@ -1,12 +1,10 @@
 package mystars.courses;
 
-import mystars.Student;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 
 
-public class Course implements Serializable{
+public class Course implements Serializable {
     private static final long serialVersionUID = 20;
     private String courseName, courseCode;
     private ArrayList<CourseComponent> courseComponents = new ArrayList<CourseComponent>();
@@ -14,8 +12,8 @@ public class Course implements Serializable{
     /**
      * Contructor to create Course object based on parameters given. Creates courses with only lectures
      *
-     * @param courseName        The name of the course.
-     * @param courseCode The code number of the course.
+     * @param courseName      The name of the course.
+     * @param courseCode      The code number of the course.
      * @param courseVacancies The number of vacancies for a course.
      */
 
@@ -30,12 +28,12 @@ public class Course implements Serializable{
     /**
      * Contructor to create Course object based on parameters given. Creates courses with only lectures and tutorials/laboratory
      *
-     * @param courseName The name of the course.
-     * @param courseCode The code number of the course.
+     * @param courseName      The name of the course.
+     * @param courseCode      The code number of the course.
      * @param courseVacancies The number of vacancies for a course.
      * @param numberOfIndexes The number of indexes for a course.
-     * @param slotsPerIndex The number of slots for an index of a course.
-     * @param isTutorialOnly Boolean: true if is tutorial.
+     * @param slotsPerIndex   The number of slots for an index of a course.
+     * @param isTutorialOnly  Boolean: true if is tutorial.
      */
 
     public Course(String courseName, String courseCode, int courseVacancies, int numberOfIndexes, int slotsPerIndex, boolean isTutorialOnly) {
@@ -48,8 +46,7 @@ public class Course implements Serializable{
         if (isTutorialOnly) {
             CourseComponent tutorial = new Tutorial(numberOfIndexes, slotsPerIndex);
             courseComponents.add(tutorial);
-        }
-        else {
+        } else {
             CourseComponent laboratory = new Laboratory(numberOfIndexes, slotsPerIndex);
             courseComponents.add(laboratory);
         }
@@ -58,11 +55,11 @@ public class Course implements Serializable{
     /**
      * Contructor to create Course object based on parameters given. Creates courses with only lectures, tutorials and labs
      *
-     * @param courseName        The name of the course.
-     * @param courseCode The code number of the course.
+     * @param courseName      The name of the course.
+     * @param courseCode      The code number of the course.
      * @param courseVacancies The number of vacancies for a course.
      * @param numberOfIndexes The number of indexes for a course.
-     * @param slotsPerIndex The number of slots for an index of a course.
+     * @param slotsPerIndex   The number of slots for an index of a course.
      */
 
     public Course(String courseName, String courseCode, int courseVacancies, int numberOfIndexes, int slotsPerIndex) {
