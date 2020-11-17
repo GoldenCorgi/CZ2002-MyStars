@@ -3,8 +3,12 @@ package mystars;
 import mystars.courses.Course;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
+
+import static mystars.Storage.loadCourses;
+import static mystars.Storage.loadStudents;
 
 
 public class Admin implements Serializable {
@@ -15,7 +19,13 @@ public class Admin implements Serializable {
 //    private HashMap<String, String> IndexMap = new HashMap<>();
 //    Scanner sc = new Scanner(System.in);
 
+
+
+    ArrayList<Course> CourseList;
+    ArrayList<Student> StudentList;
     public Admin() {
+        StudentList = loadStudents();
+        CourseList = loadCourses();
     }
 
 
