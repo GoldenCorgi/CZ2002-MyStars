@@ -1,7 +1,6 @@
 package mystars;
 
 import mystars.courses.Course;
-import mystars.courses.Courses;
 
 import java.util.Arrays;
 import java.util.HashMap;

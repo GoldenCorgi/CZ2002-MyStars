@@ -6,8 +6,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 
-public class Course implements Serializable{
-    private static final long serialVersionUID = 20;
+public class Course {
     private String courseName, courseCode;
     private ArrayList<CourseComponent> courseComponents = new ArrayList<CourseComponent>();
 
