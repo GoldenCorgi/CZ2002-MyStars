@@ -3,9 +3,18 @@ package mystars;
 import mystars.login.Login;
 import mystars.login.UserList;
 
+import javax.swing.*;
+import java.text.ParseException;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.Date;
 import java.util.Scanner;
 import java.util.logging.Logger;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.text.SimpleDateFormat;
+import java.util.*;
 /**
  * Main class.
  */
@@ -15,6 +24,7 @@ public class Main {
         Logger logger = Logger.getLogger("MyStars");
         final Storage storage = new Storage("data");
         UserList users;
+        Scanner sc = new Scanner(System.in);
 
         try {
 //            logger.log(Level.INFO, "going to load users");
@@ -41,7 +51,7 @@ public class Main {
             System.out.println("(5) Change Index Number of Course");
             System.out.println("(6) Swop Index Number with Another Student");
             System.out.println("(7) Exit");
-            Scanner sc = new Scanner(System.in);
+//            Scanner sc = new Scanner(System.in);
             StudentApp Student1 = new StudentApp();
 
             do {
@@ -90,14 +100,34 @@ public class Main {
                 System.out.println("(6) Print Student List by Index Number");
                 System.out.println("(7) Print Student List by Course");
                 System.out.println("(8) Exit");
-                Scanner sc = new Scanner(System.in);
+//                Scanner sc = new Scanner(System.in);
 
                 System.out.println("Enter the number of your choice: ");
                 choice = sc.nextInt();
                 switch (choice) {
                     case 1:
-                        System.out.println("New Student Access Period: ");
-                        int index1 = sc.nextInt();
+                        LocalDateTime currentDateTime = LocalDateTime.now();
+                        DateTimeFormatter formatDateTime = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+                        String formattedCurrentDT = currentDateTime.format(formatDateTime);
+                        System.out.println("Current Date and Time: " + formattedCurrentDT);
+                        System.out.println("Enter start date of Student Access Period (dd-MM-yyyy): ");
+                        String date = sc.next();
+                        System.out.println("Enter start time of Student Access Period: ");
+                        String time = sc.next();
+                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+                        LocalDate startDate = LocalDate.parse(date, formatter);
+                        LocalTime timeFormat = LocalTime.parse(time);
+                        System.out.println("date: " + startDate);
+                        System.out.println("time: " + timeFormat);
+
+                        System.out.println("Enter end date of Student Access Period (dd-MM-yyyy): ");
+                        String date2 = sc.next();
+                        System.out.println("Enter end time of Student Access Period: ");
+                        String time2 = sc.next();
+                        LocalDate endDate = LocalDate.parse(date2, formatter);
+                        LocalTime timeFormat2 = LocalTime.parse(time2);
+                        System.out.println("date: " + endDate);
+                        System.out.println("time: " + timeFormat2);
                         break;
                     case 2:
                         // Done
