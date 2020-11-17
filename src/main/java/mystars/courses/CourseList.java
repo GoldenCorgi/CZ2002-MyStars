@@ -8,6 +8,7 @@ import java.util.ArrayList;
 public class CourseList {
 
     private final ArrayList<Course> courses;
+
     public CourseList() {
         courses = new ArrayList<>();
     }

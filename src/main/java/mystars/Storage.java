@@ -18,7 +18,7 @@ public class Storage {
     private static final String READ_ERROR = "Error reading file.";
     private static final String DIRECTORY_ERROR = "Error creating directory.";
     private static final String WRITE_ERROR = "Error writing file.";
-    private static final String COURSES_FILE = "courses.txt";
+    private static final String COURSES_SERIALIZABLE_FILE_NAME = "courses.dat";
     private static final String USERS_FILE = "users.txt";
     private static final String DOCTORS_FILE = "doctors.txt";
     private final String folder;
@@ -228,7 +228,8 @@ public class Storage {
 //        writeToFile(doctorsFileContent, DOCTORS_FILE);
 //    }
 
-    public static ArrayList<Course> readSerializedObject(String filename) {
+    public static ArrayList<Course> loadCourses() {
+        String filename = Paths.get("data", COURSES_SERIALIZABLE_FILE_NAME).normalize().toString();
         ArrayList<Course> pDetails = null;
         FileInputStream fis = null;
         ObjectInputStream in = null;
@@ -248,7 +249,8 @@ public class Storage {
         return pDetails;
     }
 
-        public static void writeSerializedObject(String filename, ArrayList<Course> list) {
+        public static void saveCourses(ArrayList<Course> list) {
+        String filename = Paths.get("data", COURSES_SERIALIZABLE_FILE_NAME).normalize().toString();
         FileOutputStream fos = null;
         ObjectOutputStream out = null;
         try {
@@ -266,7 +268,9 @@ public class Storage {
         ArrayList<Course> list = new ArrayList<>();
         try	{
             // read from serialized file the list of professors
-            list = Storage.readSerializedObject("data/courses.dat");
+            String path = Paths.get("data", COURSES_SERIALIZABLE_FILE_NAME).normalize().toString();
+//            System.out.println(path);
+            list = Storage.loadCourses();
             for (int i = 0 ; i < list.size() ; i++) {
                 Course p = (Course)list.get(i);
                 System.out.println("name is " + p.getCourseName() );
@@ -274,12 +278,12 @@ public class Storage {
             }
             // write to serialized file - update/insert/delete
             // example - add one more professor
-            Course p = new Course("2","jos@ntu.edu.sg",67909999);
+            Course p = new Course("oodp i guess","cz2002","SCSE", 21);
             // add to list
             list.add(p);
             // list.remove(p);  // remove if p equals object in the list
 
-            Storage.writeSerializedObject("data/courses.dat", list);
+            Storage.saveCourses(list);
 
         }  catch ( Exception e ) {
             System.out.println( "Exception >> " + e.getMessage() );
