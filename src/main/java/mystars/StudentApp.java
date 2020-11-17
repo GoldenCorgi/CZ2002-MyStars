@@ -1,17 +1,18 @@
 package mystars;
 
+import java.io.Serializable;
 import java.util.HashMap;
 
-public class StudentApp {
+public class StudentApp implements Serializable  {
 
-    private HashMap<String, Student> studentList = new HashMap<>();
+    private static HashMap<String, Student> studentList = new HashMap<>();
 
-    public void StudentApp() {
+    public static void StudentApp() {
         // load list of students
 
     }
 
-    public
+
 //    + changeIndex(oldIndex, newIndex): void
 //+ swapIndex(oldIndex, peerIndex, peerMatricNo, peerPassword): void
 //+ checkVerification(): boolean

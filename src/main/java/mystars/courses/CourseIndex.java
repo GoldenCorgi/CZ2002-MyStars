@@ -13,6 +13,9 @@ public class CourseIndex implements Serializable {
     private List<Student> registeredStudents = null;
     private List<CourseComponent> courseComponents = null;
 
+    public String getIndexName() {
+        return indexName;
+    }
     public CourseIndex(String indexName, int totalVacancies) {
         this.totalVacancies = totalVacancies;
         this.indexName = indexName;
@@ -43,5 +46,13 @@ public class CourseIndex implements Serializable {
 
     public List<Student> getAddedStudents() {
         return this.registeredStudents;
+    }
+
+    public void printRegisteredStudent() {
+        for (int i = 0; i < this.registeredStudents.size(); i++) {
+            System.out.println(Integer.toString(i+1) + ": " + this.registeredStudents.get(i).getStudentName());
+        }
+
+
     }
 }

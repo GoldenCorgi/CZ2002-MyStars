@@ -1,16 +1,15 @@
 package mystars;
 
-import mystars.courses.Course;
+import java.io.Serializable;
+import java.util.HashMap;
 
-import java.util.*;
-
-public class Student {
+public class Student implements Serializable {
 
     private String matricNo, studentName, studentEmail, studentGender, studentNationality;
     private int numberOfCoursesRegistered,MaxAcademicUnit = 21;
     private HashMap<String, String> studentCourses = new HashMap<>();
 
-    public void Student(String matricNo, String studentName, String studentEmail, String studentGender, String studentNationality) {
+    public Student(String matricNo, String studentName, String studentEmail, String studentGender, String studentNationality) {
         this.studentName = studentName;
         this.matricNo = matricNo;
         this.studentEmail = studentEmail;
@@ -51,7 +50,7 @@ public class Student {
 
 
     public boolean checkTimingClash(String courseCode1, String courseCode2, String courseIndex1, String courseIndex2) {
-
+        return true;
     }
 
     public int getNumberOfCoursesRegistered(){

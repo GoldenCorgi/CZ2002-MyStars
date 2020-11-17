@@ -42,30 +42,31 @@ public class Main {
             System.out.println("(6) Swop Index Number with Another Student");
             System.out.println("(7) Exit");
             Scanner sc = new Scanner(System.in);
-            Student Student1 = new Student();
+            StudentApp Student1 = new StudentApp();
 
             do {
-                choice = Student1.getChoice(sc);
+                System.out.println("Enter the number of your choice: ");
+                choice = sc.nextInt();
                 switch (choice) {
                     case 1:
-                        Student1.addCourse();
+//                        Student1.addCourse();
                         break;
                     case 2:
-                        Student1.dropCourse();
+//                        Student1.dropCourse();
                         break;
                     case 3:
-                        Student1.getCourses();
+//                        Student1.getCourses();
                         break;
                     case 4:
                         // use courses class to check vacancies of index
                         break;
                     case 5:
-                        Student1.changeIndex();
+//                        Student1.changeIndex();
 
                         break;
                     case 6:
-                        String peerUserName = Student1.swapIndex();
-                        Student Student2 = new Student();
+//                        String peerUserName = Student1.swapIndex();
+//                        Student Student2 = new Student();
                         //Student2.swapIndex(oldIndex, newIndex); -- need to do method overloading i think?
 
                         break;
@@ -77,7 +78,7 @@ public class Main {
         } else if (rolename.equals("Admin")) {
             // TODO add admin actions
             System.out.println("Welcome Admin");
-            Admin Admin1 = new Admin();
+            Admin admin = new Admin("sampleadminname");
             // admin actions
             int choice;
             do {
@@ -99,21 +100,74 @@ public class Main {
                         int index1 = sc.nextInt();
                         break;
                     case 2:
-                        System.out.println("Program terminating..");
+                        // Done
+                        System.out.println("(2) Add Student");
+                        System.out.println("Enter studentEmail: ");
+                        String studentEmail = sc.nextLine();
+                        if (admin.checkStudentEmailExists(studentEmail)){
+                            // True = already exists
+                            System.out.println("Email already exists!");
+                            break;
+                        };
+                        System.out.println("Enter studentName: ");
+                        String studentName = sc.nextLine();
+                        System.out.println("Enter matricNo: ");
+                        String matricNo = sc.nextLine();
+                        // TODO Verify matric does not duplicate
+                        System.out.println("Enter studentGender: ");
+                        String studentGender = sc.nextLine().toLowerCase();
+                        // TODO verify gender lmao
+//                        if (admin.verifyGender(studentGender)){
+//                            // True = correct input
+//                            System.out.println("Gender incorrect format (Male/Female)!");
+//                            break;
+//                        };
+                        System.out.println("Enter studentNationality: ");
+                        String studentNationality = sc.nextLine();
+                        // TODO verify nationality?
+                        login.addNewStudentWithPassword(sc,studentEmail);
+                        Student newStudent = new Student(matricNo, studentName, studentEmail,  studentGender,  studentNationality);
+                        admin.addStudent(newStudent);
+                        System.out.println("Student added");
                         break;
+
                     case 3:
-                        Admin1.addCourses();
+//                        Admin1.addCourses();
+                        System.out.println("Program terminating..");
+
                         break;
                     case 4:
                         System.out.println("Program terminating..");
                         break;
                     case 5:
-                        System.out.println("Program terminating..");
+                        // Done
+                        System.out.println("(5) Check Vacancies for a Course Index");
+                        System.out.println("Enter courseCode: ");
+                        String courseCode = sc.nextLine();
+                        // TODO verify coursecode
+                        System.out.println("Enter courseIndex: ");
+                        String courseIndex = sc.nextLine();
+                        // TODO Verify courseindex
+                        int vacancies = admin.checkVacancies(courseCode,courseIndex);
+                        System.out.println("Course Index has " + String.valueOf(vacancies) + " Vacancies");
                         break;
                     case 6:
+                        System.out.println("(6) Print Student List by Index Number");
+                        System.out.println("Enter courseCode: ");
+                        courseCode = sc.nextLine();
+                        // TODO verify coursecode
+                        System.out.println("Enter courseIndex: ");
+                        courseIndex = sc.nextLine();
+                        // TODO Verify courseindex
+                        admin.printStudentListByIndex(courseCode,courseIndex);
                         System.out.println("Program terminating..");
                         break;
                     case 7:
+                        System.out.println("(7) Print Student List by Course");
+                        System.out.println("Enter courseCode: ");
+                        courseCode = sc.nextLine();
+                        // TODO verify coursecode
+                        admin.printStudentListByCourse(courseCode);
                         System.out.println("Program terminating..");
                         break;
                     case 8:

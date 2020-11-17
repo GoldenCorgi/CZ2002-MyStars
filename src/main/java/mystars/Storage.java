@@ -134,8 +134,13 @@ public class Storage {
     }
 
     public static HashMap<String, Course> loadCourses() {
-        String filename = Paths.get("data", COURSES_SERIALIZABLE_FILE_NAME).normalize().toString();
+        Path path = Paths.get("data", COURSES_SERIALIZABLE_FILE_NAME);
+        String filename = path.normalize().toString();
         HashMap<String, Course> CourseHashMap = null;
+        if (!Files.exists(path)) {
+            return CourseHashMap;
+        }
+
         FileInputStream fis = null;
         ObjectInputStream in = null;
         try {
@@ -169,15 +174,20 @@ public class Storage {
         }
     }
 
-    public static ArrayList<Student> loadStudents() {
-        String filename = Paths.get("data", STUDENTS_SERIALIZABLE_FILE_NAME).normalize().toString();
-        ArrayList<Student> pDetails = null;
+    public static HashMap<String, Student> loadStudents() {
+        Path path = Paths.get("data", STUDENTS_SERIALIZABLE_FILE_NAME);
+        HashMap<String, Student> pDetails = new HashMap<>();
+        if (!Files.exists(path)) {
+            return pDetails;
+        }
+        String filename = path.normalize().toString();
+
         FileInputStream fis;
         ObjectInputStream in;
         try {
             fis = new FileInputStream(filename);
             in = new ObjectInputStream(fis);
-            pDetails = (ArrayList) in.readObject();
+            pDetails = (HashMap<String, Student>) in.readObject();
             in.close();
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -190,14 +200,14 @@ public class Storage {
         return pDetails;
     }
 
-    public static void saveStudents(ArrayList<Student> list) {
+    public static void saveStudents(HashMap<String, Student> studentList) {
         String filename = Paths.get("data", STUDENTS_SERIALIZABLE_FILE_NAME).normalize().toString();
         FileOutputStream fos;
         ObjectOutputStream out;
         try {
             fos = new FileOutputStream(filename);
             out = new ObjectOutputStream(fos);
-            out.writeObject(list);
+            out.writeObject(studentList);
             out.close();
             //	System.out.println("Object Persisted");
         } catch (IOException ex) {
@@ -206,7 +216,7 @@ public class Storage {
     }
 
     public static void main(String[] args) {
-        ArrayList<Course> list = new ArrayList<>();
+        HashMap<String, Course> list = new HashMap<String, Course>();
         try {
 
             String path = Paths.get("data", COURSES_SERIALIZABLE_FILE_NAME).normalize().toString();
@@ -219,7 +229,7 @@ public class Storage {
             }
             Course p = new Course("oodp i guess", "cz2002", "SCSE", 21);
             // add to list
-            list.add(p);
+            list.put(p.getCourseCode(),p);
 
             Storage.saveCourses(list);
 
