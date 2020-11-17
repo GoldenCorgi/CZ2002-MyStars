@@ -1,23 +1,57 @@
 package mystars;
 
+import mystars.courses.Course;
+
 import java.util.*;
 
 public class Student {
-    private String matricNo;
-    private String studName;
-    private String studServerName;
-    private int numberOfCoursesRegistered;
-    private HashMap<String, String> studCourses = new HashMap<>();
-    // private HashMap<String, Object> studCourses= new HashMap<>(); use Course as object?
-    private final int MAXCOURSES = 6;
 
-    //Scanner scanner = new Scanner(System.in);
+    private String matricNo, studentName, studentEmail, studentGender, studentNationality;
+    private int numberOfCoursesRegistered,MaxAcademicUnit = 21;
+    private HashMap<String, Course> studentCourses = new HashMap<>();
 
-    public Student() {
+
+
+    public void Student(String matricNo, String studentName, String studentEmail, String studentGender, String studentNationality) {
+        this.studentName = studentName;
+        this.matricNo = matricNo;
+        this.studentEmail = studentEmail;
+        this.studentGender = studentGender;
+        this.studentNationality = studentNationality;
+
     }
 
-    //public String getStudName(studServerName) {return studName;}
-    //public String getMatricNo(studServerName) { return matricNo;}
+    public String getStudentName() {
+        return this.studentName;
+    }
+    public String getMatricNo() {
+        return this.matricNo;
+    }
+    public String getStudentEmail() {
+        return this.studentEmail;
+    }
+    public String getStudentGender() {
+        return this.studentGender;
+    }
+    public String getStudentNationality() {
+        return this.studentNationality;
+    }
+    public Boolean hasCourse(String courseCode) {
+        return (this.studentCourses.get(courseCode) != null);
+    }
+
+
+
++ hasCourse(courseCode): boolean
++ addCourse(courseIndex): void
++ dropCourse(): void
++ getCourse(studCourses): HashMap
++ hasVacancies(courseIndex): boolean
++ checkVacancies(courseIndex): int
++ checkTimingClash(courseCode): boolean
++ getNumberOfCoursesRegistered(): int
++ checkVerification(): boolean
++ updateCourseData(checkVerification): void
 
     public int getChoice(Scanner sc) {
         System.out.println("Enter the number of your choice: ");
