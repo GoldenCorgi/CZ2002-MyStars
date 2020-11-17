@@ -8,7 +8,7 @@ import mystars.Student;
 public class Index {
     private int numberOfSlots;
     private int numberOfVacancies;
-    private int indexName;
+    private String indexName;
     private List<Student> addedStudents = null;
 
     public Index(int numberOfSlots) {
@@ -26,6 +26,10 @@ public class Index {
 
     public int getNumberOfSlots() {
         return this.numberOfSlots;
+    }
+
+    public void addIndexName(String indexName) {
+        this.indexName = indexName;
     }
 
     public List<Student> getAddedStudents() {

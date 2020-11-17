@@ -118,6 +118,50 @@ public class Main {
         else if (rolename.equals("Admin")) {
             // TODO add admin actions
             System.out.println("Welcome Admin");
+            Admin Admin1 = new Admin();
+            // admin actions
+            int choice;
+            do {
+                System.out.println("(1) Edit Student Access Period");
+                System.out.println("(2) Add Student");
+                System.out.println("(3) Add Course");
+                System.out.println("(4) Update Course");
+                System.out.println("(5) Check Vacancies for a Course Index");
+                System.out.println("(6) Print Student List by Index Number");
+                System.out.println("(7) Print Student List by Course");
+                System.out.println("(8) Exit");
+                Scanner sc = new Scanner(System.in);
+
+                System.out.println("Enter the number of your choice: ");
+                choice = sc.nextInt();
+                switch (choice) {
+                    case 1:
+                        System.out.println("New Student Access Period: ");
+                        int index1 = sc.nextInt();
+                        break;
+                    case 2:
+                        System.out.println("Program terminating..");
+                        break;
+                    case 3:
+                        Admin1.addCourses();
+                        break;
+                    case 4:
+                        System.out.println("Program terminating..");
+                        break;
+                    case 5:
+                        System.out.println("Program terminating..");
+                        break;
+                    case 6:
+                        System.out.println("Program terminating..");
+                        break;
+                    case 7:
+                        System.out.println("Program terminating..");
+                        break;
+                    case 8:
+                        System.out.println("Program terminating..");
+
+                }
+            } while(choice < 8);
         }
 
         else {
