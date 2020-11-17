@@ -9,6 +9,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Loads and saves data to file.
@@ -110,26 +111,6 @@ public class Storage {
     }
 
     /**
-     * Saves modules into file.
-     *
-     * @param modules ArrayList of modules to save.
-     * @throws StarsException If there is problem writing or saving file.
-     */
-//    public void saveAppointments(AppointmentList modules) throws StarsException {
-//        assert modules != null : "Saving null modules ArrayList";
-//
-//        StringBuilder modulesFileContent = new StringBuilder();
-//
-//        for (Appointment appointment : modules.getAppointments()) {
-//            // Need to format tasks
-//            modulesFileContent.append(appointment);
-//            modulesFileContent.append(System.lineSeparator());
-//        }
-//
-//        writeToFile(modulesFileContent, MODULES_FILE);
-//    }
-
-    /**
      * Writes content to file.
      *
      * @param fileContent String content to write.
@@ -152,91 +133,20 @@ public class Storage {
         }
     }
 
-    /**
-     * Loads modules, stores them into ArrayList and returns the ArrayList.
-     *
-     * @return ArrayList of modules.
-     * @throws StarsException If there is problem reading file.
-     */
-//    public ArrayList<Appointment> loadAppointments() throws StarsException {
-//        Path path = Paths.get(folder, MODULES_FILE);
-//        ArrayList<Appointment> modules = new ArrayList<>();
-//
-//        if (Files.exists(path)) {
-//            try {
-//                BufferedReader bufferedReader = Files.newBufferedReader(path);
-//
-//                while (true) {
-//                    String line = bufferedReader.readLine();
-//                    if (line == null) {
-//                        break;
-//                    }
-//
-//                    Appointment appointment = Parser.readAppointment(line);
-//                    modules.add(appointment);
-//                }
-//            } catch (IOException e) {
-//                throw new StarsException(READ_ERROR);
-//            }
-//        }
-//
-//        return modules;
-//    }
+    public static HashMap<String, Course> loadCourses() {
+        Path path = Paths.get("data", COURSES_SERIALIZABLE_FILE_NAME);
+        String filename = path.normalize().toString();
+        HashMap<String, Course> CourseHashMap = null;
+        if (!Files.exists(path)) {
+            return CourseHashMap;
+        }
 
-    /**
-     * Loads doctors, stores them into ArrayList and returns the ArrayList.
-     *
-     * @return ArrayList of doctors.
-     * @throws StarsException If there is problem reading file.
-     */
-//    public ArrayList<Doctor> loadDoctors() throws StarsException {
-//        Path path = Paths.get(folder, DOCTORS_FILE);
-//        ArrayList<Doctor> doctors = new ArrayList<>();
-//
-//        if (Files.exists(path)) {
-//            try {
-//                BufferedReader bufferedReader = Files.newBufferedReader(path);
-//
-//                while (true) {
-//                    String line = bufferedReader.readLine();
-//                    if (line == null) {
-//                        break;
-//                    }
-//
-//                    Doctor doctor = Parser.readDoctor(line);
-//                    doctors.add(doctor);
-//                }
-//            } catch (IOException e) {
-//                throw new StarsException(READ_ERROR);
-//            }
-//        }
-//
-//        return doctors;
-//    }
-//
-//    public void saveDoctors(DoctorList doctors) throws StarsException {
-//        assert doctors != null : "Saving null doctors ArrayList";
-//
-//        StringBuilder doctorsFileContent = new StringBuilder();
-//
-//        for (int i = 0; i < doctors.getSize(); i++) {
-//            // Need to format tasks
-//            doctorsFileContent.append(doctors.getDoctorUsingIndex(i));
-//            doctorsFileContent.append(System.lineSeparator());
-//        }
-//
-//        writeToFile(doctorsFileContent, DOCTORS_FILE);
-//    }
-
-    public static ArrayList<Course> loadCourses() {
-        String filename = Paths.get("data", COURSES_SERIALIZABLE_FILE_NAME).normalize().toString();
-        ArrayList<Course> pDetails = null;
         FileInputStream fis = null;
         ObjectInputStream in = null;
         try {
             fis = new FileInputStream(filename);
             in = new ObjectInputStream(fis);
-            pDetails = (ArrayList) in.readObject();
+            CourseHashMap = (HashMap<String, Course>) in.readObject();
             in.close();
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -246,17 +156,17 @@ public class Storage {
         // print out the size
         //System.out.println(" Details Size: " + pDetails.size());
         //System.out.println();
-        return pDetails;
+        return CourseHashMap;
     }
 
-        public static void saveCourses(ArrayList<Course> list) {
+    public static void saveCourses(HashMap<String, Course> CourseHashMap) {
         String filename = Paths.get("data", COURSES_SERIALIZABLE_FILE_NAME).normalize().toString();
         FileOutputStream fos = null;
         ObjectOutputStream out = null;
         try {
             fos = new FileOutputStream(filename);
             out = new ObjectOutputStream(fos);
-            out.writeObject(list);
+            out.writeObject(CourseHashMap);
             out.close();
             //	System.out.println("Object Persisted");
         } catch (IOException ex) {
@@ -264,16 +174,20 @@ public class Storage {
         }
     }
 
+    public static HashMap<String, Student> loadStudents() {
+        Path path = Paths.get("data", STUDENTS_SERIALIZABLE_FILE_NAME);
+        HashMap<String, Student> pDetails = new HashMap<>();
+        if (!Files.exists(path)) {
+            return pDetails;
+        }
+        String filename = path.normalize().toString();
 
-    public static ArrayList<Student> loadStudents() {
-        String filename = Paths.get("data", STUDENTS_SERIALIZABLE_FILE_NAME).normalize().toString();
-        ArrayList<Student> pDetails = null;
         FileInputStream fis;
-        ObjectInputStream in = null;
+        ObjectInputStream in;
         try {
             fis = new FileInputStream(filename);
             in = new ObjectInputStream(fis);
-            pDetails = (ArrayList) in.readObject();
+            pDetails = (HashMap<String, Student>) in.readObject();
             in.close();
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -286,14 +200,14 @@ public class Storage {
         return pDetails;
     }
 
-    public static void saveStudents(ArrayList<Student> list) {
+    public static void saveStudents(HashMap<String, Student> studentList) {
         String filename = Paths.get("data", STUDENTS_SERIALIZABLE_FILE_NAME).normalize().toString();
-        FileOutputStream fos = null;
-        ObjectOutputStream out = null;
+        FileOutputStream fos;
+        ObjectOutputStream out;
         try {
             fos = new FileOutputStream(filename);
             out = new ObjectOutputStream(fos);
-            out.writeObject(list);
+            out.writeObject(studentList);
             out.close();
             //	System.out.println("Object Persisted");
         } catch (IOException ex) {
@@ -302,25 +216,25 @@ public class Storage {
     }
 
     public static void main(String[] args) {
-        ArrayList<Course> list = new ArrayList<>();
-        try	{
+        HashMap<String, Course> list = new HashMap<String, Course>();
+        try {
 
             String path = Paths.get("data", COURSES_SERIALIZABLE_FILE_NAME).normalize().toString();
             System.out.println(path);
             list = Storage.loadCourses();
-            for (int i = 0 ; i < list.size() ; i++) {
-                Course p = (Course)list.get(i);
-                System.out.println("name is " + p.getCourseName() );
-                System.out.println("contact is " + p.getCourseCode() );
+            for (int i = 0; i < list.size(); i++) {
+                Course p = list.get(i);
+                System.out.println("name is " + p.getCourseName());
+                System.out.println("contact is " + p.getCourseCode());
             }
-            Course p = new Course("oodp i guess","cz2002","SCSE", 21);
+            Course p = new Course("oodp i guess", "cz2002", "SCSE", 21);
             // add to list
-            list.add(p);
+            list.put(p.getCourseCode(),p);
 
             Storage.saveCourses(list);
 
-        }  catch ( Exception e ) {
-            System.out.println( "Exception >> " + e.getMessage() );
+        } catch (Exception e) {
+            System.out.println("Exception >> " + e.getMessage());
         }
     }
 
