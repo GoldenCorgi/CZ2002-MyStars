@@ -64,9 +64,7 @@ public class Course implements Serializable {
             entry.getValue().printRegisteredStudent();
             // ...
             System.out.println(" ");
-
         }
-
     }
 
 

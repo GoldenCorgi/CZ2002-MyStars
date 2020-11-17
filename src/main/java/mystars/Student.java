@@ -2,6 +2,7 @@ package mystars;
 
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.Map;
 
 // in the main function, create another student class for the peer, to swap index for peer
 
@@ -58,6 +59,16 @@ public class Student implements Serializable {
     public HashMap<String, String> getCourse() {
         return this.studentCourses;
     }
+
+    public void printCourse() {
+            // https://stackoverflow.com/questions/1066589/iterate-through-a-hashmap
+            for (Map.Entry<String, String> entry : this.studentCourses.entrySet()) {
+                String CourseCode = entry.getKey();
+                String CourseIndex = entry.getValue();
+                System.out.println(" CourseCode: " + CourseCode + "// Course Index: " + CourseIndex);
+            }
+        }
+
 
 
     public boolean checkTimingClash(String courseCode1, String courseCode2, String courseIndex1, String courseIndex2) {

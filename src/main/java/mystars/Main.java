@@ -1,20 +1,15 @@
 package mystars;
 
 import mystars.login.Login;
+import mystars.login.User;
 import mystars.login.UserList;
 
-import javax.swing.*;
-import java.text.ParseException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.Date;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 import java.util.logging.Logger;
-
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.text.SimpleDateFormat;
-import java.util.*;
 /**
  * Main class.
  */
@@ -37,8 +32,8 @@ public class Main {
         }
         Login login = new Login(users, storage);
         // TODO return user class instead, so can get their username and role
-        String rolename = login.run();
-
+        User user = login.run();
+        String rolename = user.getRole();
 
         if (rolename.equals("Student")) {
             System.out.println("Welcome Student");
@@ -52,29 +47,70 @@ public class Main {
             System.out.println("(6) Swop Index Number with Another Student");
             System.out.println("(7) Exit");
 //            Scanner sc = new Scanner(System.in);
-            StudentApp Student1 = new StudentApp();
+            StudentApp StudentApp = new StudentApp(user.getName());
 
             do {
                 System.out.println("Enter the number of your choice: ");
                 choice = sc.nextInt();
                 switch (choice) {
                     case 1:
-//                        Student1.addCourse();
+                        // Done
+                        System.out.println("(1) Add course");
+                        System.out.println("Enter courseCode: ");
+                        String courseCode = sc.nextLine();
+                        // TODO verify coursecode
+                        System.out.println("Enter courseIndex: ");
+                        String courseIndex = sc.nextLine();
+                        // TODO Verify courseindex
+
+                        // TODO Validate whether course got vacancies etc
+                        StudentApp.addCourse(courseCode,courseIndex);
                         break;
                     case 2:
-//                        Student1.dropCourse();
+                        // Done
+                        System.out.println("(2) Drop course");
+                        System.out.println("Enter courseCode: ");
+                        courseCode = sc.nextLine();
+                        // TODO verify coursecode
+                        StudentApp.dropCourse(courseCode);
+
                         break;
                     case 3:
-//                        Student1.getCourses();
+                        // Done
+                        System.out.println("(3) Check/Print Courses Registered");
+                        StudentApp.printCourse();
                         break;
                     case 4:
+                        // Done
+                        System.out.println("(4) Check Vacancies Available");
+                        System.out.println("Enter courseCode: ");
+                         courseCode = sc.nextLine();
+                        // TODO verify coursecode
+                        System.out.println("Enter courseIndex: ");
+                         courseIndex = sc.nextLine();
+                        // TODO Verify courseindex
+                        int vacancies = StudentApp.checkVacancies(courseCode,courseIndex);
+                        System.out.println("Course Index has " + String.valueOf(vacancies) + " Vacancies");
+
                         // use courses class to check vacancies of index
                         break;
                     case 5:
-//                        Student1.changeIndex();
+                        // Done
+                          System.out.println("(5) Change Index Number of Course");
+                        System.out.println("Enter courseCode: ");
+                         courseCode = sc.nextLine();
+                        // TODO verify coursecode
+                        System.out.println("Enter new courseIndex: ");
+                         courseIndex = sc.nextLine();
+                        // TODO Verify courseindex
+
+                        // TODO Validate whether course got vacancies etc
+                        StudentApp.addCourse(courseCode,courseIndex);
 
                         break;
                     case 6:
+                        System.out.println("(6) Swop Index Number with Another Student");
+
 //                        String peerUserName = Student1.swapIndex();
 //                        Student Student2 = new Student();
                         //Student2.swapIndex(oldIndex, newIndex); -- need to do method overloading i think?
@@ -84,11 +120,11 @@ public class Main {
                         System.out.println("Program terminating..");
 
                 }
-            } while (choice < 7);
+            } while (choice != 7);
         } else if (rolename.equals("Admin")) {
             // TODO add admin actions
             System.out.println("Welcome Admin");
-            Admin admin = new Admin("sampleadminname");
+            Admin admin = new Admin(user.getName());
             // admin actions
             int choice;
             do {
@@ -162,9 +198,9 @@ public class Main {
                         break;
 
                     case 3:
-//                        Admin1.addCourses();
-                        System.out.println("Program terminating..");
-
+                        // Done
+                        admin.addCourse(sc);
+                        System.out.println("Course Added");
                         break;
                     case 4:
                         System.out.println("Program terminating..");
@@ -182,6 +218,7 @@ public class Main {
                         System.out.println("Course Index has " + String.valueOf(vacancies) + " Vacancies");
                         break;
                     case 6:
+                        // Done
                         System.out.println("(6) Print Student List by Index Number");
                         System.out.println("Enter courseCode: ");
                         courseCode = sc.nextLine();
@@ -193,6 +230,7 @@ public class Main {
                         System.out.println("Program terminating..");
                         break;
                     case 7:
+                        // Done
                         System.out.println("(7) Print Student List by Course");
                         System.out.println("Enter courseCode: ");
                         courseCode = sc.nextLine();
@@ -202,9 +240,8 @@ public class Main {
                         break;
                     case 8:
                         System.out.println("Program terminating..");
-
                 }
-            } while (choice < 8);
+            } while (choice != 8);
         } else {
             System.out.println("Unknown Role");
         }

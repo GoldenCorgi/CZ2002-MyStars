@@ -76,11 +76,11 @@ public class Login {
     }
 
 
-    public String run() throws StarsException {
+    public User run() throws StarsException {
         Scanner sc = new Scanner(System.in);
-        String rolename = "", username;
+        String rolename = "", username = null;
         boolean validated = false;
-        while (!validated) {
+        do {
 
             LocalDateTime now = LocalDateTime.now();
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
@@ -111,9 +111,10 @@ public class Login {
             } else {
                 System.out.println("User - " + username + " - is not allowed to log in as a " + rolename);
             }
-        }
+        } while (!validated);
         storage.saveUsers(users);
-        return rolename;
+        sc.close();
+        return users.getExistingUser(username);
         //char[] pw = console.readPassword("Enter password: ");
 
         //String password = new String(pw);
