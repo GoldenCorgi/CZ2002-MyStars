@@ -11,10 +11,10 @@ public class StudentApp {
 
     }
 
-
+    public
 //    + changeIndex(oldIndex, newIndex): void
-+ swapIndex(oldIndex, peerIndex, peerMatricNo, peerPassword): void
-+ checkVerification(): boolean
-+ updateCourseData(checkVerification :  boolean): void
-+ checkTimingClash(courseCode : String): boolean
+//+ swapIndex(oldIndex, peerIndex, peerMatricNo, peerPassword): void
+//+ checkVerification(): boolean
+//+ updateCourseData(checkVerification :  boolean): void
+//+ checkTimingClash(courseCode : String): boolean
 }
