@@ -11,11 +11,13 @@ public class Course implements Serializable {
 //    private ArrayList<CourseIndex> courseIndex = new ArrayList<CourseIndex>();
     private HashMap<String, CourseIndex> courseIndex = new HashMap<String, CourseIndex>();
     /**
-     * Contructor to create Course object based on parameters given. Creates courses with only lectures
+     * Contructor to create Course object based on parameters given.
+     * Creates courses with lectures, tutorial and/or labs.
      *
-     * @param courseName      The name of the course.
-     * @param courseCode      The code number of the course.
-     * @param courseVacancies The number of vacancies for a course.
+     * @param courseName The name of the course.
+     * @param courseCode The code number of the course.
+     * @param school The school offering the course.
+     * @param academicUnit The number of vacancies for a course.
      */
 
     public Course(String courseName, String courseCode, String school, int academicUnit) {
@@ -25,16 +27,26 @@ public class Course implements Serializable {
         this.academicUnit = academicUnit;
     }
 
-
+    /**
+     * Function to add course index.
+     *
+     * @param index The index of the course.
+     */
 
     public void addCourseIndex(CourseIndex index) {
         courseIndex.put(index.getIndexName(),index);
     }
-    /* get courseName */
+
+    /**
+     * Function to get courseName.
+     */
     public String getCourseName() {
         return this.courseName;
     }
 
+    /**
+     * Function to get courseName.
+     */
 
     public CourseIndex getCourseIndexByIndexName(String courseIndexName) {
         return this.courseIndex.get(courseIndexName);
