@@ -41,22 +41,30 @@ public class Admin implements Serializable {
 
         switch (choice) {
             case 1:
-                Course newCourse = new Course(courseName, courseCode, courseVacancies);
-                CoursesMap.put(courseCode, newCourse);
+                System.out.println("You have chosen choice 1 - unimplemented");
+
+//                Course newCourse = new Course(courseName, courseCode, courseVacancies);
+//                CoursesMap.put(courseCode, newCourse);
                 break;
             case 2:
-                newCourse = new Course(courseName, courseCode, courseVacancies, numberOfIndexes, slotsPerIndex, true);
-                CoursesMap.put(courseCode, newCourse);
+                System.out.println("You have chosen choice 2 - unimplemented");
+
+//                newCourse = new Course(courseName, courseCode, courseVacancies, numberOfIndexes, slotsPerIndex, true);
+//                CoursesMap.put(courseCode, newCourse);
                 break;
             case 3:
-                newCourse = new Course(courseName, courseCode, courseVacancies, numberOfIndexes, slotsPerIndex, false);
-                CoursesMap.put(courseCode, newCourse);
+                System.out.println("You have chosen choice 3 - unimplemented");
+
+//                newCourse = new Course(courseName, courseCode, courseVacancies, numberOfIndexes, slotsPerIndex, false);
+//                CoursesMap.put(courseCode, newCourse);
                 break;
             case 4:
-                newCourse = new Course(courseName, courseCode, courseVacancies, numberOfIndexes, slotsPerIndex);
-                CoursesMap.put(courseCode, newCourse);
+                System.out.println("You have chosen choice 4 - unimplemented");
+
+//                newCourse = new Course(courseName, courseCode, courseVacancies, numberOfIndexes, slotsPerIndex);
+//                CoursesMap.put(courseCode, newCourse);
                 break;
-            case 5:
+            default:
                 System.out.println("Invalid! Please choose again!");
         }
     }
