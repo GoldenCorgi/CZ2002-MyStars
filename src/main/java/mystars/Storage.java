@@ -20,7 +20,7 @@ public class Storage {
     private static final String WRITE_ERROR = "Error writing file.";
     private static final String COURSES_SERIALIZABLE_FILE_NAME = "courses.dat";
     private static final String USERS_FILE = "users.txt";
-    private static final String DOCTORS_FILE = "doctors.txt";
+    private static final String STUDENTS_SERIALIZABLE_FILE_NAME = "students.dat";
     private final String folder;
 
 
@@ -264,24 +264,58 @@ public class Storage {
         }
     }
 
+
+    public static ArrayList<Student> loadStudents() {
+        String filename = Paths.get("data", STUDENTS_SERIALIZABLE_FILE_NAME).normalize().toString();
+        ArrayList<Student> pDetails = null;
+        FileInputStream fis;
+        ObjectInputStream in = null;
+        try {
+            fis = new FileInputStream(filename);
+            in = new ObjectInputStream(fis);
+            pDetails = (ArrayList) in.readObject();
+            in.close();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        } catch (ClassNotFoundException ex) {
+            ex.printStackTrace();
+        }
+        // print out the size
+        //System.out.println(" Details Size: " + pDetails.size());
+        //System.out.println();
+        return pDetails;
+    }
+
+    public static void saveStudents(ArrayList<Student> list) {
+        String filename = Paths.get("data", STUDENTS_SERIALIZABLE_FILE_NAME).normalize().toString();
+        FileOutputStream fos = null;
+        ObjectOutputStream out = null;
+        try {
+            fos = new FileOutputStream(filename);
+            out = new ObjectOutputStream(fos);
+            out.writeObject(list);
+            out.close();
+            //	System.out.println("Object Persisted");
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
     public static void main(String[] args) {
         ArrayList<Course> list = new ArrayList<>();
         try	{
-            // read from serialized file the list of professors
+
             String path = Paths.get("data", COURSES_SERIALIZABLE_FILE_NAME).normalize().toString();
-//            System.out.println(path);
+            System.out.println(path);
             list = Storage.loadCourses();
             for (int i = 0 ; i < list.size() ; i++) {
                 Course p = (Course)list.get(i);
                 System.out.println("name is " + p.getCourseName() );
                 System.out.println("contact is " + p.getCourseCode() );
             }
-            // write to serialized file - update/insert/delete
-            // example - add one more professor
             Course p = new Course("oodp i guess","cz2002","SCSE", 21);
             // add to list
             list.add(p);
-            // list.remove(p);  // remove if p equals object in the list
 
             Storage.saveCourses(list);
 

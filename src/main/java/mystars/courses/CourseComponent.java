@@ -2,7 +2,7 @@ package mystars.courses;
 
 import java.io.Serializable;
 
-public abstract class CourseComponent implements Serializable  {
+public class CourseComponent implements Serializable  {
     private String componentName, venue, startTime, endTime, day;
 
     public CourseComponent(String venue, String startTime, String endTime, String day, String componentName) {
