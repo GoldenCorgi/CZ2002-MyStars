@@ -60,11 +60,7 @@ public class Admin implements Serializable {
                 break;
             case 5:
                 System.out.println("Invalid! Please choose again!");
-                break;
         }
-
-
-
     }
 
     public void updateCourses() {}
