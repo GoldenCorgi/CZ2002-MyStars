@@ -8,13 +8,23 @@ import java.util.Scanner;
 
 
 public class Admin implements Serializable {
-    private static final long serialVersionUID = 26;
-    //    private String name;
-    private HashMap<String, Course> CoursesMap = new HashMap<>();
-    private HashMap<String, String> IndexMap = new HashMap<>();
-    Scanner sc = new Scanner(System.in);
+
+//    private static final long serialVersionUID = 26;
+//    //    private String name;
+//    private HashMap<String, Course> CoursesMap = new HashMap<>();
+//    private HashMap<String, String> IndexMap = new HashMap<>();
+//    Scanner sc = new Scanner(System.in);
 
     public Admin() {
+    }
+
+
+    public void editStudentAccessPeriod() {
+
+    }
+
+    public void addStudent() {
+
     }
 
     public void addCourses() {
@@ -70,15 +80,21 @@ public class Admin implements Serializable {
     }
 
     public void updateCourses() {
+
+    }
+    public int checkVacancies(String courseCode, String courseIndex) {
+        return 1;
     }
 
-    public void checkSlots() {
+    public void printStudentListByIndex(){
+
     }
 
-    public void studentListIndex() {
+
+
+    public void printStudentListByCourse() {
+
     }
 
-    public void studentListCourses() {
-    }
 
 }
