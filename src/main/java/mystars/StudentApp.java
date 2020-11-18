@@ -1,6 +1,8 @@
 package mystars;
 
 import mystars.courses.Course;
+import mystars.login.Login;
+import mystars.login.User;
 
 import java.util.HashMap;
 import java.util.Scanner;
@@ -52,7 +54,7 @@ public class StudentApp  {
     }
 
 
-    public void runLoop() {
+    public void runLoop(Login login) throws StarsException {
          final String Choices = "(1) Add course" +
                 "\n(2) Drop course" +
                 "\n(3) Check/Print Courses Registered" +
@@ -127,6 +129,20 @@ public class StudentApp  {
                     break;
                 case 6:
                     System.out.println("(6) Swop Index Number with Another Student");
+                    // TODO validate whether current student has any courses registered
+
+                    User SecondUser = login.GetSwoppingStudent();
+                    Student SecondStudent = StudentList.get(SecondUser.getName());
+                    System.out.println("Enter courseCode: ");
+                    courseCode = sc.nextLine();
+                    // TODO verify coursecode
+                    String index1, index2;
+                    index1 = student.getCourseIndex(courseCode);
+                    index2 = SecondStudent.getCourseIndex(courseCode);
+
+                    // TODO Validate whether course got vacancies etc
+                    student.addCourse(courseCode,index2);
+                    SecondStudent.addCourse(courseCode,index1);
 
                     break;
                 case 7:

@@ -75,6 +75,43 @@ public class Login {
     }
 
 
+
+    public User GetSwoppingStudent() throws StarsException {
+        Scanner sc = new Scanner(System.in);
+        String rolename = "", username = null;
+        boolean validated = false;
+        do {
+
+            LocalDateTime now = LocalDateTime.now();
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+
+
+//            System.out.println(dtf.format(now)); // removing this line until i figure out how to adapt datetime into my testing framework
+            rolename = "Student";
+            if (rolename.equals("")) {
+                continue;
+            }
+            username = inputUsername(sc);
+            int matched = users.ValidateUser(username, rolename);
+
+            if (matched == 2) {
+                System.out.println("Welcome back - " + username);
+                String password = inputPassword(sc);
+                validated = users.validatePassword(username, password);
+                if (!validated) {
+                    System.out.println("Incorrect Password! Please retry your login.\t");
+                }
+
+            } else if (matched == 0) {
+                System.out.println("You are not registered - " + username);
+            } else {
+                System.out.println("User - " + username + " - is not allowed to log in as a " + rolename);
+            }
+        } while (!validated);
+        sc.close();
+        return users.getExistingUser(username);
+    }
+
     public User run() throws StarsException {
         Scanner sc = new Scanner(System.in);
         String rolename = "", username = null;

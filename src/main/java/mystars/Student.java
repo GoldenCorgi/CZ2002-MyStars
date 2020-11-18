@@ -16,7 +16,7 @@ public class Student implements Serializable {
     private static final long serialVersionUID = 42L;
 
     private String matricNo, studentName, studentEmail, studentGender, studentNationality;
-    private int numberOfCoursesRegistered, MaxAcademicUnit = 21;
+    private int numberOfCoursesRegistered=0, MaxAcademicUnit = 21;
     private HashMap<String, String> studentCourses = new HashMap<>();
 
     public Student(String matricNo, String studentName, String studentEmail, String studentGender, String studentNationality) {
@@ -25,7 +25,6 @@ public class Student implements Serializable {
         this.studentEmail = studentEmail;
         this.studentGender = studentGender;
         this.studentNationality = studentNationality;
-
     }
 
     public String getStudentName() {
@@ -62,6 +61,10 @@ public class Student implements Serializable {
 
     public HashMap<String, String> getCourse() {
         return this.studentCourses;
+    }
+
+    public String getCourseIndex(String CourseCode) {
+        return this.studentCourses.get(CourseCode);
     }
 
     public void printCourse() {
