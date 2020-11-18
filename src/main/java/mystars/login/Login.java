@@ -61,14 +61,13 @@ public class Login {
     public void addNewStudentWithPassword(Scanner sc, String username) throws StarsException {
         String password;
         Console console = System.console();
-            if (console == null) {
-                System.out.println("Couldn't get Console instance - Do not run in an IDE");
-                System.out.println("Enter your not so secret password: ");
-                password = sc.next();
-            }
-            else {
+        if (console == null) {
+            System.out.println("Couldn't get Console instance - Do not run in an IDE");
+            System.out.println("Enter your not so secret password: ");
+            password = sc.next();
+        } else {
             char[] passwordArray = console.readPassword("Enter your secret password: ");
-                password =  new String(passwordArray);
+            password = new String(passwordArray);
         }
 
         users.addNewUser(username, password, "student");

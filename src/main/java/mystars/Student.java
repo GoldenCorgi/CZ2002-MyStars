@@ -12,12 +12,11 @@ import java.util.Map;
 // put temp int to peerStudCourses
 
 
-
-
 public class Student implements Serializable {
+    private static final long serialVersionUID = 42L;
 
     private String matricNo, studentName, studentEmail, studentGender, studentNationality;
-    private int numberOfCoursesRegistered,MaxAcademicUnit = 21;
+    private int numberOfCoursesRegistered, MaxAcademicUnit = 21;
     private HashMap<String, String> studentCourses = new HashMap<>();
 
     public Student(String matricNo, String studentName, String studentEmail, String studentGender, String studentNationality) {
@@ -32,15 +31,19 @@ public class Student implements Serializable {
     public String getStudentName() {
         return this.studentName;
     }
+
     public String getMatricNo() {
         return this.matricNo;
     }
+
     public String getStudentEmail() {
         return this.studentEmail;
     }
+
     public String getStudentGender() {
         return this.studentGender;
     }
+
     public String getStudentNationality() {
         return this.studentNationality;
     }
@@ -50,8 +53,9 @@ public class Student implements Serializable {
     }
 
     public void addCourse(String courseCode, String courseIndex) {
-        this.studentCourses.put(courseCode,courseIndex);
+        this.studentCourses.put(courseCode, courseIndex);
     }
+
     public void dropCourse(String courseCode) {
         this.studentCourses.remove(courseCode);
     }
@@ -61,21 +65,20 @@ public class Student implements Serializable {
     }
 
     public void printCourse() {
-            // https://stackoverflow.com/questions/1066589/iterate-through-a-hashmap
-            for (Map.Entry<String, String> entry : this.studentCourses.entrySet()) {
-                String CourseCode = entry.getKey();
-                String CourseIndex = entry.getValue();
-                System.out.println(" CourseCode: " + CourseCode + "// Course Index: " + CourseIndex);
-            }
+        // https://stackoverflow.com/questions/1066589/iterate-through-a-hashmap
+        for (Map.Entry<String, String> entry : this.studentCourses.entrySet()) {
+            String CourseCode = entry.getKey();
+            String CourseIndex = entry.getValue();
+            System.out.println(" CourseCode: " + CourseCode + "// Course Index: " + CourseIndex);
         }
-
+    }
 
 
     public boolean checkTimingClash(String courseCode1, String courseCode2, String courseIndex1, String courseIndex2) {
         return true;
     }
 
-    public int getNumberOfCoursesRegistered(){
+    public int getNumberOfCoursesRegistered() {
         return this.studentCourses.size();
     }
 
