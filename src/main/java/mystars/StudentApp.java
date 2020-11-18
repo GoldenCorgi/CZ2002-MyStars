@@ -15,6 +15,14 @@ public class StudentApp  {
     private final Student student;
     private final HashMap<String, Course> CourseList;
 
+    /**
+     * Constructor to create StudentApp object based on parameters given.
+     * Creates StudentApp with studentEmail
+     *
+     * @param StudentEmail The school email of a student
+     *
+     *
+     */
     public StudentApp(String StudentEmail) {
         StudentList = loadStudents();
         this.StudentEmail = StudentEmail;
@@ -61,12 +69,12 @@ public class StudentApp  {
                 "\n(6) Swop Index Number with Another Student" +
                 "\n(7) Exit";
 
-        System.out.println(Choices);
         Scanner sc = new Scanner(System.in);
 
 
         int choice;
         do {
+            System.out.println(Choices);
             System.out.println("Enter the number of your choice: ");
             choice = sc.nextInt();
             switch (choice) {

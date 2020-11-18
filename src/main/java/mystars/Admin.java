@@ -28,7 +28,7 @@ public class Admin implements Serializable {
 //    Scanner sc = new Scanner(System.in);
 
     private HashMap<String, Course> CourseList;
-    private HashMap<String, Student> StudentList = new HashMap<>();
+    private HashMap<String, Student> StudentList;
 
     public Admin(String sampleadminname) {
         StudentList = loadStudents();
@@ -184,6 +184,7 @@ public class Admin implements Serializable {
 
     public void runLoop(Login login) throws StarsException {
         int choice;
+        Scanner sc = new Scanner(System.in);
         final String Choices = "(1) Edit Student Access Period"+
                 "\n(2) Add Student"+
                 "\n(3) Add Course"+
@@ -194,8 +195,6 @@ public class Admin implements Serializable {
                 "(8) Exit";
         do {
             System.out.println(Choices);
-            Scanner sc = new Scanner(System.in);
-
             System.out.println("Enter the number of your choice: ");
             choice = sc.nextInt();
             switch (choice) {
