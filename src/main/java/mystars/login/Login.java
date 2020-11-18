@@ -13,6 +13,14 @@ public class Login {
     UserList users;
     Storage storage;
 
+    /**
+     * Contructor to create Login object based on parameters given.
+     * Creates Login with UserList object users and Storage object storage
+     *
+     * @param users The UserList object of a list of users
+     * @param storage The Storage object for storage
+     */
+
     public Login(UserList users, Storage storage) {
         this.users = users;
         this.storage = storage;
