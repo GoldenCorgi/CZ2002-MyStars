@@ -8,21 +8,13 @@ import java.io.Serializable;
 import java.util.List;
 
 public class CourseIndex implements Serializable {
+    private static final long serialVersionUID = 42L;
+
     private int totalVacancies;
     private String indexName;
     private List<Student> registeredStudents = null;
     private List<CourseComponent> courseComponents = null;
 
-    /**
-     * Constructor to create course index object using the parameters given.
-     *
-     * @param indexName The name of the index of the course.
-     * @param totalVacancies The total vacancies in the index of the course.
-     */
-
-    public String getIndexName() {
-        return indexName;
-    }
     public CourseIndex(String indexName, int totalVacancies) {
         this.totalVacancies = totalVacancies;
         this.indexName = indexName;
@@ -31,12 +23,23 @@ public class CourseIndex implements Serializable {
     }
 
     /**
+     * Constructor to create course index object using the parameters given.
+     *
+     * @param indexName      The name of the index of the course.
+     * @param totalVacancies The total vacancies in the index of the course.
+     */
+
+    public String getIndexName() {
+        return indexName;
+    }
+
+    /**
      * Function to add laboratory to course index.
      *
-     * @param venue The venue of the laboratory.
+     * @param venue     The venue of the laboratory.
      * @param startTime The start time of the laboratory.
-     * @param endTime The end time of the laboratory.
-     * @param day The day of the laboratory.
+     * @param endTime   The end time of the laboratory.
+     * @param day       The day of the laboratory.
      */
     public void addLaboratory(String venue, String startTime, String endTime, String day) {
         courseComponents.add(new Laboratory(venue, startTime, endTime, day));
@@ -45,10 +48,10 @@ public class CourseIndex implements Serializable {
     /**
      * Function to add tutorial to course index.
      *
-     * @param venue The venue of the tutorial.
+     * @param venue     The venue of the tutorial.
      * @param startTime The start time of the tutorial.
-     * @param endTime The end time of the tutorial.
-     * @param day The day of the tutorial.
+     * @param endTime   The end time of the tutorial.
+     * @param day       The day of the tutorial.
      */
     public void addTutorial(String venue, String startTime, String endTime, String day) {
         courseComponents.add(new Tutorial(venue, startTime, endTime, day));
@@ -57,10 +60,10 @@ public class CourseIndex implements Serializable {
     /**
      * Function to add lecture to course index.
      *
-     * @param venue The venue of the lecture.
+     * @param venue     The venue of the lecture.
      * @param startTime The start time of the lecture.
-     * @param endTime The end time of the lecture.
-     * @param day The day of the lecture.
+     * @param endTime   The end time of the lecture.
+     * @param day       The day of the lecture.
      */
     public void addLecture(String venue, String startTime, String endTime, String day) {
         courseComponents.add(new Lecture(venue, startTime, endTime, day));
@@ -83,7 +86,7 @@ public class CourseIndex implements Serializable {
     }
 
     /**
-     *Function to check if course index is full. Returns a boolean value.
+     * Function to check if course index is full. Returns a boolean value.
      */
     public boolean isFull() {
         return this.getNumberOfVacancies() == 0;
@@ -98,7 +101,7 @@ public class CourseIndex implements Serializable {
 
     public void printRegisteredStudent() {
         for (int i = 0; i < this.registeredStudents.size(); i++) {
-            System.out.println(Integer.toString(i+1) + ": " + this.registeredStudents.get(i).getStudentName());
+            System.out.println(Integer.toString(i + 1) + ": " + this.registeredStudents.get(i).getStudentName());
         }
 
 

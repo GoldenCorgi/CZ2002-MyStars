@@ -61,14 +61,13 @@ public class Login {
     public void addNewStudentWithPassword(Scanner sc, String username) throws StarsException {
         String password;
         Console console = System.console();
-            if (console == null) {
-                System.out.println("Couldn't get Console instance - Do not run in an IDE");
-                System.out.println("Enter your not so secret password: ");
-                password = sc.next();
-            }
-            else {
+        if (console == null) {
+            System.out.println("Couldn't get Console instance - Do not run in an IDE");
+            System.out.println("Enter your not so secret password: ");
+            password = sc.next();
+        } else {
             char[] passwordArray = console.readPassword("Enter your secret password: ");
-                password =  new String(passwordArray);
+            password = new String(passwordArray);
         }
 
         users.addNewUser(username, password, "student");
@@ -76,11 +75,11 @@ public class Login {
     }
 
 
-    public String run() throws StarsException {
+    public User run() throws StarsException {
         Scanner sc = new Scanner(System.in);
-        String rolename = "", username;
+        String rolename = "", username = null;
         boolean validated = false;
-        while (!validated) {
+        do {
 
             LocalDateTime now = LocalDateTime.now();
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
@@ -111,9 +110,10 @@ public class Login {
             } else {
                 System.out.println("User - " + username + " - is not allowed to log in as a " + rolename);
             }
-        }
+        } while (!validated);
         storage.saveUsers(users);
-        return rolename;
+        sc.close();
+        return users.getExistingUser(username);
         //char[] pw = console.readPassword("Enter password: ");
 
         //String password = new String(pw);

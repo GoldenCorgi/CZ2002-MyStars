@@ -72,7 +72,7 @@ public class UserList {
      * @return <code>true</code> if username already exists; <code>false</code> otherwise.
      */
     public boolean isExistingUser(String username) {
-        return getExistingUser(username) > -1;
+        return getExistingUser(username) != null;
     }
 
     /**
@@ -82,16 +82,16 @@ public class UserList {
      * @param username The username entered by the user.
      * @return index of the user with the Password; -1 otherwise.
      */
-    public int getExistingUser(String username) {
+    public User getExistingUser(String username) {
         assert username != null && !username.equals("") : "Cannot get user of null username";
 
         for (int i = 0; i < getSize(); i++) {
             if (getUserUsingIndex(i).getName().equals(username)) {
-                return i;
+                return getUserUsingIndex(i);
             }
         }
 
-        return -1;
+        return null;
     }
 
     /**
@@ -129,9 +129,8 @@ public class UserList {
      * @return True if password matches, False otherwise.
      */
     public Boolean validatePassword(String username, String password) {
-        int idx = getExistingUser(username);
         /** TODO PASSWORD HASHING **/
-        return this.users.get(idx).validatePassword(password);
+        return getExistingUser(username).validatePassword(password);
     }
 
 }

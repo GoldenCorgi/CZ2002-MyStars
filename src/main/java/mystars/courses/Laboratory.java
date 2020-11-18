@@ -2,13 +2,13 @@ package mystars.courses;
 
 public class Laboratory extends CourseComponent {
     /**
-     *Constructor to create Laboratory object based on parameters given.
-     *Creates laboratory with venue, start time, end time and day.
+     * Constructor to create Laboratory object based on parameters given.
+     * Creates laboratory with venue, start time, end time and day.
      *
-     * @param venue The venue of the course component (Lecture, Tutorial and Laboratory)
+     * @param venue     The venue of the course component (Lecture, Tutorial and Laboratory)
      * @param startTime The start time of the course component (Lecture, Tutorial and Laboratory)
-     * @param endTime The end time of the course component (Lecture, Tutorial and Laboratory)
-     * @param day The day of the course component (Lecture, Tutorial and Laboratory)
+     * @param endTime   The end time of the course component (Lecture, Tutorial and Laboratory)
+     * @param day       The day of the course component (Lecture, Tutorial and Laboratory)
      */
 
     public Laboratory(String venue, String startTime, String endTime, String day) {
