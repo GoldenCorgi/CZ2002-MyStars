@@ -10,7 +10,7 @@ import java.util.Scanner;
 import static mystars.Storage.loadCourses;
 import static mystars.Storage.loadStudents;
 
-public class StudentApp  {
+public class StudentApp {
 
     private static HashMap<String, Student> StudentList = new HashMap<>();
     private final String StudentEmail;
@@ -22,8 +22,6 @@ public class StudentApp  {
      * Creates StudentApp with studentEmail
      *
      * @param StudentEmail The school email of a student
-     *
-     *
      */
     public StudentApp(String StudentEmail) {
         StudentList = loadStudents();
@@ -63,7 +61,7 @@ public class StudentApp  {
 
 
     public void runLoop(Login login) throws StarsException {
-         final String Choices = "(1) Add course" +
+        final String Choices = "(1) Add course" +
                 "\n(2) Drop course" +
                 "\n(3) Check/Print Courses Registered" +
                 "\n(4) Check Vacancies Available" +
@@ -149,8 +147,8 @@ public class StudentApp  {
                     index2 = SecondStudent.getCourseIndex(courseCode);
 
                     // TODO Validate whether course got vacancies etc
-                    student.addCourse(courseCode,index2);
-                    SecondStudent.addCourse(courseCode,index1);
+                    student.addCourse(courseCode, index2);
+                    SecondStudent.addCourse(courseCode, index1);
 
                     break;
                 case 7:

@@ -16,17 +16,17 @@ public class Student implements Serializable {
     private static final long serialVersionUID = 42L;
 
     private String matricNo, studentName, studentEmail, studentGender, studentNationality;
-    private int numberOfCoursesRegistered=0, MaxAcademicUnit = 21;
+    private int numberOfCoursesRegistered = 0, MaxAcademicUnit = 21;
     private HashMap<String, String> studentCourses = new HashMap<>();
 
     /**
      * Contructor to create Student object based on parameters given.
      * Creates Student with matricNo, studentName, studentEmail, studentGender, studentNationality
      *
-     * @param matricNo The matriculation number of a student
-     * @param studentName The full student name of a student
-     * @param studentEmail The student school email of a student
-     * @param studentGender The gender of a student
+     * @param matricNo           The matriculation number of a student
+     * @param studentName        The full student name of a student
+     * @param studentEmail       The student school email of a student
+     * @param studentGender      The gender of a student
      * @param studentNationality The nationality of a student
      */
 

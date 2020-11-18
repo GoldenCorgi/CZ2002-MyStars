@@ -18,6 +18,7 @@ public class User {
     // TODO update role /student/admin
     private String role;
     private String salt;
+
     public User(String username, String password, String role) {
         setName(username);
         setNewPassword(password);

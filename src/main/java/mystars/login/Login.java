@@ -17,7 +17,7 @@ public class Login {
      * Contructor to create Login object based on parameters given.
      * Creates Login with UserList object users and Storage object storage
      *
-     * @param users The UserList object of a list of users
+     * @param users   The UserList object of a list of users
      * @param storage The Storage object for storage
      */
 
@@ -81,7 +81,6 @@ public class Login {
         users.addNewUser(username, password, "student");
         storage.saveUsers(users);
     }
-
 
 
     public User GetSwoppingStudent() throws StarsException {
