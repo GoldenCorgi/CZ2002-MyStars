@@ -163,7 +163,107 @@ public class Admin implements Serializable {
     }
 
 
-    public void updateCourses() {
+    public void updateCourses(Scanner sc) {
+        System.out.println("Enter Course Code:");
+        String courseCode = sc.next();
+        System.out.println("Enter Course Name:");
+        String courseName = sc.next();
+        System.out.println("Enter Course School:");
+        String courseSchool = sc.next();
+        System.out.println("Enter AU:");
+        int AcademicUnits = sc.nextInt();
+
+        System.out.println("Enter Course Vacancies:");
+        int courseVacancies = sc.nextInt();
+        System.out.println("Enter Number of Indexes:");
+        int numberOfIndexes = sc.nextInt();
+//        Index[] index = new Index[numberOfIndexes];
+
+        Course course = new Course(courseName, courseCode, courseSchool, AcademicUnits);
+        CourseList.put(course.getCourseCode(), course);
+        for (int i = 0; i < numberOfIndexes; i++) {
+            System.out.println("Enter Index Name:");
+            String indexName = sc.next();
+            CourseIndex courseIndex = new CourseIndex(indexName, courseVacancies);
+            course.addCourseIndex(courseIndex);
+            System.out.println("Enter Course Components:");
+            int choice;
+            System.out.println("1. Lecture     2. Lecture and Tutorial     3. Lecture, Tutorial and Lab");
+            choice = sc.nextInt();
+
+            switch (choice) {
+                case 1:
+                    System.out.println("You have chosen choice 1 - Lecture Only");
+                    System.out.println("Enter Lecture Venue:");
+                    String LecVenue = sc.next();
+                    System.out.println("Enter Lecture StartTime (HHMM):");
+                    String LecStart = sc.next();
+                    System.out.println("Enter Lecture EndTime (HHMM):");
+                    String LecEnd = sc.next();
+                    System.out.println("Enter Lecture WeekDay:");
+                    String LecDay = sc.next();
+                    courseIndex.addLecture(LecVenue, LecStart, LecEnd, LecDay);
+
+
+                    break;
+                case 2:
+                    System.out.println("You have chosen choice 2 - Lecture & Tutorial");
+                    System.out.println("Enter Lecture Venue:");
+                    LecVenue = sc.next();
+                    System.out.println("Enter Lecture StartTime (HHMM):");
+                    LecStart = sc.next();
+                    System.out.println("Enter Lecture EndTime (HHMM):");
+                    LecEnd = sc.next();
+                    System.out.println("Enter Lecture WeekDay:");
+                    LecDay = sc.next();
+                    courseIndex.addLecture(LecVenue, LecStart, LecEnd, LecDay);
+                    System.out.println("Enter Tutorial Venue:");
+                    String TutVenue = sc.next();
+                    System.out.println("Enter Tutorial StartTime (HHMM):");
+                    String TutStart = sc.next();
+                    System.out.println("Enter Tutorial EndTime (HHMM):");
+                    String TutEnd = sc.next();
+                    System.out.println("Enter Tutorial WeekDay:");
+                    String TutDay = sc.next();
+                    courseIndex.addTutorial(TutVenue, TutStart, TutEnd, TutDay);
+
+                    break;
+                case 3:
+                    System.out.println("You have chosen choice 3 - Lecture, Tutorial & Lab");
+                    System.out.println("Enter Lecture Venue:");
+                    LecVenue = sc.next();
+                    System.out.println("Enter Lecture StartTime (HHMM):");
+                    LecStart = sc.next();
+                    System.out.println("Enter Lecture EndTime (HHMM):");
+                    LecEnd = sc.next();
+                    System.out.println("Enter Lecture WeekDay:");
+                    LecDay = sc.next();
+                    courseIndex.addLecture(LecVenue, LecStart, LecEnd, LecDay);
+                    System.out.println("Enter Tutorial Venue:");
+                    TutVenue = sc.next();
+                    System.out.println("Enter Tutorial StartTime (HHMM):");
+                    TutStart = sc.next();
+                    System.out.println("Enter Tutorial EndTime (HHMM):");
+                    TutEnd = sc.next();
+                    System.out.println("Enter Tutorial WeekDay:");
+                    TutDay = sc.next();
+                    courseIndex.addTutorial(TutVenue, TutStart, TutEnd, TutDay);
+                    System.out.println("Enter Lab Venue:");
+                    String LabVenue = sc.next();
+                    System.out.println("Enter Lab StartTime (HHMM):");
+                    String LabStart = sc.next();
+                    System.out.println("Enter Lab EndTime (HHMM):");
+                    String LabEnd = sc.next();
+                    System.out.println("Enter Lab WeekDay:");
+                    String LabDay = sc.next();
+                    courseIndex.addLaboratory(LabVenue, LabStart, LabEnd, LabDay);
+
+                    break;
+                default:
+                    System.out.println("Invalid! Please choose again!");
+            }
+
+        }
 
     }
 
@@ -185,13 +285,13 @@ public class Admin implements Serializable {
     public void runLoop(Login login) throws StarsException {
         int choice;
         Scanner sc = new Scanner(System.in);
-        final String Choices = "(1) Edit Student Access Period"+
-                "\n(2) Add Student"+
-                "\n(3) Add Course"+
-                "\n(4) Update Course"+
-                "\n(5) Check Vacancies for a Course Index"+
-                "\n(6) Print Student List by Index Number"+
-                "\n(7) Print Student List by Course"+
+        final String Choices = "(1) Edit Student Access Period" +
+                "\n(2) Add Student" +
+                "\n(3) Add Course" +
+                "\n(4) Update Course" +
+                "\n(5) Check Vacancies for a Course Index" +
+                "\n(6) Print Student List by Index Number" +
+                "\n(7) Print Student List by Course" +
                 "(8) Exit";
         do {
             System.out.println(Choices);
@@ -261,6 +361,7 @@ public class Admin implements Serializable {
                     System.out.println("Course Added");
                     break;
                 case 4:
+                    updateCourses(sc);
                     System.out.println("Program terminating..");
                     break;
                 case 5:
