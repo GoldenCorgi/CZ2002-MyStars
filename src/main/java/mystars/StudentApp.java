@@ -15,6 +15,14 @@ public class StudentApp  {
     private final Student student;
     private final HashMap<String, Course> CourseList;
 
+    /**
+     * Constructor to create StudentApp object based on parameters given.
+     * Creates StudentApp with studentEmail
+     *
+     * @param StudentEmail The school email of a student
+     *
+     *
+     */
     public StudentApp(String StudentEmail) {
         StudentList = loadStudents();
         this.StudentEmail = StudentEmail;

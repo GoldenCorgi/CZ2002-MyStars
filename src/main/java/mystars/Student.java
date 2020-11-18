@@ -19,6 +19,17 @@ public class Student implements Serializable {
     private int numberOfCoursesRegistered, MaxAcademicUnit = 21;
     private HashMap<String, String> studentCourses = new HashMap<>();
 
+    /**
+     * Contructor to create Student object based on parameters given.
+     * Creates Student with matricNo, studentName, studentEmail, studentGender, studentNationality
+     *
+     * @param matricNo The matriculation number of a student
+     * @param studentName The full student name of a student
+     * @param studentEmail The student school email of a student
+     * @param studentGender The gender of a student
+     * @param studentNationality The nationality of a student
+     */
+
     public Student(String matricNo, String studentName, String studentEmail, String studentGender, String studentNationality) {
         this.studentName = studentName;
         this.matricNo = matricNo;
@@ -94,45 +105,7 @@ public class Student implements Serializable {
 //        return choice;
 //    }
 //
-//    public boolean hasCourse(String courseCode) {
-//        if (studCourses.containsKey(courseCode)) {
-//            return true;
-//        } else {
-//            return false;
-//        }
-//    }
-//
-//    public void addCourse() {
-//        //if (courseIndex) in txt file (ie. valid)
-//        // extract courseCode from the .txt file using courseIndex as key
-//        Scanner sc = new Scanner(System.in);
-//        System.out.println("Please enter index number: ");
-//        int index = sc.nextInt();
-//        String courseIndex = String.valueOf(index);
-//        // getCourseCode using courseIndex from Courses class?
-////        // hasVacancies check using Courses class?
-////        //hasVacancy = courseList.hasVacancies(courseIndex)
-//        boolean hasVacancy = true;
-////        //courseCode = courseList.getCourseCode(courseIndex);
-//        String courseCode = "CZ2002";
-//        if (!hasCourse(courseCode)) {
-//            if (hasVacancy) {
-//                if (numberOfCoursesRegistered <= MAXCOURSES) {
-//                    //display the index info
-//                    System.out.println("Enter '1' to confirm add course: ");
-//                    int confirm = sc.nextInt();
-//                    boolean confirmed = Confirmation(confirm);
-//                    if (confirmed) {
-//                        System.out.println("This index has now been added to your courses!");
-//                        studCourses.put(courseCode, courseIndex);
-//                        // reduce vacancy of this index
-//                    }
-//                }
-//            } else {
-//                System.out.println("Course has already been added");
-//            }
-//        }
-//    }
+
 //
 //    public boolean Confirmation(int confirm) {
 //        if (confirm == 1) {
