@@ -61,12 +61,12 @@ public class StudentApp  {
                 "\n(6) Swop Index Number with Another Student" +
                 "\n(7) Exit";
 
-        System.out.println(Choices);
         Scanner sc = new Scanner(System.in);
 
 
         int choice;
         do {
+            System.out.println(Choices);
             System.out.println("Enter the number of your choice: ");
             choice = sc.nextInt();
             switch (choice) {
