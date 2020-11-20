@@ -30,7 +30,7 @@ jobs:
           java-version: '11'
           java-package: jdk+fx
 
-        - name: Build and check with Gradle
+      - name: Build and check with Gradle
         run: ./gradlew check
 
       - name: Install dos2unix (LINUX)
@@ -43,6 +43,7 @@ jobs:
 
       - name: Generate coverage report
         run: ./gradlew codeCoverageReport
+
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v1
         with:
