@@ -40,8 +40,8 @@ jobs:
         uses: codecov/codecov-action@v1
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          file: ./report.xml
-          directory: ./build/reports/jacoco
+#          file: ./report.xml
+#          directory: ./build/reports/jacoco
           flags: unittests
           env_vars: OS,JAVA
           name: codecov-umbrella
