@@ -42,9 +42,9 @@ jobs:
           token: ${{ secrets.CODECOV_TOKEN }}
 #          file: ./report.xml
 #          directory: ./build/reports/jacoco
-          flags: unittests
+#          flags: unittests
           env_vars: OS,JAVA
           name: codecov-umbrella
           fail_ci_if_error: true
 #          path_to_write_report: ./coverage/codecov_report.gz
-          verbose: true
+#          verbose: true
