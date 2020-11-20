@@ -29,10 +29,13 @@ test {
         showStackTraces true
         showStandardStreams = false
     }
-    finalizedBy jacocoTestReport // report is always generated after tests run
+//    finalizedBy codeCoverageReport // report is always generated after tests run
 
 }
+
 task codeCoverageReport(type: JacocoReport) {
+    dependsOn test
+
     executionData fileTree(project.rootDir.absolutePath).include("**/build/jacoco/*.exec")
 
     reports {
