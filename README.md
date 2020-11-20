@@ -1,22 +1,28 @@
 # Project Template for CZ2002 MyStars
 
-![Java CI](https://github.com/GoldenCorgi/CZ2002-MyStars/workflows/Java%20CI/badge.svg)
+![Java Automatic CodeCoverage Report](https://github.com/GoldenCorgi/CZ2002-MyStars/workflows/Java%20Automatic%20CodeCoverage%20Report/badge.svg)
+![Java CI/CD Integrated Test](https://github.com/GoldenCorgi/CZ2002-MyStars/workflows/Java%20CI/CD%20Integrated%20Test/badge.svg)
 [![Netlify Status](https://api.netlify.com/api/v1/badges/122779ae-d183-46e9-beef-6e66a0d4db3f/deploy-status)](https://cz2002-mystars.netlify.app)
 [![codecov](https://codecov.io/gh/GoldenCorgi/CZ2002-MyStars/branch/master/graph/badge.svg?token=W928NWEEMJ)](https://codecov.io/gh/GoldenCorgi/CZ2002-MyStars)
 
+## Documentation
+
+The website hosting our documentation can be found here [https://cz2002-mystars.netlify.app](https://cz2002-mystars.netlify.app)
 
 
 ## Code Coverage
 
-Fuck yes
 An icicle graph showing the code coverage for tests. The top section represents the entire project. Proceeding with folders and finally individual files. The size and color of each slice is representing the number of statements and the coverage, respectively.
 
 [![codecov](https://codecov.io/gh/GoldenCorgi/CZ2002-MyStars/branch/master/graphs/icicle.svg?token=W928NWEEMJ)](https://codecov.io/gh/GoldenCorgi/CZ2002-MyStars)
 
 
-This is a project template for a greenfield Java project. Given below are instructions on how to use it.
+
+
 
 ## Setting up in Intellij
+
+This is a project template for a greenfield Java project. Given below are instructions on how to use it.
 
 Tools Used: JDK 11 (use the exact version), update Intellij to the most recent version.
 
