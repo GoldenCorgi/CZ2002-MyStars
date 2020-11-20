@@ -8,6 +8,7 @@ class StorageTest {
 
     @Test
     void loadCourses() {
+        assert(Storage.loadCourses() != null);
         assertTrue(true);
     }
 
