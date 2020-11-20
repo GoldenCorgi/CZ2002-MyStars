@@ -29,20 +29,17 @@ test {
         showStackTraces true
         showStandardStreams = false
     }
+    finalizedBy jacocoTestReport
 //    finalizedBy codeCoverageReport // report is always generated after tests run
 
 }
 
-task codeCoverageReport(type: JacocoReport) {
-    dependsOn test
-
-    executionData fileTree(project.rootDir.absolutePath).include("**/build/jacoco/*.exec")
-
+jacocoTestReport {
     reports {
         xml.enabled true
-        xml.destination file("./build/reports/jacoco/coverage.xml")
-        html.enabled false
+        xml.destination file("${buildDir}/reports/jacoco/coverage.xml")
         csv.enabled false
+        html.enabled false
     }
 }
 
