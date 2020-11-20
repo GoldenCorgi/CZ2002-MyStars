@@ -129,7 +129,6 @@ public class UserList {
      * @return True if password matches, False otherwise.
      */
     public Boolean validatePassword(String username, String password) {
-        /** TODO PASSWORD HASHING **/
         return getExistingUser(username).validatePassword(password);
     }
 

@@ -4,21 +4,19 @@ import mystars.login.Login;
 import mystars.login.User;
 import mystars.login.UserList;
 
-import java.util.logging.Logger;
-
 /**
  * Main class.
  */
 public class Main {
 
     public static void main(String[] args) throws StarsException {
-        Logger logger = Logger.getLogger("MyStars");
+//        Logger logger = Logger.getLogger("MyStars");
         Storage storage = new Storage("data");
         UserList users;
         users = storage.loadUsers();
 
         Login login = new Login(users, storage);
-        // TODO return user class instead, so can get their username and role
+        // return user class instead, so can get their username and role
         User user = login.run();
         String roleName = user.getRole();
 

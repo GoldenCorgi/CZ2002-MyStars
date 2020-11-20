@@ -14,12 +14,11 @@ import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
 
-import static mystars.Storage.loadCourses;
-import static mystars.Storage.loadStudents;
+import static mystars.Storage.*;
 
 
 public class Admin implements Serializable {
-    private static final long serialVersionUID = 42L;
+    private static final long serialVersionUID = 420;
 
 //    private static final long serialVersionUID = 26;
 //    //    private String name;
@@ -27,8 +26,8 @@ public class Admin implements Serializable {
 //    private HashMap<String, String> IndexMap = new HashMap<>();
 //    Scanner sc = new Scanner(System.in);
 
-    private HashMap<String, Course> CourseList;
-    private HashMap<String, Student> StudentList;
+    private final HashMap<String, Course> CourseList;
+    private final HashMap<String, Student> StudentList;
 
     public Admin(String sampleadminname) {
         StudentList = loadStudents();
@@ -61,43 +60,55 @@ public class Admin implements Serializable {
 
     public void addCourse(Scanner sc) {
         System.out.println("Enter Course Name:");
-        String courseName = sc.next();
+        String courseName = sc.nextLine();
         System.out.println("Enter Course Code:");
-        String courseCode = sc.next();
+        String courseCode = sc.nextLine();
         System.out.println("Enter Course School:");
-        String courseSchool = sc.next();
+        String courseSchool = sc.nextLine();
         System.out.println("Enter AU:");
         int AcademicUnits = sc.nextInt();
+        // Remove non-integer inputs due to buggy java stuff lmao https://stackoverflow.com/questions/27717503/why-does-my-scanner-repeat
+        sc.nextLine();
+
 
         System.out.println("Enter Course Vacancies:");
         int courseVacancies = sc.nextInt();
+        // Remove non-integer inputs due to buggy java stuff lmao https://stackoverflow.com/questions/27717503/why-does-my-scanner-repeat
+        sc.nextLine();
+
         System.out.println("Enter Number of Indexes:");
         int numberOfIndexes = sc.nextInt();
+        // Remove non-integer inputs due to buggy java stuff lmao https://stackoverflow.com/questions/27717503/why-does-my-scanner-repeat
+        sc.nextLine();
+
 //        Index[] index = new Index[numberOfIndexes];
 
         Course course = new Course(courseName, courseCode, courseSchool, AcademicUnits);
         CourseList.put(course.getCourseCode(), course);
         for (int i = 0; i < numberOfIndexes; i++) {
             System.out.println("Enter Index Name:");
-            String indexName = sc.next();
+            String indexName = sc.nextLine();
             CourseIndex courseIndex = new CourseIndex(indexName, courseVacancies);
             course.addCourseIndex(courseIndex);
             System.out.println("Enter Course Components:");
             int choice;
             System.out.println("1. Lecture     2. Lecture and Tutorial     3. Lecture, Tutorial and Lab");
             choice = sc.nextInt();
+            // Remove non-integer inputs due to buggy java stuff lmao https://stackoverflow.com/questions/27717503/why-does-my-scanner-repeat
+            sc.nextLine();
+
 
             switch (choice) {
                 case 1:
                     System.out.println("You have chosen choice 1 - Lecture Only");
                     System.out.println("Enter Lecture Venue:");
-                    String LecVenue = sc.next();
+                    String LecVenue = sc.nextLine();
                     System.out.println("Enter Lecture StartTime (HHMM):");
-                    String LecStart = sc.next();
+                    String LecStart = sc.nextLine();
                     System.out.println("Enter Lecture EndTime (HHMM):");
-                    String LecEnd = sc.next();
+                    String LecEnd = sc.nextLine();
                     System.out.println("Enter Lecture WeekDay:");
-                    String LecDay = sc.next();
+                    String LecDay = sc.nextLine();
                     courseIndex.addLecture(LecVenue, LecStart, LecEnd, LecDay);
 
 
@@ -105,53 +116,53 @@ public class Admin implements Serializable {
                 case 2:
                     System.out.println("You have chosen choice 2 - Lecture & Tutorial");
                     System.out.println("Enter Lecture Venue:");
-                    LecVenue = sc.next();
+                    LecVenue = sc.nextLine();
                     System.out.println("Enter Lecture StartTime (HHMM):");
-                    LecStart = sc.next();
+                    LecStart = sc.nextLine();
                     System.out.println("Enter Lecture EndTime (HHMM):");
-                    LecEnd = sc.next();
+                    LecEnd = sc.nextLine();
                     System.out.println("Enter Lecture WeekDay:");
-                    LecDay = sc.next();
+                    LecDay = sc.nextLine();
                     courseIndex.addLecture(LecVenue, LecStart, LecEnd, LecDay);
                     System.out.println("Enter Tutorial Venue:");
-                    String TutVenue = sc.next();
+                    String TutVenue = sc.nextLine();
                     System.out.println("Enter Tutorial StartTime (HHMM):");
-                    String TutStart = sc.next();
+                    String TutStart = sc.nextLine();
                     System.out.println("Enter Tutorial EndTime (HHMM):");
-                    String TutEnd = sc.next();
+                    String TutEnd = sc.nextLine();
                     System.out.println("Enter Tutorial WeekDay:");
-                    String TutDay = sc.next();
+                    String TutDay = sc.nextLine();
                     courseIndex.addTutorial(TutVenue, TutStart, TutEnd, TutDay);
 
                     break;
                 case 3:
                     System.out.println("You have chosen choice 3 - Lecture, Tutorial & Lab");
                     System.out.println("Enter Lecture Venue:");
-                    LecVenue = sc.next();
+                    LecVenue = sc.nextLine();
                     System.out.println("Enter Lecture StartTime (HHMM):");
-                    LecStart = sc.next();
+                    LecStart = sc.nextLine();
                     System.out.println("Enter Lecture EndTime (HHMM):");
-                    LecEnd = sc.next();
+                    LecEnd = sc.nextLine();
                     System.out.println("Enter Lecture WeekDay:");
-                    LecDay = sc.next();
+                    LecDay = sc.nextLine();
                     courseIndex.addLecture(LecVenue, LecStart, LecEnd, LecDay);
                     System.out.println("Enter Tutorial Venue:");
-                    TutVenue = sc.next();
+                    TutVenue = sc.nextLine();
                     System.out.println("Enter Tutorial StartTime (HHMM):");
-                    TutStart = sc.next();
+                    TutStart = sc.nextLine();
                     System.out.println("Enter Tutorial EndTime (HHMM):");
-                    TutEnd = sc.next();
+                    TutEnd = sc.nextLine();
                     System.out.println("Enter Tutorial WeekDay:");
-                    TutDay = sc.next();
+                    TutDay = sc.nextLine();
                     courseIndex.addTutorial(TutVenue, TutStart, TutEnd, TutDay);
                     System.out.println("Enter Lab Venue:");
-                    String LabVenue = sc.next();
+                    String LabVenue = sc.nextLine();
                     System.out.println("Enter Lab StartTime (HHMM):");
-                    String LabStart = sc.next();
+                    String LabStart = sc.nextLine();
                     System.out.println("Enter Lab EndTime (HHMM):");
-                    String LabEnd = sc.next();
+                    String LabEnd = sc.nextLine();
                     System.out.println("Enter Lab WeekDay:");
-                    String LabDay = sc.next();
+                    String LabDay = sc.nextLine();
                     courseIndex.addLaboratory(LabVenue, LabStart, LabEnd, LabDay);
 
                     break;
@@ -165,43 +176,54 @@ public class Admin implements Serializable {
 
     public void updateCourses(Scanner sc) {
         System.out.println("Enter Course Code:");
-        String courseCode = sc.next();
+        String courseCode = sc.nextLine();
         System.out.println("Enter Course Name:");
-        String courseName = sc.next();
+        String courseName = sc.nextLine();
         System.out.println("Enter Course School:");
-        String courseSchool = sc.next();
+        String courseSchool = sc.nextLine();
         System.out.println("Enter AU:");
         int AcademicUnits = sc.nextInt();
+        // Remove non-integer inputs due to buggy java stuff lmao https://stackoverflow.com/questions/27717503/why-does-my-scanner-repeat
+        sc.nextLine();
 
         System.out.println("Enter Course Vacancies:");
         int courseVacancies = sc.nextInt();
+        // Remove non-integer inputs due to buggy java stuff lmao https://stackoverflow.com/questions/27717503/why-does-my-scanner-repeat
+        sc.nextLine();
+
         System.out.println("Enter Number of Indexes:");
         int numberOfIndexes = sc.nextInt();
+        // Remove non-integer inputs due to buggy java stuff lmao https://stackoverflow.com/questions/27717503/why-does-my-scanner-repeat
+        sc.nextLine();
+
 //        Index[] index = new Index[numberOfIndexes];
 
         Course course = new Course(courseName, courseCode, courseSchool, AcademicUnits);
         CourseList.put(course.getCourseCode(), course);
         for (int i = 0; i < numberOfIndexes; i++) {
             System.out.println("Enter Index Name:");
-            String indexName = sc.next();
+            String indexName = sc.nextLine();
             CourseIndex courseIndex = new CourseIndex(indexName, courseVacancies);
             course.addCourseIndex(courseIndex);
             System.out.println("Enter Course Components:");
             int choice;
             System.out.println("1. Lecture     2. Lecture and Tutorial     3. Lecture, Tutorial and Lab");
             choice = sc.nextInt();
+            // Remove non-integer inputs due to buggy java stuff lmao https://stackoverflow.com/questions/27717503/why-does-my-scanner-repeat
+            sc.nextLine();
+
 
             switch (choice) {
                 case 1:
                     System.out.println("You have chosen choice 1 - Lecture Only");
                     System.out.println("Enter Lecture Venue:");
-                    String LecVenue = sc.next();
+                    String LecVenue = sc.nextLine();
                     System.out.println("Enter Lecture StartTime (HHMM):");
-                    String LecStart = sc.next();
+                    String LecStart = sc.nextLine();
                     System.out.println("Enter Lecture EndTime (HHMM):");
-                    String LecEnd = sc.next();
+                    String LecEnd = sc.nextLine();
                     System.out.println("Enter Lecture WeekDay:");
-                    String LecDay = sc.next();
+                    String LecDay = sc.nextLine();
                     courseIndex.addLecture(LecVenue, LecStart, LecEnd, LecDay);
 
 
@@ -209,53 +231,53 @@ public class Admin implements Serializable {
                 case 2:
                     System.out.println("You have chosen choice 2 - Lecture & Tutorial");
                     System.out.println("Enter Lecture Venue:");
-                    LecVenue = sc.next();
+                    LecVenue = sc.nextLine();
                     System.out.println("Enter Lecture StartTime (HHMM):");
-                    LecStart = sc.next();
+                    LecStart = sc.nextLine();
                     System.out.println("Enter Lecture EndTime (HHMM):");
-                    LecEnd = sc.next();
+                    LecEnd = sc.nextLine();
                     System.out.println("Enter Lecture WeekDay:");
-                    LecDay = sc.next();
+                    LecDay = sc.nextLine();
                     courseIndex.addLecture(LecVenue, LecStart, LecEnd, LecDay);
                     System.out.println("Enter Tutorial Venue:");
-                    String TutVenue = sc.next();
+                    String TutVenue = sc.nextLine();
                     System.out.println("Enter Tutorial StartTime (HHMM):");
-                    String TutStart = sc.next();
+                    String TutStart = sc.nextLine();
                     System.out.println("Enter Tutorial EndTime (HHMM):");
-                    String TutEnd = sc.next();
+                    String TutEnd = sc.nextLine();
                     System.out.println("Enter Tutorial WeekDay:");
-                    String TutDay = sc.next();
+                    String TutDay = sc.nextLine();
                     courseIndex.addTutorial(TutVenue, TutStart, TutEnd, TutDay);
 
                     break;
                 case 3:
                     System.out.println("You have chosen choice 3 - Lecture, Tutorial & Lab");
                     System.out.println("Enter Lecture Venue:");
-                    LecVenue = sc.next();
+                    LecVenue = sc.nextLine();
                     System.out.println("Enter Lecture StartTime (HHMM):");
-                    LecStart = sc.next();
+                    LecStart = sc.nextLine();
                     System.out.println("Enter Lecture EndTime (HHMM):");
-                    LecEnd = sc.next();
+                    LecEnd = sc.nextLine();
                     System.out.println("Enter Lecture WeekDay:");
-                    LecDay = sc.next();
+                    LecDay = sc.nextLine();
                     courseIndex.addLecture(LecVenue, LecStart, LecEnd, LecDay);
                     System.out.println("Enter Tutorial Venue:");
-                    TutVenue = sc.next();
+                    TutVenue = sc.nextLine();
                     System.out.println("Enter Tutorial StartTime (HHMM):");
-                    TutStart = sc.next();
+                    TutStart = sc.nextLine();
                     System.out.println("Enter Tutorial EndTime (HHMM):");
-                    TutEnd = sc.next();
+                    TutEnd = sc.nextLine();
                     System.out.println("Enter Tutorial WeekDay:");
-                    TutDay = sc.next();
+                    TutDay = sc.nextLine();
                     courseIndex.addTutorial(TutVenue, TutStart, TutEnd, TutDay);
                     System.out.println("Enter Lab Venue:");
-                    String LabVenue = sc.next();
+                    String LabVenue = sc.nextLine();
                     System.out.println("Enter Lab StartTime (HHMM):");
-                    String LabStart = sc.next();
+                    String LabStart = sc.nextLine();
                     System.out.println("Enter Lab EndTime (HHMM):");
-                    String LabEnd = sc.next();
+                    String LabEnd = sc.nextLine();
                     System.out.println("Enter Lab WeekDay:");
-                    String LabDay = sc.next();
+                    String LabDay = sc.nextLine();
                     courseIndex.addLaboratory(LabVenue, LabStart, LabEnd, LabDay);
 
                     break;
@@ -285,18 +307,21 @@ public class Admin implements Serializable {
     public void runLoop(Login login) throws StarsException {
         int choice;
         Scanner sc = new Scanner(System.in);
-        final String Choices = "(1) Edit Student Access Period" +
+        final String Choices = "\n(1) Edit Student Access Period" +
                 "\n(2) Add Student" +
                 "\n(3) Add Course" +
                 "\n(4) Update Course" +
                 "\n(5) Check Vacancies for a Course Index" +
                 "\n(6) Print Student List by Index Number" +
                 "\n(7) Print Student List by Course" +
-                "(8) Exit";
+                "\n(8) Exit";
         do {
             System.out.println(Choices);
             System.out.println("Enter the number of your choice: ");
             choice = sc.nextInt();
+            // Remove non-integer inputs due to buggy java stuff lmao https://stackoverflow.com/questions/27717503/why-does-my-scanner-repeat
+            sc.nextLine();
+
             switch (choice) {
                 case 1:
                     LocalDateTime currentDateTime = LocalDateTime.now();
@@ -304,9 +329,9 @@ public class Admin implements Serializable {
                     String formattedCurrentDT = currentDateTime.format(formatDateTime);
                     System.out.println("Current Date and Time: " + formattedCurrentDT);
                     System.out.println("Enter start date of Student Access Period (dd-MM-yyyy): ");
-                    String date = sc.next();
+                    String date = sc.nextLine();
                     System.out.println("Enter start time of Student Access Period: ");
-                    String time = sc.next();
+                    String time = sc.nextLine();
                     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
                     LocalDate startDate = LocalDate.parse(date, formatter);
                     LocalTime timeFormat = LocalTime.parse(time);
@@ -314,9 +339,9 @@ public class Admin implements Serializable {
                     System.out.println("time: " + timeFormat);
 
                     System.out.println("Enter end date of Student Access Period (dd-MM-yyyy): ");
-                    String date2 = sc.next();
+                    String date2 = sc.nextLine();
                     System.out.println("Enter end time of Student Access Period: ");
-                    String time2 = sc.next();
+                    String time2 = sc.nextLine();
                     LocalDate endDate = LocalDate.parse(date2, formatter);
                     LocalTime timeFormat2 = LocalTime.parse(time2);
                     System.out.println("date: " + endDate);
@@ -332,7 +357,6 @@ public class Admin implements Serializable {
                         System.out.println("Email already exists!");
                         break;
                     }
-                    ;
                     System.out.println("Enter studentName: ");
                     String studentName = sc.nextLine();
                     System.out.println("Enter matricNo: ");
@@ -374,7 +398,7 @@ public class Admin implements Serializable {
                     String courseIndex = sc.nextLine();
                     // TODO Verify courseindex
                     int vacancies = checkVacancies(courseCode, courseIndex);
-                    System.out.println("Course Index has " + String.valueOf(vacancies) + " Vacancies");
+                    System.out.println("Course Index has " + vacancies + " Vacancies");
                     break;
                 case 6:
                     // Done
@@ -386,7 +410,6 @@ public class Admin implements Serializable {
                     courseIndex = sc.nextLine();
                     // TODO Verify courseindex
                     printStudentListByIndex(courseCode, courseIndex);
-                    System.out.println("Program terminating..");
                     break;
                 case 7:
                     // Done
@@ -395,11 +418,12 @@ public class Admin implements Serializable {
                     courseCode = sc.nextLine();
                     // TODO verify coursecode
                     printStudentListByCourse(courseCode);
-                    System.out.println("Program terminating..");
                     break;
                 case 8:
                     System.out.println("Program terminating..");
             }
+            saveCourses(CourseList);
+            saveStudents(StudentList);
         } while (choice != 8);
 
     }

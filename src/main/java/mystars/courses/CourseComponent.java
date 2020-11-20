@@ -3,7 +3,12 @@ package mystars.courses;
 import java.io.Serializable;
 
 public class CourseComponent implements Serializable {
-    private String componentName, venue, startTime, endTime, day;
+    private static final long serialVersionUID = 420;
+    private final String componentName;
+    private final String venue;
+    private final String startTime;
+    private final String endTime;
+    private final String day;
 
     /**
      * Constructor to create Course Component object based on parameters given.

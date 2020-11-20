@@ -14,10 +14,15 @@ import java.util.Map;
 
 public class Student implements Serializable {
     private static final long serialVersionUID = 42L;
-
-    private String matricNo, studentName, studentEmail, studentGender, studentNationality;
-    private int numberOfCoursesRegistered = 0, MaxAcademicUnit = 21;
-    private HashMap<String, String> studentCourses = new HashMap<>();
+    // TODO change possibility to edit courses info
+    private final String matricNo;
+    private final String studentName;
+    private final String studentEmail;
+    private final String studentGender;
+    private final String studentNationality;
+    private final int numberOfCoursesRegistered = 0;
+    private final int MaxAcademicUnit = 21;
+    private final HashMap<String, String> studentCourses = new HashMap<>();
 
     /**
      * Contructor to create Student object based on parameters given.
@@ -80,10 +85,14 @@ public class Student implements Serializable {
 
     public void printCourse() {
         // https://stackoverflow.com/questions/1066589/iterate-through-a-hashmap
-        for (Map.Entry<String, String> entry : this.studentCourses.entrySet()) {
-            String CourseCode = entry.getKey();
-            String CourseIndex = entry.getValue();
-            System.out.println(" CourseCode: " + CourseCode + "// Course Index: " + CourseIndex);
+        if (this.studentCourses.size() != 0) {
+            for (Map.Entry<String, String> entry : this.studentCourses.entrySet()) {
+                String CourseCode = entry.getKey();
+                String CourseIndex = entry.getValue();
+                System.out.println("  CourseCode: " + CourseCode + " || Course Index: " + CourseIndex);
+            }
+        } else {
+            System.out.println("Student has no courses registered!");
         }
     }
 

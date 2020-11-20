@@ -6,25 +6,28 @@ import java.util.Map;
 
 
 public class Course implements Serializable {
-    private String courseName, courseCode, school;
-    private int academicUnit;
-    //    private ArrayList<CourseIndex> courseIndex = new ArrayList<CourseIndex>();
-    private HashMap<String, CourseIndex> courseIndex = new HashMap<String, CourseIndex>();
+    private static final long serialVersionUID = 420;
+    // TODO change possibility to edit courses info
+
+    private final String courseName;
+    private final String courseCode;
+    private final String courseSchool;
+    private final int academicUnit;
+    private final HashMap<String, CourseIndex> courseIndex = new HashMap<>();
 
     /**
-     * Contructor to create Course object based on parameters given.
+     * Constructor to create Course object based on parameters given.
      * Creates courses with lectures, tutorial and/or labs.
      *
      * @param courseName   The name of the course.
      * @param courseCode   The code number of the course.
-     * @param school       The school offering the course.
+     * @param courseSchool The school offering the course.
      * @param academicUnit The number of vacancies for a course.
      */
-
-    public Course(String courseName, String courseCode, String school, int academicUnit) {
+    public Course(String courseName, String courseCode, String courseSchool, int academicUnit) {
         this.courseCode = courseCode;
         this.courseName = courseName;
-        this.school = school;
+        this.courseSchool = courseSchool;
         this.academicUnit = academicUnit;
     }
 
@@ -45,6 +48,15 @@ public class Course implements Serializable {
         return this.courseName;
     }
 
+
+    public int getCourseAcademicUnit() {
+        return this.academicUnit;
+    }
+
+    public String getCourseSchool() {
+        return this.courseSchool;
+    }
+
     /**
      * Function to get courseName.
      */
@@ -62,10 +74,8 @@ public class Course implements Serializable {
         // https://stackoverflow.com/questions/1066589/iterate-through-a-hashmap
         for (Map.Entry<String, CourseIndex> entry : this.courseIndex.entrySet()) {
             String CourseIndexName = entry.getKey();
-
             System.out.println("Printing students for Course Index: " + CourseIndexName);
             entry.getValue().printRegisteredStudent();
-            // ...
             System.out.println(" ");
         }
     }
