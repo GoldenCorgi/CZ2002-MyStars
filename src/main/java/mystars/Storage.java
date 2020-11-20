@@ -23,7 +23,7 @@ public class Storage {
     private static final String COURSES_SERIALIZABLE_FILE_NAME = "courses.dat";
     private static final String USERS_FILE = "users.txt";
     private static final String STUDENTS_SERIALIZABLE_FILE_NAME = "students.dat";
-    private final String folder;
+    private static String folder = "data";
 
 
     /**
@@ -154,7 +154,7 @@ public class Storage {
      *
      * @return ArrayList of users.
      */
-    public UserList loadUsers() {
+    public static UserList loadUsers() {
         Path path = Paths.get(folder, USERS_FILE);
         ArrayList<User> users = new ArrayList<>();
 //            logger.log(Level.INFO, "going to load users");
