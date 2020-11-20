@@ -41,7 +41,7 @@ jobs:
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           file: ./report.xml
-          directory: ./reports/jacoco/
+          directory: ./build/reports/jacoco
           flags: unittests
           env_vars: OS,JAVA
           name: codecov-umbrella
