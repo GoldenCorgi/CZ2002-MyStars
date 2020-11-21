@@ -252,7 +252,7 @@ public class Admin implements Serializable {
             }
             AcademicUnits = sc.nextInt();
             sc.nextLine();
-        } while ((AcademicUnits <= 0) || (AcademicUnits > 4));
+        } while ((AcademicUnits <= 0) || (AcademicUnits > 4)); // TODO show a warning message if input not within limits
 
         int courseVacancies;
         do {
@@ -264,7 +264,7 @@ public class Admin implements Serializable {
             }
             courseVacancies = sc.nextInt();
             sc.nextLine();
-        } while ((courseVacancies <= 50) || (courseVacancies > 500));
+        } while ((courseVacancies <= 50) || (courseVacancies > 500)); // TODO show a warning message if input not within limits
 
         int numberOfIndexes;
         do {
@@ -276,7 +276,7 @@ public class Admin implements Serializable {
             }
             numberOfIndexes = sc.nextInt();
             sc.nextLine();
-        } while ((numberOfIndexes <= 0) || (numberOfIndexes > 10));
+        } while ((numberOfIndexes <= 0) || (numberOfIndexes > 10)); // TODO show a warning message if input not within limits
 
 //        Index[] index = new Index[numberOfIndexes];
 
@@ -410,7 +410,6 @@ public class Admin implements Serializable {
      */
     public void runLoop(Login login, Scanner sc) throws StarsException {
         String choice;
-//        Scanner sc = new Scanner(System.in);
         final String Choices = "\n(1) Edit Student Access Period" +
                 "\n(2) Add Student" +
                 "\n(3) Add Course" +
@@ -423,8 +422,6 @@ public class Admin implements Serializable {
             System.out.println(Choices);
             System.out.println("Enter the number of your choice: ");
             choice = sc.nextLine();
-            // Remove non-integer inputs due to buggy java stuff lmao https://stackoverflow.com/questions/27717503/why-does-my-scanner-repeat
-
             switch (choice) {
                 case "1":
                     System.out.println("\n(1) Edit Student Access Period");
@@ -466,10 +463,10 @@ public class Admin implements Serializable {
                     String studentName = sc.nextLine();
                     System.out.println("Enter matricNo: ");
                     String matricNo = sc.nextLine();
-                    // TODO Verify matric does not duplicate
+                    // TODO Verify matric does not duplicate ?
                     System.out.println("Enter studentGender: ");
                     String studentGender = sc.nextLine().toLowerCase();
-                    // TODO verify gender lmao
+                    // TODO verify gender lmao --------- use enum methods?
 //                        if (admin.verifyGender(studentGender)){
 //                            // True = correct input
 //                            System.out.println("Gender incorrect format (Male/Female)!");
@@ -501,7 +498,7 @@ public class Admin implements Serializable {
                     System.out.println("\n(5) Check Vacancies for a Course Index");
                     System.out.println("Enter courseCode: ");
                     String courseCode = sc.nextLine();
-                    // TODO verify coursecode
+                    // TODO verify coursecode --- copy over from studentapp
                     System.out.println("Enter courseIndex: ");
                     String courseIndex = sc.nextLine();
                     // TODO Verify courseindex
