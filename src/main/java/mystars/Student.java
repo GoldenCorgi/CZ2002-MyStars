@@ -36,8 +36,8 @@ public class Student implements Serializable {
      */
 
     public Student(String matricNo, String studentName, String studentEmail, String studentGender, String studentNationality) {
-        this.studentName = studentName;
         this.matricNo = matricNo;
+        this.studentName = studentName;
         this.studentEmail = studentEmail;
         this.studentGender = studentGender;
         this.studentNationality = studentNationality;
