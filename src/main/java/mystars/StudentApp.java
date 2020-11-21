@@ -56,7 +56,7 @@ public class StudentApp {
     public void dropCourse(String courseCode) {
         // does god exist, if true, does god code?
         // hopefully this drops the student from the course index, but does anyone know? i sure dont
-        CourseList.get(courseCode).getCourseIndexByIndexName(student.getCourseIndex(courseCode));
+        CourseList.get(courseCode).getCourseIndexByIndexName(student.getCourseIndex(courseCode)).dropStudent(student);
         student.dropCourse(courseCode);
     }
 

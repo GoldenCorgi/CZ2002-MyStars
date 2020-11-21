@@ -80,8 +80,11 @@ public class CourseIndex implements Serializable {
             waitListStudents.add(student);
         } else {
             registeredStudents.add(student);
-
         }
+    }
+    public void dropStudent(Student student) {
+        waitListStudents.remove(student);
+        registeredStudents.remove(student);
     }
 
     public void refreshWaitList() {
