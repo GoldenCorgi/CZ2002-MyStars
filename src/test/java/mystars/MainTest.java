@@ -9,4 +9,5 @@ class MainTest {
     public void sampleTest() {
         assertTrue(true);
     }
+
 }
