@@ -358,7 +358,7 @@ public class Admin implements Serializable {
      * @throws StarsException
      */
     public void runLoop(Login login) throws StarsException {
-        int choice;
+        String choice;
         Scanner sc = new Scanner(System.in);
         final String Choices = "\n(1) Edit Student Access Period" +
                 "\n(2) Add Student" +
@@ -371,12 +371,12 @@ public class Admin implements Serializable {
         do {
             System.out.println(Choices);
             System.out.println("Enter the number of your choice: ");
-            choice = sc.nextInt();
+            choice = sc.nextLine();
             // Remove non-integer inputs due to buggy java stuff lmao https://stackoverflow.com/questions/27717503/why-does-my-scanner-repeat
             sc.nextLine();
 
             switch (choice) {
-                case 1:
+                case "1":
                     LocalDateTime currentDateTime = LocalDateTime.now();
                     DateTimeFormatter formatDateTime = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
                     String formattedCurrentDT = currentDateTime.format(formatDateTime);
@@ -400,7 +400,7 @@ public class Admin implements Serializable {
                     System.out.println("date: " + endDate);
                     System.out.println("time: " + timeFormat2);
                     break;
-                case 2:
+                case "2":
                     // Done
                     System.out.println("(2) Add Student");
                     System.out.println("Enter studentEmail: ");
@@ -432,16 +432,16 @@ public class Admin implements Serializable {
                     System.out.println("Student added");
                     break;
 
-                case 3:
+                case "3":
                     // Done
                     addCourse(sc);
                     System.out.println("Course Added");
                     break;
-                case 4:
+                case "4":
                     updateCourses(sc);
                     System.out.println("Program terminating..");
                     break;
-                case 5:
+                case "5":
                     // Done
                     System.out.println("(5) Check Vacancies for a Course Index");
                     System.out.println("Enter courseCode: ");
@@ -453,7 +453,7 @@ public class Admin implements Serializable {
                     int vacancies = checkVacancies(courseCode, courseIndex);
                     System.out.println("Course Index has " + vacancies + " Vacancies");
                     break;
-                case 6:
+                case "6":
                     // Done
                     System.out.println("(6) Print Student List by Index Number");
                     System.out.println("Enter courseCode: ");
@@ -464,7 +464,7 @@ public class Admin implements Serializable {
                     // TODO Verify courseindex
                     printStudentListByIndex(courseCode, courseIndex);
                     break;
-                case 7:
+                case "7":
                     // Done
                     System.out.println("(7) Print Student List by Course");
                     System.out.println("Enter courseCode: ");
@@ -472,12 +472,16 @@ public class Admin implements Serializable {
                     // TODO verify coursecode
                     printStudentListByCourse(courseCode);
                     break;
-                case 8:
+                case "8":
                     System.out.println("Program terminating..");
+                    break;
+                default:
+                    System.out.println("Unknown Input Choice");
+
             }
             saveCourses(CourseList);
             saveStudents(StudentList);
-        } while (choice != 8);
+        } while (choice != "8");
 
     }
 }

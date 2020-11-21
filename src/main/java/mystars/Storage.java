@@ -60,6 +60,26 @@ public class Storage {
         return new User(username, password, role, salt);
     }
 
+    /**
+     * Saves users into file.
+     *
+     * @param users ArrayList of users to save.
+     * @throws StarsException If there is problem writing or saving file.
+     */
+    public static void saveUsers(UserList users) throws StarsException {
+        assert users != null : "Saving null users ArrayList";
+
+        StringBuilder usersFileContent = new StringBuilder();
+
+        for (int i = 0; i < users.getSize(); i++) {
+            // Need to format tasks
+            usersFileContent.append(users.getUserUsingIndex(i));
+            usersFileContent.append(System.lineSeparator());
+        }
+
+        writeToFile(usersFileContent, USERS_FILE);
+    }
+
     public static HashMap<String, Course> loadCourses() {
         Path path = Paths.get("data", COURSES_SERIALIZABLE_FILE_NAME);
         String filename = path.normalize().toString();
@@ -131,13 +151,14 @@ public class Storage {
         if (!Files.exists(path)) {
             System.out.println("No previous data");
             System.out.println("Creating new student user defaults");
-            pDetails.put("student", new Student("1234", "ExampleStudent","student","Male","Singaporean"));
+            pDetails.put("student", new Student("1234", "ExampleStudent", "student", "Male", "Singaporean"));
             return pDetails;
         }
-        String filename = path.normalize().toString();
 
+        String filename = path.normalize().toString();
         FileInputStream fis;
         ObjectInputStream in;
+
         try {
             fis = new FileInputStream(filename);
             in = new ObjectInputStream(fis);
@@ -146,16 +167,13 @@ public class Storage {
         } catch (IOException | ClassNotFoundException ex) {
             ex.printStackTrace();
         }
+
         if (pDetails.size() == 0) {
             System.out.println("No previous data");
             System.out.println("Creating new student user defaults");
-            pDetails.put("student", new Student("1234", "ExampleStudent","student","Male","Singaporean"));
-
+            pDetails.put("student", new Student("1234", "ExampleStudent", "student", "Male", "Singaporean"));
         }
 
-        // print out the size
-        //System.out.println(" Details Size: " + pDetails.size());
-        //System.out.println();
         return pDetails;
     }
 
@@ -223,26 +241,6 @@ public class Storage {
         }
 
         return usersList;
-    }
-
-    /**
-     * Saves users into file.
-     *
-     * @param users ArrayList of users to save.
-     * @throws StarsException If there is problem writing or saving file.
-     */
-    public static void saveUsers(UserList users) throws StarsException {
-        assert users != null : "Saving null users ArrayList";
-
-        StringBuilder usersFileContent = new StringBuilder();
-
-        for (int i = 0; i < users.getSize(); i++) {
-            // Need to format tasks
-            usersFileContent.append(users.getUserUsingIndex(i));
-            usersFileContent.append(System.lineSeparator());
-        }
-
-        writeToFile(usersFileContent, USERS_FILE);
     }
 
     /**

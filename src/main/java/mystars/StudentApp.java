@@ -53,6 +53,9 @@ public class StudentApp {
      */
 
     public void dropCourse(String courseCode) {
+        // does god exist, if true, does god code?
+        // hopefully this drops the student from the course index, but does anyone know? i sure dont
+        CourseList.get(courseCode).getCourseIndexByIndexName(student.getCourseIndex(courseCode));
         student.dropCourse(courseCode);
     }
 
@@ -168,16 +171,16 @@ public class StudentApp {
 
         Scanner sc = new Scanner(System.in);
 
-        int choice;
+        String choice;
         do {
             System.out.println(Choices);
             System.out.println("Enter the number of your choice: ");
-            choice = sc.nextInt();
+            choice = sc.nextLine();
             // Remove non-integer inputs due to buggy java stuff lmao https://stackoverflow.com/questions/27717503/why-does-my-scanner-repeat
-            sc.nextLine();
+
 
             switch (choice) {
-                case 1:
+                case "1":
                     // Done
                     System.out.println("(1) Add course");
                     System.out.println("Enter courseCode: ");
@@ -203,7 +206,7 @@ public class StudentApp {
                     System.out.println("Course successfully added");
 
                     break;
-                case 2:
+                case "2":
                     // Done
                     System.out.println("(2) Drop course");
                     System.out.println("Enter courseCode: ");
@@ -221,12 +224,12 @@ public class StudentApp {
                     System.out.println("Course successfully dropped");
 
                     break;
-                case 3:
+                case "3":
                     // Done
                     System.out.println("(3) Check/Print Courses Registered");
                     printCourse();
                     break;
-                case 4:
+                case "4":
                     // Done
                     System.out.println("(4) Check Vacancies Available");
                     System.out.println("Enter courseCode: ");
@@ -246,7 +249,7 @@ public class StudentApp {
                     int vacancies = checkVacancies(courseCode, courseIndex);
                     System.out.println("Course Index has " + vacancies + " Vacancies");
                     break;
-                case 5:
+                case "5":
                     // Done
                     System.out.println("(5) Change Index Number of Course");
                     System.out.println("Enter courseCode: ");
@@ -255,12 +258,18 @@ public class StudentApp {
                     if (!verifyCourseCode(courseCode)) {
                         break;
                     }
+                    // Verify if the student has this bloody course in the first place?
+                    if (!verifyStudentHasCourseCode(courseCode)) {
+                        System.out.println("Rejected - Course code entered is not registered.");
+
+                        break;
+                    }
 
                     System.out.println("Enter new courseIndex: ");
                     courseIndex = sc.nextLine();
                     // verify course index in student
                     if (verifyStudentHasCourseIndex(courseIndex)) {
-                        System.out.println("Course index entered is already registered.");
+                        System.out.println("Rejected - Course index entered is already registered.");
                         break;
                     }
 
@@ -269,12 +278,12 @@ public class StudentApp {
                         break;
                     }
 
-
                     // Validate whether course got vacancies etc -- validation done in addcourse itself.
                     addCourse(courseCode, courseIndex);
+                    System.out.println("Course Changed");
 
                     break;
-                case 6:
+                case "6":
                     System.out.println("(6) Swop Index Number with Another Student");
                     // validate whether current student has any courses registered
                     if (verifyExistingCourse(student)) {
@@ -304,13 +313,16 @@ public class StudentApp {
                     SecondStudent.addCourse(courseCode, index1);
 
                     break;
-                case 7:
+                case "7":
                     System.out.println("Program terminating..");
+                    break;
 
+                default:
+                    System.out.println("Unknown Input Choice");
             }
             saveCourses(CourseList);
             saveStudents(StudentList);
-        } while (choice != 7);
+        } while (choice != "7");
     }
 
 }
