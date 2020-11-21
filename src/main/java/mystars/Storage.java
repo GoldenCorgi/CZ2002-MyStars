@@ -186,18 +186,19 @@ public class Storage {
             StudentHashMap.put(student9.getStudentEmail(), student9);
             Student student10 = new Student("U1921010J", "Rachel Tan", "rach0012", "Female", "Malaysian");
             StudentHashMap.put(student10.getStudentEmail(), student10);
-            Student student11 = new Student("U1921011K", "Cheryl Koh", "cher0013", "Female", "Singaporean");
+            Student student11 = new Student("U1921011K", "Cheryl Lim", "cher0013", "Female", "Singaporean");
             StudentHashMap.put(student11.getStudentEmail(), student11);
-            Student student12 = new Student("U1921012L", "Jamie Ng", "jamie0014", "Female", "Malaysian");
+            Student student12 = new Student("U1921012L", "Jamie Tan", "jami0014", "Female", "Malaysian");
             StudentHashMap.put(student12.getStudentEmail(), student12);
-            Student student13 = new Student("U1921013M", "Hilary Lim", "hlim0015", "Female", "Singaporean");
+            Student student13 = new Student("U1921013M", "Hilary Ng", "hiln0015", "Female", "Singaporean");
             StudentHashMap.put(student13.getStudentEmail(), student13);
-            Student student14 = new Student("U1921014N", "Natasha Khoo", "khoo0016", "Female", "Singaporean");
+            Student student14 = new Student("U1921014N", "Natasha Ang", "angn0016", "Female", "Singaporean");
             StudentHashMap.put(student14.getStudentEmail(), student14);
             Student student15 = new Student("U1921015P", "Nicole Ong", "ongn0017", "Female", "Singaporean");
             StudentHashMap.put(student15.getStudentEmail(), student15);
 
             return StudentHashMap;
+
         }
 
         String filename = path.normalize().toString();
@@ -325,8 +326,23 @@ public class Storage {
             System.out.println("No previous data for UserList");
             System.out.println("Creating new admin user defaults");
             usersList.addNewUser("admin", "1234", "Admin");
-            // TODO consider adding student defaults
-            usersList.addNewUser("student", "1234", "Student");
+            System.out.println("Creating new student user defaults");
+            usersList.addNewUser("admin", "1234", "Admin");
+            usersList.addNewUser("timh0011", "1234", "Student");
+            usersList.addNewUser("benc0012", "1234", "Student");
+            usersList.addNewUser("limd0013", "1234", "Student");
+            usersList.addNewUser("chua0014", "1234", "Student");
+            usersList.addNewUser("jtan0015", "1234", "Student");
+            usersList.addNewUser("iant0016", "1234", "Student");
+            usersList.addNewUser("sean0017", "1234", "Student");
+            usersList.addNewUser("jong0018", "1234", "Student");
+            usersList.addNewUser("jane0011", "1234", "Student");
+            usersList.addNewUser("rach0012", "1234", "Student");
+            usersList.addNewUser("cher0013", "1234", "Student");
+            usersList.addNewUser("jami0014", "1234", "Student");
+            usersList.addNewUser("hiln0015", "1234", "Student");
+            usersList.addNewUser("angn0016", "1234", "Student");
+            usersList.addNewUser("ongn0017", "1234", "Student");
 
         }
 
