@@ -134,9 +134,7 @@ public class StudentApp {
      */
 
     public boolean verifyStudentHasCourseCode(String courseCode){
-        if (student.hasCourseCode(courseCode)){
-            return true;}
-        return false;
+        return student.hasCourseCode(courseCode);
     }
 
     /**
@@ -147,8 +145,7 @@ public class StudentApp {
      */
 
     public boolean verifyStudentHasCourseIndex(String courseIndex){
-        if (student.hasCourseIndex(courseIndex)){ return true; }
-        return false;
+        return student.hasCourseIndex(courseIndex);
     }
 
 
@@ -157,10 +154,9 @@ public class StudentApp {
      * runLoop to run the student function
      *
      * @param login Login details
-     * @throws StarsException
      */
 
-    public void runLoop(Login login, Scanner sc) throws StarsException {
+    public void runLoop(Login login, Scanner sc) {
         final String Choices = "\n(1) Add course" +
                 "\n(2) Drop course" +
                 "\n(3) Check/Print Courses Registered" +
@@ -323,7 +319,7 @@ public class StudentApp {
             }
             saveCourses(CourseList);
             saveStudents(StudentList);
-        } while (choice != "7");
+        } while (!choice.equals("7"));
     }
 
 }
