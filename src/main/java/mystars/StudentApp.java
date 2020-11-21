@@ -124,6 +124,19 @@ public class StudentApp {
     }
 
     /**
+     * Verify if student has course
+     *
+     * @param courseCode The course code entered
+     * @return <code>true</code> if student has courses; <code>false</code> otherwise.
+     */
+
+    public boolean verifyStudentHasCourse(String courseCode){
+        if (student.hasCourse(courseCode)){
+            return true;}
+        return false;
+    }
+
+    /**
      * runLoop to run the student function
      *
      * @param login Login details
@@ -165,6 +178,11 @@ public class StudentApp {
                     if (!verifyCourseIndex(courseCode, courseIndex)) {
                         break;
                     }
+                    // verify coursecode in student
+                    if (verifyStudentHasCourse(courseCode)) {
+                        System.out.println("Course has already been added.");
+                        break;
+                    }
                     // Validate whether course got vacancies etc -- validation done in addcourse itself.
                     addCourse(courseCode, courseIndex);
                     System.out.println("Course successfully added");
@@ -179,7 +197,11 @@ public class StudentApp {
                     if (!verifyCourseCode(courseCode)) {
                         break;
                     }
-                    // TODO verify coursecode in student
+                    // verify coursecode in student
+                    if (!verifyStudentHasCourse(courseCode)) {
+                        System.out.println("Course entered is not registered.");
+                        break;
+                    }
                     dropCourse(courseCode);
                     System.out.println("Course successfully dropped");
 
