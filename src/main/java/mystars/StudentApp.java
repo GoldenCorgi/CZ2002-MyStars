@@ -160,7 +160,7 @@ public class StudentApp {
      * @throws StarsException
      */
 
-    public void runLoop(Login login) throws StarsException {
+    public void runLoop(Login login, Scanner sc) throws StarsException {
         final String Choices = "\n(1) Add course" +
                 "\n(2) Drop course" +
                 "\n(3) Check/Print Courses Registered" +
@@ -169,7 +169,7 @@ public class StudentApp {
                 "\n(6) Swop Index Number with Another Student" +
                 "\n(7) Exit";
 
-        Scanner sc = new Scanner(System.in);
+//        Scanner sc = new Scanner(System.in);
 
         String choice;
         do {
@@ -182,7 +182,7 @@ public class StudentApp {
             switch (choice) {
                 case "1":
                     // Done
-                    System.out.println("(1) Add course");
+                    System.out.println("\n(1) Add course");
                     System.out.println("Enter courseCode: ");
                     String courseCode = sc.nextLine();
                     // verify courseCode
@@ -208,7 +208,7 @@ public class StudentApp {
                     break;
                 case "2":
                     // Done
-                    System.out.println("(2) Drop course");
+                    System.out.println("\n(2) Drop course");
                     System.out.println("Enter courseCode: ");
                     courseCode = sc.nextLine();
                     // verify coursecode in courselist
@@ -226,12 +226,12 @@ public class StudentApp {
                     break;
                 case "3":
                     // Done
-                    System.out.println("(3) Check/Print Courses Registered");
+                    System.out.println("\n(3) Check/Print Courses Registered");
                     printCourse();
                     break;
                 case "4":
                     // Done
-                    System.out.println("(4) Check Vacancies Available");
+                    System.out.println("\n(4) Check Vacancies Available");
                     System.out.println("Enter courseCode: ");
                     courseCode = sc.nextLine();
                     // verify coursecode
@@ -251,7 +251,7 @@ public class StudentApp {
                     break;
                 case "5":
                     // Done
-                    System.out.println("(5) Change Index Number of Course");
+                    System.out.println("\n(5) Change Index Number of Course");
                     System.out.println("Enter courseCode: ");
                     courseCode = sc.nextLine();
                     // verify coursecode
@@ -284,7 +284,7 @@ public class StudentApp {
 
                     break;
                 case "6":
-                    System.out.println("(6) Swop Index Number with Another Student");
+                    System.out.println("\n(6) Swop Index Number with Another Student");
                     // validate whether current student has any courses registered
                     if (verifyExistingCourse(student)) {
                         break;
@@ -319,6 +319,7 @@ public class StudentApp {
 
                 default:
                     System.out.println("Unknown Input Choice");
+                    break;
             }
             saveCourses(CourseList);
             saveStudents(StudentList);

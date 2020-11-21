@@ -4,6 +4,8 @@ import mystars.login.Login;
 import mystars.login.User;
 import mystars.login.UserList;
 
+import java.util.Scanner;
+
 /**
  * Main class.
  */
@@ -11,13 +13,14 @@ public class Main {
 
     public static void main(String[] args) throws StarsException {
 //        Logger logger = Logger.getLogger("MyStars");
+        Scanner sc = new Scanner(System.in);
         Storage storage = new Storage("data");
         UserList users;
         users = storage.loadUsers();
         while (true) {
             Login login = new Login(users, storage);
             // return user class instead, so can get their username and role
-            User user = login.run();
+            User user = login.run(sc);
             if (user == null) {
                 // user input specifies exit
                 break;
@@ -27,11 +30,11 @@ public class Main {
             if (roleName.equals("Student")) {
                 System.out.println("Welcome Student - " + user.getName());
                 StudentApp StudentApp = new StudentApp(user.getName());
-                StudentApp.runLoop(login);
+                StudentApp.runLoop(login,sc);
             } else if (roleName.equals("Admin")) {
                 System.out.println("Welcome Admin - " + user.getName());
                 Admin admin = new Admin(user.getName());
-                admin.runLoop(login);
+                admin.runLoop(login,sc);
             } else {
                 System.out.println("Unknown Role");
             }
