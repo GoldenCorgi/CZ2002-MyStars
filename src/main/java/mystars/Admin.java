@@ -9,20 +9,16 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.*;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Scanner;
+import java.util.Set;
 
 import static mystars.Storage.*;
 
 
 public class Admin implements Serializable {
     private static final long serialVersionUID = 420;
-
-//    private static final long serialVersionUID = 26;
-//    //    private String name;
-//    private HashMap<String, Course> CoursesMap = new HashMap<>();
-//    private HashMap<String, String> IndexMap = new HashMap<>();
-//    Scanner sc = new Scanner(System.in);
-
     private final HashMap<String, Course> CourseList;
     private final HashMap<String, Student> StudentList;
 
@@ -82,7 +78,6 @@ public class Admin implements Serializable {
      * Function to add course.
      * @param sc Scanner object.
      */
-
     public void addCourse(Scanner sc) {
         System.out.println("Enter Course Name:");
         String courseName = sc.nextLine();
