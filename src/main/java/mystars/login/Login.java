@@ -36,14 +36,14 @@ public class Login {
     }
 
     private String inputRole(Scanner sc) {
-        System.out.println("Select user type: ");
-        System.out.println("1. Student      2. Admin");
+        System.out.println("\nSelect user type: ");
+        System.out.println("1. Student      2. Admin     3. End Program");
         int role;
         String roleName;
         try {
             role = sc.nextInt();
             // Remove non-integer inputs due to buggy java stuff lmao https://stackoverflow.com/questions/27717503/why-does-my-scanner-repeat
-//            sc.nextLine();
+            sc.nextLine();
 
         } catch (InputMismatchException e) {
             System.out.println("Incorrect input - Please enter a numeric number");
@@ -54,8 +54,10 @@ public class Login {
             roleName = "Student";
         } else if (role == 2) {
             roleName = "Admin";
+        } else if (role == 3) {
+            return null;
         } else {
-            System.out.println("Incorrect input - Please only enter 1 or 2");
+            System.out.println("Incorrect input - Please only enter 1, 2 or 3");
             return "";
         }
         return roleName;
@@ -121,7 +123,10 @@ public class Login {
 //            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
 //            System.out.println(dtf.format(now)); // removing this line until i figure out how to adapt datetime into my testing framework
             roleName = inputRole(sc);
-            if (roleName.equals("")) {
+            if (roleName == null) {
+                return null;
+            }
+            else if (roleName.equals("")) {
                 continue;
             }
             username = inputUsername(sc);
