@@ -425,29 +425,34 @@ public class Admin implements Serializable {
             switch (choice) {
                 case "1":
                     System.out.println("\n(1) Edit Student Access Period");
+                    try{
+                        LocalDateTime currentDateTime = LocalDateTime.now();
+                        DateTimeFormatter formatDateTime = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+                        String formattedCurrentDT = currentDateTime.format(formatDateTime);
+                        System.out.println("Current Date and Time: " + formattedCurrentDT);
+                        System.out.println("Enter start date of Student Access Period (dd-MM-yyyy): ");
+                        String date = sc.nextLine();
+                        System.out.println("Enter start time of Student Access Period: ");
+                        String time = sc.nextLine();
+                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+                        LocalDate startDate = LocalDate.parse(date, formatter);
+                        LocalTime timeFormat = LocalTime.parse(time);
+                        System.out.println("New Start Date and Time");
+                        System.out.println("date: " + startDate);
+                        System.out.println("time: " + timeFormat);
 
-                    LocalDateTime currentDateTime = LocalDateTime.now();
-                    DateTimeFormatter formatDateTime = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
-                    String formattedCurrentDT = currentDateTime.format(formatDateTime);
-                    System.out.println("Current Date and Time: " + formattedCurrentDT);
-                    System.out.println("Enter start date of Student Access Period (dd-MM-yyyy): ");
-                    String date = sc.nextLine();
-                    System.out.println("Enter start time of Student Access Period: ");
-                    String time = sc.nextLine();
-                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-                    LocalDate startDate = LocalDate.parse(date, formatter);
-                    LocalTime timeFormat = LocalTime.parse(time);
-                    System.out.println("date: " + startDate);
-                    System.out.println("time: " + timeFormat);
-
-                    System.out.println("Enter end date of Student Access Period (dd-MM-yyyy): ");
-                    String date2 = sc.nextLine();
-                    System.out.println("Enter end time of Student Access Period: ");
-                    String time2 = sc.nextLine();
-                    LocalDate endDate = LocalDate.parse(date2, formatter);
-                    LocalTime timeFormat2 = LocalTime.parse(time2);
-                    System.out.println("date: " + endDate);
-                    System.out.println("time: " + timeFormat2);
+                        System.out.println("Enter end date of Student Access Period (dd-MM-yyyy): ");
+                        String date2 = sc.nextLine();
+                        System.out.println("Enter end time of Student Access Period: ");
+                        String time2 = sc.nextLine();
+                        LocalDate endDate = LocalDate.parse(date2, formatter);
+                        LocalTime timeFormat2 = LocalTime.parse(time2);
+                        System.out.println("New End Date and Time");
+                        System.out.println("date: " + endDate);
+                        System.out.println("time: " + timeFormat2);
+                    } catch (Exception e) {
+                        System.out.println("Invalid input try again!");
+                    }
                     break;
                 case "2":
                     // Done
