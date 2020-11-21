@@ -146,12 +146,19 @@ public class Admin implements Serializable {
             String indexName = sc.nextLine();
             CourseIndex courseIndex = new CourseIndex(indexName, courseVacancies);
             course.addCourseIndex(courseIndex);
-            System.out.println("Enter Course Components:");
+
             int choice;
-            System.out.println("1. Lecture     2. Lecture and Tutorial     3. Lecture, Tutorial and Lab");
-            choice = sc.nextInt();
-            // Remove non-integer inputs due to buggy java stuff lmao https://stackoverflow.com/questions/27717503/why-does-my-scanner-repeat
-            sc.nextLine();
+            do {
+                System.out.println("Enter Course Components:");
+                System.out.println("1. Lecture     2. Lecture and Tutorial     3. Lecture, Tutorial and Lab");
+                while(!sc.hasNextInt()) {
+                    System.out.println("Please enter an integer!");
+                    System.out.println("Enter Course Vacancies:");
+                    sc.next();
+                }
+                choice = sc.nextInt();
+                sc.nextLine();
+            } while ((choice <= 0) || (choice >= 4));
 
 
             switch (choice) {
@@ -287,13 +294,19 @@ public class Admin implements Serializable {
             String indexName = sc.nextLine();
             CourseIndex courseIndex = new CourseIndex(indexName, courseVacancies);
             course.addCourseIndex(courseIndex);
-            System.out.println("Enter Course Components:");
-            int choice;
-            System.out.println("1. Lecture     2. Lecture and Tutorial     3. Lecture, Tutorial and Lab");
-            choice = sc.nextInt();
-            // Remove non-integer inputs due to buggy java stuff lmao https://stackoverflow.com/questions/27717503/why-does-my-scanner-repeat
-            sc.nextLine();
 
+            int choice;
+            do {
+                System.out.println("Enter Course Components:");
+                System.out.println("1. Lecture     2. Lecture and Tutorial     3. Lecture, Tutorial and Lab");
+                while(!sc.hasNextInt()) {
+                    System.out.println("Please enter an integer!");
+                    System.out.println("Enter Course Vacancies:");
+                    sc.next();
+                }
+                choice = sc.nextInt();
+                sc.nextLine();
+            } while ((choice <= 0) || (choice >= 4));
 
             switch (choice) {
                 case 1:
