@@ -39,7 +39,6 @@ public class Admin implements Serializable {
      * @param gender The gender of student.
      * @return
      */
-
     public static Boolean verifyGender(String gender) {
         final Set<String> genderTypes = new HashSet<>() {{
             add("male");
@@ -414,6 +413,7 @@ public class Admin implements Serializable {
      * runLoop to run the student function
      *
      * @param login Login details
+     * @param sc Scanner for input
      * @throws StarsException
      */
     public void runLoop(Login login, Scanner sc) throws StarsException {

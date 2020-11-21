@@ -155,8 +155,8 @@ public class StudentApp {
      * runLoop to run the student function
      *
      * @param login Login details
+     * @param sc Scanner for input
      */
-
     public void runLoop(Login login, Scanner sc) {
         final String Choices = "\n(1) Add course" +
                 "\n(2) Drop course" +
