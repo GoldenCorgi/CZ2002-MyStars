@@ -326,8 +326,23 @@ public class Storage {
             System.out.println("No previous data for UserList");
             System.out.println("Creating new admin user defaults");
             usersList.addNewUser("admin", "1234", "Admin");
-            // TODO consider adding student defaults
-            usersList.addNewUser("student", "1234", "Student");
+            System.out.println("Creating new student user defaults");
+            usersList.addNewUser("admin", "1234", "Admin");
+            usersList.addNewUser("timh0011", "1234", "Student");
+            usersList.addNewUser("benc0012", "1234", "Student");
+            usersList.addNewUser("limd0013", "1234", "Student");
+            usersList.addNewUser("chua0014", "1234", "Student");
+            usersList.addNewUser("jtan0015", "1234", "Student");
+            usersList.addNewUser("iant0016", "1234", "Student");
+            usersList.addNewUser("sean0017", "1234", "Student");
+            usersList.addNewUser("jong0018", "1234", "Student");
+            usersList.addNewUser("jane0011", "1234", "Student");
+            usersList.addNewUser("rach0012", "1234", "Student");
+            usersList.addNewUser("cher0013", "1234", "Student");
+            usersList.addNewUser("jami0014", "1234", "Student");
+            usersList.addNewUser("hiln0015", "1234", "Student");
+            usersList.addNewUser("angn0016", "1234", "Student");
+            usersList.addNewUser("ongn0017", "1234", "Student");
 
         }
 
