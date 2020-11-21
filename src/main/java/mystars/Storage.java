@@ -85,7 +85,7 @@ public class Storage {
         String filename = path.normalize().toString();
         HashMap<String, Course> CourseHashMap = new HashMap<>();
         if (!Files.exists(path)) {
-            System.out.println("No previous data");
+            System.out.println("No previous data for CourseList");
             System.out.println("Creating two default courses, CZ2001 and CZ2002");
             Course course1 = new Course("Algorithms", "CZ2001", "SCSE", 3);
             course1.addCourseIndex(new CourseIndex("10027", 20));
@@ -113,7 +113,7 @@ public class Storage {
         //System.out.println(" Details Size: " + pDetails.size());
         //System.out.println();
         if (CourseHashMap.size() == 0) {
-            System.out.println("No previous data");
+            System.out.println("No previous data for CourseList");
             System.out.println("Creating two default courses, CZ2001 and CZ2002");
             Course course1 = new Course("Algorithms", "CZ2001", "SCSE", 3);
             course1.addCourseIndex(new CourseIndex("10027", 20));
@@ -149,7 +149,7 @@ public class Storage {
         Path path = Paths.get("data", STUDENTS_SERIALIZABLE_FILE_NAME);
         HashMap<String, Student> pDetails = new HashMap<>();
         if (!Files.exists(path)) {
-            System.out.println("No previous data");
+            System.out.println("No previous data for StudentList");
             System.out.println("Creating new student user defaults");
             pDetails.put("student", new Student("1234", "ExampleStudent", "student", "Male", "Singaporean"));
             return pDetails;
@@ -169,7 +169,7 @@ public class Storage {
         }
 
         if (pDetails.size() == 0) {
-            System.out.println("No previous data");
+            System.out.println("No previous data for StudentList");
             System.out.println("Creating new student user defaults");
             pDetails.put("student", new Student("1234", "ExampleStudent", "student", "Male", "Singaporean"));
         }
@@ -232,7 +232,7 @@ public class Storage {
 //            logger.log(Level.INFO, "loaded users");
         usersList = new UserList(users);
         if (users.size() == 0) {
-            System.out.println("No previous data");
+            System.out.println("No previous data for UserList");
             System.out.println("Creating new admin user defaults");
             usersList.addNewUser("admin", "1234", "Admin");
             // TODO consider adding student defaults

@@ -29,7 +29,7 @@ public class Login {
         if (console == null) {
             System.out.println("Couldn't get Console instance - Do not run in an IDE");
             System.out.println("Enter your not so secret password: ");
-            return sc.next();
+            return sc.nextLine();
         }
         char[] passwordArray = console.readPassword("Enter your secret password: ");
         return new String(passwordArray);
@@ -66,7 +66,7 @@ public class Login {
     private String inputUsername(Scanner sc) {
 
         System.out.println("Enter your username: ");
-        return sc.next();
+        return sc.nextLine();
     }
 
 
@@ -76,7 +76,7 @@ public class Login {
         if (console == null) {
             System.out.println("Couldn't get Console instance - Do not run in an IDE");
             System.out.println("Enter your not so secret password: ");
-            password = sc.next();
+            password = sc.nextLine();
         } else {
             char[] passwordArray = console.readPassword("Enter your secret password: ");
             password = new String(passwordArray);
@@ -113,8 +113,8 @@ public class Login {
         return users.getExistingUser(username);
     }
 
-    public User run() throws StarsException {
-        Scanner sc = new Scanner(System.in);
+    public User run(Scanner sc) throws StarsException {
+//        Scanner sc = new Scanner(System.in);
         String roleName, username = null;
         boolean validated = false;
         do {

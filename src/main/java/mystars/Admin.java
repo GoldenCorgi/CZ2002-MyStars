@@ -357,9 +357,9 @@ public class Admin implements Serializable {
      * @param login Login details
      * @throws StarsException
      */
-    public void runLoop(Login login) throws StarsException {
+    public void runLoop(Login login, Scanner sc) throws StarsException {
         String choice;
-        Scanner sc = new Scanner(System.in);
+//        Scanner sc = new Scanner(System.in);
         final String Choices = "\n(1) Edit Student Access Period" +
                 "\n(2) Add Student" +
                 "\n(3) Add Course" +
@@ -377,6 +377,8 @@ public class Admin implements Serializable {
 
             switch (choice) {
                 case "1":
+                    System.out.println("\n(1) Edit Student Access Period");
+
                     LocalDateTime currentDateTime = LocalDateTime.now();
                     DateTimeFormatter formatDateTime = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
                     String formattedCurrentDT = currentDateTime.format(formatDateTime);
@@ -402,7 +404,7 @@ public class Admin implements Serializable {
                     break;
                 case "2":
                     // Done
-                    System.out.println("(2) Add Student");
+                    System.out.println("\n(2) Add Student");
                     System.out.println("Enter studentEmail: ");
                     String studentEmail = sc.nextLine();
                     if (checkStudentEmailExists(studentEmail)) {
@@ -433,17 +435,22 @@ public class Admin implements Serializable {
                     break;
 
                 case "3":
+                    System.out.println("\n(3) Add Course");
+
+
                     // Done
                     addCourse(sc);
                     System.out.println("Course Added");
                     break;
                 case "4":
+                    System.out.println("\n(4) Update Course");
+
                     updateCourses(sc);
                     System.out.println("Program terminating..");
                     break;
                 case "5":
                     // Done
-                    System.out.println("(5) Check Vacancies for a Course Index");
+                    System.out.println("\n(5) Check Vacancies for a Course Index");
                     System.out.println("Enter courseCode: ");
                     String courseCode = sc.nextLine();
                     // TODO verify coursecode
@@ -455,7 +462,7 @@ public class Admin implements Serializable {
                     break;
                 case "6":
                     // Done
-                    System.out.println("(6) Print Student List by Index Number");
+                    System.out.println("\n(6) Print Student List by Index Number");
                     System.out.println("Enter courseCode: ");
                     courseCode = sc.nextLine();
                     // TODO verify coursecode
@@ -466,7 +473,7 @@ public class Admin implements Serializable {
                     break;
                 case "7":
                     // Done
-                    System.out.println("(7) Print Student List by Course");
+                    System.out.println("\n(7) Print Student List by Course");
                     System.out.println("Enter courseCode: ");
                     courseCode = sc.nextLine();
                     // TODO verify coursecode
