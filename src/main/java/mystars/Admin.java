@@ -82,6 +82,7 @@ public class Admin implements Serializable {
      * Function to add course.
      * @param sc Scanner object.
      */
+
     public void addCourse(Scanner sc) {
         System.out.println("Enter Course Name:");
         String courseName = sc.nextLine();
@@ -423,7 +424,6 @@ public class Admin implements Serializable {
             System.out.println("Enter the number of your choice: ");
             choice = sc.nextLine();
             // Remove non-integer inputs due to buggy java stuff lmao https://stackoverflow.com/questions/27717503/why-does-my-scanner-repeat
-            sc.nextLine();
 
             switch (choice) {
                 case "1":
@@ -486,8 +486,6 @@ public class Admin implements Serializable {
 
                 case "3":
                     System.out.println("\n(3) Add Course");
-
-
                     // Done
                     addCourse(sc);
                     System.out.println("Course Added");
