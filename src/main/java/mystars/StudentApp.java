@@ -31,7 +31,12 @@ public class StudentApp {
         this.CourseList = loadCourses();
     }
 
-
+    /**
+     * Add course for a student based on the course code and course index
+     *
+     * @param courseCode The course code entered by student
+     * @param courseIndex The course index entered by student
+     */
     public void addCourse(String courseCode, String courseIndex) {
         student.addCourse(courseCode, courseIndex);
         // god has yet again forsaken this line of code
@@ -41,20 +46,43 @@ public class StudentApp {
 
     }
 
+    /**
+     * Drop course for student based on the course code
+     *
+     * @param courseCode The course code entered by student
+     */
+
     public void dropCourse(String courseCode) {
         student.dropCourse(courseCode);
     }
 
+    /**
+     * Print list of registered student courses
+     */
 
     public void printCourse() {
         student.printCourse();
-
     }
+
+    /**
+     * Check for vacancies in course based on the course code and course index
+     *
+     * @param courseCode The course code entered by student
+     * @param courseIndex The course index entered by student
+     * @return The number of vacancies in a course
+     */
 
     public int checkVacancies(String courseCode, String courseIndex) {
         // god has forsaken this code, and so will i
         return CourseList.get(courseCode).getCourseIndexByIndexName(courseIndex).getNumberOfVacancies();
     }
+
+    /**
+     * Verify if the course code exists
+     *
+     * @param courseCode The course code entered by student
+     * @return <code>true</code> if course code exists; <code>false</code> otherwise.
+     */
 
     public boolean verifyCourseCode(String courseCode) {
         if (CourseList.get(courseCode) == null) {
@@ -64,6 +92,14 @@ public class StudentApp {
         return true;
     }
 
+    /**
+     * Verify if the course index exists
+     *
+     * @param courseCode The course code
+     * @param courseIndex The course index
+     * @return <code>true</code> if course index exists; <code>false</code> otherwise.
+     */
+
     public boolean verifyCourseIndex(String courseCode, String courseIndex) {
         if (CourseList.get(courseCode).getCourseIndexByIndexName(courseIndex) == null) {
             System.out.println("Rejected - courseIndex does not exist in CourseCode");
@@ -72,6 +108,13 @@ public class StudentApp {
         return true;
     }
 
+    /**
+     * Verify if the course code exists
+     *
+     * @param student A student object
+     * @return <code>true</code> if student no courses; <code>false</code> otherwise.
+     */
+
     public boolean verifyExistingCourse(Student student) {
         if (student.getNumberOfCoursesRegistered() == 0) {
             System.out.println("Rejected - student doesn't have any course");
@@ -79,6 +122,13 @@ public class StudentApp {
         }
         return true;
     }
+
+    /**
+     * runLoop to run the student function
+     *
+     * @param login Login details
+     * @throws StarsException
+     */
 
     public void runLoop(Login login) throws StarsException {
         final String Choices = "\n(1) Add course" +
