@@ -92,6 +92,21 @@ public class Storage {
         // print out the size
         //System.out.println(" Details Size: " + pDetails.size());
         //System.out.println();
+        if (CourseHashMap == null) {
+            System.out.println("No previous data");
+            System.out.println("Creating two default courses, CZ2001 and CZ2002");
+            Course course1 = new Course("Algorithms", "CZ2001", "SCSE", 3);
+            course1.addCourseIndex(new CourseIndex("10027", 20));
+            course1.addCourseIndex(new CourseIndex("10028", 20));
+            CourseHashMap.put(course1.getCourseCode(), course1);
+            Course course2 = new Course("OODP", "CZ2002", "SCSE", 3);
+            course2.addCourseIndex(new CourseIndex("3044", 20));
+            course2.addCourseIndex(new CourseIndex("3045", 20));
+            CourseHashMap.put(course2.getCourseCode(), course2);
+
+            return CourseHashMap;
+        }
+
         return CourseHashMap;
     }
 
