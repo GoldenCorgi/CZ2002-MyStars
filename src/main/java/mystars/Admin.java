@@ -488,7 +488,7 @@ public class Admin implements Serializable {
             }
             saveCourses(CourseList);
             saveStudents(StudentList);
-        } while (choice != "8");
+        } while (!choice.equals("8"));
 
     }
 }
