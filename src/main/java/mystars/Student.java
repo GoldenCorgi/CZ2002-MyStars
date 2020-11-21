@@ -89,10 +89,13 @@ public class Student implements Serializable {
      * @param courseCode The course code entered by student
      * @return <code>true</code> if course code exists in student courses list; <code>false</code> otherwise.
      */
-    public boolean hasCourse(String courseCode) {
+    public boolean hasCourseCode(String courseCode) {
         return (this.studentCourses.containsKey(courseCode));
     }
 
+    public boolean hasCourseIndex(String courseIndex) {
+        return (this.studentCourses.containsValue(courseIndex));
+    }
     /**
      * Add a course, based on course code and course index entered, into list of registered student courses
      *
