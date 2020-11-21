@@ -43,10 +43,11 @@ public class Login {
         try {
             role = sc.nextInt();
             // Remove non-integer inputs due to buggy java stuff lmao https://stackoverflow.com/questions/27717503/why-does-my-scanner-repeat
-            sc.nextLine();
+//            sc.nextLine();
 
         } catch (InputMismatchException e) {
             System.out.println("Incorrect input - Please enter a numeric number");
+            sc.nextLine();
             return "";
         }
         if (role == 1) {

@@ -29,10 +29,23 @@ public class Admin implements Serializable {
     private final HashMap<String, Course> CourseList;
     private final HashMap<String, Student> StudentList;
 
+    /**
+     * Constructor to create Admin object based on parameters given.
+     * Creates admin with sampleadminname
+     *
+     * @param sampleadminname The name of an admin.
+     */
     public Admin(String sampleadminname) {
         StudentList = loadStudents();
         CourseList = loadCourses();
     }
+
+    /**
+     * Function to verify gender.
+     *
+     * @param gender The gender of student.
+     * @return
+     */
 
     public static Boolean verifyGender(String gender) {
         final Set<String> genderTypes = new HashSet<>() {{
@@ -42,6 +55,12 @@ public class Admin implements Serializable {
         return (genderTypes.contains(gender.toLowerCase()));
     }
 
+    /**
+     * Function to check if student's email exists.
+     *
+     * @param email The email name of the student.
+     * @return
+     */
     public Boolean checkStudentEmailExists(String email) {
         // true if exists
         return (StudentList.get(email) != null);
@@ -51,13 +70,21 @@ public class Admin implements Serializable {
 
     }
 
+    /**
+     * Function to add student.
+     *
+     * @param student Student object
+     */
     public void addStudent(Student student) {
         String email = student.getStudentEmail();
         StudentList.put(email, student);
         Storage.saveStudents(StudentList);
     }
 
-
+    /**
+     * Function to add course.
+     * @param sc Scanner object.
+     */
     public void addCourse(Scanner sc) {
         System.out.println("Enter Course Name:");
         String courseName = sc.nextLine();
@@ -173,7 +200,11 @@ public class Admin implements Serializable {
         }
     }
 
-
+    /**
+     * Function to update course.
+     *
+     * @param sc Scanner object.
+     */
     public void updateCourses(Scanner sc) {
         System.out.println("Enter Course Code:");
         String courseCode = sc.nextLine();
@@ -289,21 +320,43 @@ public class Admin implements Serializable {
 
     }
 
+    /**
+     * Function too check vacancies of course.
+     *
+     * @param courseCode The course code of a course.
+     * @param courseIndex The course index of a course.
+     * @return
+     */
     public int checkVacancies(String courseCode, String courseIndex) {
         // fuck this
         return CourseList.get(courseCode).getCourseIndexByIndexName(courseIndex).getNumberOfVacancies();
     }
 
+    /**
+     * Function to print student list by index
+     *
+     * @param courseCode  The course code of a course.
+     * @param courseIndex The course index of a course.
+     */
     public void printStudentListByIndex(String courseCode, String courseIndex) {
         CourseList.get(courseCode).getCourseIndexByIndexName(courseIndex).printRegisteredStudent();
     }
 
-
+    /**
+     * Function to print student list by course.
+     *
+     * @param courseCode The course code of a course.
+     */
     public void printStudentListByCourse(String courseCode) {
         CourseList.get(courseCode).printAllStudentsInIndexes();
     }
 
-
+    /**
+     * runLoop to run the student function
+     *
+     * @param login Login details
+     * @throws StarsException
+     */
     public void runLoop(Login login) throws StarsException {
         int choice;
         Scanner sc = new Scanner(System.in);
