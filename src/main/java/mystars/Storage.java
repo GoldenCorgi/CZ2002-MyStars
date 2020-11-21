@@ -84,26 +84,28 @@ public class Storage {
         Path path = Paths.get("data", COURSES_SERIALIZABLE_FILE_NAME);
         String filename = path.normalize().toString();
         HashMap<String, Course> CourseHashMap = new HashMap<>();
+        HashMap<String, Course> DefaultCourse = new HashMap<>();
+        Course course1 = new Course("Algorithms", "CZ2001", "SCSE", 3);
+        course1.addCourseIndex(new CourseIndex("10027", 10));
+        course1.addCourseIndex(new CourseIndex("10028", 10));
+        DefaultCourse.put(course1.getCourseCode(), course1);
+        Course course2 = new Course("OODP", "CZ2002", "SCSE", 3);
+        course2.addCourseIndex(new CourseIndex("30440", 10));
+        course2.addCourseIndex(new CourseIndex("30450", 10));
+        DefaultCourse.put(course2.getCourseCode(), course2);
+        Course course3 = new Course("Computer Graphics and Visualisation", "CZ2003", "SCSE", 3);
+        course3.addCourseIndex(new CourseIndex("13044", 10));
+        course3.addCourseIndex(new CourseIndex("13045", 10));
+        DefaultCourse.put(course3.getCourseCode(), course3);
+        Course course4 = new Course("Human Computer Interaction", "CZ2004", "SCSE", 3);
+        course4.addCourseIndex(new CourseIndex("10014", 10));
+        course4.addCourseIndex(new CourseIndex("10015", 10));
+        DefaultCourse.put(course4.getCourseCode(), course4);
+
         if (!Files.exists(path)) {
             System.out.println("No previous data for CourseList");
             System.out.println("Creating 4 default courses: CZ2001, CZ2002, CZ2003, CZ2004");
-            Course course1 = new Course("Algorithms", "CZ2001", "SCSE", 3);
-            course1.addCourseIndex(new CourseIndex("10027", 10));
-            course1.addCourseIndex(new CourseIndex("10028", 10));
-            CourseHashMap.put(course1.getCourseCode(), course1);
-            Course course2 = new Course("OODP", "CZ2002", "SCSE", 3);
-            course2.addCourseIndex(new CourseIndex("30440", 10));
-            course2.addCourseIndex(new CourseIndex("30450", 10));
-            CourseHashMap.put(course2.getCourseCode(), course2);
-            Course course3 = new Course("Computer Graphics and Visualisation", "CZ2003", "SCSE", 3);
-            course3.addCourseIndex(new CourseIndex("13044", 10));
-            course3.addCourseIndex(new CourseIndex("13045", 10));
-            CourseHashMap.put(course3.getCourseCode(), course3);
-            Course course4 = new Course("Human Computer Interaction", "CZ2004", "SCSE", 3);
-            course4.addCourseIndex(new CourseIndex("10014", 10));
-            course4.addCourseIndex(new CourseIndex("10015", 10));
-            CourseHashMap.put(course4.getCourseCode(), course4);
-            return CourseHashMap;
+            return DefaultCourse;
         }
 
         FileInputStream fis;
@@ -122,24 +124,7 @@ public class Storage {
         if (CourseHashMap.size() == 0) {
             System.out.println("No previous data for CourseList");
             System.out.println("Creating 4 default courses: CZ2001, CZ2002, CZ2003, CZ2004");
-            Course course1 = new Course("Algorithms", "CZ2001", "SCSE", 3);
-            course1.addCourseIndex(new CourseIndex("10027", 10));
-            course1.addCourseIndex(new CourseIndex("10028", 10));
-            CourseHashMap.put(course1.getCourseCode(), course1);
-            Course course2 = new Course("OODP", "CZ2002", "SCSE", 3);
-            course2.addCourseIndex(new CourseIndex("30440", 10));
-            course2.addCourseIndex(new CourseIndex("30450", 10));
-            CourseHashMap.put(course2.getCourseCode(), course2);
-            Course course3 = new Course("Computer Graphics and Visualisation", "CZ2003", "SCSE", 3);
-            course3.addCourseIndex(new CourseIndex("13044", 10));
-            course3.addCourseIndex(new CourseIndex("13045", 10));
-            CourseHashMap.put(course3.getCourseCode(), course3);
-            Course course4 = new Course("Human Computer Interaction", "CZ2004", "SCSE", 3);
-            course4.addCourseIndex(new CourseIndex("10014", 10));
-            course4.addCourseIndex(new CourseIndex("10015", 10));
-            CourseHashMap.put(course4.getCourseCode(), course4);
-
-            return CourseHashMap;
+            return DefaultCourse;
         }
 
         return CourseHashMap;
@@ -163,41 +148,43 @@ public class Storage {
     public static HashMap<String, Student> loadStudents() {
         Path path = Paths.get("data", STUDENTS_SERIALIZABLE_FILE_NAME);
         HashMap<String, Student> StudentHashMap = new HashMap<>();
+        HashMap<String, Student> DefaultStudents = new HashMap<>();
+        Student student1 = new Student("U1921001A", "Tim Ho", "timh0011", "Male", "Singaporean");
+        DefaultStudents.put(student1.getStudentEmail(), student1);
+        Student student2 = new Student("U1921002B", "Ben Choi", "benc0012", "Male", "Singaporean");
+        DefaultStudents.put(student2.getStudentEmail(), student2);
+        Student student3 = new Student("U1921003C", "David Lim", "limd0013", "Male", "Malaysian");
+        DefaultStudents.put(student3.getStudentEmail(), student3);
+        Student student4 = new Student("U1921004D", "Tommy Chua", "chua0014", "Male", "Singaporean");
+        DefaultStudents.put(student4.getStudentEmail(), student4);
+        Student student5 = new Student("U1921005E", "Jim Tan", "jtan0015", "Male", "Malaysian");
+        DefaultStudents.put(student5.getStudentEmail(), student5);
+        Student student6 = new Student("U1921006F", "Ian Tan", "iant0016", "Male", "Singaporean");
+        DefaultStudents.put(student6.getStudentEmail(), student6);
+        Student student7 = new Student("U1921007G", "Sean Lau", "sean0017", "Male", "Singaporean");
+        DefaultStudents.put(student7.getStudentEmail(), student7);
+        Student student8 = new Student("U1921008H", "James Ong", "jong0018", "Male", "Singaporean");
+        DefaultStudents.put(student8.getStudentEmail(), student8);
+        Student student9 = new Student("U1921009I", "Jane Ho", "jane0011", "Female", "Singaporean");
+        DefaultStudents.put(student9.getStudentEmail(), student9);
+        Student student10 = new Student("U1921010J", "Rachel Tan", "rach0012", "Female", "Malaysian");
+        DefaultStudents.put(student10.getStudentEmail(), student10);
+        Student student11 = new Student("U1921011K", "Cheryl Lim", "cher0013", "Female", "Singaporean");
+        DefaultStudents.put(student11.getStudentEmail(), student11);
+        Student student12 = new Student("U1921012L", "Jamie Tan", "jami0014", "Female", "Malaysian");
+        DefaultStudents.put(student12.getStudentEmail(), student12);
+        Student student13 = new Student("U1921013M", "Hilary Ng", "hiln0015", "Female", "Singaporean");
+        DefaultStudents.put(student13.getStudentEmail(), student13);
+        Student student14 = new Student("U1921014N", "Natasha Ang", "angn0016", "Female", "Singaporean");
+        DefaultStudents.put(student14.getStudentEmail(), student14);
+        Student student15 = new Student("U1921015P", "Nicole Ong", "ongn0017", "Female", "Singaporean");
+        DefaultStudents.put(student15.getStudentEmail(), student15);
+
         if (!Files.exists(path)) {
             System.out.println("No previous data");
             System.out.println("Creating 15 default students");
-            Student student1 = new Student("U1921001A", "Tim Ho", "timh0011", "Male", "Singaporean");
-            StudentHashMap.put(student1.getStudentEmail(), student1);
-            Student student2 = new Student("U1921002B", "Ben Choi", "benc0012", "Male", "Singaporean");
-            StudentHashMap.put(student2.getStudentEmail(), student2);
-            Student student3 = new Student("U1921003C", "David Lim", "limd0013", "Male", "Malaysian");
-            StudentHashMap.put(student3.getStudentEmail(), student3);
-            Student student4 = new Student("U1921004D", "Tommy Chua", "chua0014", "Male", "Singaporean");
-            StudentHashMap.put(student4.getStudentEmail(), student4);
-            Student student5 = new Student("U1921005E", "Jim Tan", "jtan0015", "Male", "Malaysian");
-            StudentHashMap.put(student5.getStudentEmail(), student5);
-            Student student6 = new Student("U1921006F", "Ian Tan", "iant0016", "Male", "Singaporean");
-            StudentHashMap.put(student6.getStudentEmail(), student6);
-            Student student7 = new Student("U1921007G", "Sean Lau", "sean0017", "Male", "Singaporean");
-            StudentHashMap.put(student7.getStudentEmail(), student7);
-            Student student8 = new Student("U1921008H", "James Ong", "jong0018", "Male", "Singaporean");
-            StudentHashMap.put(student8.getStudentEmail(), student8);
-            Student student9 = new Student("U1921009I", "Jane Ho", "jane0011", "Female", "Singaporean");
-            StudentHashMap.put(student9.getStudentEmail(), student9);
-            Student student10 = new Student("U1921010J", "Rachel Tan", "rach0012", "Female", "Malaysian");
-            StudentHashMap.put(student10.getStudentEmail(), student10);
-            Student student11 = new Student("U1921011K", "Cheryl Lim", "cher0013", "Female", "Singaporean");
-            StudentHashMap.put(student11.getStudentEmail(), student11);
-            Student student12 = new Student("U1921012L", "Jamie Tan", "jami0014", "Female", "Malaysian");
-            StudentHashMap.put(student12.getStudentEmail(), student12);
-            Student student13 = new Student("U1921013M", "Hilary Ng", "hiln0015", "Female", "Singaporean");
-            StudentHashMap.put(student13.getStudentEmail(), student13);
-            Student student14 = new Student("U1921014N", "Natasha Ang", "angn0016", "Female", "Singaporean");
-            StudentHashMap.put(student14.getStudentEmail(), student14);
-            Student student15 = new Student("U1921015P", "Nicole Ong", "ongn0017", "Female", "Singaporean");
-            StudentHashMap.put(student15.getStudentEmail(), student15);
 
-            return StudentHashMap;
+            return DefaultStudents;
 
         }
 
@@ -217,38 +204,7 @@ public class Storage {
         if (StudentHashMap.size() == 0) {
             System.out.println("No previous data");
             System.out.println("Creating 15 default students");
-            Student student1 = new Student("U1921001A", "Tim Ho", "timh0011", "Male", "Singaporean");
-            StudentHashMap.put(student1.getStudentEmail(), student1);
-            Student student2 = new Student("U1921002B", "Ben Choi", "benc0012", "Male", "Singaporean");
-            StudentHashMap.put(student2.getStudentEmail(), student2);
-            Student student3 = new Student("U1921003C", "David Lim", "limd0013", "Male", "Malaysian");
-            StudentHashMap.put(student3.getStudentEmail(), student3);
-            Student student4 = new Student("U1921004D", "Tommy Chua", "chua0014", "Male", "Singaporean");
-            StudentHashMap.put(student4.getStudentEmail(), student4);
-            Student student5 = new Student("U1921005E", "Jim Tan", "jtan0015", "Male", "Malaysian");
-            StudentHashMap.put(student5.getStudentEmail(), student5);
-            Student student6 = new Student("U1921006F", "Ian Tan", "iant0016", "Male", "Singaporean");
-            StudentHashMap.put(student6.getStudentEmail(), student6);
-            Student student7 = new Student("U1921007G", "Sean Lau", "sean0017", "Male", "Singaporean");
-            StudentHashMap.put(student7.getStudentEmail(), student7);
-            Student student8 = new Student("U1921008H", "James Ong", "jong0018", "Male", "Singaporean");
-            StudentHashMap.put(student8.getStudentEmail(), student8);
-            Student student9 = new Student("U1921009I", "Jane Ho", "jane0011", "Female", "Singaporean");
-            StudentHashMap.put(student9.getStudentEmail(), student9);
-            Student student10 = new Student("U1921010J", "Rachel Tan", "rach0012", "Female", "Malaysian");
-            StudentHashMap.put(student10.getStudentEmail(), student10);
-            Student student11 = new Student("U1921011K", "Cheryl Lim", "cher0013", "Female", "Singaporean");
-            StudentHashMap.put(student11.getStudentEmail(), student11);
-            Student student12 = new Student("U1921012L", "Jamie Tan", "jami0014", "Female", "Malaysian");
-            StudentHashMap.put(student12.getStudentEmail(), student12);
-            Student student13 = new Student("U1921013M", "Hilary Ng", "hiln0015", "Female", "Singaporean");
-            StudentHashMap.put(student13.getStudentEmail(), student13);
-            Student student14 = new Student("U1921014N", "Natasha Ang", "angn0016", "Female", "Singaporean");
-            StudentHashMap.put(student14.getStudentEmail(), student14);
-            Student student15 = new Student("U1921015P", "Nicole Ong", "ongn0017", "Female", "Singaporean");
-            StudentHashMap.put(student15.getStudentEmail(), student15);
-
-            return StudentHashMap;
+            return DefaultStudents;
         }
 
         return StudentHashMap;
