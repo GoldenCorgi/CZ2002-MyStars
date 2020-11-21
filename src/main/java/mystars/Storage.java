@@ -92,6 +92,21 @@ public class Storage {
         // print out the size
         //System.out.println(" Details Size: " + pDetails.size());
         //System.out.println();
+        if (CourseHashMap == null) {
+            System.out.println("No previous data");
+            System.out.println("Creating two default courses, CZ2001 and CZ2002");
+            Course course1 = new Course("Algorithms", "CZ2001", "SCSE", 3);
+            course1.addCourseIndex(new CourseIndex("10027", 20));
+            course1.addCourseIndex(new CourseIndex("10028", 20));
+            CourseHashMap.put(course1.getCourseCode(), course1);
+            Course course2 = new Course("OODP", "CZ2002", "SCSE", 3);
+            course2.addCourseIndex(new CourseIndex("3044", 20));
+            course2.addCourseIndex(new CourseIndex("3045", 20));
+            CourseHashMap.put(course2.getCourseCode(), course2);
+
+            return CourseHashMap;
+        }
+
         return CourseHashMap;
     }
 
@@ -114,6 +129,9 @@ public class Storage {
         Path path = Paths.get("data", STUDENTS_SERIALIZABLE_FILE_NAME);
         HashMap<String, Student> pDetails = new HashMap<>();
         if (!Files.exists(path)) {
+            System.out.println("No previous data");
+            System.out.println("Creating new student user defaults");
+            pDetails.put("student", new Student("1234", "ExampleStudent","student","Male","Singaporean"));
             return pDetails;
         }
         String filename = path.normalize().toString();
@@ -128,6 +146,13 @@ public class Storage {
         } catch (IOException | ClassNotFoundException ex) {
             ex.printStackTrace();
         }
+        if (pDetails.size() == 0) {
+            System.out.println("No previous data");
+            System.out.println("Creating new student user defaults");
+            pDetails.put("student", new Student("1234", "ExampleStudent","student","Male","Singaporean"));
+
+        }
+
         // print out the size
         //System.out.println(" Details Size: " + pDetails.size());
         //System.out.println();
@@ -177,8 +202,9 @@ public class Storage {
                 //            logger.log(Level.INFO, "No users found. Creating new users list.");
                 System.out.println("Creating new admin user defaults");
                 UserList newUserList = new UserList();
-                newUserList.addNewUser("wonho", "1234", "Admin");
+                newUserList.addNewUser("admin", "1234", "Admin");
                 // TODO consider adding student defaults
+                newUserList.addNewUser("student", "1234", "Student");
                 return newUserList;
 
 //                throw new StarsException(READ_ERROR);
@@ -190,8 +216,9 @@ public class Storage {
         if (users.size() == 0) {
             System.out.println("No previous data");
             System.out.println("Creating new admin user defaults");
-            usersList.addNewUser("wonho", "samplePassword", "Admin");
+            usersList.addNewUser("admin", "1234", "Admin");
             // TODO consider adding student defaults
+            usersList.addNewUser("student", "1234", "Student");
 
         }
 
@@ -204,7 +231,7 @@ public class Storage {
      * @param users ArrayList of users to save.
      * @throws StarsException If there is problem writing or saving file.
      */
-    public void saveUsers(UserList users) throws StarsException {
+    public static void saveUsers(UserList users) throws StarsException {
         assert users != null : "Saving null users ArrayList";
 
         StringBuilder usersFileContent = new StringBuilder();
@@ -225,7 +252,7 @@ public class Storage {
      * @param file        Filename to write to.
      * @throws StarsException If there is problem writing files.
      */
-    private void writeToFile(StringBuilder fileContent, String file) throws StarsException {
+    private static void writeToFile(StringBuilder fileContent, String file) throws StarsException {
         Path folderPath = Paths.get(folder);
         if (!Files.exists(folderPath) && !new File(folder).mkdir()) {
             throw new StarsException(DIRECTORY_ERROR);

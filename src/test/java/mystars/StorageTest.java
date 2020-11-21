@@ -2,18 +2,40 @@ package mystars;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class StorageTest {
 
     @Test
-    void loadCourses() {
+    void Courses() {
+        Storage.saveCourses(Storage.loadCourses());
         assert(Storage.loadCourses() != null);
         assertTrue(true);
     }
 
     @Test
+    void Users() throws StarsException {
+        Storage.saveUsers(Storage.loadUsers());
+        assert(Storage.loadUsers() != null);
+        assertTrue(true);
+    }
+    @Test
+    void Students() {
+        Storage.saveStudents(Storage.loadStudents());
+        assert(Storage.loadStudents() != null);
+        assertTrue(true);
+    }
+
+    @Test
+    void loadCourses() {
+        assert(Storage.loadCourses() != null);
+
+        assertTrue(true);
+    }
+
+    @Test
     void saveCourses() {
+//        Storage.saveCourses(null);
         assertTrue(true);
     }
 
@@ -25,6 +47,7 @@ class StorageTest {
 
     @Test
     void saveStudents() {
+//        Storage.saveStudents(null);
         assertTrue(true);
     }
 
@@ -35,7 +58,8 @@ class StorageTest {
     }
 
     @Test
-    void saveUsers() {
+    void saveUsers() throws StarsException {
+//        Storage.saveUsers(new UserList());
         assertTrue(true);
     }
 }

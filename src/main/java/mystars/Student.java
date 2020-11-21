@@ -36,52 +36,107 @@ public class Student implements Serializable {
      */
 
     public Student(String matricNo, String studentName, String studentEmail, String studentGender, String studentNationality) {
-        this.studentName = studentName;
         this.matricNo = matricNo;
+        this.studentName = studentName;
         this.studentEmail = studentEmail;
         this.studentGender = studentGender;
         this.studentNationality = studentNationality;
     }
 
+    /**
+     * @return The full name of a student
+     */
+
     public String getStudentName() {
         return this.studentName;
     }
+
+    /**
+     * @return The matriculation number of a student
+     */
 
     public String getMatricNo() {
         return this.matricNo;
     }
 
+    /**
+     * @return The student school email of a student
+     */
+
     public String getStudentEmail() {
         return this.studentEmail;
     }
+
+    /**
+     * @return The gender of a student
+     */
 
     public String getStudentGender() {
         return this.studentGender;
     }
 
+    /**
+     * @return The nationality of a student
+     */
+
     public String getStudentNationality() {
         return this.studentNationality;
     }
 
+    /**
+     * Checks if course code entered is already in list of registered student courses
+     *
+     * @param courseCode The course code entered by student
+     * @return <code>true</code> if course code exists in student courses list; <code>false</code> otherwise.
+     */
     public boolean hasCourse(String courseCode) {
         return (this.studentCourses.containsKey(courseCode));
     }
+
+    /**
+     * Add a course, based on course code and course index entered, into list of registered student courses
+     *
+     * @param courseCode The course code to be added entered by student
+     * @param courseIndex The course index to be added entered by student
+     */
 
     public void addCourse(String courseCode, String courseIndex) {
         this.studentCourses.put(courseCode, courseIndex);
     }
 
+    /**
+     * Drop a course from list of registered student courses
+     *
+     * @param courseCode The course code to be dropped entered by student
+     */
+
     public void dropCourse(String courseCode) {
         this.studentCourses.remove(courseCode);
     }
+
+    /**
+     * @return list of registered student courses
+     */
 
     public HashMap<String, String> getCourse() {
         return this.studentCourses;
     }
 
+    /**
+     * Get course index using course code
+     *
+     * @param CourseCode The course code entered by student
+     * @return hashmap of registered student courses
+     */
+
     public String getCourseIndex(String CourseCode) {
         return this.studentCourses.get(CourseCode);
     }
+
+    /**
+     * Print all registered student courses from studentCourses hashmap if hashmap is not empty
+     * Print "Student has no courses registered!" is not courses registered
+     */
 
     public void printCourse() {
         // https://stackoverflow.com/questions/1066589/iterate-through-a-hashmap
@@ -96,10 +151,23 @@ public class Student implements Serializable {
         }
     }
 
+    /**
+     * Using course codes to check if there is a timing clash. This is to ensure that courses added into student time table do not clash
+     *
+     * @param courseCode1
+     * @param courseCode2
+     * @param courseIndex1
+     * @param courseIndex2
+     * @return <code>true</code> if course timing clashes; <code>false</code> otherwise.
+     */
 
     public boolean checkTimingClash(String courseCode1, String courseCode2, String courseIndex1, String courseIndex2) {
         return true;
     }
+
+    /**
+     * @return the number of courses registered for each student
+     */
 
     public int getNumberOfCoursesRegistered() {
         return this.studentCourses.size();
