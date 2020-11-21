@@ -4,8 +4,6 @@ import mystars.StarsException;
 import mystars.Storage;
 
 import java.io.Console;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -14,7 +12,7 @@ public class Login {
     Storage storage;
 
     /**
-     * Contructor to create Login object based on parameters given.
+     * Constructor to create Login object based on parameters given.
      * Creates Login with UserList object users and Storage object storage
      *
      * @param users   The UserList object of a list of users
@@ -41,22 +39,25 @@ public class Login {
         System.out.println("Select user type: ");
         System.out.println("1. Student      2. Admin");
         int role;
-        String rolename;
+        String roleName;
         try {
             role = sc.nextInt();
+            // Remove non-integer inputs due to buggy java stuff lmao https://stackoverflow.com/questions/27717503/why-does-my-scanner-repeat
+            sc.nextLine();
+
         } catch (InputMismatchException e) {
             System.out.println("Incorrect input - Please enter a numeric number");
             return "";
         }
         if (role == 1) {
-            rolename = "Student";
+            roleName = "Student";
         } else if (role == 2) {
-            rolename = "Admin";
+            roleName = "Admin";
         } else {
             System.out.println("Incorrect input - Please only enter 1 or 2");
             return "";
         }
-        return rolename;
+        return roleName;
     }
 
     private String inputUsername(Scanner sc) {
@@ -83,23 +84,13 @@ public class Login {
     }
 
 
-    public User GetSwoppingStudent() throws StarsException {
+    public User getSwappingStudent() {
         Scanner sc = new Scanner(System.in);
-        String rolename = "", username = null;
+        String roleName = "Student", username;
         boolean validated = false;
         do {
-
-            LocalDateTime now = LocalDateTime.now();
-            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
-
-
-//            System.out.println(dtf.format(now)); // removing this line until i figure out how to adapt datetime into my testing framework
-            rolename = "Student";
-            if (rolename.equals("")) {
-                continue;
-            }
             username = inputUsername(sc);
-            int matched = users.ValidateUser(username, rolename);
+            int matched = users.ValidateUser(username, roleName);
 
             if (matched == 2) {
                 System.out.println("Welcome back - " + username);
@@ -112,30 +103,28 @@ public class Login {
             } else if (matched == 0) {
                 System.out.println("You are not registered - " + username);
             } else {
-                System.out.println("User - " + username + " - is not allowed to log in as a " + rolename);
+                System.out.println("User - " + username + " - is not allowed to log in as a " + roleName);
             }
         } while (!validated);
-        sc.close();
+//        sc.close();
         return users.getExistingUser(username);
     }
 
     public User run() throws StarsException {
         Scanner sc = new Scanner(System.in);
-        String rolename = "", username = null;
+        String roleName, username = null;
         boolean validated = false;
         do {
 
-            LocalDateTime now = LocalDateTime.now();
-            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
-
-
+//            LocalDateTime now = LocalDateTime.now();
+//            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
 //            System.out.println(dtf.format(now)); // removing this line until i figure out how to adapt datetime into my testing framework
-            rolename = inputRole(sc);
-            if (rolename.equals("")) {
+            roleName = inputRole(sc);
+            if (roleName.equals("")) {
                 continue;
             }
             username = inputUsername(sc);
-            int matched = users.ValidateUser(username, rolename);
+            int matched = users.ValidateUser(username, roleName);
 
             if (matched == 2) {
                 System.out.println("Welcome back - " + username);
@@ -148,15 +137,15 @@ public class Login {
             } else if (matched == 0) {
                 System.out.println("You are registering as a new user - " + username);
                 String password = inputPassword(sc);
-                users.addNewUser(username, password, rolename);
+                users.addNewUser(username, password, roleName);
                 System.out.println("You have registered as a new user!");
                 validated = true;
             } else {
-                System.out.println("User - " + username + " - is not allowed to log in as a " + rolename);
+                System.out.println("User - " + username + " - is not allowed to log in as a " + roleName);
             }
         } while (!validated);
         storage.saveUsers(users);
-        sc.close();
+//        sc.close();
         return users.getExistingUser(username);
         //char[] pw = console.readPassword("Enter password: ");
 

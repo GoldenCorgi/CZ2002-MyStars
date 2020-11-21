@@ -1,6 +1,7 @@
 package mystars;
 
 import mystars.courses.Course;
+import mystars.courses.CourseIndex;
 import mystars.login.User;
 import mystars.login.UserList;
 
@@ -15,14 +16,14 @@ import java.util.HashMap;
  * Loads and saves data to file.
  */
 public class Storage {
-    public static final String LOAD_ERROR = "Error loading file.";
-    private static final String READ_ERROR = "Error reading file.";
+    //    public static final String LOAD_ERROR = "Error loading file.";
+//    private static final String READ_ERROR = "Error reading file.";
     private static final String DIRECTORY_ERROR = "Error creating directory.";
     private static final String WRITE_ERROR = "Error writing file.";
     private static final String COURSES_SERIALIZABLE_FILE_NAME = "courses.dat";
     private static final String USERS_FILE = "users.txt";
     private static final String STUDENTS_SERIALIZABLE_FILE_NAME = "students.dat";
-    private final String folder;
+    private static String folder = "data";
 
 
     /**
@@ -62,9 +63,20 @@ public class Storage {
     public static HashMap<String, Course> loadCourses() {
         Path path = Paths.get("data", COURSES_SERIALIZABLE_FILE_NAME);
         String filename = path.normalize().toString();
-        HashMap<String, Course> CourseHashMap = null;
+        HashMap<String, Course> CourseHashMap = new HashMap<>();
         if (!Files.exists(path)) {
-            return null;
+            System.out.println("No previous data");
+            System.out.println("Creating two default courses, CZ2001 and CZ2002");
+            Course course1 = new Course("Algorithms", "CZ2001", "SCSE", 3);
+            course1.addCourseIndex(new CourseIndex("10027", 20));
+            course1.addCourseIndex(new CourseIndex("10028", 20));
+            CourseHashMap.put(course1.getCourseCode(), course1);
+            Course course2 = new Course("OODP", "CZ2002", "SCSE", 3);
+            course2.addCourseIndex(new CourseIndex("3044", 20));
+            course2.addCourseIndex(new CourseIndex("3045", 20));
+            CourseHashMap.put(course2.getCourseCode(), course2);
+
+            return CourseHashMap;
         }
 
         FileInputStream fis;
@@ -137,35 +149,12 @@ public class Storage {
         }
     }
 
-    public static void main(String[] args) {
-//        HashMap<String, Course> list = new HashMap<String, Course>();
-//        try {
-//
-//            String path = Paths.get("data", COURSES_SERIALIZABLE_FILE_NAME).normalize().toString();
-//            System.out.println(path);
-//            list = Storage.loadCourses();
-//            for (int i = 0; i < list.size(); i++) {
-//                Course p = list.get(i);
-//                System.out.println("name is " + p.getCourseName());
-//                System.out.println("contact is " + p.getCourseCode());
-//            }
-//            Course p = new Course("oodp i guess", "cz2002", "SCSE", 21);
-//            // add to list
-//            list.put(p.getCourseCode(), p);
-//
-//            Storage.saveCourses(list);
-//
-//        } catch (Exception e) {
-//            System.out.println("Exception >> " + e.getMessage());
-//        }
-    }
-
     /**
      * Loads users, stores them into ArrayList and returns the ArrayList.
      *
      * @return ArrayList of users.
      */
-    public UserList loadUsers() {
+    public static UserList loadUsers() {
         Path path = Paths.get(folder, USERS_FILE);
         ArrayList<User> users = new ArrayList<>();
 //            logger.log(Level.INFO, "going to load users");
@@ -186,7 +175,11 @@ public class Storage {
             } catch (IOException e) {
                 System.out.println("Error loading user file.");
                 //            logger.log(Level.INFO, "No users found. Creating new users list.");
-                return new UserList();
+                System.out.println("Creating new admin user defaults");
+                UserList newUserList = new UserList();
+                newUserList.addNewUser("wonho", "1234", "Admin");
+                // TODO consider adding student defaults
+                return newUserList;
 
 //                throw new StarsException(READ_ERROR);
             }
@@ -194,6 +187,14 @@ public class Storage {
         UserList usersList;
 //            logger.log(Level.INFO, "loaded users");
         usersList = new UserList(users);
+        if (users.size() == 0) {
+            System.out.println("No previous data");
+            System.out.println("Creating new admin user defaults");
+            usersList.addNewUser("wonho", "samplePassword", "Admin");
+            // TODO consider adding student defaults
+
+        }
+
         return usersList;
     }
 

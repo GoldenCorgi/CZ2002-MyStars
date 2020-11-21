@@ -1,26 +1,20 @@
 package mystars.courses;
 
-//import java.io.Serializable;
 
 import mystars.Student;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 public class CourseIndex implements Serializable {
     private static final long serialVersionUID = 42L;
-
-    private int totalVacancies;
-    private String indexName;
-    private List<Student> registeredStudents = null;
-    private List<CourseComponent> courseComponents = null;
-
-    public CourseIndex(String indexName, int totalVacancies) {
-        this.totalVacancies = totalVacancies;
-        this.indexName = indexName;
-
-        //this.addedStudents = Arrays.asList(new Student[numberOfSlots]);
-    }
+    // TODO change possibility to edit courses info
+    private int totalVacancies = 0;
+    private final String indexName;
+    private final ArrayList<Student> registeredStudents = new ArrayList<>();
+    private final ArrayList<Student> waitListStudents = new ArrayList<>();
+    private final ArrayList<CourseComponent> courseComponents = new ArrayList<>();
 
     /**
      * Constructor to create course index object using the parameters given.
@@ -28,6 +22,13 @@ public class CourseIndex implements Serializable {
      * @param indexName      The name of the index of the course.
      * @param totalVacancies The total vacancies in the index of the course.
      */
+    public CourseIndex(String indexName, int totalVacancies) {
+        this.totalVacancies = totalVacancies;
+        this.indexName = indexName;
+
+        //this.addedStudents = Arrays.asList(new Student[numberOfSlots]);
+    }
+
 
     public String getIndexName() {
         return indexName;
@@ -72,11 +73,25 @@ public class CourseIndex implements Serializable {
     /**
      * Function to add student into course index.
      *
-     * @param student
+     * @param student Add student into registered student if got vacancy, else add to wait list
      */
     public void addStudent(Student student) {
-        registeredStudents.add(student);
+        if (isFull()) {
+            waitListStudents.add(student);
+        } else {
+            registeredStudents.add(student);
+
+        }
     }
+
+    public void refreshWaitList() {
+        while (!isFull() && (waitListStudents.size() > 0)) {
+            Student studentOnWaitList = waitListStudents.remove(0);
+            registeredStudents.add(studentOnWaitList);
+            // TODO notify students
+        }
+    }
+
 
     /**
      * Function to get number of vacancies of index.
@@ -92,6 +107,7 @@ public class CourseIndex implements Serializable {
         return this.getNumberOfVacancies() == 0;
     }
 
+
     /**
      * Function to get added students in a list.
      */
@@ -101,7 +117,7 @@ public class CourseIndex implements Serializable {
 
     public void printRegisteredStudent() {
         for (int i = 0; i < this.registeredStudents.size(); i++) {
-            System.out.println(Integer.toString(i + 1) + ": " + this.registeredStudents.get(i).getStudentName());
+            System.out.println((i + 1) + ": " + this.registeredStudents.get(i).getStudentName());
         }
 
 

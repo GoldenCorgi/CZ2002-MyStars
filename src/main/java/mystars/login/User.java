@@ -48,13 +48,6 @@ public class User {
         this.role = role;
     }
 
-    /**
-     * TODO HASHING
-     **/
-    public String getPasswordHash() {
-        return this.password;
-    }
-
     public void setNewPassword(String password) {
         this.salt = PasswordHandler.generateSalt();
         this.password = PasswordHandler.hashPassword(password, this.salt);
