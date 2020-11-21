@@ -9,10 +9,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Scanner;
-import java.util.Set;
+import java.util.*;
 
 import static mystars.Storage.*;
 
@@ -92,21 +89,52 @@ public class Admin implements Serializable {
         String courseCode = sc.nextLine();
         System.out.println("Enter Course School:");
         String courseSchool = sc.nextLine();
-        System.out.println("Enter AU:");
-        int AcademicUnits = sc.nextInt();
-        // Remove non-integer inputs due to buggy java stuff lmao https://stackoverflow.com/questions/27717503/why-does-my-scanner-repeat
-        sc.nextLine();
+//        System.out.println("Enter AU:");
+//        int AcademicUnits = sc.nextInt();
+//        // Remove non-integer inputs due to buggy java stuff lmao https://stackoverflow.com/questions/27717503/why-does-my-scanner-repeat
+//        sc.nextLine();
+        int AcademicUnits;
+        do {
+            System.out.println("Enter AU:");
+            while(!sc.hasNextInt()) {
+                System.out.println("Please enter an integer!");
+                System.out.println("Enter AU: ");
+                sc.next();
+            }
+            AcademicUnits = sc.nextInt();
+            sc.nextLine();
+        } while ((AcademicUnits <= 0) || (AcademicUnits > 4));
 
+        int courseVacancies;
+        do {
+            System.out.println("Enter Course Vacancies:");
+            while(!sc.hasNextInt()) {
+                System.out.println("Please enter an integer!");
+                System.out.println("Enter Course Vacancies:");
+                sc.next();
+            }
+            courseVacancies = sc.nextInt();
+            sc.nextLine();
+        } while ((courseVacancies <= 50) || (courseVacancies > 500));
+//        int courseVacancies = sc.nextInt();
+//        // Remove non-integer inputs due to buggy java stuff lmao https://stackoverflow.com/questions/27717503/why-does-my-scanner-repeat
+//        sc.nextLine();
 
-        System.out.println("Enter Course Vacancies:");
-        int courseVacancies = sc.nextInt();
-        // Remove non-integer inputs due to buggy java stuff lmao https://stackoverflow.com/questions/27717503/why-does-my-scanner-repeat
-        sc.nextLine();
-
-        System.out.println("Enter Number of Indexes:");
-        int numberOfIndexes = sc.nextInt();
-        // Remove non-integer inputs due to buggy java stuff lmao https://stackoverflow.com/questions/27717503/why-does-my-scanner-repeat
-        sc.nextLine();
+        int numberOfIndexes;
+        do {
+            System.out.println("Enter Number of Indexes:");
+            while(!sc.hasNextInt()) {
+                System.out.println("Please enter an integer!");
+                System.out.println("Enter Number of Indexes:");
+                sc.next();
+            }
+            numberOfIndexes = sc.nextInt();
+            sc.nextLine();
+        } while ((numberOfIndexes <= 0) || (numberOfIndexes > 10));
+//        System.out.println("Enter Number of Indexes:");
+//        int numberOfIndexes = sc.nextInt();
+//        // Remove non-integer inputs due to buggy java stuff lmao https://stackoverflow.com/questions/27717503/why-does-my-scanner-repeat
+//        sc.nextLine();
 
 //        Index[] index = new Index[numberOfIndexes];
 
@@ -212,20 +240,42 @@ public class Admin implements Serializable {
         String courseName = sc.nextLine();
         System.out.println("Enter Course School:");
         String courseSchool = sc.nextLine();
-        System.out.println("Enter AU:");
-        int AcademicUnits = sc.nextInt();
-        // Remove non-integer inputs due to buggy java stuff lmao https://stackoverflow.com/questions/27717503/why-does-my-scanner-repeat
-        sc.nextLine();
 
-        System.out.println("Enter Course Vacancies:");
-        int courseVacancies = sc.nextInt();
-        // Remove non-integer inputs due to buggy java stuff lmao https://stackoverflow.com/questions/27717503/why-does-my-scanner-repeat
-        sc.nextLine();
+        int AcademicUnits;
+        do {
+            System.out.println("Enter AU:");
+            while(!sc.hasNextInt()) {
+                System.out.println("Please enter an integer!");
+                System.out.println("Enter AU: ");
+                sc.next();
+            }
+            AcademicUnits = sc.nextInt();
+            sc.nextLine();
+        } while ((AcademicUnits <= 0) || (AcademicUnits > 4));
 
-        System.out.println("Enter Number of Indexes:");
-        int numberOfIndexes = sc.nextInt();
-        // Remove non-integer inputs due to buggy java stuff lmao https://stackoverflow.com/questions/27717503/why-does-my-scanner-repeat
-        sc.nextLine();
+        int courseVacancies;
+        do {
+            System.out.println("Enter Course Vacancies:");
+            while(!sc.hasNextInt()) {
+                System.out.println("Please enter an integer!");
+                System.out.println("Enter Course Vacancies:");
+                sc.next();
+            }
+            courseVacancies = sc.nextInt();
+            sc.nextLine();
+        } while ((courseVacancies <= 50) || (courseVacancies > 500));
+
+        int numberOfIndexes;
+        do {
+            System.out.println("Enter Number of Indexes:");
+            while(!sc.hasNextInt()) {
+                System.out.println("Please enter an integer!");
+                System.out.println("Enter Number of Indexes:");
+                sc.next();
+            }
+            numberOfIndexes = sc.nextInt();
+            sc.nextLine();
+        } while ((numberOfIndexes <= 0) || (numberOfIndexes > 10));
 
 //        Index[] index = new Index[numberOfIndexes];
 
@@ -488,7 +538,7 @@ public class Admin implements Serializable {
             }
             saveCourses(CourseList);
             saveStudents(StudentList);
-        } while (choice != "8");
+        } while (!choice.equals("8"));
 
     }
 }
