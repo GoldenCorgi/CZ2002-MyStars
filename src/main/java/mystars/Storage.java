@@ -92,7 +92,7 @@ public class Storage {
         // print out the size
         //System.out.println(" Details Size: " + pDetails.size());
         //System.out.println();
-        if (CourseHashMap == null) {
+        if (CourseHashMap.size() == 0) {
             System.out.println("No previous data");
             System.out.println("Creating two default courses, CZ2001 and CZ2002");
             Course course1 = new Course("Algorithms", "CZ2001", "SCSE", 3);
