@@ -25,6 +25,7 @@ public class StudentApp {
         this.StudentList = loadStudents();
         if (StudentList.get(StudentEmail) == null) {
             // TODO fix this hardcoded student part lmao
+            // I think can do without this after we put in the default values
             StudentList.put(StudentEmail, new Student("?", StudentEmail, StudentEmail, "Male", "NIL"));
         }
         this.student = StudentList.get(StudentEmail);
