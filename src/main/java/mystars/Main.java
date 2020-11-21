@@ -40,7 +40,7 @@ public class Main {
             }
         }
 
-        System.out.println("Terminating Program!");
+        System.out.println("Terminating Program, thanks for using MyStars!");
     }
 
 }
