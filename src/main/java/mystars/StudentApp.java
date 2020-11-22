@@ -301,10 +301,17 @@ public class StudentApp {
                     if (!verifyExistingCourse(student)) {
                         break;
                     }
-                    User SecondUser = login.getSwappingStudent();
+                    System.out.println("Enter second student username: ");
+                    String student2Username= sc.nextLine();
+                    System.out.println("Enter second student password: ");
+                    String student2Password= sc.nextLine();
+
+                    // verify student name and student password
+                    User SecondUser = login.getSwappingStudent(student2Username, student2Password);
                     Student SecondStudent = StudentList.get(SecondUser.getName());
+
                     // validate whether other student has any courses registered
-                    if (verifyExistingCourse(SecondStudent)) {
+                    if (!verifyExistingCourse(SecondStudent)) {
                         break;
                     }
 
@@ -318,15 +325,22 @@ public class StudentApp {
                         System.out.println("Rejected - student doesn't have course specified");
                         break;
                     }
+                    if (index1.equals(index2)) {
+                        System.out.println("Rejected - both students have the same index");
+                        break;
+                    }
 
 
                     // TODO Validate whether need to drop before add
+                    // probably need to drop before add
                     student.dropCourse(courseCode);
                     SecondStudent.dropCourse(courseCode);
                     student.addCourse(courseCode, index2);
                     SecondStudent.addCourse(courseCode, index1);
-
+                    StudentList.remove(student2Username);
+                    StudentList.put(student2Username, SecondStudent);
                     break;
+
                 case "7":
                     System.out.println("Program terminating..");
                     break;
