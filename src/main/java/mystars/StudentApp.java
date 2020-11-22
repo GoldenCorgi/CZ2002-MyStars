@@ -5,6 +5,7 @@ import mystars.login.Login;
 import mystars.login.User;
 
 import java.util.HashMap;
+import java.util.Objects;
 import java.util.Scanner;
 
 import static mystars.Storage.*;
@@ -116,11 +117,11 @@ public class StudentApp {
      * Verify if the course code exists
      *
      * @param student A student object
-     * @return <code>true</code> if student no courses; <code>false</code> otherwise.
+     * @return <code>true</code> if student has courses; <code>false</code> otherwise.
      */
 
     public boolean verifyExistingCourse(Student student) {
-        if (student.getNumberOfCoursesRegistered() == 0) {
+        if (Objects.equals(student.getNumberOfCoursesRegistered(), 0)) {
             System.out.println("Rejected - student doesn't have any course");
             return false;
         }
@@ -283,7 +284,7 @@ public class StudentApp {
                 case "6":
                     System.out.println("\n(6) Swop Index Number with Another Student");
                     // validate whether current student has any courses registered
-                    if (verifyExistingCourse(student)) {
+                    if (!verifyExistingCourse(student)) {
                         break;
                     }
                     User SecondUser = login.getSwappingStudent();
@@ -306,6 +307,8 @@ public class StudentApp {
 
 
                     // TODO Validate whether need to drop before add
+                    student.dropCourse(courseCode);
+                    SecondStudent.dropCourse(courseCode);
                     student.addCourse(courseCode, index2);
                     SecondStudent.addCourse(courseCode, index1);
 
