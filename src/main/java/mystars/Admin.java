@@ -172,7 +172,7 @@ public class Admin implements Serializable {
     }
 
     static boolean verifyCourseCodeFormat(String courseCode) {
-        String regex = "(cz)[1-4]{1}[0-1]{1}[0-9]{2}";
+        String regex = "(cz)[1-4]{1}[0-9]{3}";
         return courseCode.toLowerCase().matches(regex);
     }
     /**
@@ -369,6 +369,7 @@ public class Admin implements Serializable {
             }
 
         }
+        saveCourses(CourseList);
     }
 
 
