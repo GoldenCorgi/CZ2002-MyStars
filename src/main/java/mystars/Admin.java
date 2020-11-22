@@ -429,7 +429,8 @@ public class Admin implements Serializable {
                 "\n(5) Check Vacancies for a Course Index" +
                 "\n(6) Print Student List by Index Number" +
                 "\n(7) Print Student List by Course" +
-                "\n(8) Exit";
+                "\n(8) Print Entire Student List" +
+                "\n(9) Exit";
         do {
             System.out.println(Choices);
             System.out.println("Enter the number of your choice: ");
@@ -496,6 +497,11 @@ public class Admin implements Serializable {
                     Student newStudent = new Student(matricNo, studentName, studentEmail, studentGender, studentNationality);
                     addStudent(newStudent);
                     System.out.println("Student added");
+                    System.out.println();
+                    System.out.println("Current Student List:");
+                    for (String name: StudentList.keySet()){
+                        System.out.println(name);
+                    };
                     break;
 
                 case "3":
@@ -542,6 +548,12 @@ public class Admin implements Serializable {
                     printStudentListByCourse(courseCode);
                     break;
                 case "8":
+                    System.out.println("Current Student List:");
+                    for (String name: StudentList.keySet()){
+                        System.out.println(name);
+                    };
+                    break;
+                case "9":
                     System.out.println("Program terminating..");
                     break;
                 default:
@@ -550,7 +562,7 @@ public class Admin implements Serializable {
             }
             saveCourses(CourseList);
             saveStudents(StudentList);
-        } while (!choice.equals("8"));
+        } while (!choice.equals("9"));
 
     }
 }
