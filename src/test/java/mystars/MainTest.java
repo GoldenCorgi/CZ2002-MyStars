@@ -32,7 +32,7 @@ class MainTest {
     @Test
     void MakeCourseOverflowWaitList() {
         Admin ad = new Admin("test");
-        ad.addCourse(new Scanner("CourseName\nCZ8888\nSCSE\n1" +
+        ad.addCourse(new Scanner("CourseName\nCZ4099\nSCSE\n1" +
                 "\n1" + // Vacancies
                 "\n3" + // Type of coursecomponent (lecture/tut/lab)
                 "\n1" + // number of indexes
@@ -43,16 +43,16 @@ class MainTest {
 
         StudentApp f = new StudentApp("student");
         String inputs = "" +
-                "\n1\nCZ8888\n54345" +
+                "\n1\nCZ4099\n54345" +
                 "\n7";
         f.runLoop(new Login(new UserList()),new Scanner(inputs));
         StudentApp f2 = new StudentApp("timh0011");
         String inputs2 = "" +
-                "\n1\nCZ8888\n54345" +
+                "\n1\nCZ4099\n54345" +
                 "\n7";
         f2.runLoop(new Login(Storage.loadUsers()),new Scanner(inputs2));
         inputs = "" +
-                "\n2\nCZ8888" +
+                "\n2\nCZ4099" +
                 "\n7";
         f.runLoop(new Login(new UserList()),new Scanner(inputs));
 
