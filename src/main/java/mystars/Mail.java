@@ -7,20 +7,24 @@ import jakarta.mail.internet.MimeMessage;
 import java.io.UnsupportedEncodingException;
 import java.util.Properties;
 
-public class MailMan {
+public class Mail {
     Session session = null;
 
-    public MailMan() {
-        if (session == null) {
+    public Mail(Boolean login) {
+        if (session == null & login == true) {
             init();
+        }
+        else if (!login){
+            System.out.println("[NO LOGIN EMAIL - DEBUGGING]");
+
         }
     }
 
-    public static void main(String[] args) {
-        MailMan ma = new MailMan();
+
+    public static void sendNotification(String messageText, String targetEmail, boolean login) {
+        Mail ma = new Mail(login);
         ma.sendMail("test2", "whattohec@gmail.com");
     }
-
 
     public void init() {
 
@@ -45,6 +49,7 @@ public class MailMan {
 
     public void sendMail(String messageText, String targetEmail) {
         if (session == null) {
+            System.out.println("[EMAIL NOT SENT - SESSION NULL]");
             System.exit(0);
         }
         try {

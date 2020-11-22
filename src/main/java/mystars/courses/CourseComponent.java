@@ -1,9 +1,11 @@
 package mystars.courses;
 
 import java.io.Serializable;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 public class CourseComponent implements Serializable {
-    private static final long serialVersionUID = 420;
+    private static final long serialVersionUID = 421;
     private final String componentName;
     private final String venue;
     private final String startTime;
@@ -30,6 +32,16 @@ public class CourseComponent implements Serializable {
 
     }
 
+    public LocalTime getStartTime() {
+
+        // create an LocalTime object and
+        LocalTime lt = LocalTime.parse(startTime, DateTimeFormatter.ofPattern("HHmm"));
+
+        // print result
+        System.out.println("LocalTime : "
+                + lt);
+        return lt;
+    }
     /**
      * Function to get name of component.
      */
