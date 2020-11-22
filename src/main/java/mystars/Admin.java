@@ -3,7 +3,6 @@ package mystars;
 import mystars.courses.Course;
 import mystars.courses.CourseIndex;
 import mystars.login.Login;
-import mystars.StudentApp;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -11,7 +10,6 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
@@ -273,6 +271,10 @@ public class Admin implements Serializable {
     public void updateCourses(Scanner sc) {
         System.out.println("Enter Course Code:");
         String courseCode = sc.nextLine();
+        if (!verifyCourseCode(courseCode)) {
+            return;
+        }
+        System.out.println("Now updating course "+courseCode+" ...");
         System.out.println("Enter Course Name:");
         String courseName = sc.nextLine();
         System.out.println("Enter Course School:");
@@ -576,14 +578,12 @@ public class Admin implements Serializable {
                     String courseCode = sc.nextLine();
                     // verify coursecode --- copy over from studentapp
                     if (!verifyCourseCode(courseCode)) {
-                        System.out.println("Course not found!");
                         break;
                     }
                     System.out.println("Enter courseIndex: ");
                     String courseIndex = sc.nextLine();
                     // verify courseindex
                     if (!verifyCourseIndex(courseCode, courseIndex)) {
-                        System.out.println("Course Index not found!");
                         break;
                     }
                     int vacancies = checkVacancies(courseCode, courseIndex);
@@ -596,14 +596,12 @@ public class Admin implements Serializable {
                     courseCode = sc.nextLine();
                     // verify coursecode
                     if (!verifyCourseCode(courseCode)) {
-                        System.out.println("Course not found!");
                         break;
                     }
                     System.out.println("Enter courseIndex: ");
                     courseIndex = sc.nextLine();
                     // verify courseindex
                     if (!verifyCourseIndex(courseCode, courseIndex)) {
-                        System.out.println("Course Index not found!");
                         break;
                     }
                     printStudentListByIndex(courseCode, courseIndex);
@@ -615,7 +613,6 @@ public class Admin implements Serializable {
                     courseCode = sc.nextLine();
                     // verify coursecode
                     if (!verifyCourseCode(courseCode)) {
-                        System.out.println("Course not found!");
                         break;
                     }
                     printStudentListByCourse(courseCode);
