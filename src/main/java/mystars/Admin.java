@@ -3,6 +3,7 @@ package mystars;
 import mystars.courses.Course;
 import mystars.courses.CourseIndex;
 import mystars.login.Login;
+import mystars.StudentApp;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -10,6 +11,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
@@ -47,6 +49,16 @@ public class Admin implements Serializable {
         return (genderTypes.contains(gender.toLowerCase()));
     }
 
+    public static Boolean verifyNationality(String nationality) {
+        final Set<String> nationalityTypes = new HashSet<>() {{
+            add("singaporean");
+            add("malaysian");
+            add("indonesian");
+            add("chinese");
+            add("thai");
+        }};
+        return (nationalityTypes.contains(nationality.toLowerCase()));
+    }
     /**
      * Function to check if student's email exists.
      *
@@ -56,6 +68,10 @@ public class Admin implements Serializable {
     public Boolean checkStudentEmailExists(String email) {
         // true if exists
         return (StudentList.get(email) != null);
+    }
+    public Boolean checkMatricNoExists(String matricNo) {
+        // true if exists
+        return (StudentList.get(matricNo) != null);
     }
 
     public void editStudentAccessPeriod() {
@@ -73,6 +89,21 @@ public class Admin implements Serializable {
         Storage.saveStudents(StudentList);
     }
 
+    public boolean verifyCourseCode(String courseCode) {
+        if (CourseList.get(courseCode) == null) {
+            System.out.println("Rejected - CourseCode does not exist");
+            return false;
+        }
+        return true;
+    }
+
+    public boolean verifyCourseIndex(String courseCode, String courseIndex) {
+        if (CourseList.get(courseCode).getCourseIndexByIndexName(courseIndex) == null) {
+            System.out.println("Rejected - courseIndex does not exist in CourseCode");
+            return false;
+        }
+        return true;
+    }
     /**
      * Function to add course.
      * @param sc Scanner object.
@@ -481,18 +512,27 @@ public class Admin implements Serializable {
                     String studentName = sc.nextLine();
                     System.out.println("Enter matricNo: ");
                     String matricNo = sc.nextLine();
-                    // TODO Verify matric does not duplicate ?
+                    // verify matric does not duplicate
+                    if (checkMatricNoExists(matricNo)) {
+                        // True = already exists
+                        System.out.println("matricNo already exists!");
+                        break;
+                    }
                     System.out.println("Enter studentGender: ");
                     String studentGender = sc.nextLine().toLowerCase();
-                    // TODO verify gender lmao --------- use enum methods?
-//                        if (admin.verifyGender(studentGender)){
-//                            // True = correct input
-//                            System.out.println("Gender incorrect format (Male/Female)!");
-//                            break;
-//                        };
+                    // verify gender
+                    if (!verifyGender(studentGender)){
+//                            // false = incorrect input
+                        System.out.println("Gender incorrect format (Male/Female)!");
+                        break;
+                    }
                     System.out.println("Enter studentNationality: ");
                     String studentNationality = sc.nextLine();
-                    // TODO verify nationality?
+                    // verify nationality
+                    if (!verifyNationality(studentNationality)){
+                        System.out.println("Nationality incorrect!");
+                        break;
+                    }
                     login.addNewStudentWithPassword(sc, studentEmail);
                     Student newStudent = new Student(matricNo, studentName, studentEmail, studentGender, studentNationality);
                     addStudent(newStudent);
@@ -500,10 +540,14 @@ public class Admin implements Serializable {
                     System.out.println();
                     System.out.println("Current Student List:");
                     for (String name: StudentList.keySet()){
-                        System.out.println(name);
-                    };
+                        System.out.println("Name: "+StudentList.get(name).getStudentName());
+                        System.out.println("Matric No: "+StudentList.get(name).getMatricNo());
+                        System.out.println("Email: "+StudentList.get(name).getStudentEmail());
+                        System.out.println("Gender: "+StudentList.get(name).getStudentGender());
+                        System.out.println("Nationality: "+StudentList.get(name).getStudentNationality());
+                        System.out.println();
+                    }
                     break;
-
                 case "3":
                     System.out.println("\n(3) Add Course");
                     // Done
@@ -521,10 +565,18 @@ public class Admin implements Serializable {
                     System.out.println("\n(5) Check Vacancies for a Course Index");
                     System.out.println("Enter courseCode: ");
                     String courseCode = sc.nextLine();
-                    // TODO verify coursecode --- copy over from studentapp
+                    // verify coursecode --- copy over from studentapp
+                    if (!verifyCourseCode(courseCode)) {
+                        System.out.println("Course not found!");
+                        break;
+                    }
                     System.out.println("Enter courseIndex: ");
                     String courseIndex = sc.nextLine();
-                    // TODO Verify courseindex
+                    // verify courseindex
+                    if (!verifyCourseIndex(courseCode, courseIndex)) {
+                        System.out.println("Course Index not found!");
+                        break;
+                    }
                     int vacancies = checkVacancies(courseCode, courseIndex);
                     System.out.println("Course Index has " + vacancies + " Vacancies");
                     break;
@@ -533,10 +585,18 @@ public class Admin implements Serializable {
                     System.out.println("\n(6) Print Student List by Index Number");
                     System.out.println("Enter courseCode: ");
                     courseCode = sc.nextLine();
-                    // TODO verify coursecode
+                    // verify coursecode
+                    if (!verifyCourseCode(courseCode)) {
+                        System.out.println("Course not found!");
+                        break;
+                    }
                     System.out.println("Enter courseIndex: ");
                     courseIndex = sc.nextLine();
-                    // TODO Verify courseindex
+                    // verify courseindex
+                    if (!verifyCourseIndex(courseCode, courseIndex)) {
+                        System.out.println("Course Index not found!");
+                        break;
+                    }
                     printStudentListByIndex(courseCode, courseIndex);
                     break;
                 case "7":
@@ -544,14 +604,23 @@ public class Admin implements Serializable {
                     System.out.println("\n(7) Print Student List by Course");
                     System.out.println("Enter courseCode: ");
                     courseCode = sc.nextLine();
-                    // TODO verify coursecode
+                    // verify coursecode
+                    if (!verifyCourseCode(courseCode)) {
+                        System.out.println("Course not found!");
+                        break;
+                    }
                     printStudentListByCourse(courseCode);
                     break;
                 case "8":
                     System.out.println("Current Student List:");
                     for (String name: StudentList.keySet()){
-                        System.out.println(name);
-                    };
+                        System.out.println("Name: "+StudentList.get(name).getStudentName());
+                        System.out.println("Matric No: "+StudentList.get(name).getMatricNo());
+                        System.out.println("Email: "+StudentList.get(name).getStudentEmail());
+                        System.out.println("Gender: "+StudentList.get(name).getStudentGender());
+                        System.out.println("Nationality: "+StudentList.get(name).getStudentNationality());
+                        System.out.println();
+                    }
                     break;
                 case "9":
                     System.out.println("Program terminating..");
