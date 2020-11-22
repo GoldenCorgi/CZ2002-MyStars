@@ -288,6 +288,10 @@ public class StudentApp {
                     if (!verifyCourseIndex(courseCode, courseIndex)) {
                         break;
                     }
+                    // verify if there is vacancies in courseIndex
+                    if (Objects.equals(checkVacancies(courseCode, courseIndex), 0)) {
+                        System.out.println("Number of vacancies in courseIndex is 0. Student will be added to waitList.");
+                    }
 
                     // validate if timetable clashes
                     if (checkTimingClash(courseCode, courseIndex)){

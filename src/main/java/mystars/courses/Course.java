@@ -58,9 +58,11 @@ public class Course implements Serializable {
     }
 
     /**
-     * Function to get courseName.
+     * Using courseIndex input string to return courseIndex object
+     *
+     * @param courseIndexName
+     * @return CourseIndex object
      */
-
     public CourseIndex getCourseIndexByIndexName(String courseIndexName) {
         return this.courseIndex.get(courseIndexName);
     }
