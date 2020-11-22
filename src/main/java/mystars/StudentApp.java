@@ -372,6 +372,11 @@ public class StudentApp {
                     if (!verifyCourseIndex(courseCode, courseIndex)) {
                         break;
                     }
+                    // vet if new index will cause clashes
+                    if (checkTimingClash(courseCode, courseIndex)){
+                        System.out.println("New Course Index will clash with existing timetable!");
+                        break;
+                    }
 
                     // Validate whether course got vacancies etc -- validation done in addcourse itself.
                     addCourse(courseCode, courseIndex);
