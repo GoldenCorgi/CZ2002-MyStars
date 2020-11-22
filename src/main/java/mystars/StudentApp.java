@@ -17,6 +17,7 @@ public class StudentApp {
     private final HashMap<String, Student> StudentList;
     private final Student student;
     private final HashMap<String, Course> CourseList;
+    private final int maxAcademicUnit = 21;
 
     /**
      * Constructor to create StudentApp object based on parameters given.
@@ -164,6 +165,27 @@ public class StudentApp {
         return student.hasCourseIndex(courseIndex);
     }
 
+    /**
+     * @return the total number of AUs registered
+     */
+
+    public boolean verifyAUsRegisteredExceededMax(String newCourseCode) {
+        int au, newAU, totalAU=0;
+        for (Map.Entry<String, String> entry : student.getCourse().entrySet()) {
+            String courseCode = entry.getKey();
+            au = CourseList.get(courseCode).getCourseAcademicUnit();
+            totalAU += au;
+        }
+        newAU = CourseList.get(newCourseCode).getCourseAcademicUnit();
+        totalAU += newAU;
+        if (totalAU > maxAcademicUnit){
+            System.out.println("Maximum Academic Units to be registered exceeded.");
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
 
 
     /**
@@ -199,6 +221,10 @@ public class StudentApp {
                     String courseCode = sc.nextLine();
                     // verify courseCode
                     if (!verifyCourseCode(courseCode)) {
+                        break;
+                    }
+                    // verify if maxAU exceeded
+                    if(verifyAUsRegisteredExceededMax(courseCode)) {
                         break;
                     }
                     // verify course code in student
@@ -349,7 +375,7 @@ public class StudentApp {
                     break;
 
                 default:
-                    System.out.println("Unknown Input Choice");
+                    System.out.println("Unknown Input Choice. Please try again.");
                     break;
             }
             saveCourses(CourseList);
