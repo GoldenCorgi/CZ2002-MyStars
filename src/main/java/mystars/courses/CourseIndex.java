@@ -30,6 +30,10 @@ public class CourseIndex implements Serializable {
     }
 
 
+    public ArrayList<CourseComponent> getCourseComponents() {
+        return this.courseComponents;
+    }
+
     public String getIndexName() {
         return indexName;
     }

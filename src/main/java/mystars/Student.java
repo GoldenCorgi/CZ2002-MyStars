@@ -155,19 +155,6 @@ public class Student implements Serializable {
         }
     }
 
-    /**
-     * Using course codes to check if there is a timing clash. This is to ensure that courses added into student time table do not clash
-     *
-     * @param courseCode1
-     * @param courseCode2
-     * @param courseIndex1
-     * @param courseIndex2
-     * @return <code>true</code> if course timing clashes; <code>false</code> otherwise.
-     */
-
-    public boolean checkTimingClash(String courseCode1, String courseCode2, String courseIndex1, String courseIndex2) {
-        return true;
-    }
 
     /**
      * @return the number of courses registered for each student

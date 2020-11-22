@@ -1,14 +1,13 @@
 package mystars;
 
 import mystars.courses.Course;
+import mystars.courses.CourseComponent;
 import mystars.courses.CourseIndex;
 import mystars.login.Login;
 import mystars.login.User;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Scanner;
+import java.time.LocalTime;
+import java.util.*;
 
 import static mystars.Storage.*;
 
@@ -38,7 +37,7 @@ public class StudentApp {
     /**
      * Add course for a student based on the course code and course index
      *
-     * @param courseCode The course code entered by student
+     * @param courseCode  The course code entered by student
      * @param courseIndex The course index entered by student
      */
     public void addCourse(String courseCode, String courseIndex) {
@@ -86,7 +85,7 @@ public class StudentApp {
     /**
      * Check for vacancies in course based on the course code and course index
      *
-     * @param courseCode The course code entered by student
+     * @param courseCode  The course code entered by student
      * @param courseIndex The course index entered by student
      * @return The number of vacancies in a course
      */
@@ -114,7 +113,7 @@ public class StudentApp {
     /**
      * Verify if the course index exists
      *
-     * @param courseCode The course code
+     * @param courseCode  The course code
      * @param courseIndex The course index
      * @return <code>true</code> if course index exists; <code>false</code> otherwise.
      */
@@ -149,7 +148,7 @@ public class StudentApp {
      * @return <code>true</code> if student has course code; <code>false</code> otherwise.
      */
 
-    public boolean verifyStudentHasCourseCode(String courseCode){
+    public boolean verifyStudentHasCourseCode(String courseCode) {
         return student.hasCourseCode(courseCode);
     }
 
@@ -160,17 +159,68 @@ public class StudentApp {
      * @return <code>true</code> if student has course index; <code>false</code> otherwise.
      */
 
-    public boolean verifyStudentHasCourseIndex(String courseIndex){
+    public boolean verifyStudentHasCourseIndex(String courseIndex) {
         return student.hasCourseIndex(courseIndex);
     }
 
+
+    /**
+     * Using course codes to check if there is a timing clash. This is to ensure that courses added into student time table do not clash
+     *
+     * @param courseCode1
+     * @param courseIndex1
+     * @return <code>true</code> if course timing clashes; <code>false</code> otherwise.
+     */
+
+    public boolean checkTimingClash(String courseCode1, String courseIndex1) {
+//        System.out.println("Check Timing Clashes - ");
+        if (student.getCourse().size() != 0) {
+            for (Map.Entry<String, String> entry : student.getCourse().entrySet()) {
+//                System.out.println("here1");
+                String courseCode = entry.getKey();
+                String courseIndex = entry.getValue();
+                if (courseCode.equals(courseCode1)) {
+                    continue;
+                } // possible overlap for changing index, ignore same course
+                ArrayList<CourseComponent> cc1 = CourseList.get(courseCode).getCourseIndexByIndexName(courseIndex).getCourseComponents();
+                ArrayList<CourseComponent> cc2 = CourseList.get(courseCode1).getCourseIndexByIndexName(courseIndex1).getCourseComponents();
+                LocalTime Start1, Start2, End1, End2;
+                String day1, day2;
+                for (CourseComponent num1 : cc1) {
+//                    System.out.println("here2");
+                    ArrayList<LocalTime> dt1 = num1.getTimeRange();
+                    day1 = num1.getDay();
+                    Start1 = dt1.get(0);
+                    End1 = dt1.get(1);
+                    for (CourseComponent num2 : cc2) {
+                        ArrayList<LocalTime> dt2 = num2.getTimeRange();
+                        day2 = num2.getDay();
+                        Start2 = dt2.get(0);
+                        End2 = dt2.get(1);
+                        if (day2.equals(day1)) {
+//                            System.out.println(Start2.compareTo(End1));
+//                            System.out.println(Start1.compareTo(End2));
+                            if (Start2.compareTo(End1) < 0 & Start1.compareTo(End2) < 0) { // hope this works?'
+                                System.out.println("Course will clash with existing - " + courseCode +" - "+ courseIndex);
+                                return true;
+                            }
+                        }
+                    }
+                }
+            }
+        } else {
+            return false;
+        }
+
+        return false;
+    }
 
 
     /**
      * runLoop to run the student function
      *
      * @param login Login details
-     * @param sc Scanner for input
+     * @param sc    Scanner for input
      */
     public void runLoop(Login login, Scanner sc) {
         final String Choices = "\n(1) Add course" +
@@ -213,7 +263,14 @@ public class StudentApp {
                         break;
                     }
 
+                    // validate if timetable clashes
+                    if (checkTimingClash(courseCode, courseIndex)){
+                        System.out.println("New Course will clash with existing timetable!");
+                        break;
+                    }
+
                     // Validate whether course got vacancies etc -- validation done in addcourse itself.
+
                     addCourse(courseCode, courseIndex);
                     System.out.println("Course successfully added");
 
@@ -302,14 +359,14 @@ public class StudentApp {
                         break;
                     }
                     System.out.println("Enter second student username: ");
-                    String student2Username= sc.nextLine();
+                    String student2Username = sc.nextLine();
                     System.out.println("Enter second student password: ");
-                    String student2Password= sc.nextLine();
+                    String student2Password = sc.nextLine();
 
                     // verify student name and student password
                     User SecondUser = login.getSwappingStudent(student2Username, student2Password);
 
-                    if(SecondUser != null) {
+                    if (SecondUser != null) {
                         Student SecondStudent = StudentList.get(SecondUser.getName());
 
                         // validate whether other student has any courses registered

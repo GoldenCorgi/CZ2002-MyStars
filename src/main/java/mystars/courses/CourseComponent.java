@@ -3,6 +3,7 @@ package mystars.courses;
 import java.io.Serializable;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
 public class CourseComponent implements Serializable {
     private static final long serialVersionUID = 421;
@@ -32,16 +33,17 @@ public class CourseComponent implements Serializable {
 
     }
 
-    public LocalTime getStartTime() {
-
-        // create an LocalTime object and
-        LocalTime lt = LocalTime.parse(startTime, DateTimeFormatter.ofPattern("HHmm"));
-
-        // print result
-        System.out.println("LocalTime : "
-                + lt);
+    public ArrayList<LocalTime> getTimeRange() {
+        ArrayList<LocalTime> lt = new ArrayList<>();
+        lt.add(LocalTime.parse(startTime, DateTimeFormatter.ofPattern("HHmm")));
+        lt.add(LocalTime.parse(endTime, DateTimeFormatter.ofPattern("HHmm")));
         return lt;
     }
+
+    public String getDay() {
+        return this.day;
+    }
+
     /**
      * Function to get name of component.
      */
