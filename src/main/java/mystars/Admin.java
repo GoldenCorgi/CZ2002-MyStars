@@ -89,6 +89,10 @@ public class Admin implements Serializable {
         // true if exists
         return (StudentList.get(email) != null);
     }
+    static boolean isEmailValid(String email) {
+        String regex = "^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$";
+        return email.matches(regex);
+    }
     /**
      * Function to check if student's matric no already exists
      *
@@ -594,6 +598,9 @@ public class Admin implements Serializable {
                     if (checkStudentEmailExists(studentEmail)) {
                         // True = already exists
                         System.out.println("Email already exists!");
+                        break;
+                    } else if (!isEmailValid(studentEmail)){
+                        System.out.println("Invalid email format/input!");
                         break;
                     }
                     System.out.println("Enter studentName: ");
