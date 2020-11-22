@@ -92,19 +92,24 @@ public class Login {
             int matched = users.ValidateUser(username, roleName);
 
             if (matched == 2) {
-                System.out.println("Second user verified - " + username);
+                System.out.println("Second user username verified - " + username);
                 validated = users.validatePassword(username, password);
                 if (!validated) {
-                    System.out.println("Second user not verified - Incorrect Password! Please retry your login.\t");
+                    System.out.println("Second user password not verified - Incorrect Password! Please retry your login.\t");
+                    return null;
                 }
+                return users.getExistingUser(username);
+
 
             } else if (matched == 0) {
                 System.out.println("Second user not verified - You are not registered - " + username);
+                break;
             } else {
                 System.out.println("Second user not verified - User - " + username + " - is not allowed to log in as a " + roleName);
+                break;
             }
         } while (!validated);
-        return users.getExistingUser(username);
+        return null;
     }
 
 

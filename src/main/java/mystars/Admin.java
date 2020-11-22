@@ -141,7 +141,7 @@ public class Admin implements Serializable {
             }
             courseVacancies = sc.nextInt();
             sc.nextLine();
-        } while ((courseVacancies <= 50) || (courseVacancies > 500));
+        } while ((courseVacancies <= 0) || (courseVacancies > 60));
 //        int courseVacancies = sc.nextInt();
 //        // Remove non-integer inputs due to buggy java stuff lmao https://stackoverflow.com/questions/27717503/why-does-my-scanner-repeat
 //        sc.nextLine();

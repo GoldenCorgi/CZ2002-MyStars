@@ -1,6 +1,7 @@
 package mystars.courses;
 
 public class Laboratory extends CourseComponent {
+    private static final long serialVersionUID = 420;
     /**
      * Constructor to create Laboratory object based on parameters given.
      * Creates laboratory with venue, start time, end time and day.

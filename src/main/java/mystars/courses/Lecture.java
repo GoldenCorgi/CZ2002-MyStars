@@ -1,6 +1,7 @@
 package mystars.courses;
 
 public class Lecture extends CourseComponent {
+    private static final long serialVersionUID = 420;
     /**
      * Constructor to create lecture object based on parameters given.
      * Creates lecture with venue, start time, end time and day.

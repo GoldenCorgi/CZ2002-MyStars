@@ -95,6 +95,11 @@ public class CourseIndex implements Serializable {
         }
     }
 
+    public String studentInWhichList(Student student) {
+        if (waitListStudents.contains(student)) {return "WaitList";}
+        else if (registeredStudents.contains(student)) {return "Registered";}
+        else return "Not Registered";
+    }
 
     /**
      * Function to get number of vacancies of index.
