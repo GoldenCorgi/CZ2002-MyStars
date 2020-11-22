@@ -1,6 +1,7 @@
 package mystars.courses;
 
 public class Tutorial extends CourseComponent {
+    private static final long serialVersionUID = 420;
     /**
      * Constructor to create Tutorial object based on parameters given.
      * Creates tutorial with venue, start time, end time and day.
