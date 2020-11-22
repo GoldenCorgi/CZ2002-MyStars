@@ -288,7 +288,10 @@ public class Admin implements Serializable {
             }
             AcademicUnits = sc.nextInt();
             sc.nextLine();
-        } while ((AcademicUnits <= 0) || (AcademicUnits > 4)); // TODO show a warning message if input not within limits
+            if ((AcademicUnits <= 0) || (AcademicUnits > 4)){
+                System.out.println("Invalid, please enter values from 1 to 4 only");
+            }
+        } while ((AcademicUnits <= 0) || (AcademicUnits > 4)); // show a warning message if input not within limits
 
         int courseVacancies;
         do {
@@ -300,7 +303,10 @@ public class Admin implements Serializable {
             }
             courseVacancies = sc.nextInt();
             sc.nextLine();
-        } while ((courseVacancies <= 50) || (courseVacancies > 500)); // TODO show a warning message if input not within limits
+            if ((courseVacancies <= 0) || (courseVacancies > 500)){
+                System.out.println("Invalid, please enter values from 50 to 500 only");
+            }
+        } while ((courseVacancies <= 50) || (courseVacancies > 500)); // show a warning message if input not within limits
 
         int numberOfIndexes;
         do {
@@ -312,7 +318,10 @@ public class Admin implements Serializable {
             }
             numberOfIndexes = sc.nextInt();
             sc.nextLine();
-        } while ((numberOfIndexes <= 0) || (numberOfIndexes > 10)); // TODO show a warning message if input not within limits
+            if ((numberOfIndexes <= 0) || (numberOfIndexes > 10)){
+                System.out.println("Invalid, please enter values from 1 to 4 only");
+            }
+        } while ((numberOfIndexes <= 0) || (numberOfIndexes > 10)); // show a warning message if input not within limits
 
 //        Index[] index = new Index[numberOfIndexes];
 
