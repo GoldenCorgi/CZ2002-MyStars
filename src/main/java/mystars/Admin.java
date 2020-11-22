@@ -63,6 +63,14 @@ public class Admin implements Serializable {
         }};
         return (nationalityTypes.contains(nationality.toLowerCase()));
     }
+
+    /**
+     * Function to change time inputs to HHmm format
+     *
+     * @param sc
+     * @param display
+     * @return
+     */
     private String getHHmmFormat(Scanner sc, String display) {
         boolean x = true;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HHmm");
@@ -89,6 +97,13 @@ public class Admin implements Serializable {
         // true if exists
         return (StudentList.get(email) != null);
     }
+
+    /**
+     * Function to verify the format of email input
+     *
+     * @param email
+     * @return
+     */
     static boolean isEmailValid(String email) {
         String regex = "^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$";
         return email.matches(regex);
