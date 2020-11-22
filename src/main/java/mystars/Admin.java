@@ -101,10 +101,10 @@ public class Admin implements Serializable {
      * @param email
      * @return
      */
-    static boolean isEmailValid(String email) {
-        String regex = "^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$";
-        return email.matches(regex);
-    }
+//    static boolean isEmailValid(String email) {
+//        String regex = "^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$";
+//        return email.matches(regex);
+//    }
     /**
      * Function to check if student's matric no already exists
      *
@@ -116,6 +116,16 @@ public class Admin implements Serializable {
         return (StudentList.get(matricNo) != null);
     }
 
+    /**
+     * Function to verify the format of matricNo input
+     *
+     * @param matricNo
+     * @return
+     */
+    static boolean verifyMatricNoFormat(String matricNo) {
+        String regex = "(u)(19)[0-9]{5}[a-z]{1}";
+        return matricNo.toLowerCase().matches(regex);
+    }
     /**
      * Function to verify the school entered
      *
@@ -161,6 +171,10 @@ public class Admin implements Serializable {
         return true;
     }
 
+    static boolean verifyCourseCodeFormat(String courseCode) {
+        String regex = "(cz)[1-4]{1}[0-1]{1}[0-9]{2}";
+        return courseCode.toLowerCase().matches(regex);
+    }
     /**
      * Function to verify if course index exists
      *
@@ -190,7 +204,9 @@ public class Admin implements Serializable {
             courseCode = sc.nextLine();
             if (verifyCourseCode(courseCode))
                 System.out.println("Course code already exists, try again!");
-        } while (verifyCourseCode(courseCode));
+            else if (!verifyCourseCodeFormat(courseCode))
+                System.out.println("Invalid course code format, try again!");
+        } while (verifyCourseCode(courseCode) || !verifyCourseCodeFormat(courseCode));
 
         String courseSchool;
         // verify course school
@@ -616,10 +632,11 @@ public class Admin implements Serializable {
                         // True = already exists
                         System.out.println("Email already exists!");
                         break;
-                    } else if (!isEmailValid(studentEmail)){
-                        System.out.println("Invalid email format/input!");
-                        break;
                     }
+//                    else if (!isEmailValid(studentEmail)){
+//                        System.out.println("Invalid email format/input!");
+//                        break;
+//                    }
                     System.out.println("Enter studentName: ");
                     String studentName = sc.nextLine();
                     System.out.println("Enter matricNo: ");
@@ -629,8 +646,11 @@ public class Admin implements Serializable {
                         // True = already exists
                         System.out.println("matricNo already exists!");
                         break;
+                    } else if (!verifyMatricNoFormat(matricNo)){
+                        System.out.println("Invalid Matric No Format!");
+                        break;
                     }
-                    System.out.println("Enter studentGender: ");
+                    System.out.println("Enter studentGender: (Male/Female)");
                     String studentGender = sc.nextLine().toLowerCase();
                     // verify gender
                     if (!verifyGender(studentGender)){
@@ -682,8 +702,11 @@ public class Admin implements Serializable {
                         // True = already exists
                         System.out.println("matricNo already exists!");
                         break;
+                    } else if (!verifyMatricNoFormat(matricNo1)){
+                        System.out.println("Invalid Matric No Format!");
+                        break;
                     }
-                    System.out.println("Enter studentGender: ");
+                    System.out.println("Enter studentGender: (Male/Female)");
                     String studentGender1 = sc.nextLine().toLowerCase();
                     // verify gender
                     if (!verifyGender(studentGender1)){
