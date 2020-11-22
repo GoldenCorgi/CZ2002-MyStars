@@ -65,22 +65,22 @@ public class UserList {
     }
 
 
-    /**
-     * Checks if the Password entered by the user already exists in the user list.
-     *
-     * @param username The username entered by the user.
-     * @return <code>true</code> if username already exists; <code>false</code> otherwise.
-     */
-    public boolean isExistingUser(String username) {
-        return getExistingUser(username) != null;
-    }
+//    /**
+//     * Checks if the Password entered by the user already exists in the user list.
+//     *
+//     * @param username The username entered by the user.
+//     * @return <code>true</code> if username already exists; <code>false</code> otherwise.
+//     */
+//    public boolean isExistingUser(String username) {
+//        return getExistingUser(username) != null;
+//    }
 
     /**
      * Finds username entered by the user from the user list.
-     * Returns -1 if not found.
+     * Returns null if not found.
      *
      * @param username The username entered by the user.
-     * @return index of the user with the Password; -1 otherwise.
+     * @return User of the user with the Password; null otherwise.
      */
     public User getExistingUser(String username) {
         assert username != null && !username.equals("") : "Cannot get user of null username";
@@ -90,7 +90,6 @@ public class UserList {
                 return getUserUsingIndex(i);
             }
         }
-
         return null;
     }
 
@@ -98,11 +97,11 @@ public class UserList {
      * Finds username entered by the user from the user list.
      * Returns 2 if accurate.
      * Returns 1 if user found but role mismatch
-     * Return 0 if user not found
+     * Returns 0 if user not found
      *
      * @param username The username entered by the user.
      * @param role     The role entered by the user.
-     * @return index of the user with the Password; -1 otherwise.
+     * @return 2 if accurate, 1 if user found but role mismatch, 0 if user not found.
      */
     public int ValidateUser(String username, String role) {
         assert username != null && !username.equals("") : "Cannot get user of null username";

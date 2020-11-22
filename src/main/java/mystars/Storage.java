@@ -289,7 +289,6 @@ public class Storage {
                 }
             } catch (IOException e) {
                 System.out.println("Error loading user file.");
-                //            logger.log(Level.INFO, "No users found. Creating new users list.");
                 System.out.println("Creating new admin user defaults");
                 System.out.println("Creating new student user defaults");
                 return defaultUsers;

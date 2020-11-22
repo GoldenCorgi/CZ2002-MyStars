@@ -36,8 +36,6 @@ public class Main {
                 System.out.println("Welcome Admin - " + user.getName());
                 Admin admin = new Admin(user.getName());
                 admin.runLoop(login,sc);
-            } else {
-                System.out.println("Unknown Role");
             }
         }
 
