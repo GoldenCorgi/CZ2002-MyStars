@@ -92,7 +92,7 @@ public class Login {
             int matched = users.ValidateUser(username, roleName);
 
             if (matched == 2) {
-                System.out.println("Second user username verified - " + username);
+                System.out.println("Second user verified - " + username);
                 validated = users.validatePassword(username, password);
                 if (!validated) {
                     System.out.println("Second user password not verified - Incorrect Password! Please retry your login.\t");

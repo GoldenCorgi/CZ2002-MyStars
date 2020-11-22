@@ -47,6 +47,12 @@ public class Admin implements Serializable {
         return (genderTypes.contains(gender.toLowerCase()));
     }
 
+    /**
+     * Function to verify nationality
+     *
+     * @param nationality
+     * @return
+     */
     public static Boolean verifyNationality(String nationality) {
         final Set<String> nationalityTypes = new HashSet<>() {{
             add("singaporean");
@@ -73,7 +79,6 @@ public class Admin implements Serializable {
         }
         return value;
     }
-
     /**
      * Function to check if student's email exists.
      *
@@ -84,9 +89,36 @@ public class Admin implements Serializable {
         // true if exists
         return (StudentList.get(email) != null);
     }
+    static boolean isEmailValid(String email) {
+        String regex = "^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$";
+        return email.matches(regex);
+    }
+    /**
+     * Function to check if student's matric no already exists
+     *
+     * @param matricNo
+     * @return
+     */
     public Boolean checkMatricNoExists(String matricNo) {
         // true if exists
         return (StudentList.get(matricNo) != null);
+    }
+
+    /**
+     * Function to verify the school entered
+     *
+     * @param school
+     * @return
+     */
+    public static Boolean verifyCourseSchool(String school) {
+        final Set<String> courseSchool = new HashSet<>() {{
+            add("SCSE");
+            add("NBS");
+            add("EEE");
+            add("CEE");
+            add("SPMS");
+        }};
+        return (courseSchool.contains(school.toUpperCase()));
     }
 
     public void editStudentAccessPeriod() {
@@ -104,6 +136,12 @@ public class Admin implements Serializable {
         Storage.saveStudents(StudentList);
     }
 
+    /**
+     * Function to verify if course code exists
+     *
+     * @param courseCode
+     * @return
+     */
     public boolean verifyCourseCode(String courseCode) {
         if (CourseList.get(courseCode) == null) {
             System.out.println("Rejected - CourseCode does not exist");
@@ -112,6 +150,13 @@ public class Admin implements Serializable {
         return true;
     }
 
+    /**
+     * Function to verify if course index exists
+     *
+     * @param courseCode
+     * @param courseIndex
+     * @return
+     */
     public boolean verifyCourseIndex(String courseCode, String courseIndex) {
         if (CourseList.get(courseCode).getCourseIndexByIndexName(courseIndex) == null) {
             System.out.println("Rejected - courseIndex does not exist in CourseCode");
@@ -127,10 +172,24 @@ public class Admin implements Serializable {
     public void addCourse(Scanner sc) {
         System.out.println("Enter Course Name:");
         String courseName = sc.nextLine();
-        System.out.println("Enter Course Code:");
-        String courseCode = sc.nextLine();
-        System.out.println("Enter Course School:");
-        String courseSchool = sc.nextLine();
+        String courseCode;
+        // verify course code does not already exist
+        do {
+            System.out.println("Enter Course Code:");
+            courseCode = sc.nextLine();
+            if (verifyCourseCode(courseCode))
+                System.out.println("Course code already exists, try again!");
+        } while (verifyCourseCode(courseCode));
+
+        String courseSchool;
+        // verify course school
+        do {
+            System.out.println("Enter Course School:");
+            courseSchool = sc.nextLine();
+            if (!verifyCourseSchool(courseSchool))
+                System.out.println("Invalid Course School, try again!");
+        } while (!verifyCourseSchool(courseSchool));
+
 //        System.out.println("Enter AU:");
 //        int AcademicUnits = sc.nextInt();
 //        // Remove non-integer inputs due to buggy java stuff lmao https://stackoverflow.com/questions/27717503/why-does-my-scanner-repeat
@@ -328,21 +387,37 @@ public class Admin implements Serializable {
             }
         } while ((courseVacancies <= 50) || (courseVacancies > 500)); // show a warning message if input not within limits
 
-        int numberOfIndexes;
+        int choice;
         do {
-            System.out.println("Enter Number of Indexes:");
+            System.out.println("Enter Course Components:");
+            System.out.println("1. Lecture     2. Lecture and Tutorial     3. Lecture, Tutorial and Lab");
             while (!sc.hasNextInt()) {
                 System.out.println("Please enter an integer!");
-                System.out.println("Enter Number of Indexes:");
+                System.out.println("Enter Course Vacancies:");
                 sc.next();
             }
-            numberOfIndexes = sc.nextInt();
+            choice = sc.nextInt();
             sc.nextLine();
-            if ((numberOfIndexes <= 0) || (numberOfIndexes > 10)){
-                System.out.println("Invalid, please enter values from 1 to 4 only");
-            }
-        } while ((numberOfIndexes <= 0) || (numberOfIndexes > 10)); // show a warning message if input not within limits
+        } while ((choice <= 0) || (choice >= 4));
 
+        int numberOfIndexes;
+        if (choice==1)
+            numberOfIndexes=1;
+        else{
+            do {
+                System.out.println("Enter Number of Indexes:");
+                while (!sc.hasNextInt()) {
+                    System.out.println("Please enter an integer!");
+                    System.out.println("Enter Number of Indexes:");
+                    sc.next();
+                }
+                numberOfIndexes = sc.nextInt();
+                sc.nextLine();
+                if ((numberOfIndexes <= 0) || (numberOfIndexes > 10)){
+                    System.out.println("Invalid, please enter values from 1 to 4 only");
+                }
+            } while ((numberOfIndexes <= 0) || (numberOfIndexes > 10)); // show a warning message if input not within limits
+        }
 //        Index[] index = new Index[numberOfIndexes];
 
         Course course = new Course(courseName, courseCode, courseSchool, AcademicUnits);
@@ -353,18 +428,6 @@ public class Admin implements Serializable {
             CourseIndex courseIndex = new CourseIndex(indexName, courseVacancies);
             course.addCourseIndex(courseIndex);
 
-            int choice;
-            do {
-                System.out.println("Enter Course Components:");
-                System.out.println("1. Lecture     2. Lecture and Tutorial     3. Lecture, Tutorial and Lab");
-                while (!sc.hasNextInt()) {
-                    System.out.println("Please enter an integer!");
-                    System.out.println("Enter Course Vacancies:");
-                    sc.next();
-                }
-                choice = sc.nextInt();
-                sc.nextLine();
-            } while ((choice <= 0) || (choice >= 4));
 
             switch (choice) {
                 case 1:
@@ -474,7 +537,7 @@ public class Admin implements Serializable {
     }
 
     /**
-     * runLoop to run the student function
+     * runLoop to run the admin function
      *
      * @param login Login details
      * @param sc    Scanner for input
@@ -536,6 +599,9 @@ public class Admin implements Serializable {
                         // True = already exists
                         System.out.println("Email already exists!");
                         break;
+                    } else if (!isEmailValid(studentEmail)){
+                        System.out.println("Invalid email format/input!");
+                        break;
                     }
                     System.out.println("Enter studentName: ");
                     String studentName = sc.nextLine();
@@ -594,7 +660,7 @@ public class Admin implements Serializable {
                     System.out.println("\n(5) Check Vacancies for a Course Index");
                     System.out.println("Enter courseCode: ");
                     String courseCode = sc.nextLine();
-                    // verify coursecode --- copy over from studentapp
+                    // verify coursecode
                     if (!verifyCourseCode(courseCode)) {
                         break;
                     }

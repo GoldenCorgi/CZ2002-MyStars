@@ -109,10 +109,22 @@ public class Storage {
         course4.addCourseIndex(new CourseIndex("10014", 10));
         course4.addCourseIndex(new CourseIndex("10015", 10));
         DefaultCourse.put(course4.getCourseCode(), course4);
+        Course course5 = new Course("Software Engineering", "CZ2006", "SCSE", 4);
+        course5.addCourseIndex(new CourseIndex("12011", 10));
+        course5.addCourseIndex(new CourseIndex("12012", 10));
+        DefaultCourse.put(course5.getCourseCode(), course5);
+        Course course6 = new Course("Operating Systems", "CZ2005", "SCSE", 4);
+        course6.addCourseIndex(new CourseIndex("11014", 10));
+        course6.addCourseIndex(new CourseIndex("11015", 10));
+        DefaultCourse.put(course6.getCourseCode(), course6);
+        Course course7 = new Course("Introduction to Databases", "CZ2007", "SCSE", 4);
+        course7.addCourseIndex(new CourseIndex("10022", 10));
+        course7.addCourseIndex(new CourseIndex("10023", 10));
+        DefaultCourse.put(course7.getCourseCode(), course7);
 
         if (!Files.exists(path)) {
             System.out.println("No previous data for CourseList");
-            System.out.println("Creating 4 default courses: CZ2001, CZ2002, CZ2003, CZ2004");
+            System.out.println("Creating 7 default courses: CZ2001, CZ2002, CZ2003, CZ2004, CZ2005, CZ2006, CZ2007");
             return DefaultCourse;
         }
 
