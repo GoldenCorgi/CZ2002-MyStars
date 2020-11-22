@@ -80,5 +80,12 @@ public class Course implements Serializable {
         }
     }
 
+    public void refreshCourseWaitList() {
+        // https://stackoverflow.com/questions/1066589/iterate-through-a-hashmap
+        for (Map.Entry<String, CourseIndex> entry : this.courseIndex.entrySet()) {
+            CourseIndex CourseIndexName = entry.getValue();
+            CourseIndexName.refreshWaitList();
+        }
+    }
 
 }

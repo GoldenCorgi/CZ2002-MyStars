@@ -1,5 +1,7 @@
 package mystars;
 
+import mystars.login.Login;
+import mystars.login.UserList;
 import org.junit.jupiter.api.Test;
 
 import java.util.Scanner;
@@ -25,6 +27,36 @@ class MainTest {
                 "" +
                 "\n3";
         Main.runLoop(new Scanner(inputs));
+    }
+
+    @Test
+    void MakeCourseOverflowWaitList() {
+        Admin ad = new Admin("test");
+        ad.addCourse(new Scanner("CourseName\nCZ8888\nSCSE\n1" +
+                "\n1" + // Vacancies
+                "\n3" + // Type of coursecomponent (lecture/tut/lab)
+                "\n1" + // number of indexes
+                "\n54345" +
+                "\nVenue\n1000\n1100\nMon" +
+                "\nVenue\n1000\n1100\nMon" +
+                "\nVenue\n1000\n1100\nMon" ));
+
+        StudentApp f = new StudentApp("student");
+        String inputs = "" +
+                "\n1\nCZ8888\n54345" +
+                "\n7";
+        f.runLoop(new Login(new UserList()),new Scanner(inputs));
+        StudentApp f2 = new StudentApp("timh0011");
+        String inputs2 = "" +
+                "\n1\nCZ8888\n54345" +
+                "\n7";
+        f2.runLoop(new Login(Storage.loadUsers()),new Scanner(inputs2));
+        inputs = "" +
+                "\n2\nCZ8888" +
+                "\n7";
+        f.runLoop(new Login(new UserList()),new Scanner(inputs));
+
+
     }
 
 }

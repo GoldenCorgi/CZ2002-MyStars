@@ -21,6 +21,7 @@ class StudentAppTest {
         f.verifyStudentHasCourseCode("CZ2001");
         String inputs = "8\n3" +
                 "\n1\nCZ2001\n10027" +
+                "\n3" +
                 "\n2\nCZ2001" +
                 "\n3" +
                 "\n4\nCZ2001\n10027" +
@@ -66,7 +67,6 @@ class StudentAppTest {
                 "\nCZ2003" +
                 "\n7";
         f2.runLoop(new Login(Storage.loadUsers()),new Scanner(inputs2));
-
     }
 
     @Test

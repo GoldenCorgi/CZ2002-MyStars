@@ -74,7 +74,7 @@ public class StudentApp {
                 String CourseCode = entry.getKey();
                 String courseIndex = entry.getValue();
                 CourseIndex CI = CourseList.get(CourseCode).getCourseIndexByIndexName(courseIndex);
-                String registration = CI.studentInWhichList(student);
+                String registration = CI.studentInWhichList(student.getStudentEmail());
                 System.out.println("  CourseCode: " + CourseCode + " || Course Index: " + courseIndex + " || " + registration);
             }
         } else {
@@ -317,6 +317,13 @@ public class StudentApp {
                     }
                     dropCourse(courseCode);
                     System.out.println("Course successfully dropped");
+
+                    // Update all waitlists
+                    // https://stackoverflow.com/questions/1066589/iterate-through-a-hashmap
+                    for (Map.Entry<String, Course> entry : CourseList.entrySet()) {
+                        Course courses = entry.getValue();
+                        courses.refreshCourseWaitList();
+                    }
 
                     break;
                 case "3":

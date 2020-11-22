@@ -9,14 +9,20 @@ import java.util.Scanner;
 class AdminTest {
 
     @Test
-    void verifyGender() {
+    void CheckEveryFunction() {
         Admin ad = new Admin("test");
         ad.checkStudentEmailExists("student");
         ad.addStudent( new Student("U1921001A", "Tim Ho", "timh0011", "Male", "Singaporean"));
         ad.checkVacancies("CZ2001","10027");
         ad.printStudentListByIndex("CZ2001","10027");
         ad.printStudentListByCourse("CZ2001");
-        ad.addCourse(new Scanner("hey\nhey\nSCSE\n1\n60\n1\n1\n1\n1000\n1100\n1\n1\n1"));
+        ad.addCourse(new Scanner("hey\nhey\nSCSE\n1\n60" +
+                "\n3" + // Type of coursecomponent (lecture/tut/lab)
+                "\n1" + // number of indexes
+                "\nIndexName" +
+                "\nVenue\n1000\n1100\nMon" +
+                "\nVenue\n1000\n1100\nMon" +
+                "\nVenue\n1000\n1100\nMon" ));
         ad.updateCourses(new Scanner("hey\nhey\nSCSE\n1\n60\n1\n1\n1\n1000\n1200\n1\n1\n1"));
     }
 

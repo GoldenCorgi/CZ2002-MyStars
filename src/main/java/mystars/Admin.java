@@ -9,10 +9,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Scanner;
-import java.util.Set;
+import java.util.*;
 
 import static mystars.Storage.*;
 
@@ -784,6 +781,8 @@ public class Admin implements Serializable {
                     System.out.println("Unknown Input Choice");
 
             }
+
+
             saveCourses(CourseList);
             saveStudents(StudentList);
         } while (!choice.equals("10"));

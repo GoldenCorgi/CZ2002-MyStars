@@ -5,7 +5,6 @@ import mystars.Student;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.List;
 
 public class CourseIndex implements Serializable {
     private static final long serialVersionUID = 42L;
@@ -87,22 +86,49 @@ public class CourseIndex implements Serializable {
         }
     }
     public void dropStudent(Student student) {
-        waitListStudents.remove(student);
-        registeredStudents.remove(student);
+        String email = student.getStudentEmail();
+        Student tmpStudent = null;
+        for (Student num1 : waitListStudents) {
+            if (email.equals(num1.getStudentEmail())) {
+                tmpStudent = num1;
+                break;
+
+            }
+        }
+        if (tmpStudent != null) {waitListStudents.remove(tmpStudent);}
+        tmpStudent = null;
+        for (Student num2 : registeredStudents) {
+            if (email.equals(num2.getStudentEmail())) {
+                tmpStudent = num2;
+                break;
+            }
+        }
+        if (tmpStudent != null) {registeredStudents.remove(tmpStudent);}
+
+//        waitListStudents.remove(student);
+//        registeredStudents.remove(student);
     }
 
     public void refreshWaitList() {
         while (!isFull() && (waitListStudents.size() > 0)) {
             Student studentOnWaitList = waitListStudents.remove(0);
             registeredStudents.add(studentOnWaitList);
+            System.out.println("Updated Waitlist for " + this.indexName);
             // TODO notify students
         }
     }
 
-    public String studentInWhichList(Student student) {
-        if (waitListStudents.contains(student)) {return "WaitList";}
-        else if (registeredStudents.contains(student)) {return "Registered";}
-        else return "Not Registered";
+    public String studentInWhichList(String studentEmail) {
+        for (Student num1 : waitListStudents) {
+            if (studentEmail.equals(num1.getStudentEmail())) {
+                return "WaitList";
+            }
+        }
+
+        for (Student num1 : registeredStudents) {
+            if (studentEmail.equals(num1.getStudentEmail())) {return "Registered";}
+        }
+        return "Not Registered";
     }
 
     /**
@@ -120,12 +146,12 @@ public class CourseIndex implements Serializable {
     }
 
 
-    /**
-     * Function to get added students in a list.
-     */
-    public List<Student> getAddedStudents() {
-        return this.registeredStudents;
-    }
+//    /**
+//     * Function to get added students in a list.
+//     */
+//    public List<Student> getAddedStudents() {
+//        return this.registeredStudents;
+//    }
 
     public void printRegisteredStudent() {
         for (int i = 0; i < this.registeredStudents.size(); i++) {
