@@ -355,6 +355,7 @@ public class Admin implements Serializable {
         }
     }
 
+
     /**
      * Function to update course.
      *
@@ -562,13 +563,14 @@ public class Admin implements Serializable {
         String choice;
         final String Choices = "\n(1) Edit Student Access Period" +
                 "\n(2) Add Student" +
-                "\n(3) Add Course" +
-                "\n(4) Update Course" +
-                "\n(5) Check Vacancies for a Course Index" +
-                "\n(6) Print Student List by Index Number" +
-                "\n(7) Print Student List by Course" +
-                "\n(8) Print Entire Student List" +
-                "\n(9) Exit";
+                "\n(3) Update Student" +
+                "\n(4) Add Course" +
+                "\n(5) Update Course" +
+                "\n(6) Check Vacancies for a Course Index" +
+                "\n(7) Print Student List by Index Number" +
+                "\n(8) Print Student List by Course" +
+                "\n(9) Print Entire Student List" +
+                "\n(10) Exit";
         do {
             System.out.println(Choices);
             System.out.println("Enter the number of your choice: ");
@@ -659,20 +661,65 @@ public class Admin implements Serializable {
                     }
                     break;
                 case "3":
-                    System.out.println("\n(3) Add Course");
+                    // Done
+                    System.out.println("\n(3) Update Student");
+                    System.out.println("Enter studentEmail: ");
+                    String studentEmail1 = sc.nextLine();
+                    if (!checkStudentEmailExists(studentEmail1)) {
+                        // True = already exists
+                        System.out.println("Student does not exist!");
+                        break;
+                    } //else if (!isEmailValid(studentEmail1)){
+                        //System.out.println("Invalid email format/input!");
+                        //break;
+                    //}
+                    System.out.println("Enter studentName: ");
+                    String studentName1 = sc.nextLine();
+                    System.out.println("Enter matricNo: ");
+                    String matricNo1 = sc.nextLine();
+                    // verify matric does not duplicate
+                    if (checkMatricNoExists(matricNo1)) {
+                        // True = already exists
+                        System.out.println("matricNo already exists!");
+                        break;
+                    }
+                    System.out.println("Enter studentGender: ");
+                    String studentGender1 = sc.nextLine().toLowerCase();
+                    // verify gender
+                    if (!verifyGender(studentGender1)){
+//                            // false = incorrect input
+                        System.out.println("Gender incorrect format (Male/Female)!");
+                        break;
+                    }
+                    System.out.println("Enter studentNationality: ");
+                    String studentNationality1 = sc.nextLine();
+                    // verify nationality
+                    if (!verifyNationality(studentNationality1)){
+                        System.out.println("Nationality incorrect!");
+                        break;
+                    }
+
+                    StudentList.remove(studentEmail1);
+                    Student updatedStudent = new Student(matricNo1, studentName1, studentEmail1, studentGender1, studentNationality1);
+                    StudentList.put(studentEmail1, updatedStudent);
+                    System.out.println("Student information updated.");
+                    break;
+
+                case "4":
+                    System.out.println("\n(4) Add Course");
                     // Done
                     addCourse(sc);
                     System.out.println("Course Added");
                     break;
-                case "4":
-                    System.out.println("\n(4) Update Course");
+                case "5":
+                    System.out.println("\n(5) Update Course");
 
                     updateCourses(sc);
                     System.out.println("Program terminating..");
                     break;
-                case "5":
+                case "6":
                     // Done
-                    System.out.println("\n(5) Check Vacancies for a Course Index");
+                    System.out.println("\n(6) Check Vacancies for a Course Index");
                     System.out.println("Enter courseCode: ");
                     String courseCode = sc.nextLine();
                     // verify coursecode
@@ -688,9 +735,9 @@ public class Admin implements Serializable {
                     int vacancies = checkVacancies(courseCode, courseIndex);
                     System.out.println("Course Index has " + vacancies + " Vacancies");
                     break;
-                case "6":
+                case "7":
                     // Done
-                    System.out.println("\n(6) Print Student List by Index Number");
+                    System.out.println("\n(7) Print Student List by Index Number");
                     System.out.println("Enter courseCode: ");
                     courseCode = sc.nextLine();
                     // verify coursecode
@@ -705,9 +752,9 @@ public class Admin implements Serializable {
                     }
                     printStudentListByIndex(courseCode, courseIndex);
                     break;
-                case "7":
+                case "8":
                     // Done
-                    System.out.println("\n(7) Print Student List by Course");
+                    System.out.println("\n(8) Print Student List by Course");
                     System.out.println("Enter courseCode: ");
                     courseCode = sc.nextLine();
                     // verify coursecode
@@ -716,7 +763,7 @@ public class Admin implements Serializable {
                     }
                     printStudentListByCourse(courseCode);
                     break;
-                case "8":
+                case "9":
                     System.out.println("Current Student List:");
                     for (String name: StudentList.keySet()){
                         System.out.println("Name: "+StudentList.get(name).getStudentName());
@@ -727,7 +774,7 @@ public class Admin implements Serializable {
                         System.out.println();
                     }
                     break;
-                case "9":
+                case "10":
                     System.out.println("Program terminating..");
                     break;
                 default:
@@ -736,7 +783,7 @@ public class Admin implements Serializable {
             }
             saveCourses(CourseList);
             saveStudents(StudentList);
-        } while (!choice.equals("9"));
+        } while (!choice.equals("10"));
 
     }
 }
