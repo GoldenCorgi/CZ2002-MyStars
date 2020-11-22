@@ -2,7 +2,6 @@ package mystars;
 
 import java.io.Serializable;
 import java.util.HashMap;
-import java.util.Map;
 
 // in the main function, create another student class for the peer, to swap index for peer
 
@@ -137,23 +136,23 @@ public class Student implements Serializable {
         return this.studentCourses.get(CourseCode);
     }
 
-    /**
-     * Print all registered student courses from studentCourses hashmap if hashmap is not empty
-     * Print "Student has no courses registered!" is not courses registered
-     */
-
-    public void printCourse() {
-        // https://stackoverflow.com/questions/1066589/iterate-through-a-hashmap
-        if (this.studentCourses.size() != 0) {
-            for (Map.Entry<String, String> entry : this.studentCourses.entrySet()) {
-                String CourseCode = entry.getKey();
-                String CourseIndex = entry.getValue();
-                System.out.println("  CourseCode: " + CourseCode + " || Course Index: " + CourseIndex);
-            }
-        } else {
-            System.out.println("Student has no courses registered!");
-        }
-    }
+//    /**
+//     * Print all registered student courses from studentCourses hashmap if hashmap is not empty
+//     * Print "Student has no courses registered!" is not courses registered
+//     * !! moved to StudentApp
+//     */
+//    public void printCourse() {
+//        // https://stackoverflow.com/questions/1066589/iterate-through-a-hashmap
+//        if (this.studentCourses.size() != 0) {
+//            for (Map.Entry<String, String> entry : this.studentCourses.entrySet()) {
+//                String CourseCode = entry.getKey();
+//                String CourseIndex = entry.getValue();
+//                System.out.println("  CourseCode: " + CourseCode + " || Course Index: " + CourseIndex);
+//            }
+//        } else {
+//            System.out.println("Student has no courses registered!");
+//        }
+//    }
 
 
     /**
