@@ -44,10 +44,10 @@ public class CourseComponent implements Serializable {
         return this.day;
     }
 
-    /**
-     * Function to get name of component.
-     */
-    public String getName() {
-        return this.componentName;
-    }
+//    /**
+//     * Function to get name of component.
+//     */
+//    public String getName() {
+//        return this.componentName;
+//    }
 }

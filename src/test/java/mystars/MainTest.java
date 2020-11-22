@@ -49,6 +49,8 @@ class MainTest {
         StudentApp f2 = new StudentApp("timh0011");
         String inputs2 = "" +
                 "\n1\nCZ4099\n54345" +
+                "\n2\nCZ4099" +
+                "\n1\nCZ4099\n54345" +
                 "\n7";
         f2.runLoop(new Login(Storage.loadUsers()),new Scanner(inputs2));
         inputs = "" +

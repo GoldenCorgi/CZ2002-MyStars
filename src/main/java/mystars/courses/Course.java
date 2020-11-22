@@ -44,18 +44,18 @@ public class Course implements Serializable {
     /**
      * Function to get courseName.
      */
-    public String getCourseName() {
-        return this.courseName;
-    }
+//    public String getCourseName() {
+//        return this.courseName;
+//    }
+//    public String getCourseSchool() {
+//        return this.courseSchool;
+//    }
 
 
     public int getCourseAcademicUnit() {
         return this.academicUnit;
     }
 
-    public String getCourseSchool() {
-        return this.courseSchool;
-    }
 
     /**
      * Function to get courseName.
