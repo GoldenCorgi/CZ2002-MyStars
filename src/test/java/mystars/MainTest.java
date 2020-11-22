@@ -42,19 +42,19 @@ class MainTest {
                 "\nVenue\n1000\n1100\nMon" ));
 
         StudentApp f = new StudentApp("student");
-        String inputs = "" +
-                "\n1\nCZ4099\n54345" +
+        String inputs = "1" +
+                "\nCZ4099\n54345" +
                 "\n7";
         f.runLoop(new Login(new UserList()),new Scanner(inputs));
         StudentApp f2 = new StudentApp("timh0011");
-        String inputs2 = "" +
-                "\n1\nCZ4099\n54345" +
+        String inputs2 = "1" +
+                "\nCZ4099\n54345" +
                 "\n2\nCZ4099" +
                 "\n1\nCZ4099\n54345" +
                 "\n7";
         f2.runLoop(new Login(Storage.loadUsers()),new Scanner(inputs2));
-        inputs = "" +
-                "\n2\nCZ4099" +
+        inputs = "2" +
+                "\nCZ4099" +
                 "\n7";
         f.runLoop(new Login(new UserList()),new Scanner(inputs));
 

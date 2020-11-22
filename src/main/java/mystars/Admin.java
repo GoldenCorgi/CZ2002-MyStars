@@ -369,6 +369,7 @@ public class Admin implements Serializable {
             }
 
         }
+        saveCourses(CourseList);
     }
 
 
