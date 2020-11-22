@@ -85,32 +85,28 @@ public class Login {
         storage.saveUsers(users);
     }
 
-
-    public User getSwappingStudent() {
-        Scanner sc = new Scanner(System.in);
-        String roleName = "Student", username;
+    public User getSwappingStudent(String username, String password) {
+        String roleName = "Student";
         boolean validated = false;
         do {
-            username = inputUsername(sc);
             int matched = users.ValidateUser(username, roleName);
 
             if (matched == 2) {
-                System.out.println("Welcome back - " + username);
-                String password = inputPassword(sc);
+                System.out.println("Second user verified - " + username);
                 validated = users.validatePassword(username, password);
                 if (!validated) {
-                    System.out.println("Incorrect Password! Please retry your login.\t");
+                    System.out.println("Second user not verified - Incorrect Password! Please retry your login.\t");
                 }
 
             } else if (matched == 0) {
-                System.out.println("You are not registered - " + username);
+                System.out.println("Second user not verified - You are not registered - " + username);
             } else {
-                System.out.println("User - " + username + " - is not allowed to log in as a " + roleName);
+                System.out.println("Second user not verified - User - " + username + " - is not allowed to log in as a " + roleName);
             }
         } while (!validated);
-//        sc.close();
         return users.getExistingUser(username);
     }
+
 
     public User run(Scanner sc) throws StarsException {
 //        Scanner sc = new Scanner(System.in);
