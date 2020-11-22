@@ -115,17 +115,35 @@ public class Admin implements Serializable {
 //        // Remove non-integer inputs due to buggy java stuff lmao https://stackoverflow.com/questions/27717503/why-does-my-scanner-repeat
 //        sc.nextLine();
 
-        int numberOfIndexes;
+        int choice;
         do {
-            System.out.println("Enter Number of Indexes:");
+            System.out.println("Enter Course Components:");
+            System.out.println("1. Lecture     2. Lecture and Tutorial     3. Lecture, Tutorial and Lab");
             while(!sc.hasNextInt()) {
                 System.out.println("Please enter an integer!");
-                System.out.println("Enter Number of Indexes:");
+                System.out.println("Enter Course Vacancies:");
                 sc.next();
             }
-            numberOfIndexes = sc.nextInt();
+            choice = sc.nextInt();
             sc.nextLine();
-        } while ((numberOfIndexes <= 0) || (numberOfIndexes > 10));
+        } while ((choice <= 0) || (choice >= 4));
+
+        int numberOfIndexes;
+        if (choice==1){
+            numberOfIndexes = 1;
+        } else {
+            do {
+                System.out.println("Enter Number of Indexes:");
+                while(!sc.hasNextInt()) {
+                    System.out.println("Please enter an integer!");
+                    System.out.println("Enter Number of Indexes:");
+                    sc.next();
+                }
+                numberOfIndexes = sc.nextInt();
+                sc.nextLine();
+            } while ((numberOfIndexes <= 0) || (numberOfIndexes > 10));
+        }
+
 //        System.out.println("Enter Number of Indexes:");
 //        int numberOfIndexes = sc.nextInt();
 //        // Remove non-integer inputs due to buggy java stuff lmao https://stackoverflow.com/questions/27717503/why-does-my-scanner-repeat
@@ -140,20 +158,6 @@ public class Admin implements Serializable {
             String indexName = sc.nextLine();
             CourseIndex courseIndex = new CourseIndex(indexName, courseVacancies);
             course.addCourseIndex(courseIndex);
-
-            int choice;
-            do {
-                System.out.println("Enter Course Components:");
-                System.out.println("1. Lecture     2. Lecture and Tutorial     3. Lecture, Tutorial and Lab");
-                while(!sc.hasNextInt()) {
-                    System.out.println("Please enter an integer!");
-                    System.out.println("Enter Course Vacancies:");
-                    sc.next();
-                }
-                choice = sc.nextInt();
-                sc.nextLine();
-            } while ((choice <= 0) || (choice >= 4));
-
 
             switch (choice) {
                 case 1:
