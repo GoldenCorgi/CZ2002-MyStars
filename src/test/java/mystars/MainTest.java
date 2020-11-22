@@ -17,7 +17,7 @@ class MainTest {
                 "\n1\nstudent\nWrongPassword" +
                 "\n2\nadmin\nWrongPassword" +
                 "\n1\nstudent\n1234\n7" +
-                "\n2\nadmin\n1234\n9" +
+                "\n2\nadmin\n1234\n10" +
                 "" +
                 "" +
                 "" +
