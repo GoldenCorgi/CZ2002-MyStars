@@ -10,7 +10,7 @@ class LoginTest {
 
     @Test
     void run() throws StarsException {
-        Login ad = new Login(Storage.loadUsers(),new Storage("data"));
+        Login ad = new Login(Storage.loadUsers());
         String inputs = "1\nstudent\n1234";
         ad.run(new Scanner(inputs));
         inputs = "2\nadmin\n1234";

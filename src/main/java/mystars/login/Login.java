@@ -9,19 +9,16 @@ import java.util.Scanner;
 
 public class Login {
     UserList users;
-    Storage storage;
 
     /**
      * Constructor to create Login object based on parameters given.
      * Creates Login with UserList object users and Storage object storage
      *
      * @param users   The UserList object of a list of users
-     * @param storage The Storage object for storage
      */
 
-    public Login(UserList users, Storage storage) {
+    public Login(UserList users) {
         this.users = users;
-        this.storage = storage;
     }
 
     public String inputPassword(Scanner sc) {
@@ -82,7 +79,7 @@ public class Login {
         }
 
         users.addNewUser(username, password, "student");
-        storage.saveUsers(users);
+        Storage.saveUsers(users);
     }
 
     public User getSwappingStudent(String username, String password) {
@@ -150,7 +147,7 @@ public class Login {
                 System.out.println("User - " + username + " - is not allowed to log in as a " + roleName);
             }
         } while (!validated);
-        storage.saveUsers(users);
+        Storage.saveUsers(users);
 //        sc.close();
         return users.getExistingUser(username);
         //char[] pw = console.readPassword("Enter password: ");
