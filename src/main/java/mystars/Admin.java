@@ -47,13 +47,30 @@ public class Admin implements Serializable {
         return (genderTypes.contains(gender.toLowerCase()));
     }
 
+    private String getHHmmFormat(Scanner sc, String display) {
+        boolean x = true;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HHmm");
+        String value = "";
+        while (x) {
+            System.out.println(display);
+            value = sc.nextLine();
+            try {
+                LocalTime.parse(value, formatter);
+                return (value);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return value;
+    }
+
     /**
      * Function to check if student's email exists.
      *
      * @param email The email name of the student.
      * @return
      */
-    public Boolean checkStudentEmailExists(String email) {
+    public boolean checkStudentEmailExists(String email) {
         // true if exists
         return (StudentList.get(email) != null);
     }
@@ -75,6 +92,7 @@ public class Admin implements Serializable {
 
     /**
      * Function to add course.
+     *
      * @param sc Scanner object.
      */
     public void addCourse(Scanner sc) {
@@ -91,7 +109,7 @@ public class Admin implements Serializable {
         int AcademicUnits;
         do {
             System.out.println("Enter AU:");
-            while(!sc.hasNextInt()) {
+            while (!sc.hasNextInt()) {
                 System.out.println("Please enter an integer!");
                 System.out.println("Enter AU: ");
                 sc.next();
@@ -103,7 +121,7 @@ public class Admin implements Serializable {
         int courseVacancies;
         do {
             System.out.println("Enter Course Vacancies:");
-            while(!sc.hasNextInt()) {
+            while (!sc.hasNextInt()) {
                 System.out.println("Please enter an integer!");
                 System.out.println("Enter Course Vacancies:");
                 sc.next();
@@ -119,9 +137,9 @@ public class Admin implements Serializable {
         do {
             System.out.println("Enter Course Components:");
             System.out.println("1. Lecture     2. Lecture and Tutorial     3. Lecture, Tutorial and Lab");
-            while(!sc.hasNextInt()) {
+            while (!sc.hasNextInt()) {
                 System.out.println("Please enter an integer!");
-                System.out.println("Enter Course Vacancies:");
+                System.out.println("Enter Course Components:");
                 sc.next();
             }
             choice = sc.nextInt();
@@ -129,12 +147,12 @@ public class Admin implements Serializable {
         } while ((choice <= 0) || (choice >= 4));
 
         int numberOfIndexes;
-        if (choice==1){
+        if (choice == 1) {
             numberOfIndexes = 1;
         } else {
             do {
                 System.out.println("Enter Number of Indexes:");
-                while(!sc.hasNextInt()) {
+                while (!sc.hasNextInt()) {
                     System.out.println("Please enter an integer!");
                     System.out.println("Enter Number of Indexes:");
                     sc.next();
@@ -164,10 +182,10 @@ public class Admin implements Serializable {
                     System.out.println("You have chosen choice 1 - Lecture Only");
                     System.out.println("Enter Lecture Venue:");
                     String LecVenue = sc.nextLine();
-                    System.out.println("Enter Lecture StartTime (HHMM):");
-                    String LecStart = sc.nextLine();
-                    System.out.println("Enter Lecture EndTime (HHMM):");
-                    String LecEnd = sc.nextLine();
+//                    System.out.println();
+                    String LecStart = getHHmmFormat(sc, "Enter Lecture StartTime (HHMM):");
+//                    System.out.println("Enter Lecture EndTime (HHMM):");
+                    String LecEnd = getHHmmFormat(sc, "Enter Lecture EndTime (HHMM):");
                     System.out.println("Enter Lecture WeekDay:");
                     String LecDay = sc.nextLine();
                     courseIndex.addLecture(LecVenue, LecStart, LecEnd, LecDay);
@@ -178,19 +196,19 @@ public class Admin implements Serializable {
                     System.out.println("You have chosen choice 2 - Lecture & Tutorial");
                     System.out.println("Enter Lecture Venue:");
                     LecVenue = sc.nextLine();
-                    System.out.println("Enter Lecture StartTime (HHMM):");
-                    LecStart = sc.nextLine();
-                    System.out.println("Enter Lecture EndTime (HHMM):");
-                    LecEnd = sc.nextLine();
-                    System.out.println("Enter Lecture WeekDay:");
+//                    System.out.println("Enter Lecture StartTime (HHMM):");
+                    LecStart = getHHmmFormat(sc, "Enter Lecture StartTime (HHMM):");
+//                    System.out.println("Enter Lecture EndTime (HHMM):");
+                    LecEnd = getHHmmFormat(sc, "Enter Lecture EndTime (HHMM):");
+                    System.out.println("Enter Lecture WeekDay:"); // TODO ENUM
                     LecDay = sc.nextLine();
                     courseIndex.addLecture(LecVenue, LecStart, LecEnd, LecDay);
                     System.out.println("Enter Tutorial Venue:");
                     String TutVenue = sc.nextLine();
-                    System.out.println("Enter Tutorial StartTime (HHMM):");
-                    String TutStart = sc.nextLine();
-                    System.out.println("Enter Tutorial EndTime (HHMM):");
-                    String TutEnd = sc.nextLine();
+//                    System.out.println("Enter Tutorial StartTime (HHMM):");
+                    String TutStart = getHHmmFormat(sc, "Enter Tutorial StartTime (HHMM):");
+//                    System.out.println("Enter Tutorial EndTime (HHMM):");
+                    String TutEnd = getHHmmFormat(sc, "Enter Tutorial EndTime (HHMM):");
                     System.out.println("Enter Tutorial WeekDay:");
                     String TutDay = sc.nextLine();
                     courseIndex.addTutorial(TutVenue, TutStart, TutEnd, TutDay);
@@ -200,28 +218,28 @@ public class Admin implements Serializable {
                     System.out.println("You have chosen choice 3 - Lecture, Tutorial & Lab");
                     System.out.println("Enter Lecture Venue:");
                     LecVenue = sc.nextLine();
-                    System.out.println("Enter Lecture StartTime (HHMM):");
-                    LecStart = sc.nextLine();
-                    System.out.println("Enter Lecture EndTime (HHMM):");
-                    LecEnd = sc.nextLine();
-                    System.out.println("Enter Lecture WeekDay:");
+//                    System.out.println("Enter Lecture StartTime (HHMM):");
+                    LecStart = getHHmmFormat(sc, "Enter Lecture StartTime (HHMM):");
+//                    System.out.println("Enter Lecture EndTime (HHMM):");
+                    LecEnd = getHHmmFormat(sc, "Enter Lecture EndTime (HHMM):");
+                    System.out.println("Enter Lecture WeekDay:"); // TODO ENUM
                     LecDay = sc.nextLine();
                     courseIndex.addLecture(LecVenue, LecStart, LecEnd, LecDay);
                     System.out.println("Enter Tutorial Venue:");
-                    TutVenue = sc.nextLine();
-                    System.out.println("Enter Tutorial StartTime (HHMM):");
-                    TutStart = sc.nextLine();
-                    System.out.println("Enter Tutorial EndTime (HHMM):");
-                    TutEnd = sc.nextLine();
+                     TutVenue = sc.nextLine();
+//                    System.out.println("Enter Tutorial StartTime (HHMM):");
+                     TutStart = getHHmmFormat(sc, "Enter Tutorial StartTime (HHMM):");
+//                    System.out.println("Enter Tutorial EndTime (HHMM):");
+                     TutEnd = getHHmmFormat(sc, "Enter Tutorial EndTime (HHMM):");
                     System.out.println("Enter Tutorial WeekDay:");
-                    TutDay = sc.nextLine();
+                     TutDay = sc.nextLine();
                     courseIndex.addTutorial(TutVenue, TutStart, TutEnd, TutDay);
                     System.out.println("Enter Lab Venue:");
                     String LabVenue = sc.nextLine();
-                    System.out.println("Enter Lab StartTime (HHMM):");
-                    String LabStart = sc.nextLine();
-                    System.out.println("Enter Lab EndTime (HHMM):");
-                    String LabEnd = sc.nextLine();
+//                    System.out.println("Enter Lab StartTime (HHMM):");
+                    String LabStart = getHHmmFormat(sc, "Enter Lab StartTime (HHMM):");
+//                    System.out.println("Enter Lab EndTime (HHMM):");
+                    String LabEnd = getHHmmFormat(sc, "Enter Lab EndTime (HHMM):");
                     System.out.println("Enter Lab WeekDay:");
                     String LabDay = sc.nextLine();
                     courseIndex.addLaboratory(LabVenue, LabStart, LabEnd, LabDay);
@@ -250,7 +268,7 @@ public class Admin implements Serializable {
         int AcademicUnits;
         do {
             System.out.println("Enter AU:");
-            while(!sc.hasNextInt()) {
+            while (!sc.hasNextInt()) {
                 System.out.println("Please enter an integer!");
                 System.out.println("Enter AU: ");
                 sc.next();
@@ -262,7 +280,7 @@ public class Admin implements Serializable {
         int courseVacancies;
         do {
             System.out.println("Enter Course Vacancies:");
-            while(!sc.hasNextInt()) {
+            while (!sc.hasNextInt()) {
                 System.out.println("Please enter an integer!");
                 System.out.println("Enter Course Vacancies:");
                 sc.next();
@@ -274,7 +292,7 @@ public class Admin implements Serializable {
         int numberOfIndexes;
         do {
             System.out.println("Enter Number of Indexes:");
-            while(!sc.hasNextInt()) {
+            while (!sc.hasNextInt()) {
                 System.out.println("Please enter an integer!");
                 System.out.println("Enter Number of Indexes:");
                 sc.next();
@@ -297,7 +315,7 @@ public class Admin implements Serializable {
             do {
                 System.out.println("Enter Course Components:");
                 System.out.println("1. Lecture     2. Lecture and Tutorial     3. Lecture, Tutorial and Lab");
-                while(!sc.hasNextInt()) {
+                while (!sc.hasNextInt()) {
                     System.out.println("Please enter an integer!");
                     System.out.println("Enter Course Vacancies:");
                     sc.next();
@@ -311,10 +329,10 @@ public class Admin implements Serializable {
                     System.out.println("You have chosen choice 1 - Lecture Only");
                     System.out.println("Enter Lecture Venue:");
                     String LecVenue = sc.nextLine();
-                    System.out.println("Enter Lecture StartTime (HHMM):");
-                    String LecStart = sc.nextLine();
-                    System.out.println("Enter Lecture EndTime (HHMM):");
-                    String LecEnd = sc.nextLine();
+//                    System.out.println();
+                    String LecStart = getHHmmFormat(sc, "Enter Lecture StartTime (HHMM):");
+//                    System.out.println("Enter Lecture EndTime (HHMM):");
+                    String LecEnd = getHHmmFormat(sc, "Enter Lecture EndTime (HHMM):");
                     System.out.println("Enter Lecture WeekDay:");
                     String LecDay = sc.nextLine();
                     courseIndex.addLecture(LecVenue, LecStart, LecEnd, LecDay);
@@ -325,19 +343,19 @@ public class Admin implements Serializable {
                     System.out.println("You have chosen choice 2 - Lecture & Tutorial");
                     System.out.println("Enter Lecture Venue:");
                     LecVenue = sc.nextLine();
-                    System.out.println("Enter Lecture StartTime (HHMM):");
-                    LecStart = sc.nextLine();
-                    System.out.println("Enter Lecture EndTime (HHMM):");
-                    LecEnd = sc.nextLine();
-                    System.out.println("Enter Lecture WeekDay:");
+//                    System.out.println("Enter Lecture StartTime (HHMM):");
+                    LecStart = getHHmmFormat(sc, "Enter Lecture StartTime (HHMM):");
+//                    System.out.println("Enter Lecture EndTime (HHMM):");
+                    LecEnd = getHHmmFormat(sc, "Enter Lecture EndTime (HHMM):");
+                    System.out.println("Enter Lecture WeekDay:"); // TODO ENUM
                     LecDay = sc.nextLine();
                     courseIndex.addLecture(LecVenue, LecStart, LecEnd, LecDay);
                     System.out.println("Enter Tutorial Venue:");
                     String TutVenue = sc.nextLine();
-                    System.out.println("Enter Tutorial StartTime (HHMM):");
-                    String TutStart = sc.nextLine();
-                    System.out.println("Enter Tutorial EndTime (HHMM):");
-                    String TutEnd = sc.nextLine();
+//                    System.out.println("Enter Tutorial StartTime (HHMM):");
+                    String TutStart = getHHmmFormat(sc, "Enter Tutorial StartTime (HHMM):");
+//                    System.out.println("Enter Tutorial EndTime (HHMM):");
+                    String TutEnd = getHHmmFormat(sc, "Enter Tutorial EndTime (HHMM):");
                     System.out.println("Enter Tutorial WeekDay:");
                     String TutDay = sc.nextLine();
                     courseIndex.addTutorial(TutVenue, TutStart, TutEnd, TutDay);
@@ -347,28 +365,28 @@ public class Admin implements Serializable {
                     System.out.println("You have chosen choice 3 - Lecture, Tutorial & Lab");
                     System.out.println("Enter Lecture Venue:");
                     LecVenue = sc.nextLine();
-                    System.out.println("Enter Lecture StartTime (HHMM):");
-                    LecStart = sc.nextLine();
-                    System.out.println("Enter Lecture EndTime (HHMM):");
-                    LecEnd = sc.nextLine();
-                    System.out.println("Enter Lecture WeekDay:");
+//                    System.out.println("Enter Lecture StartTime (HHMM):");
+                    LecStart = getHHmmFormat(sc, "Enter Lecture StartTime (HHMM):");
+//                    System.out.println("Enter Lecture EndTime (HHMM):");
+                    LecEnd = getHHmmFormat(sc, "Enter Lecture EndTime (HHMM):");
+                    System.out.println("Enter Lecture WeekDay:"); // TODO ENUM
                     LecDay = sc.nextLine();
                     courseIndex.addLecture(LecVenue, LecStart, LecEnd, LecDay);
                     System.out.println("Enter Tutorial Venue:");
                     TutVenue = sc.nextLine();
-                    System.out.println("Enter Tutorial StartTime (HHMM):");
-                    TutStart = sc.nextLine();
-                    System.out.println("Enter Tutorial EndTime (HHMM):");
-                    TutEnd = sc.nextLine();
+//                    System.out.println("Enter Tutorial StartTime (HHMM):");
+                    TutStart = getHHmmFormat(sc, "Enter Tutorial StartTime (HHMM):");
+//                    System.out.println("Enter Tutorial EndTime (HHMM):");
+                    TutEnd = getHHmmFormat(sc, "Enter Tutorial EndTime (HHMM):");
                     System.out.println("Enter Tutorial WeekDay:");
                     TutDay = sc.nextLine();
                     courseIndex.addTutorial(TutVenue, TutStart, TutEnd, TutDay);
                     System.out.println("Enter Lab Venue:");
                     String LabVenue = sc.nextLine();
-                    System.out.println("Enter Lab StartTime (HHMM):");
-                    String LabStart = sc.nextLine();
-                    System.out.println("Enter Lab EndTime (HHMM):");
-                    String LabEnd = sc.nextLine();
+//                    System.out.println("Enter Lab StartTime (HHMM):");
+                    String LabStart = getHHmmFormat(sc, "Enter Lab StartTime (HHMM):");
+//                    System.out.println("Enter Lab EndTime (HHMM):");
+                    String LabEnd = getHHmmFormat(sc, "Enter Lab EndTime (HHMM):");
                     System.out.println("Enter Lab WeekDay:");
                     String LabDay = sc.nextLine();
                     courseIndex.addLaboratory(LabVenue, LabStart, LabEnd, LabDay);
@@ -385,7 +403,7 @@ public class Admin implements Serializable {
     /**
      * Function too check vacancies of course.
      *
-     * @param courseCode The course code of a course.
+     * @param courseCode  The course code of a course.
      * @param courseIndex The course index of a course.
      * @return
      */
@@ -417,7 +435,7 @@ public class Admin implements Serializable {
      * runLoop to run the student function
      *
      * @param login Login details
-     * @param sc Scanner for input
+     * @param sc    Scanner for input
      * @throws StarsException
      */
     public void runLoop(Login login, Scanner sc) throws StarsException {
@@ -438,7 +456,7 @@ public class Admin implements Serializable {
             switch (choice) {
                 case "1":
                     System.out.println("\n(1) Edit Student Access Period");
-                    try{
+                    try {
                         LocalDateTime currentDateTime = LocalDateTime.now();
                         DateTimeFormatter formatDateTime = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
                         String formattedCurrentDT = currentDateTime.format(formatDateTime);
@@ -499,9 +517,9 @@ public class Admin implements Serializable {
                     System.out.println("Student added");
                     System.out.println();
                     System.out.println("Current Student List:");
-                    for (String name: StudentList.keySet()){
+                    for (String name : StudentList.keySet()) {
                         System.out.println(name);
-                    };
+                    }
                     break;
 
                 case "3":
@@ -549,9 +567,9 @@ public class Admin implements Serializable {
                     break;
                 case "8":
                     System.out.println("Current Student List:");
-                    for (String name: StudentList.keySet()){
+                    for (String name : StudentList.keySet()) {
                         System.out.println(name);
-                    };
+                    }
                     break;
                 case "9":
                     System.out.println("Program terminating..");
