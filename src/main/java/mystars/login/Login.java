@@ -97,14 +97,18 @@ public class Login {
                 if (!validated) {
                     System.out.println("Second user not verified - Incorrect Password! Please retry your login.\t");
                 }
+                return users.getExistingUser(username);
+
 
             } else if (matched == 0) {
                 System.out.println("Second user not verified - You are not registered - " + username);
+                break;
             } else {
                 System.out.println("Second user not verified - User - " + username + " - is not allowed to log in as a " + roleName);
+                break;
             }
         } while (!validated);
-        return users.getExistingUser(username);
+        return null;
     }
 
 

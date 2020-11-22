@@ -294,37 +294,40 @@ public class StudentApp {
 
                     // verify student name and student password
                     User SecondUser = login.getSwappingStudent(student2Username, student2Password);
-                    Student SecondStudent = StudentList.get(SecondUser.getName());
 
-                    // validate whether other student has any courses registered
-                    if (!verifyExistingCourse(SecondStudent)) {
-                        break;
+                    if(SecondUser != null) {
+                        Student SecondStudent = StudentList.get(SecondUser.getName());
+
+                        // validate whether other student has any courses registered
+                        if (!verifyExistingCourse(SecondStudent)) {
+                            break;
+                        }
+
+                        System.out.println("Enter courseCode: ");
+                        courseCode = sc.nextLine();
+                        String index1, index2;
+                        index1 = student.getCourseIndex(courseCode);
+                        index2 = SecondStudent.getCourseIndex(courseCode);
+                        // verify coursecode
+                        if (index1 == null || index2 == null) {
+                            System.out.println("Rejected - student doesn't have course specified");
+                            break;
+                        }
+                        if (index1.equals(index2)) {
+                            System.out.println("Rejected - both students have the same index");
+                            break;
+                        }
+
+
+                        // TODO Validate whether need to drop before add
+                        // probably need to drop before add
+                        student.dropCourse(courseCode);
+                        SecondStudent.dropCourse(courseCode);
+                        student.addCourse(courseCode, index2);
+                        SecondStudent.addCourse(courseCode, index1);
+                        StudentList.remove(student2Username);
+                        StudentList.put(student2Username, SecondStudent);
                     }
-
-                    System.out.println("Enter courseCode: ");
-                    courseCode = sc.nextLine();
-                    String index1, index2;
-                    index1 = student.getCourseIndex(courseCode);
-                    index2 = SecondStudent.getCourseIndex(courseCode);
-                    // verify coursecode
-                    if (index1 == null || index2 == null) {
-                        System.out.println("Rejected - student doesn't have course specified");
-                        break;
-                    }
-                    if (index1.equals(index2)) {
-                        System.out.println("Rejected - both students have the same index");
-                        break;
-                    }
-
-
-                    // TODO Validate whether need to drop before add
-                    // probably need to drop before add
-                    student.dropCourse(courseCode);
-                    SecondStudent.dropCourse(courseCode);
-                    student.addCourse(courseCode, index2);
-                    SecondStudent.addCourse(courseCode, index1);
-                    StudentList.remove(student2Username);
-                    StudentList.put(student2Username, SecondStudent);
                     break;
 
                 case "7":
