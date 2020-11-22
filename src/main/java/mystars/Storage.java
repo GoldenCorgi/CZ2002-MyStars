@@ -253,6 +253,25 @@ public class Storage {
     public static UserList loadUsers() {
         Path path = Paths.get(folder, USERS_FILE);
         ArrayList<User> users = new ArrayList<>();
+        UserList defaultUsers = new UserList();
+        defaultUsers.addNewUser("admin", "1234", "Admin");
+        defaultUsers.addNewUser("student", "1234", "Student");
+        defaultUsers.addNewUser("timh0011", "1234", "Student");
+        defaultUsers.addNewUser("benc0012", "1234", "Student");
+        defaultUsers.addNewUser("limd0013", "1234", "Student");
+        defaultUsers.addNewUser("chua0014", "1234", "Student");
+        defaultUsers.addNewUser("jtan0015", "1234", "Student");
+        defaultUsers.addNewUser("iant0016", "1234", "Student");
+        defaultUsers.addNewUser("sean0017", "1234", "Student");
+        defaultUsers.addNewUser("jong0018", "1234", "Student");
+        defaultUsers.addNewUser("jane0011", "1234", "Student");
+        defaultUsers.addNewUser("rach0012", "1234", "Student");
+        defaultUsers.addNewUser("cher0013", "1234", "Student");
+        defaultUsers.addNewUser("jami0014", "1234", "Student");
+        defaultUsers.addNewUser("hiln0015", "1234", "Student");
+        defaultUsers.addNewUser("angn0016", "1234", "Student");
+        defaultUsers.addNewUser("ongn0017", "1234", "Student");
+
 //            logger.log(Level.INFO, "going to load users");
 
         if (Files.exists(path)) {
@@ -272,56 +291,20 @@ public class Storage {
                 System.out.println("Error loading user file.");
                 //            logger.log(Level.INFO, "No users found. Creating new users list.");
                 System.out.println("Creating new admin user defaults");
-                UserList newUserList = new UserList();
-                newUserList.addNewUser("admin", "1234", "Admin");
-                newUserList.addNewUser("timh0011", "1234", "Student");
-                newUserList.addNewUser("benc0012", "1234", "Student");
-                newUserList.addNewUser("limd0013", "1234", "Student");
-                newUserList.addNewUser("chua0014", "1234", "Student");
-                newUserList.addNewUser("jtan0015", "1234", "Student");
-                newUserList.addNewUser("iant0016", "1234", "Student");
-                newUserList.addNewUser("sean0017", "1234", "Student");
-                newUserList.addNewUser("jong0018", "1234", "Student");
-                newUserList.addNewUser("jane0011", "1234", "Student");
-                newUserList.addNewUser("rach0012", "1234", "Student");
-                newUserList.addNewUser("cher0013", "1234", "Student");
-                newUserList.addNewUser("jami0014", "1234", "Student");
-                newUserList.addNewUser("hiln0015", "1234", "Student");
-                newUserList.addNewUser("angn0016", "1234", "Student");
-                newUserList.addNewUser("ongn0017", "1234", "Student");
-
-                return newUserList;
+                System.out.println("Creating new student user defaults");
+                return defaultUsers;
 
 //                throw new StarsException(READ_ERROR);
             }
         }
-        UserList usersList;
-//            logger.log(Level.INFO, "loaded users");
-        usersList = new UserList(users);
         if (users.size() == 0) {
             System.out.println("No previous data for UserList");
             System.out.println("Creating new admin user defaults");
-            usersList.addNewUser("admin", "1234", "Admin");
             System.out.println("Creating new student user defaults");
-            usersList.addNewUser("admin", "1234", "Admin");
-            usersList.addNewUser("timh0011", "1234", "Student");
-            usersList.addNewUser("benc0012", "1234", "Student");
-            usersList.addNewUser("limd0013", "1234", "Student");
-            usersList.addNewUser("chua0014", "1234", "Student");
-            usersList.addNewUser("jtan0015", "1234", "Student");
-            usersList.addNewUser("iant0016", "1234", "Student");
-            usersList.addNewUser("sean0017", "1234", "Student");
-            usersList.addNewUser("jong0018", "1234", "Student");
-            usersList.addNewUser("jane0011", "1234", "Student");
-            usersList.addNewUser("rach0012", "1234", "Student");
-            usersList.addNewUser("cher0013", "1234", "Student");
-            usersList.addNewUser("jami0014", "1234", "Student");
-            usersList.addNewUser("hiln0015", "1234", "Student");
-            usersList.addNewUser("angn0016", "1234", "Student");
-            usersList.addNewUser("ongn0017", "1234", "Student");
-
+            return defaultUsers;
         }
-
+        UserList usersList;
+        usersList = new UserList(users);
         return usersList;
     }
 

@@ -2,7 +2,6 @@ package mystars;
 
 import mystars.login.Login;
 import mystars.login.User;
-import mystars.login.UserList;
 
 import java.util.Scanner;
 
@@ -14,11 +13,13 @@ public class Main {
     public static void main(String[] args) throws StarsException {
 //        Logger logger = Logger.getLogger("MyStars");
         Scanner sc = new Scanner(System.in);
-        Storage storage = new Storage("data");
-        UserList users;
-        users = storage.loadUsers();
+        runLoop(sc);
+    }
+
+
+    public static void runLoop(Scanner sc) throws StarsException {
         while (true) {
-            Login login = new Login(users, storage);
+            Login login = new Login(Storage.loadUsers());
             // return user class instead, so can get their username and role
             User user = login.run(sc);
             if (user == null) {
@@ -41,6 +42,4 @@ public class Main {
         }
 
         System.out.println("Terminating Program, thanks for using MyStars!");
-    }
-
-}
+    }}
