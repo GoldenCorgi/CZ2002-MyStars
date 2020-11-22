@@ -119,6 +119,12 @@ public class Admin implements Serializable {
         return (StudentList.get(matricNo) != null);
     }
 
+    /**
+     * Function to verify the format of matricNo input
+     *
+     * @param matricNo
+     * @return
+     */
     static boolean verifyMatricNoFormat(String matricNo) {
         String regex = "(u)(19)[0-9]{5}[a-z]{1}";
         return matricNo.toLowerCase().matches(regex);
@@ -168,6 +174,10 @@ public class Admin implements Serializable {
         return true;
     }
 
+    static boolean verifyCourseCodeFormat(String courseCode) {
+        String regex = "(cz)[1-4]{1}[0-1]{1}[0-9]{2}";
+        return courseCode.toLowerCase().matches(regex);
+    }
     /**
      * Function to verify if course index exists
      *
@@ -197,7 +207,9 @@ public class Admin implements Serializable {
             courseCode = sc.nextLine();
             if (verifyCourseCode(courseCode))
                 System.out.println("Course code already exists, try again!");
-        } while (verifyCourseCode(courseCode));
+            else if (!verifyCourseCodeFormat(courseCode))
+                System.out.println("Invalid course code format, try again!");
+        } while (verifyCourseCode(courseCode) || !verifyCourseCodeFormat(courseCode));
 
         String courseSchool;
         // verify course school
