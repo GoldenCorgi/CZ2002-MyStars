@@ -159,7 +159,6 @@ public class Admin implements Serializable {
      */
     public boolean verifyCourseCode(String courseCode) {
         if (CourseList.get(courseCode) == null) {
-            System.out.println("Rejected - CourseCode does not exist");
             return false;
         }
         return true;
@@ -231,7 +230,11 @@ public class Admin implements Serializable {
             }
             courseVacancies = sc.nextInt();
             sc.nextLine();
-        } while ((courseVacancies <= 0) || (courseVacancies > 60));
+            if ((courseVacancies <= 0) || (courseVacancies > 500)){
+                System.out.println("Invalid, please enter values from 1 to 500 only");
+            }
+
+        } while ((courseVacancies <= 0) || (courseVacancies > 500));
 //        int courseVacancies = sc.nextInt();
 //        // Remove non-integer inputs due to buggy java stuff lmao https://stackoverflow.com/questions/27717503/why-does-my-scanner-repeat
 //        sc.nextLine();
@@ -398,9 +401,9 @@ public class Admin implements Serializable {
             courseVacancies = sc.nextInt();
             sc.nextLine();
             if ((courseVacancies <= 0) || (courseVacancies > 500)){
-                System.out.println("Invalid, please enter values from 50 to 500 only");
+                System.out.println("Invalid, please enter values from 1 to 500 only");
             }
-        } while ((courseVacancies <= 50) || (courseVacancies > 500)); // show a warning message if input not within limits
+        } while ((courseVacancies <= 0) || (courseVacancies > 500)); // show a warning message if input not within limits
 
         int choice;
         do {

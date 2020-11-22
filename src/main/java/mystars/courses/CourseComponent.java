@@ -6,7 +6,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class CourseComponent implements Serializable {
-    private static final long serialVersionUID = 421;
+    private static final long serialVersionUID = 422;
     private final String componentName;
     private final String venue;
     private final String startTime;
