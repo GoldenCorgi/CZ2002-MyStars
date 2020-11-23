@@ -9,11 +9,10 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
-import java.time.LocalDate;
-import java.time.LocalTime;
 
 /**
  * Loads and saves data to file.
@@ -83,6 +82,68 @@ public class Storage {
         }
 
         writeToFile(usersFileContent, USERS_FILE);
+    }
+
+    /**
+     * Loads users, stores them into ArrayList and returns the ArrayList.
+     *
+     * @return ArrayList of users.
+     */
+    public static UserList loadUsers() {
+        Path path = Paths.get(folder, USERS_FILE);
+        ArrayList<User> users = new ArrayList<>();
+        UserList defaultUsers = new UserList();
+        defaultUsers.addNewUser("admin", "1234", "Admin");
+        defaultUsers.addNewUser("student", "1234", "Student");
+        defaultUsers.addNewUser("timh0011", "1234", "Student");
+        defaultUsers.addNewUser("benc0012", "1234", "Student");
+        defaultUsers.addNewUser("limd0013", "1234", "Student");
+        defaultUsers.addNewUser("chua0014", "1234", "Student");
+        defaultUsers.addNewUser("jtan0015", "1234", "Student");
+        defaultUsers.addNewUser("iant0016", "1234", "Student");
+        defaultUsers.addNewUser("sean0017", "1234", "Student");
+        defaultUsers.addNewUser("jong0018", "1234", "Student");
+        defaultUsers.addNewUser("jane0011", "1234", "Student");
+        defaultUsers.addNewUser("rach0012", "1234", "Student");
+        defaultUsers.addNewUser("cher0013", "1234", "Student");
+        defaultUsers.addNewUser("jami0014", "1234", "Student");
+        defaultUsers.addNewUser("hiln0015", "1234", "Student");
+        defaultUsers.addNewUser("angn0016", "1234", "Student");
+        defaultUsers.addNewUser("ongn0017", "1234", "Student");
+
+//            logger.log(Level.INFO, "going to load users");
+
+        if (Files.exists(path)) {
+            try {
+                BufferedReader bufferedReader = Files.newBufferedReader(path);
+
+                while (true) {
+                    String line = bufferedReader.readLine();
+                    if (line == null) {
+                        break;
+                    }
+
+                    User user = readUser(line);
+                    users.add(user);
+                }
+            } catch (IOException e) {
+                System.out.println("Error loading user file.");
+                System.out.println("Creating new admin user defaults");
+                System.out.println("Creating new student user defaults");
+                return defaultUsers;
+
+//                throw new StarsException(READ_ERROR);
+            }
+        }
+        if (users.size() == 0) {
+            System.out.println("No previous data for UserList");
+            System.out.println("Creating new admin user defaults");
+            System.out.println("Creating new student user defaults");
+            return defaultUsers;
+        }
+        UserList usersList;
+        usersList = new UserList(users);
+        return usersList;
     }
 
     /**
@@ -271,68 +332,6 @@ public class Storage {
     }
 
     /**
-     * Loads users, stores them into ArrayList and returns the ArrayList.
-     *
-     * @return ArrayList of users.
-     */
-    public static UserList loadUsers() {
-        Path path = Paths.get(folder, USERS_FILE);
-        ArrayList<User> users = new ArrayList<>();
-        UserList defaultUsers = new UserList();
-        defaultUsers.addNewUser("admin", "1234", "Admin");
-        defaultUsers.addNewUser("student", "1234", "Student");
-        defaultUsers.addNewUser("timh0011", "1234", "Student");
-        defaultUsers.addNewUser("benc0012", "1234", "Student");
-        defaultUsers.addNewUser("limd0013", "1234", "Student");
-        defaultUsers.addNewUser("chua0014", "1234", "Student");
-        defaultUsers.addNewUser("jtan0015", "1234", "Student");
-        defaultUsers.addNewUser("iant0016", "1234", "Student");
-        defaultUsers.addNewUser("sean0017", "1234", "Student");
-        defaultUsers.addNewUser("jong0018", "1234", "Student");
-        defaultUsers.addNewUser("jane0011", "1234", "Student");
-        defaultUsers.addNewUser("rach0012", "1234", "Student");
-        defaultUsers.addNewUser("cher0013", "1234", "Student");
-        defaultUsers.addNewUser("jami0014", "1234", "Student");
-        defaultUsers.addNewUser("hiln0015", "1234", "Student");
-        defaultUsers.addNewUser("angn0016", "1234", "Student");
-        defaultUsers.addNewUser("ongn0017", "1234", "Student");
-
-//            logger.log(Level.INFO, "going to load users");
-
-        if (Files.exists(path)) {
-            try {
-                BufferedReader bufferedReader = Files.newBufferedReader(path);
-
-                while (true) {
-                    String line = bufferedReader.readLine();
-                    if (line == null) {
-                        break;
-                    }
-
-                    User user = readUser(line);
-                    users.add(user);
-                }
-            } catch (IOException e) {
-                System.out.println("Error loading user file.");
-                System.out.println("Creating new admin user defaults");
-                System.out.println("Creating new student user defaults");
-                return defaultUsers;
-
-//                throw new StarsException(READ_ERROR);
-            }
-        }
-        if (users.size() == 0) {
-            System.out.println("No previous data for UserList");
-            System.out.println("Creating new admin user defaults");
-            System.out.println("Creating new student user defaults");
-            return defaultUsers;
-        }
-        UserList usersList;
-        usersList = new UserList(users);
-        return usersList;
-    }
-
-    /**
      * Writes content to file.
      *
      * @param fileContent String content to write.
@@ -356,38 +355,53 @@ public class Storage {
     }
 
     /**
-     * Loads access period date using an ArrayList<LocalDate>, stores them into ArrayList.
+     * Loads access period date using an ArrayList<LocalDateTime>, stores them into ArrayList.
      *
-     * @return ArrayList of LocalDate
+     * @return ArrayList of LocalDateTime
      */
-    public static ArrayList<LocalDate> loadAccessPeriodDate() {
+    public static ArrayList<LocalDateTime> loadAccessPeriodDate() {
         Path path = Paths.get("data", DATES_SERIALIZABLE_FILE_NAME);
         String filename = path.normalize().toString();
-        ArrayList<LocalDate> dateArrayList = new ArrayList<>();
+        ArrayList<LocalDateTime> dateArrayList = new ArrayList<>();
+
+        ArrayList<LocalDateTime> defaultDateArray = new ArrayList<>();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+        LocalDateTime startDate = LocalDateTime.parse("01-11-2020 00:00:01", formatter);
+        defaultDateArray.add(0, startDate);
+        LocalDateTime endDate = LocalDateTime.parse("31-12-2020 23:59:59", formatter);
+        defaultDateArray.add(1, endDate);
 
         FileInputStream fis;
         ObjectInputStream in;
+        if (!Files.exists(path)) {
+            System.out.println("No previous data for Access Period");
+            System.out.println("Creating default - 01/11 to 31/12");
+            return defaultDateArray;
+        }
+
         try {
             fis = new FileInputStream(filename);
             in = new ObjectInputStream(fis);
-            dateArrayList = (ArrayList<LocalDate>) in.readObject();
+            dateArrayList = (ArrayList<LocalDateTime>) in.readObject();
             in.close();
         } catch (IOException | ClassNotFoundException ex) {
             ex.printStackTrace();
         }
-        // print out the size
-        //System.out.println(" Details Size: " + pDetails.size());
-        //System.out.println();
+        if (dateArrayList.size() == 0) {
+            System.out.println("No previous data for Access Period");
+            System.out.println("Creating default - 01/11 to 31/12");
+            return defaultDateArray;
+        }
 
         return dateArrayList;
     }
 
     /**
-     * Save the updated ArrayList<LocalDate> into the serializable file dates.dat
+     * Save the updated ArrayList<LocalDateTime> into the serializable file dates.dat
      *
-     * @param dateArrayList The updated ArrayList of LocalDate
+     * @param dateArrayList The updated ArrayList of LocalDateTime
      */
-    public static void saveAccessPeriodDate(ArrayList<LocalDate> dateArrayList) {
+    public static void saveAccessPeriodDate(ArrayList<LocalDateTime> dateArrayList) {
         String filename = Paths.get("data", DATES_SERIALIZABLE_FILE_NAME).normalize().toString();
         FileOutputStream fos;
         ObjectOutputStream out;
@@ -402,50 +416,50 @@ public class Storage {
         }
     }
 
-    /**
-     * Loads access period Time using an ArrayList<LocalTime>, stores them into ArrayList.
-     *
-     * @return ArrayList<LocalTime>.
-     */
-    public static ArrayList<LocalTime> loadAccessPeriodTime() {
-        Path path = Paths.get("data", TIME_SERIALIZABLE_FILE_NAME);
-        String filename = path.normalize().toString();
-        ArrayList<LocalTime> timeArrayList = new ArrayList<>();
-
-        FileInputStream fis;
-        ObjectInputStream in;
-        try {
-            fis = new FileInputStream(filename);
-            in = new ObjectInputStream(fis);
-            timeArrayList = (ArrayList<LocalTime>) in.readObject();
-            in.close();
-        } catch (IOException | ClassNotFoundException ex) {
-            ex.printStackTrace();
-        }
-        // print out the size
-        //System.out.println(" Details Size: " + pDetails.size());
-        //System.out.println();
-
-        return timeArrayList;
-    }
-
-    /**
-     * Save the updated ArrayList<LocalTime> into the serializable file time.dat
-     *
-     * @param timeArrayList The updated ArrayList of LocalTime
-     */
-    public static void saveAccessPeriodTime(ArrayList<LocalTime> timeArrayList) {
-        String filename = Paths.get("data", TIME_SERIALIZABLE_FILE_NAME).normalize().toString();
-        FileOutputStream fos;
-        ObjectOutputStream out;
-        try {
-            fos = new FileOutputStream(filename);
-            out = new ObjectOutputStream(fos);
-            out.writeObject(timeArrayList);
-            out.close();
-            //	System.out.println("Object Persisted");
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-    }
+//    /**
+//     * Loads access period Time using an ArrayList<LocalTime>, stores them into ArrayList.
+//     *
+//     * @return ArrayList<LocalTime>.
+//     */
+//    public static ArrayList<LocalTime> loadAccessPeriodTime() {
+//        Path path = Paths.get("data", TIME_SERIALIZABLE_FILE_NAME);
+//        String filename = path.normalize().toString();
+//        ArrayList<LocalTime> timeArrayList = new ArrayList<>();
+//
+//        FileInputStream fis;
+//        ObjectInputStream in;
+//        try {
+//            fis = new FileInputStream(filename);
+//            in = new ObjectInputStream(fis);
+//            timeArrayList = (ArrayList<LocalTime>) in.readObject();
+//            in.close();
+//        } catch (IOException | ClassNotFoundException ex) {
+//            ex.printStackTrace();
+//        }
+//        // print out the size
+//        //System.out.println(" Details Size: " + pDetails.size());
+//        //System.out.println();
+//
+//        return timeArrayList;
+//    }
+//
+//    /**
+//     * Save the updated ArrayList<LocalTime> into the serializable file time.dat
+//     *
+//     * @param timeArrayList The updated ArrayList of LocalTime
+//     */
+//    public static void saveAccessPeriodTime(ArrayList<LocalTime> timeArrayList) {
+//        String filename = Paths.get("data", TIME_SERIALIZABLE_FILE_NAME).normalize().toString();
+//        FileOutputStream fos;
+//        ObjectOutputStream out;
+//        try {
+//            fos = new FileOutputStream(filename);
+//            out = new ObjectOutputStream(fos);
+//            out.writeObject(timeArrayList);
+//            out.close();
+//            //	System.out.println("Object Persisted");
+//        } catch (IOException ex) {
+//            ex.printStackTrace();
+//        }
+//    }
 }

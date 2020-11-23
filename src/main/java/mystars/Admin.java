@@ -5,8 +5,6 @@ import mystars.courses.CourseIndex;
 import mystars.login.Login;
 
 import java.io.Serializable;
-import java.sql.Time;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -19,20 +17,20 @@ public class Admin implements Serializable {
     private static final long serialVersionUID = 420;
     private final HashMap<String, Course> CourseList;
     private final HashMap<String, Student> StudentList;
-    private final ArrayList<LocalDate> DateList;
-    private final ArrayList<LocalTime> TimeList;
+    private final ArrayList<LocalDateTime> DateList;
+//    private final ArrayList<LocalTime> TimeList;
 
     /**
      * Constructor to create Admin object based on parameters given.
-     * Creates admin with sampleadminname
+     * Creates admin with adminUserName
      *
-     * @param sampleadminname The name of an admin.
+     * @param adminUserName The name of an admin.
      */
-    public Admin(String sampleadminname) {
+    public Admin(String adminUserName) {
         StudentList = loadStudents();
         CourseList = loadCourses();
         DateList = loadAccessPeriodDate();
-        TimeList = loadAccessPeriodTime();
+//        TimeList = loadAccessPeriodTime();
     }
 
     /**
@@ -45,6 +43,7 @@ public class Admin implements Serializable {
         String regex = "^[a-zA-Z]+$";
         return name.matches(regex);
     }
+
     /**
      * Function to verify gender.
      *
@@ -77,6 +76,50 @@ public class Admin implements Serializable {
     }
 
     /**
+     * Function to verify the format of matricNo input
+     *
+     * @param matricNo
+     * @return
+     */
+    static boolean verifyMatricNoFormat(String matricNo) {
+        String regex = "(u)(19)[0-9]{5}[a-z]{1}";
+        return matricNo.toLowerCase().matches(regex);
+    }
+
+    /**
+     * Function to verify the school entered
+     *
+     * @param school
+     * @return
+     */
+    public static Boolean verifyCourseSchool(String school) {
+        final Set<String> courseSchool = new HashSet<>() {{
+            add("SCSE");
+            add("NBS");
+            add("EEE");
+            add("CEE");
+            add("SPMS");
+        }};
+        return (courseSchool.contains(school.toUpperCase()));
+    }
+
+//    /**
+//     * Function to verify the format of email input
+//     *
+//     * @param email
+//     * @return
+//     */
+//    static boolean isEmailValid(String email) {
+//        String regex = "^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$";
+//        return email.matches(regex);
+//    }
+
+    static boolean verifyCourseCodeFormat(String courseCode) {
+        String regex = "(cz)[1-4]{1}[0-9]{3}";
+        return courseCode.toLowerCase().matches(regex);
+    }
+
+    /**
      * Function to change time inputs to HHmm format
      *
      * @param sc
@@ -99,6 +142,7 @@ public class Admin implements Serializable {
         }
         return value;
     }
+
     /**
      * Function to check if student's email exists.
      *
@@ -111,16 +155,6 @@ public class Admin implements Serializable {
     }
 
     /**
-     * Function to verify the format of email input
-     *
-     * @param email
-     * @return
-     */
-//    static boolean isEmailValid(String email) {
-//        String regex = "^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$";
-//        return email.matches(regex);
-//    }
-    /**
      * Function to check if student's matric no already exists
      *
      * @param matricNo
@@ -131,106 +165,80 @@ public class Admin implements Serializable {
         return (StudentList.get(matricNo) != null);
     }
 
-    /**
-     * Function to verify the format of matricNo input
-     *
-     * @param matricNo
-     * @return
-     */
-    static boolean verifyMatricNoFormat(String matricNo) {
-        String regex = "(u)(19)[0-9]{5}[a-z]{1}";
-        return matricNo.toLowerCase().matches(regex);
-    }
-    /**
-     * Function to verify the school entered
-     *
-     * @param school
-     * @return
-     */
-    public static Boolean verifyCourseSchool(String school) {
-        final Set<String> courseSchool = new HashSet<>() {{
-            add("SCSE");
-            add("NBS");
-            add("EEE");
-            add("CEE");
-            add("SPMS");
-        }};
-        return (courseSchool.contains(school.toUpperCase()));
-    }
-
     public void editStudentAccessPeriod(Scanner sc) {
         LocalDateTime currentDateTime = LocalDateTime.now();
         DateTimeFormatter formatDateTime = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
         String formattedCurrentDT = currentDateTime.format(formatDateTime);
         System.out.println("Current Date and Time: " + formattedCurrentDT);
-        DateList.removeAll(DateList);
-        TimeList.removeAll(TimeList);
+        LocalDateTime oldStartDate = DateList.get(0);
+        LocalDateTime oldEndDate = DateList.get(1);
+        System.out.println("Old Start Date : " + oldStartDate.format(formatDateTime));
+        System.out.println("Old End Date   : " + oldEndDate.format(formatDateTime));
+//        DateList.removeAll(DateList);
+//        TimeList.removeAll(TimeList);
 
         try {
-            System.out.println("Enter start date of Student Access Period (dd-MM-yyyy): ");
+            System.out.println("Enter start date of Student Access Period (dd-MM-yyyy HH:mm:ss): ");
             String date = sc.nextLine();
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-            LocalDate startDate = LocalDate.parse(date, formatter);
-            System.out.println("New Start Date : " + startDate);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+            LocalDateTime startDate = LocalDateTime.parse(date, formatter);
+            System.out.println("New Start Date : " + startDate.format(formatDateTime));
             DateList.add(0, startDate);
-
-            System.out.println("Enter end date of Student Access Period (dd-MM-yyyy): ");
+            System.out.println("Enter end date of Student Access Period (dd-MM-yyyy HH:mm:ss): ");
             String date2 = sc.nextLine();
-            LocalDate endDate = LocalDate.parse(date2, formatter);
-            System.out.println("New End Time: " + endDate);
+            LocalDateTime endDate = LocalDateTime.parse(date2, formatter);
+            System.out.println("New End Time: " + endDate.format(formatDateTime));
             DateList.add(1, endDate);
 
-            System.out.println("Enter start time of Student Access Period: ");
-            String time = sc.nextLine();
-            LocalTime startTime = LocalTime.parse(time);
-            System.out.println("New Start Date and Time");
-            System.out.println("New Start Time: " + startTime);
-            TimeList.add(0, startTime);
-
-            System.out.println("Enter end time of Student Access Period: ");
-            String time2 = sc.nextLine();
-            LocalTime endTime = LocalTime.parse(time2);
-            System.out.println("New End Date and Time");
-            System.out.println("New End Time: " + endTime);
-            TimeList.add(0, endTime);
+//            System.out.println("Enter start time of Student Access Period: ");
+//            String time = sc.nextLine();
+//            LocalTime startTime = LocalTime.parse(time);
+//            System.out.println("New Start Date and Time");
+//            System.out.println("New Start Time: " + startTime);
+//            TimeList.add(0, startTime);
+//
+//            System.out.println("Enter end time of Student Access Period: ");
+//            String time2 = sc.nextLine();
+//            LocalTime endTime = LocalTime.parse(time2);
+//            System.out.println("New End Date and Time");
+//            System.out.println("New End Time: " + endTime);
+//            TimeList.add(0, endTime);
 
         } catch (Exception e) {
             System.out.println("Invalid input try again!");
         }
+//        DateList.removeAll(DateList);
 
     }
 
     public boolean accessPeriod() {
-        LocalDate currentDate =  LocalDate.now();
-        LocalTime currentTime = LocalTime.now();
-        LocalDate startDate =  DateList.get(0);
-        LocalDate endDate = DateList.get(1);
-        LocalTime startTime = TimeList.get(0);
-        LocalTime endTime = TimeList.get(1);
+        LocalDateTime currentDate = LocalDateTime.now();
+//        LocalTime currentTime = LocalTime.now();
+        LocalDateTime startDate = DateList.get(0);
+        LocalDateTime endDate = DateList.get(1);
+//        LocalTime startTime = TimeList.get(0);
+//        LocalTime endTime = TimeList.get(1);
 
-        if ((DateList.isEmpty()) || (TimeList.isEmpty())) {
+        if ((DateList.isEmpty())) {
             return false;
-        }
-        else if (currentDate.isBefore(startDate)) {
+        } else if (currentDate.isBefore(startDate)) {
             return false;
-        }
-        else if (currentDate.isAfter(startDate) && currentDate.isBefore((endDate))) {
+        } else if (currentDate.isAfter(startDate) && currentDate.isBefore((endDate))) {
             return true;
         }
-        else if (currentDate.isEqual(startDate) && currentDate.isBefore(endDate)) {
-            if (currentTime.isBefore(startTime)) {
-                return false;
-            }
-            else if (currentTime.isAfter(startTime) || currentTime.equals(startTime)) {
-                return true;
-            }
-        }
+//        else if (currentDate.isEqual(startDate) && currentDate.isBefore(endDate)) {
+//            if (currentTime.isBefore(startTime)) {
+//                return false;
+//            }
+//            else if (currentTime.isAfter(startTime) || currentTime.equals(startTime)) {
+//                return true;
+//            }
+//        }
         else if (currentDate.isAfter(endDate)) {
             return false;
         }
         return false;
     }
-
 
     /**
      * Function to add student.
@@ -250,16 +258,9 @@ public class Admin implements Serializable {
      * @return
      */
     public boolean verifyCourseCode(String courseCode) {
-        if (CourseList.get(courseCode) == null) {
-            return false;
-        }
-        return true;
+        return CourseList.get(courseCode) != null;
     }
 
-    static boolean verifyCourseCodeFormat(String courseCode) {
-        String regex = "(cz)[1-4]{1}[0-9]{3}";
-        return courseCode.toLowerCase().matches(regex);
-    }
     /**
      * Function to verify if course index exists
      *
@@ -274,6 +275,7 @@ public class Admin implements Serializable {
         }
         return true;
     }
+
     /**
      * Function to add course.
      *
@@ -328,7 +330,7 @@ public class Admin implements Serializable {
             }
             courseVacancies = sc.nextInt();
             sc.nextLine();
-            if ((courseVacancies <= 0) || (courseVacancies > 500)){
+            if ((courseVacancies <= 0) || (courseVacancies > 500)) {
                 System.out.println("Invalid, please enter values from 1 to 500 only");
             }
 
@@ -430,13 +432,13 @@ public class Admin implements Serializable {
                     LecDay = sc.nextLine();
                     courseIndex.addLecture(LecVenue, LecStart, LecEnd, LecDay);
                     System.out.println("Enter Tutorial Venue:");
-                     TutVenue = sc.nextLine();
+                    TutVenue = sc.nextLine();
 //                    System.out.println("Enter Tutorial StartTime (HHMM):");
-                     TutStart = getHHmmFormat(sc, "Enter Tutorial StartTime (HHMM):");
+                    TutStart = getHHmmFormat(sc, "Enter Tutorial StartTime (HHMM):");
 //                    System.out.println("Enter Tutorial EndTime (HHMM):");
-                     TutEnd = getHHmmFormat(sc, "Enter Tutorial EndTime (HHMM):");
+                    TutEnd = getHHmmFormat(sc, "Enter Tutorial EndTime (HHMM):");
                     System.out.println("Enter Tutorial WeekDay:");
-                     TutDay = sc.nextLine();
+                    TutDay = sc.nextLine();
                     courseIndex.addTutorial(TutVenue, TutStart, TutEnd, TutDay);
                     System.out.println("Enter Lab Venue:");
                     String LabVenue = sc.nextLine();
@@ -469,7 +471,7 @@ public class Admin implements Serializable {
         if (!verifyCourseCode(courseCode)) {
             return;
         }
-        System.out.println("Now updating course "+courseCode+" ...");
+        System.out.println("Now updating course " + courseCode + " ...");
         System.out.println("Enter Course Name:");
         String courseName = sc.nextLine();
         System.out.println("Enter Course School:");
@@ -485,7 +487,7 @@ public class Admin implements Serializable {
             }
             AcademicUnits = sc.nextInt();
             sc.nextLine();
-            if ((AcademicUnits <= 0) || (AcademicUnits > 4)){
+            if ((AcademicUnits <= 0) || (AcademicUnits > 4)) {
                 System.out.println("Invalid, please enter values from 1 to 4 only");
             }
         } while ((AcademicUnits <= 0) || (AcademicUnits > 4)); // show a warning message if input not within limits
@@ -500,7 +502,7 @@ public class Admin implements Serializable {
             }
             courseVacancies = sc.nextInt();
             sc.nextLine();
-            if ((courseVacancies <= 0) || (courseVacancies > 500)){
+            if ((courseVacancies <= 0) || (courseVacancies > 500)) {
                 System.out.println("Invalid, please enter values from 1 to 500 only");
             }
         } while ((courseVacancies <= 0) || (courseVacancies > 500)); // show a warning message if input not within limits
@@ -519,9 +521,9 @@ public class Admin implements Serializable {
         } while ((choice <= 0) || (choice >= 4));
 
         int numberOfIndexes;
-        if (choice==1)
-            numberOfIndexes=1;
-        else{
+        if (choice == 1)
+            numberOfIndexes = 1;
+        else {
             do {
                 System.out.println("Enter Number of Indexes:");
                 while (!sc.hasNextInt()) {
@@ -531,7 +533,7 @@ public class Admin implements Serializable {
                 }
                 numberOfIndexes = sc.nextInt();
                 sc.nextLine();
-                if ((numberOfIndexes <= 0) || (numberOfIndexes > 10)){
+                if ((numberOfIndexes <= 0) || (numberOfIndexes > 10)) {
                     System.out.println("Invalid, please enter values from 1 to 4 only");
                 }
             } while ((numberOfIndexes <= 0) || (numberOfIndexes > 10)); // show a warning message if input not within limits
@@ -696,7 +698,7 @@ public class Admin implements Serializable {
                     System.out.println("Enter studentName: ");
                     String studentName = sc.nextLine();
                     // verify name does not contain numbers
-                    if (!verifyNameInput(studentName)){
+                    if (!verifyNameInput(studentName)) {
                         System.out.println("Invalid name input!");
                         break;
                     }
@@ -708,21 +710,21 @@ public class Admin implements Serializable {
                         break;
                     }
                     // verify matric in correct format
-                    else if (!verifyMatricNoFormat(matricNo)){
+                    else if (!verifyMatricNoFormat(matricNo)) {
                         System.out.println("Invalid Matric No Format!");
                         break;
                     }
                     System.out.println("Enter studentGender: (Male/Female)");
                     String studentGender = sc.nextLine().toLowerCase();
                     // verify gender
-                    if (!verifyGender(studentGender)){
+                    if (!verifyGender(studentGender)) {
                         System.out.println("Gender incorrect format (Male/Female)!");
                         break;
                     }
                     System.out.println("Enter studentNationality: ");
                     String studentNationality = sc.nextLine();
                     // verify nationality
-                    if (!verifyNationality(studentNationality)){
+                    if (!verifyNationality(studentNationality)) {
                         System.out.println("Nationality incorrect!");
                         break;
                     }
@@ -732,12 +734,12 @@ public class Admin implements Serializable {
                     System.out.println("Student added");
                     System.out.println();
                     System.out.println("Current Student List:");
-                    for (String name: StudentList.keySet()){
-                        System.out.println("Name: "+StudentList.get(name).getStudentName());
-                        System.out.println("Matric No: "+StudentList.get(name).getMatricNo());
-                        System.out.println("Email: "+StudentList.get(name).getStudentEmail());
-                        System.out.println("Gender: "+StudentList.get(name).getStudentGender());
-                        System.out.println("Nationality: "+StudentList.get(name).getStudentNationality());
+                    for (String name : StudentList.keySet()) {
+                        System.out.println("Name: " + StudentList.get(name).getStudentName());
+                        System.out.println("Matric No: " + StudentList.get(name).getMatricNo());
+                        System.out.println("Email: " + StudentList.get(name).getStudentEmail());
+                        System.out.println("Gender: " + StudentList.get(name).getStudentGender());
+                        System.out.println("Nationality: " + StudentList.get(name).getStudentNationality());
                         System.out.println();
                     }
                     break;
@@ -753,7 +755,7 @@ public class Admin implements Serializable {
                     }
                     System.out.println("Enter studentName: ");
                     String studentName1 = sc.nextLine();
-                    if (!verifyNameInput(studentName1)){
+                    if (!verifyNameInput(studentName1)) {
                         System.out.println("Invalid name input!");
                         break;
                     }
@@ -765,21 +767,21 @@ public class Admin implements Serializable {
                         break;
                     }
                     // verify matric in correct format
-                    else if (!verifyMatricNoFormat(matricNo1)){
+                    else if (!verifyMatricNoFormat(matricNo1)) {
                         System.out.println("Invalid Matric No Format!");
                         break;
                     }
                     System.out.println("Enter studentGender: (Male/Female)");
                     String studentGender1 = sc.nextLine().toLowerCase();
                     // verify gender
-                    if (!verifyGender(studentGender1)){
+                    if (!verifyGender(studentGender1)) {
                         System.out.println("Gender incorrect format (Male/Female)!");
                         break;
                     }
                     System.out.println("Enter studentNationality: ");
                     String studentNationality1 = sc.nextLine();
                     // verify nationality
-                    if (!verifyNationality(studentNationality1)){
+                    if (!verifyNationality(studentNationality1)) {
                         System.out.println("Nationality incorrect!");
                         break;
                     }
@@ -850,12 +852,12 @@ public class Admin implements Serializable {
                     break;
                 case "9":
                     System.out.println("Current Student List:");
-                    for (String name: StudentList.keySet()){
-                        System.out.println("Name: "+StudentList.get(name).getStudentName());
-                        System.out.println("Matric No: "+StudentList.get(name).getMatricNo());
-                        System.out.println("Email: "+StudentList.get(name).getStudentEmail());
-                        System.out.println("Gender: "+StudentList.get(name).getStudentGender());
-                        System.out.println("Nationality: "+StudentList.get(name).getStudentNationality());
+                    for (String name : StudentList.keySet()) {
+                        System.out.println("Name: " + StudentList.get(name).getStudentName());
+                        System.out.println("Matric No: " + StudentList.get(name).getMatricNo());
+                        System.out.println("Email: " + StudentList.get(name).getStudentEmail());
+                        System.out.println("Gender: " + StudentList.get(name).getStudentGender());
+                        System.out.println("Nationality: " + StudentList.get(name).getStudentNationality());
                         System.out.println();
                     }
                     break;
@@ -870,6 +872,7 @@ public class Admin implements Serializable {
 
             saveCourses(CourseList);
             saveStudents(StudentList);
+            saveAccessPeriodDate(DateList);
         } while (!choice.equals("10"));
 
     }
