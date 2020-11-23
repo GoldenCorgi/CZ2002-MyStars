@@ -36,6 +36,16 @@ public class Admin implements Serializable {
     }
 
     /**
+     * Function to verify name input
+     *
+     * @param name
+     * @return
+     */
+    static boolean verifyNameInput(String name) {
+        String regex = "^[a-zA-Z ]+$";
+        return name.matches(regex);
+    }
+    /**
      * Function to verify gender.
      *
      * @param gender The gender of student.
@@ -678,25 +688,27 @@ public class Admin implements Serializable {
                     System.out.println("\n(2) Add Student");
                     System.out.println("Enter studentEmail: ");
                     String studentEmail = sc.nextLine();
+                    // verify email does not already exist
                     if (checkStudentEmailExists(studentEmail)) {
-                        // True = already exists
                         System.out.println("Email already exists!");
                         break;
                     }
-//                    else if (!isEmailValid(studentEmail)){
-//                        System.out.println("Invalid email format/input!");
-//                        break;
-//                    }
                     System.out.println("Enter studentName: ");
                     String studentName = sc.nextLine();
+                    // verify name does not contain numbers
+                    if (!verifyNameInput(studentName)){
+                        System.out.println("Invalid name input!");
+                        break;
+                    }
                     System.out.println("Enter matricNo: ");
                     String matricNo = sc.nextLine();
                     // verify matric does not duplicate
                     if (checkMatricNoExists(matricNo)) {
-                        // True = already exists
                         System.out.println("matricNo already exists!");
                         break;
-                    } else if (!verifyMatricNoFormat(matricNo)){
+                    }
+                    // verify matric in correct format
+                    else if (!verifyMatricNoFormat(matricNo)){
                         System.out.println("Invalid Matric No Format!");
                         break;
                     }
@@ -704,7 +716,6 @@ public class Admin implements Serializable {
                     String studentGender = sc.nextLine().toLowerCase();
                     // verify gender
                     if (!verifyGender(studentGender)){
-//                            // false = incorrect input
                         System.out.println("Gender incorrect format (Male/Female)!");
                         break;
                     }
@@ -735,24 +746,27 @@ public class Admin implements Serializable {
                     System.out.println("\n(3) Update Student");
                     System.out.println("Enter studentEmail: ");
                     String studentEmail1 = sc.nextLine();
+                    // verify student email already exist
                     if (!checkStudentEmailExists(studentEmail1)) {
-                        // True = already exists
                         System.out.println("Student does not exist!");
                         break;
-                    } //else if (!isEmailValid(studentEmail1)){
-                        //System.out.println("Invalid email format/input!");
-                        //break;
-                    //}
+                    }
+                    System.out.println("Updating student "+studentEmail1+"...");
                     System.out.println("Enter studentName: ");
                     String studentName1 = sc.nextLine();
+                    if (!verifyNameInput(studentName1)){
+                        System.out.println("Invalid name input!");
+                        break;
+                    }
                     System.out.println("Enter matricNo: ");
                     String matricNo1 = sc.nextLine();
                     // verify matric does not duplicate
                     if (checkMatricNoExists(matricNo1)) {
-                        // True = already exists
                         System.out.println("matricNo already exists!");
                         break;
-                    } else if (!verifyMatricNoFormat(matricNo1)){
+                    }
+                    // verify matric in correct format
+                    else if (!verifyMatricNoFormat(matricNo1)){
                         System.out.println("Invalid Matric No Format!");
                         break;
                     }
@@ -760,7 +774,6 @@ public class Admin implements Serializable {
                     String studentGender1 = sc.nextLine().toLowerCase();
                     // verify gender
                     if (!verifyGender(studentGender1)){
-//                            // false = incorrect input
                         System.out.println("Gender incorrect format (Male/Female)!");
                         break;
                     }
@@ -774,8 +787,18 @@ public class Admin implements Serializable {
 
                     StudentList.remove(studentEmail1);
                     Student updatedStudent = new Student(matricNo1, studentName1, studentEmail1, studentGender1, studentNationality1);
-                    StudentList.put(studentEmail1, updatedStudent);
+                    addStudent(updatedStudent);
                     System.out.println("Student information updated.");
+                    System.out.println();
+                    System.out.println("Current Student List:");
+                    for (String name: StudentList.keySet()){
+                        System.out.println("Name: "+StudentList.get(name).getStudentName());
+                        System.out.println("Matric No: "+StudentList.get(name).getMatricNo());
+                        System.out.println("Email: "+StudentList.get(name).getStudentEmail());
+                        System.out.println("Gender: "+StudentList.get(name).getStudentGender());
+                        System.out.println("Nationality: "+StudentList.get(name).getStudentNationality());
+                        System.out.println();
+                    }
                     break;
 
                 case "4":
