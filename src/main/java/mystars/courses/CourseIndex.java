@@ -163,9 +163,9 @@ public class CourseIndex implements Serializable {
 
     public void printRegisteredStudent() {
         for (int i = 0; i < this.registeredStudents.size(); i++) {
-            System.out.println((i + 1) + ": " + this.registeredStudents.get(i).getStudentName() + "||" + this.registeredStudents.get(i).getStudentEmail()+
-                    "||" + this.registeredStudents.get(i).getMatricNo() + "||" + this.registeredStudents.get(i).getStudentGender() +
-                    "||" + this.registeredStudents.get(i).getStudentNationality());
+            System.out.println((i + 1) + ": " + this.registeredStudents.get(i).getStudentName() + " || " + this.registeredStudents.get(i).getStudentEmail()+
+                    " || " + this.registeredStudents.get(i).getMatricNo() + " || " + this.registeredStudents.get(i).getStudentGender() +
+                    " || " + this.registeredStudents.get(i).getStudentNationality());
         }
 
 
