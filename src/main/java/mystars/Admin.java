@@ -39,7 +39,7 @@ public class Admin implements Serializable {
      * @param name
      * @return
      */
-    static boolean verifyNameInput(String name) {
+    public static boolean verifyNameInput(String name) {
         String regex = "^[a-zA-Z ]+$";
         return name.matches(regex);
     }
@@ -81,7 +81,7 @@ public class Admin implements Serializable {
      * @param matricNo
      * @return
      */
-    static boolean verifyMatricNoFormat(String matricNo) {
+    public static boolean verifyMatricNoFormat(String matricNo) {
         String regex = "(u)(19)[0-9]{5}[a-z]{1}";
         return matricNo.toLowerCase().matches(regex);
     }
@@ -155,7 +155,7 @@ public class Admin implements Serializable {
      * @param matricNo
      * @return
      */
-    public Boolean checkMatricNoExists(String matricNo) {
+    public boolean checkMatricNoExists(String matricNo) {
         // true if exists
         return (StudentList.get(matricNo) != null);
     }
