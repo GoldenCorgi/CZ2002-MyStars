@@ -161,6 +161,7 @@ public class Admin implements Serializable {
     }
 
     public void editStudentAccessPeriod(Scanner sc) {
+        boolean valid = true;
         LocalDateTime currentDateTime = LocalDateTime.now();
         DateTimeFormatter formatDateTime = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
         String formattedCurrentDT = currentDateTime.format(formatDateTime);
@@ -178,12 +179,12 @@ public class Admin implements Serializable {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
             LocalDateTime startDate = LocalDateTime.parse(date, formatter);
             System.out.println("New Start Date : " + startDate.format(formatDateTime));
-            DateList.add(0, startDate);
+
             System.out.println("Enter end date of Student Access Period (dd-MM-yyyy HH:mm:ss): ");
             String date2 = sc.nextLine();
             LocalDateTime endDate = LocalDateTime.parse(date2, formatter);
             System.out.println("New End Time: " + endDate.format(formatDateTime));
-            DateList.add(1, endDate);
+
 
 //            System.out.println("Enter start time of Student Access Period: ");
 //            String time = sc.nextLine();
@@ -198,10 +199,19 @@ public class Admin implements Serializable {
 //            System.out.println("New End Date and Time");
 //            System.out.println("New End Time: " + endTime);
 //            TimeList.add(0, endTime);
-
+            if (startDate.isAfter(endDate)){
+                System.out.println("Invalid input, end date must be after start date!");
+                valid = false;
+            }else if (valid){
+                DateList.add(0, startDate);
+                DateList.add(1, endDate);
+                System.out.println("Student Access Period Edited!");
+            }
         } catch (Exception e) {
+            valid = false;
             System.out.println("Invalid input try again!");
         }
+
 //        DateList.removeAll(DateList);
 
     }
@@ -689,7 +699,6 @@ public class Admin implements Serializable {
                 case "1":
                     System.out.println("\n(1) Edit Student Access Period");
                     editStudentAccessPeriod(sc);
-                    System.out.println("Student Access Period Edited!");
                     break;
                 case "2":
                     // Done
