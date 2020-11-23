@@ -114,11 +114,6 @@ public class Admin implements Serializable {
 //        return email.matches(regex);
 //    }
 
-    static boolean verifyCourseCodeFormat(String courseCode) {
-        String regex = "(cz)[1-4]{1}[0-9]{3}";
-        return courseCode.toLowerCase().matches(regex);
-    }
-
     /**
      * Function to change time inputs to HHmm format
      *
