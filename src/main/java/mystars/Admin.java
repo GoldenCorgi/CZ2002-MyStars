@@ -262,7 +262,7 @@ public class Admin implements Serializable {
      * @param courseCode
      * @return
      */
-    static boolean verifyCourseCodeFormat(String courseCode) {
+    public static boolean verifyCourseCodeFormat(String courseCode) {
         String regex = "(cz)[1-4]{1}[0-9]{3}";
         return courseCode.toLowerCase().matches(regex);
     }
