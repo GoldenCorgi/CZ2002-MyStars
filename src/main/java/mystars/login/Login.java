@@ -4,8 +4,13 @@ import mystars.StarsException;
 import mystars.Storage;
 
 import java.io.Console;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
+
+import static mystars.Storage.loadAccessPeriodDate;
 
 public class Login {
     UserList users;
@@ -139,6 +144,35 @@ public class Login {
         return null;
     }
 
+
+
+    public boolean accessPeriod() {
+        ArrayList<LocalDateTime> DateList = loadAccessPeriodDate();
+        LocalDateTime currentDate = LocalDateTime.now();
+        LocalDateTime startDate = DateList.get(0);
+        LocalDateTime endDate = DateList.get(1);
+        DateTimeFormatter formatDateTime = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+
+
+        if ((DateList.isEmpty())) {
+            System.out.println("Access Period Start Date : " + startDate.format(formatDateTime));
+            System.out.println("Access Period End Date   : " + endDate.format(formatDateTime));
+            System.out.println("Current Date and Time: " + currentDate.format(formatDateTime));
+            return false;
+        } else if (currentDate.isBefore(startDate)) {
+            System.out.println("Access Period Start Date : " + startDate.format(formatDateTime));
+            System.out.println("Access Period End Date   : " + endDate.format(formatDateTime));
+            System.out.println("Current Date and Time: " + currentDate.format(formatDateTime));
+            return false;
+        } else if (currentDate.isAfter(startDate) && currentDate.isBefore((endDate))) {
+            return true;
+        }
+        System.out.println("Access Period Start Date : " + startDate.format(formatDateTime));
+        System.out.println("Access Period End Date   : " + endDate.format(formatDateTime));
+        System.out.println("Current Date and Time: " + currentDate.format(formatDateTime));
+        return false;
+    }
+
     /**
      * Run method to run login
      *
@@ -147,20 +181,21 @@ public class Login {
      * @throws StarsException
      */
     public User run(Scanner sc) throws StarsException {
-//        Scanner sc = new Scanner(System.in);
         String roleName, username = null;
         boolean validated = false;
         do {
-
-//            LocalDateTime now = LocalDateTime.now();
-//            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
-//            System.out.println(dtf.format(now)); // removing this line until i figure out how to adapt datetime into my testing framework
             roleName = inputRole(sc);
             if (roleName == null) {
                 return null;
             }
             else if (roleName.equals("")) {
                 continue;
+            }
+            if (roleName.equals("Student")) {
+                if (!accessPeriod()) {
+                    System.out.println("Students are unable to access MyStars out of the access period duration!" );
+                    continue;
+                }
             }
             username = inputUsername(sc);
             int matched = users.ValidateUser(username, roleName);
@@ -184,11 +219,6 @@ public class Login {
             }
         } while (!validated);
         Storage.saveUsers(users);
-//        sc.close();
         return users.getExistingUser(username);
-        //char[] pw = console.readPassword("Enter password: ");
-
-        //String password = new String(pw);
-
     }
 }

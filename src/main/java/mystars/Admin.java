@@ -216,34 +216,6 @@ public class Admin implements Serializable {
 
     }
 
-    public boolean accessPeriod() {
-        LocalDateTime currentDate = LocalDateTime.now();
-//        LocalTime currentTime = LocalTime.now();
-        LocalDateTime startDate = DateList.get(0);
-        LocalDateTime endDate = DateList.get(1);
-//        LocalTime startTime = TimeList.get(0);
-//        LocalTime endTime = TimeList.get(1);
-
-        if ((DateList.isEmpty())) {
-            return false;
-        } else if (currentDate.isBefore(startDate)) {
-            return false;
-        } else if (currentDate.isAfter(startDate) && currentDate.isBefore((endDate))) {
-            return true;
-        }
-//        else if (currentDate.isEqual(startDate) && currentDate.isBefore(endDate)) {
-//            if (currentTime.isBefore(startTime)) {
-//                return false;
-//            }
-//            else if (currentTime.isAfter(startTime) || currentTime.equals(startTime)) {
-//                return true;
-//            }
-//        }
-        else if (currentDate.isAfter(endDate)) {
-            return false;
-        }
-        return false;
-    }
 
     /**
      * Function to add student.

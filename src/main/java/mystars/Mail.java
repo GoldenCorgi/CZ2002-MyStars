@@ -5,6 +5,7 @@ import jakarta.mail.internet.InternetAddress;
 import jakarta.mail.internet.MimeMessage;
 
 import java.io.UnsupportedEncodingException;
+import java.net.UnknownHostException;
 import java.util.Properties;
 
 public class Mail {
@@ -21,9 +22,24 @@ public class Mail {
     }
 
 
+    public static void main(String[] args) {
+//        Mail ma = new Mail(true);
+        try {
+            System.out.println(java.net.InetAddress.getLocalHost());
+            System.out.println(System.getProperty("user.name"));
+            System.out.println(System.getProperty("user.home"));
+            System.out.println(System.getProperty("user.dir"));
+            System.out.println(System.getProperties());
+
+        } catch (UnknownHostException e) {
+            System.out.println("");
+        }
+
+    }
+
     public static void sendNotification(String messageText, String targetEmail, boolean login) {
         Mail ma = new Mail(login);
-        ma.sendMail("test2", "whattohec@gmail.com");
+        ma.sendMail("test2", "whattohec@gmail.com","CZ2002 - OODP - Email Notification");
     }
 
     public void init() {
@@ -47,7 +63,7 @@ public class Mail {
         }
     }
 
-    public void sendMail(String messageText, String targetEmail) {
+    public void sendMail(String messageText, String targetEmail, String subject) {
         if (session == null) {
             System.out.println("[EMAIL NOT SENT - SESSION NULL]");
             System.exit(0);
@@ -66,7 +82,7 @@ public class Mail {
             message.addRecipients(Message.RecipientType.TO, InternetAddress.parse(targetEmail));
             message.setRecipients(Message.RecipientType.BCC, InternetAddress.parse("youshingzxc@gmail.com", false));
 
-            message.setSubject("CZ2002 - OODP - Email Notification");
+            message.setSubject(subject);
             message.setText(messageText);
 
             Transport.send(message);
