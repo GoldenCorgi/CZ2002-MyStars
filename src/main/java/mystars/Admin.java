@@ -885,7 +885,7 @@ public class Admin implements Serializable {
                         System.out.println("Course Name: "+ CourseList.get(course).getCourseName());
                         System.out.println("Course School: "+ CourseList.get(course).getCourseSchool());
                         System.out.println("Academic Units (AUs): "+ CourseList.get(course).getCourseAcademicUnit());
-                        CourseList.get(course).getCourseIndex();
+                        CourseList.get(course).getCourseIndexAndVacancy();
                         System.out.println();
                     }
                     break;

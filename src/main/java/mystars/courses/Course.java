@@ -66,10 +66,10 @@ public class Course implements Serializable {
     /**
      * Function to print out course indexes for a course
      */
-    public void getCourseIndex(){
-        System.out.println("Course Indexes:");
+    public void getCourseIndexAndVacancy(){
+        System.out.println("Course Indexes and Vacancy:");
         for (String name: courseIndex.keySet()){
-            System.out.println(courseIndex.get(name).getIndexName());
+            System.out.println(courseIndex.get(name).getIndexName()+ " : "+courseIndex.get(name).getNumberOfVacancies());
         }
     }
     /**
