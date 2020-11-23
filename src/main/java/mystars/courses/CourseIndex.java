@@ -146,16 +146,18 @@ public class CourseIndex implements Serializable {
     }
 
 
-//    /**
-//     * Function to get added students in a list.
-//     */
-//    public List<Student> getAddedStudents() {
-//        return this.registeredStudents;
-//    }
+    /**
+     * Function to get added students in a list.
+     */
+   public ArrayList<Student> getRegisteredStudents() {
+        return this.registeredStudents;
+    }
 
     public void printRegisteredStudent() {
         for (int i = 0; i < this.registeredStudents.size(); i++) {
-            System.out.println((i + 1) + ": " + this.registeredStudents.get(i).getStudentName());
+            System.out.println((i + 1) + ": " + this.registeredStudents.get(i).getStudentName() + "||" + this.registeredStudents.get(i).getStudentEmail()+
+                    "||" + this.registeredStudents.get(i).getMatricNo() + "||" + this.registeredStudents.get(i).getStudentGender() +
+                    "||" + this.registeredStudents.get(i).getStudentNationality());
         }
 
 
