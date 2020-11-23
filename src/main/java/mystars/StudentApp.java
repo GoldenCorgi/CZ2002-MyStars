@@ -181,6 +181,18 @@ public class StudentApp {
             return false;
         }
     }
+    /**
+     * Verify if student is in waitList for given courseCode
+     *
+     * @param courseCode The courseCode entered by student to be dropped
+     * @return <code>true</code> if student is in waitlist, <code>false</code> otherwise
+     */
+    public boolean verifyInWaitList(String courseCode){
+        String courseIndex = student.getCourseIndex(courseCode);
+        CourseIndex CI = CourseList.get(courseCode).getCourseIndexByIndexName(courseIndex);
+        String registration = CI.studentInWhichList(student.getStudentEmail());
+        return registration.equals("WaitList");
+    }
 
     /**
      * Using course codes to check if there is a timing clash. This is to ensure that courses added into student time table do not clash
@@ -316,9 +328,13 @@ public class StudentApp {
                         System.out.println("Course entered is not registered.");
                         break;
                     }
+                    // verify if in waitlist
+                    if(verifyInWaitList(courseCode)){
+                        System.out.println("Student is removed from course waitList.");
+                    }
+                    else{
+                    System.out.println("Course successfully dropped");}
                     dropCourse(courseCode);
-                    System.out.println("Course successfully dropped");
-
                     // Update all waitlists
                     // https://stackoverflow.com/questions/1066589/iterate-through-a-hashmap
                     for (Map.Entry<String, Course> entry : CourseList.entrySet()) {
