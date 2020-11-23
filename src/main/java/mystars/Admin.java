@@ -256,6 +256,12 @@ public class Admin implements Serializable {
         return true;
     }
 
+    /**
+     * Function to verify course code format (CZ1xxx to CZ4xxx)
+     *
+     * @param courseCode
+     * @return
+     */
     static boolean verifyCourseCodeFormat(String courseCode) {
         String regex = "(cz)[1-4]{1}[0-9]{3}";
         return courseCode.toLowerCase().matches(regex);
