@@ -40,7 +40,7 @@ public class Admin implements Serializable {
      * @return
      */
     static boolean verifyNameInput(String name) {
-        String regex = "^[a-zA-Z]+$";
+        String regex = "^[a-zA-Z ]+$";
         return name.matches(regex);
     }
 
@@ -261,6 +261,16 @@ public class Admin implements Serializable {
         return CourseList.get(courseCode) != null;
     }
 
+    /**
+     * Function to verify course code format (CZ1xxx to CZ4xxx)
+     *
+     * @param courseCode
+     * @return
+     */
+    static boolean verifyCourseCodeFormat(String courseCode) {
+        String regex = "(cz)[1-4]{1}[0-9]{3}";
+        return courseCode.toLowerCase().matches(regex);
+    }
     /**
      * Function to verify if course index exists
      *
@@ -753,6 +763,7 @@ public class Admin implements Serializable {
                         System.out.println("Student does not exist!");
                         break;
                     }
+                    System.out.println("Updating student "+studentEmail1+"...");
                     System.out.println("Enter studentName: ");
                     String studentName1 = sc.nextLine();
                     if (!verifyNameInput(studentName1)) {
@@ -788,8 +799,18 @@ public class Admin implements Serializable {
 
                     StudentList.remove(studentEmail1);
                     Student updatedStudent = new Student(matricNo1, studentName1, studentEmail1, studentGender1, studentNationality1);
-                    StudentList.put(studentEmail1, updatedStudent);
+                    addStudent(updatedStudent);
                     System.out.println("Student information updated.");
+                    System.out.println();
+                    System.out.println("Current Student List:");
+                    for (String name: StudentList.keySet()){
+                        System.out.println("Name: "+StudentList.get(name).getStudentName());
+                        System.out.println("Matric No: "+StudentList.get(name).getMatricNo());
+                        System.out.println("Email: "+StudentList.get(name).getStudentEmail());
+                        System.out.println("Gender: "+StudentList.get(name).getStudentGender());
+                        System.out.println("Nationality: "+StudentList.get(name).getStudentNationality());
+                        System.out.println();
+                    }
                     break;
 
                 case "4":

@@ -10,13 +10,22 @@ import java.util.Scanner;
  */
 public class Main {
 
+    /**
+     * main method to run the whole program
+     *
+     * @throws StarsException
+     */
     public static void main(String[] args) throws StarsException {
 //        Logger logger = Logger.getLogger("MyStars");
         Scanner sc = new Scanner(System.in);
         runLoop(sc);
     }
 
-
+    /**
+     * runLoop to run the program
+     *
+     * @param sc Scanner for input
+     */
     public static void runLoop(Scanner sc) throws StarsException {
         while (true) {
             Login login = new Login(Storage.loadUsers());
