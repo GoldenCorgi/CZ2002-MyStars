@@ -679,7 +679,8 @@ public class Admin implements Serializable {
                 "\n(7) Print Student List by Index Number" +
                 "\n(8) Print Student List by Course" +
                 "\n(9) Print Entire Student List" +
-                "\n(10) Exit";
+                "\n(10) Print Entire Course List" +
+                "\n(11) Exit";
         do {
             System.out.println(Choices);
             System.out.println("Enter the number of your choice: ");
@@ -878,6 +879,17 @@ public class Admin implements Serializable {
                     }
                     break;
                 case "10":
+                    System.out.println("Current Course List:");
+                    for (String course: CourseList.keySet()){
+                        System.out.println("Course Code: "+ CourseList.get(course).getCourseCode());
+                        System.out.println("Course Name: "+ CourseList.get(course).getCourseName());
+                        System.out.println("Course School: "+ CourseList.get(course).getCourseSchool());
+                        System.out.println("Academic Units (AUs): "+ CourseList.get(course).getCourseAcademicUnit());
+                        CourseList.get(course).getCourseIndex();
+                        System.out.println();
+                    }
+                    break;
+                case "11":
                     System.out.println("Program terminating..");
                     break;
                 default:
@@ -889,7 +901,7 @@ public class Admin implements Serializable {
             saveCourses(CourseList);
             saveStudents(StudentList);
             saveAccessPeriodDate(DateList);
-        } while (!choice.equals("10"));
+        } while (!choice.equals("11"));
 
     }
 }

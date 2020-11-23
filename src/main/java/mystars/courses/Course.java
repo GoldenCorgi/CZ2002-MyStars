@@ -36,7 +36,6 @@ public class Course implements Serializable {
      *
      * @param index The index of the course.
      */
-
     public void addCourseIndex(CourseIndex index) {
         courseIndex.put(index.getIndexName(), index);
     }
@@ -44,19 +43,35 @@ public class Course implements Serializable {
     /**
      * Function to get courseName.
      */
-//    public String getCourseName() {
-//        return this.courseName;
-//    }
-//    public String getCourseSchool() {
-//        return this.courseSchool;
-//    }
+    public String getCourseName() {
+        return this.courseName;
+    }
 
+    /**
+     * Function to get course school
+     * @return
+     */
+    public String getCourseSchool() {
+        return this.courseSchool;
+    }
 
+    /**
+     * Function to get course academic units
+     * @return
+     */
     public int getCourseAcademicUnit() {
         return this.academicUnit;
     }
 
-
+    /**
+     * Function to print out course indexes for a course
+     */
+    public void getCourseIndex(){
+        System.out.println("Course Indexes:");
+        for (String name: courseIndex.keySet()){
+            System.out.println(courseIndex.get(name).getIndexName());
+        }
+    }
     /**
      * Using courseIndex input string to return courseIndex object
      *
@@ -67,7 +82,10 @@ public class Course implements Serializable {
         return this.courseIndex.get(courseIndexName);
     }
 
-    /* get courseName */
+    /**
+     * Function to get course code
+     * @return
+     */
     public String getCourseCode() {
         return this.courseCode;
     }
