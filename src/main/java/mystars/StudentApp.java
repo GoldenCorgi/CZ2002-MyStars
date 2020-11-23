@@ -287,7 +287,10 @@ public class StudentApp {
                     }
                     // verify course code in student
                     if (verifyStudentHasCourseCode(courseCode)) {
-                        System.out.println("Course code has already been added.");
+                        if (verifyInWaitList(courseCode)){
+                            System.out.println("Course code has already been added to waitList."); }
+                        else{
+                            System.out.println("Course code has already been registered.");}
                         break;
                     }
                     System.out.println("Enter courseIndex: ");
@@ -303,8 +306,9 @@ public class StudentApp {
                         break;
                     }
 
-                    // Validate whether course got vacancies etc -- validation done in addcourse itself.
+                    // verify if course is already in waitlist
 
+                    // Validate whether course got vacancies etc -- validation done in addcourse itself.
                     addCourse(courseCode, courseIndex);
                     // verify if there is vacancies in courseIndex
                     if (Objects.equals(checkVacancies(courseCode, courseIndex), 0)) {
