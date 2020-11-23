@@ -16,11 +16,16 @@ public class Login {
      *
      * @param users   The UserList object of a list of users
      */
-
     public Login(UserList users) {
         this.users = users;
     }
 
+    /**
+     * Get user input for password
+     *
+     * @param sc Scanner for input
+     * @return password input by user as String
+     */
     public String inputPassword(Scanner sc) {
         Console console = System.console();
         if (console == null) {
@@ -32,6 +37,12 @@ public class Login {
         return new String(passwordArray);
     }
 
+    /**
+     * Get user input for role and check input must be 1, 2, 3
+     *
+     * @param sc Scanner for input
+     * @return role input by user as String
+     */
     private String inputRole(Scanner sc) {
         System.out.println("\nSelect user type: ");
         System.out.println("1. Student      2. Admin     3. End Program");
@@ -59,13 +70,25 @@ public class Login {
         return roleName;
     }
 
+    /**
+     * Get user input for username
+     *
+     * @param sc Scanner for input
+     * @return username input by user as String
+     */
     private String inputUsername(Scanner sc) {
 
         System.out.println("Enter your username: ");
         return sc.nextLine();
     }
 
-
+    /**
+     * Add new student with password if the student does not exist
+     *
+     * @param sc Scanner for input
+     * @param username Username input
+     * @throws StarsException
+     */
     public void addNewStudentWithPassword(Scanner sc, String username) throws StarsException {
         String password;
         Console console = System.console();
@@ -82,6 +105,13 @@ public class Login {
         Storage.saveUsers(users);
     }
 
+    /**
+     * Verify second student username and password when swapping index in studentApp
+     *
+     * @param username Username input by second student
+     * @param password Password input by second student
+     * @return User object of second student
+     */
     public User getSwappingStudent(String username, String password) {
         String roleName = "Student";
         boolean validated = false;
@@ -109,7 +139,13 @@ public class Login {
         return null;
     }
 
-
+    /**
+     * Run method to run login
+     *
+     * @param sc Scanner for input
+     * @return User object that has successfully signed in
+     * @throws StarsException
+     */
     public User run(Scanner sc) throws StarsException {
 //        Scanner sc = new Scanner(System.in);
         String roleName, username = null;
