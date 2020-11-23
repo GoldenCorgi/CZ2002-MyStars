@@ -37,6 +37,7 @@ public class StudentApp {
 
     /**
      * Add course for a student based on the course code and course index
+     * Add student into courseIndex object in the courseList hashmap
      *
      * @param courseCode  The course code entered by student
      * @param courseIndex The course index entered by student
@@ -52,6 +53,7 @@ public class StudentApp {
 
     /**
      * Drop course for student based on the course code
+     * Drop student from courseIndex object in courseList hashmap
      *
      * @param courseCode The course code entered by student
      */
@@ -65,7 +67,6 @@ public class StudentApp {
     /**
      * Print list of registered student courses
      */
-
     public void printCourse() {
         HashMap<String, String> studentCourses = student.getCourse();
         // https://stackoverflow.com/questions/1066589/iterate-through-a-hashmap
@@ -80,7 +81,6 @@ public class StudentApp {
         } else {
             System.out.println("Student has no courses registered!");
         }
-//        student.printCourse();
     }
 
     /**
@@ -90,7 +90,6 @@ public class StudentApp {
      * @param courseIndex The course index entered by student
      * @return The number of vacancies in a course
      */
-
     public int checkVacancies(String courseCode, String courseIndex) {
         // god has forsaken this code, and so will i
         return CourseList.get(courseCode).getCourseIndexByIndexName(courseIndex).getNumberOfVacancies();
@@ -102,7 +101,6 @@ public class StudentApp {
      * @param courseCode The course code entered by student
      * @return <code>true</code> if course code exists; <code>false</code> otherwise.
      */
-
     public boolean verifyCourseCode(String courseCode) {
         if (CourseList.get(courseCode) == null) {
             System.out.println("Rejected - CourseCode does not exist");
@@ -118,7 +116,6 @@ public class StudentApp {
      * @param courseIndex The course index
      * @return <code>true</code> if course index exists; <code>false</code> otherwise.
      */
-
     public boolean verifyCourseIndex(String courseCode, String courseIndex) {
         if (CourseList.get(courseCode).getCourseIndexByIndexName(courseIndex) == null) {
             System.out.println("Rejected - courseIndex does not exist in CourseCode");
@@ -133,7 +130,6 @@ public class StudentApp {
      * @param student A student object
      * @return <code>true</code> if student has courses; <code>false</code> otherwise.
      */
-
     public boolean verifyExistingCourse(Student student) {
         if (Objects.equals(student.getNumberOfCoursesRegistered(), 0)) {
             System.out.println("Rejected - student doesn't have any course");
@@ -148,7 +144,6 @@ public class StudentApp {
      * @param courseCode The course code entered
      * @return <code>true</code> if student has course code; <code>false</code> otherwise.
      */
-
     public boolean verifyStudentHasCourseCode(String courseCode) {
         return student.hasCourseCode(courseCode);
     }
@@ -159,15 +154,16 @@ public class StudentApp {
      * @param courseIndex The course index entered
      * @return <code>true</code> if student has course index; <code>false</code> otherwise.
      */
-
     public boolean verifyStudentHasCourseIndex(String courseIndex) {
         return student.hasCourseIndex(courseIndex);
     }
 
     /**
+     * Verify if student has exceeded max AUs to be registered
+     *
+     * @param newCourseCode The courseCode entered by student to be added
      * @return the total number of AUs registered
      */
-
     public boolean verifyAUsRegisteredExceededMax(String newCourseCode) {
         int au, newAU, totalAU=0;
         for (Map.Entry<String, String> entry : student.getCourse().entrySet()) {
@@ -193,7 +189,6 @@ public class StudentApp {
      * @param courseIndex1
      * @return <code>true</code> if course timing clashes; <code>false</code> otherwise.
      */
-
     public boolean checkTimingClash(String courseCode1, String courseIndex1) {
 //        System.out.println("Check Timing Clashes - ");
         if (Objects.equals(student.getCourse().size(), 0)) {
