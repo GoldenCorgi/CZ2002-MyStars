@@ -437,8 +437,9 @@ public class StudentApp {
                         // probably need to drop before add
                         student.dropCourse(courseCode);
                         SecondStudent.dropCourse(courseCode);
-                        student.addCourse(courseCode, index2);
+                        addCourse(courseCode, index2);
                         SecondStudent.addCourse(courseCode, index1);
+                        CourseList.get(courseCode).getCourseIndexByIndexName(index1).addStudent(SecondStudent);
                         StudentList.remove(student2Username);
                         StudentList.put(student2Username, SecondStudent);
                     }
