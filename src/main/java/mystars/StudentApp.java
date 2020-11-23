@@ -289,10 +289,6 @@ public class StudentApp {
                     if (!verifyCourseIndex(courseCode, courseIndex)) {
                         break;
                     }
-                    // verify if there is vacancies in courseIndex
-                    if (Objects.equals(checkVacancies(courseCode, courseIndex), 0)) {
-                        System.out.println("Number of vacancies in courseIndex is 0. Student will be added to waitList.");
-                    }
 
                     // validate if timetable clashes
                     if (checkTimingClash(courseCode, courseIndex)){
@@ -303,7 +299,12 @@ public class StudentApp {
                     // Validate whether course got vacancies etc -- validation done in addcourse itself.
 
                     addCourse(courseCode, courseIndex);
-                    System.out.println("Course successfully added");
+                    // verify if there is vacancies in courseIndex
+                    if (Objects.equals(checkVacancies(courseCode, courseIndex), 0)) {
+                        System.out.println("Number of vacancies in courseIndex is 0. Student will be added to waitList.");
+                    }
+                    else {
+                    System.out.println("Course successfully added");}
 
                     break;
                 case "2":
