@@ -85,6 +85,12 @@ public class Storage {
         writeToFile(usersFileContent, USERS_FILE);
     }
 
+    /**
+     * Load courses as CourseHashMap using courses serializable file courses.dat from data
+     * Create default courses if courses.dat does not exist
+     *
+     * @return CourseHashMap in the form of HashMap<String, Course>
+     */
     public static HashMap<String, Course> loadCourses() {
         Path path = Paths.get("data", COURSES_SERIALIZABLE_FILE_NAME);
         String filename = path.normalize().toString();
@@ -148,13 +154,17 @@ public class Storage {
         //System.out.println();
         if (CourseHashMap.size() == 0) {
             System.out.println("No previous data for CourseList");
-            System.out.println("Creating 4 default courses: CZ2001, CZ2002, CZ2003, CZ2004");
+            System.out.println("Creating 7 default courses: CZ2001, CZ2002, CZ2003, CZ2004, CZ2005, CZ2006, CZ2007");
             return DefaultCourse;
         }
 
         return CourseHashMap;
     }
 
+    /**
+     * Save the updated CourseHashMap into the serializable file courses.dat
+     * @param CourseHashMap The updated CoursehashMap
+     */
     public static void saveCourses(HashMap<String, Course> CourseHashMap) {
         String filename = Paths.get("data", COURSES_SERIALIZABLE_FILE_NAME).normalize().toString();
         FileOutputStream fos;
@@ -170,6 +180,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Load students as StudentHashMap using students serializable file students.dat from data
+     * Create default students if students.dat does not exist
+     *
+     * @return StudentHashMap in the form of HashMap<String, Student>
+     */
     public static HashMap<String, Student> loadStudents() {
         Path path = Paths.get("data", STUDENTS_SERIALIZABLE_FILE_NAME);
         HashMap<String, Student> StudentHashMap = new HashMap<>();
@@ -235,6 +251,10 @@ public class Storage {
         return StudentHashMap;
     }
 
+    /**
+     * Save the updated StudentHashMap into the serializable file students.dat
+     * @param StudentHashMap The updated StudentHashMap
+     */
     public static void saveStudents(HashMap<String, Student> StudentHashMap) {
         String filename = Paths.get("data", STUDENTS_SERIALIZABLE_FILE_NAME).normalize().toString();
         FileOutputStream fos;
@@ -335,6 +355,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads access period date using an ArrayList<LocalDate>, stores them into ArrayList.
+     *
+     * @return ArrayList of LocalDate
+     */
     public static ArrayList<LocalDate> loadAccessPeriodDate() {
         Path path = Paths.get("data", DATES_SERIALIZABLE_FILE_NAME);
         String filename = path.normalize().toString();
@@ -357,6 +382,11 @@ public class Storage {
         return dateArrayList;
     }
 
+    /**
+     * Save the updated ArrayList<LocalDate> into the serializable file dates.dat
+     *
+     * @param dateArrayList The updated ArrayList of LocalDate
+     */
     public static void saveAccessPeriodDate(ArrayList<LocalDate> dateArrayList) {
         String filename = Paths.get("data", DATES_SERIALIZABLE_FILE_NAME).normalize().toString();
         FileOutputStream fos;
@@ -372,6 +402,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads access period Time using an ArrayList<LocalTime>, stores them into ArrayList.
+     *
+     * @return ArrayList<LocalTime>.
+     */
     public static ArrayList<LocalTime> loadAccessPeriodTime() {
         Path path = Paths.get("data", TIME_SERIALIZABLE_FILE_NAME);
         String filename = path.normalize().toString();
@@ -394,6 +429,11 @@ public class Storage {
         return timeArrayList;
     }
 
+    /**
+     * Save the updated ArrayList<LocalTime> into the serializable file time.dat
+     *
+     * @param timeArrayList The updated ArrayList of LocalTime
+     */
     public static void saveAccessPeriodTime(ArrayList<LocalTime> timeArrayList) {
         String filename = Paths.get("data", TIME_SERIALIZABLE_FILE_NAME).normalize().toString();
         FileOutputStream fos;
