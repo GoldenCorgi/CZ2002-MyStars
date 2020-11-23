@@ -33,35 +33,41 @@ class AdminTest {
     }
 
     @Test
-    void CheckIfExitNumberIsStill10() throws StarsException {
+    void CheckIfExitNumberIsStill11() throws StarsException {
         Admin ad = new Admin("test");
-        String inputs = "helpe\n10";
+        String inputs = "helpe\n11";
         ad.runLoop(new Login(new UserList()),new Scanner(inputs));
     }
 
     @Test
     void case6heckVacanciesIndex() throws StarsException {
         Admin ad = new Admin("test");
-        String inputs = "6\nCZ2001\n10027\n10";
+        String inputs = "6\nCZ2001\n10027\n11";
         ad.runLoop(new Login(new UserList()),new Scanner(inputs));
     }
 
     @Test
     void case7PrintStudentListByIndexNumber() throws StarsException {
         Admin ad = new Admin("test");
-        String inputs = "7\nCZ2001\n10027\n10";
+        String inputs = "7\nCZ2001\n10027\n11";
         ad.runLoop(new Login(new UserList()),new Scanner(inputs));
     }
     @Test
     void case8PrintStudentListByCourse() throws StarsException {
         Admin ad = new Admin("test");
-        String inputs = "8\nCZ2001\n10";
+        String inputs = "8\nCZ2001\n11";
         ad.runLoop(new Login(new UserList()),new Scanner(inputs));
     }
     @Test
     void case9PrintEntireStudentList() throws StarsException {
         Admin ad = new Admin("test");
-        String inputs = "9\n10";
+        String inputs = "9\n11";
+        ad.runLoop(new Login(new UserList()),new Scanner(inputs));
+    }
+    @Test
+    void case10PrintEntireCourseList() throws StarsException {
+        Admin ad = new Admin("test");
+        String inputs = "10\n11";
         ad.runLoop(new Login(new UserList()),new Scanner(inputs));
     }
 

@@ -1,6 +1,7 @@
 package mystars.courses;
 
 
+import mystars.Mail;
 import mystars.Student;
 
 import java.io.Serializable;
@@ -112,9 +113,16 @@ public class CourseIndex implements Serializable {
     public void refreshWaitList() {
         while (!isFull() && (waitListStudents.size() > 0)) {
             Student studentOnWaitList = waitListStudents.remove(0);
+            String email = studentOnWaitList.getStudentEmail();
+            // notify students
+            if (email.contains("@")) {
+                Mail.sendNotification("Your waitlisted courseIndex - " + this.indexName +" has been registered!", email, true);
+            }
+            else {
+                System.out.println("Email not sent - '" + email +"' is not a valid email.");
+            }
             registeredStudents.add(studentOnWaitList);
             System.out.println("Updated Waitlist for " + this.indexName);
-            // TODO notify students
         }
     }
 
