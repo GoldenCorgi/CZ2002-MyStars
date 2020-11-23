@@ -5,6 +5,7 @@ import mystars.courses.CourseIndex;
 import mystars.login.Login;
 
 import java.io.Serializable;
+import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -18,6 +19,8 @@ public class Admin implements Serializable {
     private static final long serialVersionUID = 420;
     private final HashMap<String, Course> CourseList;
     private final HashMap<String, Student> StudentList;
+    private final ArrayList<LocalDate> DateList;
+    private final ArrayList<LocalTime> TimeList;
 
     /**
      * Constructor to create Admin object based on parameters given.
@@ -28,6 +31,8 @@ public class Admin implements Serializable {
     public Admin(String sampleadminname) {
         StudentList = loadStudents();
         CourseList = loadCourses();
+        DateList = loadAccessPeriodDate();
+        TimeList = loadAccessPeriodTime();
     }
 
     /**
@@ -143,9 +148,79 @@ public class Admin implements Serializable {
         return (courseSchool.contains(school.toUpperCase()));
     }
 
-    public void editStudentAccessPeriod() {
+    public void editStudentAccessPeriod(Scanner sc) {
+        LocalDateTime currentDateTime = LocalDateTime.now();
+        DateTimeFormatter formatDateTime = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+        String formattedCurrentDT = currentDateTime.format(formatDateTime);
+        System.out.println("Current Date and Time: " + formattedCurrentDT);
+        DateList.removeAll(DateList);
+        TimeList.removeAll(TimeList);
+
+        try {
+            System.out.println("Enter start date of Student Access Period (dd-MM-yyyy): ");
+            String date = sc.nextLine();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+            LocalDate startDate = LocalDate.parse(date, formatter);
+            System.out.println("New Start Date : " + startDate);
+            DateList.add(0, startDate);
+
+            System.out.println("Enter end date of Student Access Period (dd-MM-yyyy): ");
+            String date2 = sc.nextLine();
+            LocalDate endDate = LocalDate.parse(date2, formatter);
+            System.out.println("New End Time: " + endDate);
+            DateList.add(1, endDate);
+
+            System.out.println("Enter start time of Student Access Period: ");
+            String time = sc.nextLine();
+            LocalTime startTime = LocalTime.parse(time);
+            System.out.println("New Start Date and Time");
+            System.out.println("New Start Time: " + startTime);
+            TimeList.add(0, startTime);
+
+            System.out.println("Enter end time of Student Access Period: ");
+            String time2 = sc.nextLine();
+            LocalTime endTime = LocalTime.parse(time2);
+            System.out.println("New End Date and Time");
+            System.out.println("New End Time: " + endTime);
+            TimeList.add(0, endTime);
+
+        } catch (Exception e) {
+            System.out.println("Invalid input try again!");
+        }
 
     }
+
+    public boolean accessPeriod() {
+        LocalDate currentDate =  LocalDate.now();
+        LocalTime currentTime = LocalTime.now();
+        LocalDate startDate =  DateList.get(0);
+        LocalDate endDate = DateList.get(1);
+        LocalTime startTime = TimeList.get(0);
+        LocalTime endTime = TimeList.get(1);
+
+        if ((DateList.isEmpty()) || (TimeList.isEmpty())) {
+            return false;
+        }
+        else if (currentDate.isBefore(startDate)) {
+            return false;
+        }
+        else if (currentDate.isAfter(startDate) && currentDate.isBefore((endDate))) {
+            return true;
+        }
+        else if (currentDate.isEqual(startDate) && currentDate.isBefore(endDate)) {
+            if (currentTime.isBefore(startTime)) {
+                return false;
+            }
+            else if (currentTime.isAfter(startTime) || currentTime.equals(startTime)) {
+                return true;
+            }
+        }
+        else if (currentDate.isAfter(endDate)) {
+            return false;
+        }
+        return false;
+    }
+
 
     /**
      * Function to add student.
@@ -595,34 +670,8 @@ public class Admin implements Serializable {
             switch (choice) {
                 case "1":
                     System.out.println("\n(1) Edit Student Access Period");
-                    try {
-                        LocalDateTime currentDateTime = LocalDateTime.now();
-                        DateTimeFormatter formatDateTime = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
-                        String formattedCurrentDT = currentDateTime.format(formatDateTime);
-                        System.out.println("Current Date and Time: " + formattedCurrentDT);
-                        System.out.println("Enter start date of Student Access Period (dd-MM-yyyy): ");
-                        String date = sc.nextLine();
-                        System.out.println("Enter start time of Student Access Period: ");
-                        String time = sc.nextLine();
-                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-                        LocalDate startDate = LocalDate.parse(date, formatter);
-                        LocalTime timeFormat = LocalTime.parse(time);
-                        System.out.println("New Start Date and Time");
-                        System.out.println("date: " + startDate);
-                        System.out.println("time: " + timeFormat);
-
-                        System.out.println("Enter end date of Student Access Period (dd-MM-yyyy): ");
-                        String date2 = sc.nextLine();
-                        System.out.println("Enter end time of Student Access Period: ");
-                        String time2 = sc.nextLine();
-                        LocalDate endDate = LocalDate.parse(date2, formatter);
-                        LocalTime timeFormat2 = LocalTime.parse(time2);
-                        System.out.println("New End Date and Time");
-                        System.out.println("date: " + endDate);
-                        System.out.println("time: " + timeFormat2);
-                    } catch (Exception e) {
-                        System.out.println("Invalid input try again!");
-                    }
+                    editStudentAccessPeriod(sc);
+                    System.out.println("Student Access Period Edited!");
                     break;
                 case "2":
                     // Done

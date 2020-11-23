@@ -24,7 +24,7 @@ public class Student implements Serializable {
     private final HashMap<String, String> studentCourses = new HashMap<>();
 
     /**
-     * Contructor to create Student object based on parameters given.
+     * Constructor to create Student object based on parameters given.
      * Creates Student with matricNo, studentName, studentEmail, studentGender, studentNationality
      *
      * @param matricNo           The matriculation number of a student

@@ -10,7 +10,10 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 /**
  * Loads and saves data to file.
@@ -23,6 +26,8 @@ public class Storage {
     private static final String COURSES_SERIALIZABLE_FILE_NAME = "courses.dat";
     private static final String USERS_FILE = "users.txt";
     private static final String STUDENTS_SERIALIZABLE_FILE_NAME = "students.dat";
+    private static final String DATES_SERIALIZABLE_FILE_NAME = "dates.dat";
+    private static final String TIME_SERIALIZABLE_FILE_NAME = "time.dat";
     private static String folder = "data";
 
 
@@ -330,5 +335,77 @@ public class Storage {
         }
     }
 
+    public static ArrayList<LocalDate> loadAccessPeriodDate() {
+        Path path = Paths.get("data", DATES_SERIALIZABLE_FILE_NAME);
+        String filename = path.normalize().toString();
+        ArrayList<LocalDate> dateArrayList = new ArrayList<>();
 
+        FileInputStream fis;
+        ObjectInputStream in;
+        try {
+            fis = new FileInputStream(filename);
+            in = new ObjectInputStream(fis);
+            dateArrayList = (ArrayList<LocalDate>) in.readObject();
+            in.close();
+        } catch (IOException | ClassNotFoundException ex) {
+            ex.printStackTrace();
+        }
+        // print out the size
+        //System.out.println(" Details Size: " + pDetails.size());
+        //System.out.println();
+
+        return dateArrayList;
+    }
+
+    public static void saveAccessPeriodDate(ArrayList<LocalDate> dateArrayList) {
+        String filename = Paths.get("data", DATES_SERIALIZABLE_FILE_NAME).normalize().toString();
+        FileOutputStream fos;
+        ObjectOutputStream out;
+        try {
+            fos = new FileOutputStream(filename);
+            out = new ObjectOutputStream(fos);
+            out.writeObject(dateArrayList);
+            out.close();
+            //	System.out.println("Object Persisted");
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public static ArrayList<LocalTime> loadAccessPeriodTime() {
+        Path path = Paths.get("data", TIME_SERIALIZABLE_FILE_NAME);
+        String filename = path.normalize().toString();
+        ArrayList<LocalTime> timeArrayList = new ArrayList<>();
+
+        FileInputStream fis;
+        ObjectInputStream in;
+        try {
+            fis = new FileInputStream(filename);
+            in = new ObjectInputStream(fis);
+            timeArrayList = (ArrayList<LocalTime>) in.readObject();
+            in.close();
+        } catch (IOException | ClassNotFoundException ex) {
+            ex.printStackTrace();
+        }
+        // print out the size
+        //System.out.println(" Details Size: " + pDetails.size());
+        //System.out.println();
+
+        return timeArrayList;
+    }
+
+    public static void saveAccessPeriodTime(ArrayList<LocalTime> timeArrayList) {
+        String filename = Paths.get("data", TIME_SERIALIZABLE_FILE_NAME).normalize().toString();
+        FileOutputStream fos;
+        ObjectOutputStream out;
+        try {
+            fos = new FileOutputStream(filename);
+            out = new ObjectOutputStream(fos);
+            out.writeObject(timeArrayList);
+            out.close();
+            //	System.out.println("Object Persisted");
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
 }
