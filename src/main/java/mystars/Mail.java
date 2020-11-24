@@ -56,8 +56,8 @@ public class Mail {
 
     public void sendMail(String messageText, String targetEmail, String subject) {
         if (session == null) {
-            System.out.println("[EMAIL NOT SENT - SESSION NULL]");
-            System.exit(0);
+//            System.out.println("[EMAIL NOT SENT - SESSION NULL]");
+            return;
         }
         try {
 
