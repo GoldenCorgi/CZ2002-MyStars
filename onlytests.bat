@@ -3,7 +3,7 @@
 
 cd docs
 
-ECHO [2/2] RUNNING TEST CASES
+ECHO [1/1] RUNNING TEST CASES
 
 cd ../text-ui-test
 call runtest.bat
