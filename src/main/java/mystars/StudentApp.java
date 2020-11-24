@@ -445,6 +445,11 @@ public class StudentApp {
                             System.out.println("Rejected - both students have the same index");
                             break;
                         }
+                        // vet if new index will cause clashes
+                        if (checkTimingClash(courseCode, index2)){
+                            System.out.println("Rejected - second student's Course Index will clash with existing timetable!");
+                            break;
+                        }
 
 
                         // TODO Validate whether need to drop before add
