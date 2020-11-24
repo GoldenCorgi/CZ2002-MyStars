@@ -78,7 +78,7 @@ class AdminTest {
         Admin ad = new Admin("test");
         String inputs = "1"+
                 "\n06-01-2019 02:02:02\n06-01-2019 01:02:02" +
-                "\n1\n06-01-2019 02:02:02\n06-01-2019 03:02:02" +
+                "\n1\n06-01-2019 02:02:02\n06-01-2021 03:02:02" +
                 "\n11"
                 ;
         ad.runLoop(new Login(new UserList()),new Scanner(inputs));

@@ -121,7 +121,7 @@ public class Login {
         String roleName = "Student";
         boolean validated = false;
         do {
-            int matched = users.ValidateUser(username, roleName);
+            int matched = users.validateUser(username, roleName);
 
             if (matched == 2) {
                 System.out.println("Second user verified - " + username);
@@ -197,7 +197,7 @@ public class Login {
                 }
             }
             username = inputUsername(sc);
-            int matched = users.ValidateUser(username, roleName);
+            int matched = users.validateUser(username, roleName);
 
             if (matched == 2) {
                 System.out.println("Welcome back - " + username);

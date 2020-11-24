@@ -104,7 +104,7 @@ public class UserList {
      * @param role     The role entered by the user.
      * @return 2 if accurate, 1 if user found but role mismatch, 0 if user not found.
      */
-    public int ValidateUser(String username, String role) {
+    public int validateUser(String username, String role) {
         assert username != null && !username.equals("") : "Cannot get user of null username";
         assert role != null && !role.equals("") : "Cannot get role of null role";
 
