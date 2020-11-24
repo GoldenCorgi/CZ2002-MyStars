@@ -413,7 +413,12 @@ public class StudentApp {
 
                     // Validate whether course got vacancies etc -- validation done in addcourse itself.
                     addCourse(courseCode, courseIndex);
-                    System.out.println("Course Changed");
+                    // verify if there is vacancies in courseIndex
+                    if (Objects.equals(checkVacancies(courseCode, courseIndex), 0)) {
+                        System.out.println("Number of vacancies in courseIndex is 0. Student will be added to waitList.");
+                    }
+                    else {
+                        System.out.println("Course index successfully changed.");}
 
                     break;
                 case "6":
