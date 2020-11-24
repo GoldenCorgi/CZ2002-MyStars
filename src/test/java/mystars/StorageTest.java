@@ -19,9 +19,10 @@ class StorageTest {
 
     @Test
     void Courses() {
-        Storage.saveCourses(Storage.loadCourses());
-        assert(Storage.loadCourses() != null);
         Storage.saveCourses(new HashMap<String, Course>());
+        assert(Storage.loadCourses() != null);
+
+        Storage.saveCourses(Storage.loadCourses());
         assert(Storage.loadCourses() != null);
 
         assertTrue(true);
@@ -29,18 +30,20 @@ class StorageTest {
 
     @Test
     void Users() throws StarsException {
-        Storage.saveUsers(Storage.loadUsers());
-        assert(Storage.loadUsers() != null);
         Storage.saveUsers(new UserList());
+        assert(Storage.loadUsers() != null);
+
+        Storage.saveUsers(Storage.loadUsers());
         assert(Storage.loadUsers() != null);
 
         assertTrue(true);
     }
     @Test
     void Students() {
-        Storage.saveStudents(Storage.loadStudents());
-        assert(Storage.loadStudents() != null);
         Storage.saveStudents(new HashMap<String,Student>());
+        assert(Storage.loadStudents() != null);
+
+        Storage.saveStudents(Storage.loadStudents());
         assert(Storage.loadStudents() != null);
         assertTrue(true);
     }

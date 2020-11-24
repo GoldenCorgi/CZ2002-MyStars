@@ -28,6 +28,8 @@ public class Main {
      * @throws StarsException Error handling
      */
     public static void runLoop(Scanner sc) throws StarsException {
+        Mail.initialisation();
+        System.out.println("Welcome to MyStars!");
         while (true) {
             Login login = new Login(Storage.loadUsers());
             // return user class instead, so can get their username and role
