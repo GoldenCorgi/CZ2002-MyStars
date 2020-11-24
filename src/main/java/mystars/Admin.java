@@ -829,6 +829,7 @@ public class Admin implements Serializable {
                     courseCode = sc.nextLine();
                     // verify coursecode
                     if (!verifyCourseCode(courseCode)) {
+                        System.out.println("Rejected - courseCode does not exist in CourseList");
                         break;
                     }
                     System.out.println("Enter courseIndex: ");
@@ -846,6 +847,7 @@ public class Admin implements Serializable {
                     courseCode = sc.nextLine();
                     // verify coursecode
                     if (!verifyCourseCode(courseCode)) {
+                        System.out.println("Rejected - courseCode does not exist in CourseList");
                         break;
                     }
                     printStudentListByCourse(courseCode);
