@@ -13,7 +13,7 @@ public class Main {
     /**
      * main method to run the whole program
      *
-     * @throws StarsException
+     * @throws StarsException Error handling
      */
     public static void main(String[] args) throws StarsException {
 //        Logger logger = Logger.getLogger("MyStars");
@@ -25,6 +25,7 @@ public class Main {
      * runLoop to run the program
      *
      * @param sc Scanner for input
+     * @throws StarsException Error handling
      */
     public static void runLoop(Scanner sc) throws StarsException {
         while (true) {

@@ -150,7 +150,7 @@ public class Storage {
      * Load courses as CourseHashMap using courses serializable file courses.dat from data
      * Create default courses if courses.dat does not exist
      *
-     * @return CourseHashMap in the form of HashMap<String, Course>
+     * @return CourseHashMap in the form of HashMap - String, Course
      */
     public static HashMap<String, Course> loadCourses() {
         Path path = Paths.get("data", COURSES_SERIALIZABLE_FILE_NAME);
@@ -245,7 +245,7 @@ public class Storage {
      * Load students as StudentHashMap using students serializable file students.dat from data
      * Create default students if students.dat does not exist
      *
-     * @return StudentHashMap in the form of HashMap<String, Student>
+     * @return StudentHashMap in the form of HashMap - String, Student
      */
     public static HashMap<String, Student> loadStudents() {
         Path path = Paths.get("data", STUDENTS_SERIALIZABLE_FILE_NAME);
@@ -355,7 +355,7 @@ public class Storage {
     }
 
     /**
-     * Loads access period date using an ArrayList<LocalDateTime>, stores them into ArrayList.
+     * Loads access period date using an ArrayList with LocalDateTime, stores them into ArrayList.
      *
      * @return ArrayList of LocalDateTime
      */
@@ -397,7 +397,7 @@ public class Storage {
     }
 
     /**
-     * Save the updated ArrayList<LocalDateTime> into the serializable file dates.dat
+     * Save the updated ArrayList with LocalDateTime into the serializable file dates.dat
      *
      * @param dateArrayList The updated ArrayList of LocalDateTime
      */

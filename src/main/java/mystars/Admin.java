@@ -238,7 +238,7 @@ public class Admin implements Serializable {
      * Function to verify if course code exists
      *
      * @param courseCode  The course code of a course.
-     * @return
+     * @return true if course code exists
      */
     public boolean verifyCourseCode(String courseCode) {
         return CourseList.get(courseCode) != null;
@@ -248,7 +248,7 @@ public class Admin implements Serializable {
      * Function to verify course code format (CZ1xxx to CZ4xxx)
      *
      * @param courseCode  The course code of a course.
-     * @return
+     * @return true if course code format is valid
      */
     public static boolean verifyCourseCodeFormat(String courseCode) {
         String regex = "(cz)[1-4]{1}[0-9]{3}";
@@ -259,7 +259,7 @@ public class Admin implements Serializable {
      *
      * @param courseCode  The course code of a course.
      * @param courseIndex The course index of a course.
-     * @return
+     * @return true if course index exists in course code
      */
     public boolean verifyCourseIndex(String courseCode, String courseIndex) {
         if (CourseList.get(courseCode).getCourseIndexByIndexName(courseIndex) == null) {
@@ -628,7 +628,7 @@ public class Admin implements Serializable {
      *
      * @param courseCode  The course code of a course.
      * @param courseIndex The course index of a course.
-     * @return
+     * @return Number of vacancies
      */
     public int checkVacancies(String courseCode, String courseIndex) {
         // fuck this
@@ -659,7 +659,7 @@ public class Admin implements Serializable {
      *
      * @param login Login details
      * @param sc    Scanner for input
-     * @throws StarsException
+     * @throws StarsException Error handling
      */
     public void runLoop(Login login, Scanner sc) throws StarsException {
         String choice;

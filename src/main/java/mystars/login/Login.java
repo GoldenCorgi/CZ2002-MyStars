@@ -92,7 +92,7 @@ public class Login {
      *
      * @param sc Scanner for input
      * @param username Username input
-     * @throws StarsException
+     * @throws StarsException Error handling
      */
     public void addNewStudentWithPassword(Scanner sc, String username) throws StarsException {
         String password;
@@ -177,7 +177,7 @@ public class Login {
      *
      * @param sc Scanner for input
      * @return User object that has successfully signed in
-     * @throws StarsException
+     * @throws StarsException Error handling
      */
     public User run(Scanner sc) throws StarsException {
         String roleName, username = null;

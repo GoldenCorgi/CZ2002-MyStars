@@ -59,6 +59,7 @@ public class UserList {
      *
      * @param username Name of the user.
      * @param password Password of the user.
+     * @param role Rolename of the user
      */
     public void addNewUser(String username, String password, String role) {
         addUser(new User(username, password, role));

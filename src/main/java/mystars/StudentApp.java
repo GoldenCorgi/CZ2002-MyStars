@@ -197,8 +197,8 @@ public class StudentApp {
     /**
      * Using course codes to check if there is a timing clash. This is to ensure that courses added into student time table do not clash
      *
-     * @param courseCode1
-     * @param courseIndex1
+     * @param courseCode1 The new course code that the student want to add
+     * @param courseIndex1 The new course index that the student want to add
      * @return <code>true</code> if course timing clashes; <code>false</code> otherwise.
      */
     public boolean checkTimingClash(String courseCode1, String courseIndex1) {

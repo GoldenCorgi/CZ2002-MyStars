@@ -141,6 +141,8 @@ public class CourseIndex implements Serializable {
 
     /**
      * Function to get number of vacancies of index.
+     *
+     * @return number of vacancies in index
      */
     public int getNumberOfVacancies() {
         return (this.totalVacancies) - registeredStudents.size();
@@ -148,6 +150,8 @@ public class CourseIndex implements Serializable {
 
     /**
      * Function to check if course index is full. Returns a boolean value.
+     *
+     * @return true if course index is full
      */
     public boolean isFull() {
         return this.getNumberOfVacancies() == 0;
@@ -155,9 +159,10 @@ public class CourseIndex implements Serializable {
 
 
     /**
-     * Function to get added students in a list.
+     *  Function to get added students in a list.
+      * @return Arraylist of students
      */
-   public ArrayList<Student> getRegisteredStudents() {
+    public ArrayList<Student> getRegisteredStudents() {
         return this.registeredStudents;
     }
 
