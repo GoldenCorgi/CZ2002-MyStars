@@ -419,11 +419,9 @@ public class StudentApp {
                     }
                     System.out.println("Enter second student username: ");
                     String student2Username = sc.nextLine();
-                    System.out.println("Enter second student password: ");
-                    String student2Password = sc.nextLine(); // TODO mask password ?
 
                     // verify student name and student password
-                    User SecondUser = login.getSwappingStudent(student2Username, student2Password);
+                    User SecondUser = login.getSwappingStudent(student2Username, sc);
 
                     if (SecondUser != null) {
                         Student SecondStudent = StudentList.get(SecondUser.getName());

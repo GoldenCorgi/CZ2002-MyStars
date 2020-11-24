@@ -114,10 +114,11 @@ public class Login {
      * Verify second student username and password when swapping index in studentApp
      *
      * @param username Username input by second student
-     * @param password Password input by second student
+     * @param sc Scanner for input
      * @return User object of second student
      */
-    public User getSwappingStudent(String username, String password) {
+    public User getSwappingStudent(String username, Scanner sc) {
+        String password = inputPassword(sc);
         String roleName = "Student";
         boolean validated = false;
         do {
