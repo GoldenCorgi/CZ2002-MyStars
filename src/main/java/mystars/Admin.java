@@ -36,8 +36,8 @@ public class Admin implements Serializable {
     /**
      * Function to verify name input
      *
-     * @param name
-     * @return
+     * @param name The name of student inputted by admin
+     * @return true if valid name format, false otherwise
      */
     public static boolean verifyNameInput(String name) {
         String regex = "^[a-zA-Z ]+$";
@@ -48,7 +48,7 @@ public class Admin implements Serializable {
      * Function to verify gender.
      *
      * @param gender The gender of student.
-     * @return
+     * @return true if valid gender format, false otherwise
      */
     public static Boolean verifyGender(String gender) {
         final Set<String> genderTypes = new HashSet<>() {{
@@ -61,8 +61,8 @@ public class Admin implements Serializable {
     /**
      * Function to verify nationality
      *
-     * @param nationality
-     * @return
+     * @param nationality The nationality of student inputted by admin
+     * @return true if valid nationality format, false otherwise
      */
     public static Boolean verifyNationality(String nationality) {
         final Set<String> nationalityTypes = new HashSet<>() {{
@@ -79,8 +79,8 @@ public class Admin implements Serializable {
     /**
      * Function to verify the format of matricNo input
      *
-     * @param matricNo
-     * @return
+     * @param matricNo The matric number of student inputted by admin
+     * @return true if valid matric format, false otherwise
      */
     public static boolean verifyMatricNoFormat(String matricNo) {
         String regex = "(u)(19)[0-9]{5}[a-z]{1}";
@@ -90,8 +90,8 @@ public class Admin implements Serializable {
     /**
      * Function to verify the school entered
      *
-     * @param school
-     * @return
+     * @param school The school of course inputted by admin
+     * @return true if valid school format, false otherwise
      */
     public static Boolean verifyCourseSchool(String school) {
         final Set<String> courseSchool = new HashSet<>() {{
@@ -118,9 +118,9 @@ public class Admin implements Serializable {
     /**
      * Function to change time inputs to HHmm format
      *
-     * @param sc
-     * @param display
-     * @return
+     * @param sc Scanner for input
+     * @param display String to show to user for input
+     * @return String of date time in HHmm format
      */
     private String getHHmmFormat(Scanner sc, String display) {
         boolean x = true;
@@ -143,7 +143,7 @@ public class Admin implements Serializable {
      * Function to check if student's email exists.
      *
      * @param email The email name of the student.
-     * @return
+     * @return true if email exists
      */
     public boolean checkStudentEmailExists(String email) {
         // true if exists
@@ -153,14 +153,19 @@ public class Admin implements Serializable {
     /**
      * Function to check if student's matric no already exists
      *
-     * @param matricNo
-     * @return
+     * @param matricNo The matric number of student inputted by admin
+     * @return true if matric already exists
      */
     public boolean checkMatricNoExists(String matricNo) {
         // true if exists
         return (StudentList.get(matricNo) != null);
     }
 
+    /**
+     * Function to edit student access period
+     *
+     * @param sc Scanner for input
+     */
     public void editStudentAccessPeriod(Scanner sc) {
         boolean valid = true;
         LocalDateTime currentDateTime = LocalDateTime.now();
@@ -232,7 +237,7 @@ public class Admin implements Serializable {
     /**
      * Function to verify if course code exists
      *
-     * @param courseCode
+     * @param courseCode  The course code of a course.
      * @return
      */
     public boolean verifyCourseCode(String courseCode) {
@@ -242,7 +247,7 @@ public class Admin implements Serializable {
     /**
      * Function to verify course code format (CZ1xxx to CZ4xxx)
      *
-     * @param courseCode
+     * @param courseCode  The course code of a course.
      * @return
      */
     public static boolean verifyCourseCodeFormat(String courseCode) {
@@ -252,8 +257,8 @@ public class Admin implements Serializable {
     /**
      * Function to verify if course index exists
      *
-     * @param courseCode
-     * @param courseIndex
+     * @param courseCode  The course code of a course.
+     * @param courseIndex The course index of a course.
      * @return
      */
     public boolean verifyCourseIndex(String courseCode, String courseIndex) {
