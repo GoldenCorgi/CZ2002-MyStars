@@ -71,6 +71,7 @@ public class Admin implements Serializable {
             add("indonesian");
             add("chinese");
             add("thai");
+            add("others");
         }};
         return (nationalityTypes.contains(nationality.toLowerCase()));
     }
@@ -209,7 +210,7 @@ public class Admin implements Serializable {
             }
         } catch (Exception e) {
             valid = false;
-            System.out.println("Invalid input try again!");
+            System.out.println("Invalid input, try again!");
         }
 
 //        DateList.removeAll(DateList);
@@ -446,6 +447,8 @@ public class Admin implements Serializable {
 
         }
         saveCourses(CourseList);
+        System.out.println("Course Added");
+
     }
 
 
@@ -797,7 +800,6 @@ public class Admin implements Serializable {
                     System.out.println("\n(4) Add Course");
                     // Done
                     addCourse(sc);
-                    System.out.println("Course Added");
                     break;
                 case "5":
                     System.out.println("\n(5) Update Course");

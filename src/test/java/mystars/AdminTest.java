@@ -32,6 +32,57 @@ class AdminTest {
                 "\nVenue\n1000\n1100\nMon" ));
     }
 
+    @Test
+    void case2AddStudent() throws StarsException {
+        Admin ad = new Admin("test");
+        String inputs = "2"+
+                "\nstudentEmail\nHeyNoNumbersInName\nU1900000F\nMale\nsingaporean" +
+                "\n2" +
+                "\nstudentEmail1\nHeyNoNumbersInName\nU1900001F\nMale\nwrongNationality" +
+                "\n2" +
+                "\nstudentEmail2\nHeyNoNumbersInName\nU1900002F\nWrongGender" +
+                "\n2" +
+                "\nstudentEmail3\nHeyNoNumbersInName\nU1900000F" +
+                "\n2" +
+                "\nstudentEmail4\nHeyNoNumbersInName\nU19z" +
+                "\n2" +
+                "\nstudentEmail5\nHeyNumbersInName2" +
+                "\n2" +
+                "\nstudentEmail" +
+                "\n11"
+                ;
+        ad.runLoop(new Login(new UserList()),new Scanner(inputs));
+    }
+    @Test
+    void case3AddStudent() throws StarsException {
+        Admin ad = new Admin("test");
+        String inputs = "2"+
+                "\nstudentEmail\nHeyNoNumbersInName\nU1900000F\nMale\nsingaporean" +
+                "\n2" +
+                "\nstudentEmail\nHeyNoNumbersInName\nU1900001F\nMale\nwrongNationality" +
+                "\n2" +
+                "\nstudentEmail\nHeyNoNumbersInName\nU1900002F\nWrongGender" +
+                "\n2" +
+                "\nstudentEmail\nHeyNoNumbersInName\nU1900000F" +
+                "\n2" +
+                "\nstudentEmail\nHeyNoNumbersInName\nU19z" +
+                "\n2" +
+                "\nstudentEmail\nHeyNumbersInName2" +
+                "\n11"
+                ;
+        ad.runLoop(new Login(new UserList()),new Scanner(inputs));
+    }
+
+    @Test
+    void case1EditStudentAccessPeriod() throws StarsException {
+        Admin ad = new Admin("test");
+        String inputs = "1"+
+                "\n06-01-2019 02:02:02\n06-01-2019 01:02:02" +
+                "\n1\n06-01-2019 02:02:02\n06-01-2019 03:02:02" +
+                "\n11"
+                ;
+        ad.runLoop(new Login(new UserList()),new Scanner(inputs));
+    }
 
     @Test
     void case45addupdateCourse() throws StarsException {
