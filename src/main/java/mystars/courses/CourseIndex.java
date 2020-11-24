@@ -148,6 +148,10 @@ public class CourseIndex implements Serializable {
         return (this.totalVacancies) - registeredStudents.size();
     }
 
+    public int getNumberOfTotalVacancies() {
+        return (this.totalVacancies);
+    }
+
     /**
      * Function to check if course index is full. Returns a boolean value.
      *

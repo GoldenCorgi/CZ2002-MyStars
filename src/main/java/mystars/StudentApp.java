@@ -95,6 +95,10 @@ public class StudentApp {
         return CourseList.get(courseCode).getCourseIndexByIndexName(courseIndex).getNumberOfVacancies();
     }
 
+    public int checkTotalVacancies(String courseCode, String courseIndex) {
+        // god has forsaken this code, and so will i
+        return CourseList.get(courseCode).getCourseIndexByIndexName(courseIndex).getNumberOfTotalVacancies();
+    }
     /**
      * Verify if the course code exists
      *
@@ -370,7 +374,8 @@ public class StudentApp {
                     }
 
                     int vacancies = checkVacancies(courseCode, courseIndex);
-                    System.out.println("Course Index has " + vacancies + " Vacancies");
+                    int totVacancies = checkTotalVacancies(courseCode, courseIndex);
+                    System.out.println("Course Index has " + vacancies + " Vacancies out of " + totVacancies);
                     break;
                 case "5":
                     // Done
