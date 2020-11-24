@@ -106,7 +106,7 @@ public class Login {
             password = new String(passwordArray);
         }
 
-        users.addNewUser(username, password, "student");
+        users.addNewUser(username, password, "Student");
         Storage.saveUsers(users);
     }
 
