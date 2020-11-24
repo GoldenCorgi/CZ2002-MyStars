@@ -4,7 +4,10 @@
 [![Netlify Status](https://api.netlify.com/api/v1/badges/122779ae-d183-46e9-beef-6e66a0d4db3f/deploy-status)](https://cz2002-mystars.netlify.app)
 [![codecov](https://codecov.io/gh/GoldenCorgi/CZ2002-MyStars/branch/master/graph/badge.svg?token=W928NWEEMJ)](https://codecov.io/gh/GoldenCorgi/CZ2002-MyStars)
 
-![meme](https://i.redd.it/5mfbi6v63ir41.jpg)
+<p align="center">
+  <img src="https://i.redd.it/5mfbi6v63ir41.jpg" width="70%" />
+</p>
+
 
 ## Documentation
 
