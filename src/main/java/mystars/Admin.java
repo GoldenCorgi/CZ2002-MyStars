@@ -458,6 +458,7 @@ public class Admin implements Serializable {
         System.out.println("Enter Course Code:");
         String courseCode = sc.nextLine();
         if (!verifyCourseCode(courseCode)) {
+            System.out.println("Course - " + courseCode + " does not exist");
             return;
         }
         System.out.println("Now updating course " + courseCode + " ...");
@@ -800,9 +801,7 @@ public class Admin implements Serializable {
                     break;
                 case "5":
                     System.out.println("\n(5) Update Course");
-
                     updateCourses(sc);
-                    System.out.println("Program terminating..");
                     break;
                 case "6":
                     // Done

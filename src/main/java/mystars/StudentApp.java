@@ -203,7 +203,7 @@ public class StudentApp {
      */
     public boolean checkTimingClash(String courseCode1, String courseIndex1) {
 //        System.out.println("Check Timing Clashes - ");
-        if (Objects.equals(student.getCourse().size(), 0)) {
+        if (student.getCourse().size() > 0) {
             for (Map.Entry<String, String> entry : student.getCourse().entrySet()) {
 //                System.out.println("here1");
                 String courseCode = entry.getKey();

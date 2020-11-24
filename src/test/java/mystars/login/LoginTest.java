@@ -19,7 +19,7 @@ class LoginTest {
         ad.run(new Scanner(inputs));
         inputs = "1\nadmin\n3";
         ad.run(new Scanner(inputs));
-        inputs = "555\n1\nnewUser2\nNewPassword";
+        inputs = "555\n1\nnewUser2\n3";
         ad.run(new Scanner(inputs));
 
     }

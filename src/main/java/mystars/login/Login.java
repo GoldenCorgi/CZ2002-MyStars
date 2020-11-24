@@ -145,7 +145,12 @@ public class Login {
     }
 
 
+    private void printDates(LocalDateTime currentDate,LocalDateTime startDate,LocalDateTime endDate,DateTimeFormatter formatDateTime) {
+        System.out.println("Access Period Start Date : " + startDate.format(formatDateTime));
+        System.out.println("Access Period End Date   : " + endDate.format(formatDateTime));
+        System.out.println("Current Date and Time: " + currentDate.format(formatDateTime));
 
+    }
     public boolean accessPeriod() {
         ArrayList<LocalDateTime> DateList = loadAccessPeriodDate();
         LocalDateTime currentDate = LocalDateTime.now();
@@ -155,21 +160,15 @@ public class Login {
 
 
         if ((DateList.isEmpty())) {
-            System.out.println("Access Period Start Date : " + startDate.format(formatDateTime));
-            System.out.println("Access Period End Date   : " + endDate.format(formatDateTime));
-            System.out.println("Current Date and Time: " + currentDate.format(formatDateTime));
+            printDates(currentDate, startDate, endDate, formatDateTime);
             return false;
         } else if (currentDate.isBefore(startDate)) {
-            System.out.println("Access Period Start Date : " + startDate.format(formatDateTime));
-            System.out.println("Access Period End Date   : " + endDate.format(formatDateTime));
-            System.out.println("Current Date and Time: " + currentDate.format(formatDateTime));
+            printDates(currentDate, startDate, endDate, formatDateTime);
             return false;
         } else if (currentDate.isAfter(startDate) && currentDate.isBefore((endDate))) {
             return true;
         }
-        System.out.println("Access Period Start Date : " + startDate.format(formatDateTime));
-        System.out.println("Access Period End Date   : " + endDate.format(formatDateTime));
-        System.out.println("Current Date and Time: " + currentDate.format(formatDateTime));
+        printDates(currentDate, startDate, endDate, formatDateTime);
         return false;
     }
 

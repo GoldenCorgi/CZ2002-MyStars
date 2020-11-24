@@ -23,7 +23,7 @@ class AdminTest {
                 "\nVenue\n1000\n1100\nMon" +
                 "\nVenue\n1000\n1100\nMon" +
                 "\nVenue\n1000\n1100\nMon" ));
-        ad.updateCourses(new Scanner("Algos?\nCZ4098\nSCSE\n1\n60" +
+        ad.updateCourses(new Scanner("CZ4098\nAlgos?\nSCSE\n1\n60" +
                 "\n3" + // Type of coursecomponent (lecture/tut/lab)
                 "\n1" + // number of indexes
                 "\nIndexName" +
@@ -31,6 +31,57 @@ class AdminTest {
                 "\nVenue\n1000\n1100\nMon" +
                 "\nVenue\n1000\n1100\nMon" ));
     }
+
+
+    @Test
+    void case45addupdateCourse() throws StarsException {
+        Admin ad = new Admin("test");
+        String inputs = "4"+
+                "\nAlgos?\nCZ4098\nSCSE\n1\n60" +
+                "\n3" + // Type of coursecomponent (lecture/tut/lab)
+                "\n1" + // number of indexes
+                "\nIndexName" +
+                "\nVenue\n1000\n1100\nMon" +
+                "\nVenue\n1000\n1100\nMon" +
+                "\nVenue\n1000\n1100\nMon" +
+                "\n5" +
+                "\nCZ4098\nAlgos?\nSCSE\n1\n60" +
+                "\n3" + // Type of coursecomponent (lecture/tut/lab)
+                "\n1" + // number of indexes
+                "\nIndexName" +
+                "\nVenue\n1000\n1100\nMon" +
+                "\nVenue\n1000\n1100\nMon" +
+                "\nVenue\n1000\n1100\nMon"+
+                "\n5" +
+                "\nCZ4098\nAlgos?\nSCSE\n1\n60" +
+                "\n2" + // Type of coursecomponent (lecture/tut/lab)
+                "\n1" + // number of indexes
+                "\nIndexName" +
+                "\nVenue\n1000\n1100\nMon" +
+                "\nVenue\n1000\n1100\nMon" +
+                "\n5" +
+                "\nCZ4098\nAlgos?\nSCSE\n1\n60" +
+                "\n1" + // Type of coursecomponent (lecture/tut/lab)
+                "\nIndexName" +
+                "\nVenue\n1000\n1100\nMon"+
+                "\n4" +
+                "\nAlgos?\nCZ4097\nSCSE\n1\n60" +
+                "\n2" + // Type of coursecomponent (lecture/tut/lab)
+                "\n1" + // number of indexes
+                "\nIndexName" +
+                "\nVenue\n1000\n1100\nMon" +
+                "\nVenue\n1000\n1100\nMon" +
+                "\n4" +
+                "\nAlgos?\nCZ4096\nSCSE\n1\n60" +
+                "\n1" + // Type of coursecomponent (lecture/tut/lab)
+                "\nIndexName" +
+                "\nVenue\n1000\n1100\nMon" +
+                "\n11"
+                ;
+        ad.runLoop(new Login(new UserList()),new Scanner(inputs));
+    }
+
+
 
     @Test
     void CheckIfExitNumberIsStill11() throws StarsException {
