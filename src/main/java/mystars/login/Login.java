@@ -118,7 +118,16 @@ public class Login {
      * @return User object of second student
      */
     public User getSwappingStudent(String username, Scanner sc) {
-        String password = inputPassword(sc);
+        String password;
+        Console console = System.console();
+        if (console == null) {
+            System.out.println("Couldn't get Console instance - Do not run in an IDE");
+            System.out.println("Enter second user's not so secret password: ");
+            password= sc.nextLine();
+        }
+        else {
+        char[] passwordArray = console.readPassword("Enter second user's secret password: ");
+        password = new String(passwordArray);}
         String roleName = "Student";
         boolean validated = false;
         do {
