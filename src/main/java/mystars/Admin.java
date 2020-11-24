@@ -276,11 +276,13 @@ public class Admin implements Serializable {
         do {
             System.out.println("Enter Course Code:");
             courseCode = sc.nextLine();
-            if (verifyCourseCode(courseCode))
+            if (verifyCourseCode(courseCode)){
                 System.out.println("Course code already exists, try again!");
+                return;
+            }
             else if (!verifyCourseCodeFormat(courseCode))
                 System.out.println("Invalid course code format, try again!");
-        } while (verifyCourseCode(courseCode) || !verifyCourseCodeFormat(courseCode));
+        } while (!verifyCourseCodeFormat(courseCode));
 
         String courseSchool;
         // verify course school
