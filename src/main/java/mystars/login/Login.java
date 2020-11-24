@@ -145,12 +145,26 @@ public class Login {
     }
 
 
+    /**
+     * Print the access period and current date for comparison
+     *
+     * @param currentDate current date
+     * @param startDate start date of access period
+     * @param endDate end date of access period
+     * @param formatDateTime format of string to output
+     */
     private void printDates(LocalDateTime currentDate,LocalDateTime startDate,LocalDateTime endDate,DateTimeFormatter formatDateTime) {
         System.out.println("Access Period Start Date : " + startDate.format(formatDateTime));
         System.out.println("Access Period End Date   : " + endDate.format(formatDateTime));
         System.out.println("Current Date and Time: " + currentDate.format(formatDateTime));
 
     }
+
+    /**
+     * Verify if current date is in the access period
+     *
+     * @return true if now is within access period
+     */
     public boolean accessPeriod() {
         ArrayList<LocalDateTime> DateList = loadAccessPeriodDate();
         LocalDateTime currentDate = LocalDateTime.now();
