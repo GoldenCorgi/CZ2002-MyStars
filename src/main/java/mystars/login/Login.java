@@ -209,11 +209,7 @@ public class Login {
                 }
 
             } else if (matched == 0) {
-                System.out.println("You are registering as a new user - " + username);
-                String password = inputPassword(sc);
-                users.addNewUser(username, password, roleName);
-                System.out.println("You have registered as a new user!");
-                validated = true;
+                System.out.println("You are not registered as a user! - " + username);
             } else {
                 System.out.println("User - " + username + " - is not allowed to log in as a " + roleName);
             }
