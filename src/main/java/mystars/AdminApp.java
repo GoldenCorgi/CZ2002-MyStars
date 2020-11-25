@@ -4,7 +4,6 @@ import mystars.courses.Course;
 import mystars.courses.CourseIndex;
 import mystars.login.Login;
 
-import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -13,20 +12,19 @@ import java.util.*;
 import static mystars.Storage.*;
 
 
-public class Admin implements Serializable {
-    private static final long serialVersionUID = 420;
+public class AdminApp {
     private final HashMap<String, Course> CourseList;
     private final HashMap<String, Student> StudentList;
     private final ArrayList<LocalDateTime> DateList;
 //    private final ArrayList<LocalTime> TimeList;
 
     /**
-     * Constructor to create Admin object based on parameters given.
+     * Constructor to create AdminApp object based on parameters given.
      * Creates admin with adminUserName
      *
      * @param adminUserName The name of an admin.
      */
-    public Admin(String adminUserName) {
+    public AdminApp(String adminUserName) {
         StudentList = loadStudents();
         CourseList = loadCourses();
         DateList = loadAccessPeriodDate();

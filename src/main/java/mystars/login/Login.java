@@ -50,7 +50,7 @@ public class Login {
      */
     private String inputRole(Scanner sc) {
         System.out.println("\nSelect user type: ");
-        System.out.println("1. Student      2. Admin     3. End Program");
+        System.out.println("1. Student      2. AdminApp     3. End Program");
         String role;
         String roleName;
         try {
@@ -65,7 +65,7 @@ public class Login {
         if (role.equals("1")) {
             roleName = "Student";
         } else if (role.equals("2")) {
-            roleName = "Admin";
+            roleName = "AdminApp";
         } else if (role.equals("3")) {
             return null;
         } else {

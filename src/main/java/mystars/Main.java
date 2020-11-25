@@ -44,9 +44,9 @@ public class Main {
                 System.out.println("Welcome Student - " + user.getName());
                 StudentApp StudentApp = new StudentApp(user.getName());
                 StudentApp.runLoop(login,sc);
-            } else if (roleName.equals("Admin")) {
-                System.out.println("Welcome Admin - " + user.getName());
-                Admin admin = new Admin(user.getName());
+            } else if (roleName.equals("AdminApp")) {
+                System.out.println("Welcome AdminApp - " + user.getName());
+                AdminApp admin = new AdminApp(user.getName());
                 admin.runLoop(login,sc);
             }
         }

@@ -31,7 +31,7 @@ class MainTest {
 
     @Test
     void MakeCourseOverflowWaitList() {
-        Admin ad = new Admin("test");
+        AdminApp ad = new AdminApp("test");
         ad.addCourse(new Scanner("CourseName\nCZ4099\nSCSE\n1" +
                 "\n1" + // Vacancies
                 "\n3" + // Type of coursecomponent (lecture/tut/lab)

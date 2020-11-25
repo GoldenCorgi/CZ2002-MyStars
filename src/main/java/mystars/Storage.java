@@ -93,7 +93,7 @@ public class Storage {
         Path path = Paths.get(folder, USERS_FILE);
         ArrayList<User> users = new ArrayList<>();
         UserList defaultUsers = new UserList();
-        defaultUsers.addNewUser("admin", "1234", "Admin");
+        defaultUsers.addNewUser("admin", "1234", "AdminApp");
         defaultUsers.addNewUser("student", "1234", "Student");
         defaultUsers.addNewUser("timh0011", "1234", "Student");
         defaultUsers.addNewUser("benc0012", "1234", "Student");

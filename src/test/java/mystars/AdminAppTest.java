@@ -6,11 +6,11 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Scanner;
 
-class AdminTest {
+class AdminAppTest {
 
     @Test
     void CheckEveryFunction() {
-        Admin ad = new Admin("test");
+        AdminApp ad = new AdminApp("test");
         ad.checkStudentEmailExists("student");
         ad.addStudent( new Student("U1921001A", "Tim Ho", "timh0011", "Male", "Singaporean"));
         ad.checkVacancies("CZ2001","10027");
@@ -34,7 +34,7 @@ class AdminTest {
 
     @Test
     void case2AddStudent() throws StarsException {
-        Admin ad = new Admin("test");
+        AdminApp ad = new AdminApp("test");
         String inputs = "2"+
                 "\nstudentEmail\nHeyNoNumbersInName\nU1900000F\nMale\nsingaporean" +
                 "\n2" +
@@ -55,7 +55,7 @@ class AdminTest {
     }
     @Test
     void case3AddStudent() throws StarsException {
-        Admin ad = new Admin("test");
+        AdminApp ad = new AdminApp("test");
         String inputs = "2"+
                 "\nstudentEmail\nHeyNoNumbersInName\nU1900000F\nMale\nsingaporean" +
                 "\n2" +
@@ -75,7 +75,7 @@ class AdminTest {
 
     @Test
     void case1EditStudentAccessPeriod() throws StarsException {
-        Admin ad = new Admin("test");
+        AdminApp ad = new AdminApp("test");
         String inputs = "1"+
                 "\n06-01-2019 02:02:02\n06-01-2019 01:02:02" +
                 "\n1\n06-01-2019 02:02:02\n06-01-2021 03:02:02" +
@@ -86,7 +86,7 @@ class AdminTest {
 
     @Test
     void case45addupdateCourse() throws StarsException {
-        Admin ad = new Admin("test");
+        AdminApp ad = new AdminApp("test");
         String inputs = "4"+
                 "\nAlgos?\nCZ4098\nSCSE\n1\n60" +
                 "\n3" + // Type of coursecomponent (lecture/tut/lab)
@@ -136,39 +136,39 @@ class AdminTest {
 
     @Test
     void CheckIfExitNumberIsStill11() throws StarsException {
-        Admin ad = new Admin("test");
+        AdminApp ad = new AdminApp("test");
         String inputs = "helpe\n11";
         ad.runLoop(new Login(new UserList()),new Scanner(inputs));
     }
 
     @Test
     void case6heckVacanciesIndex() throws StarsException {
-        Admin ad = new Admin("test");
+        AdminApp ad = new AdminApp("test");
         String inputs = "6\nCZ2001\n10027\n11";
         ad.runLoop(new Login(new UserList()),new Scanner(inputs));
     }
 
     @Test
     void case7PrintStudentListByIndexNumber() throws StarsException {
-        Admin ad = new Admin("test");
+        AdminApp ad = new AdminApp("test");
         String inputs = "7\nCZ2001\n10027\n11";
         ad.runLoop(new Login(new UserList()),new Scanner(inputs));
     }
     @Test
     void case8PrintStudentListByCourse() throws StarsException {
-        Admin ad = new Admin("test");
+        AdminApp ad = new AdminApp("test");
         String inputs = "8\nCZ2001\n11";
         ad.runLoop(new Login(new UserList()),new Scanner(inputs));
     }
     @Test
     void case9PrintEntireStudentList() throws StarsException {
-        Admin ad = new Admin("test");
+        AdminApp ad = new AdminApp("test");
         String inputs = "9\n11";
         ad.runLoop(new Login(new UserList()),new Scanner(inputs));
     }
     @Test
     void case10PrintEntireCourseList() throws StarsException {
-        Admin ad = new Admin("test");
+        AdminApp ad = new AdminApp("test");
         String inputs = "10\n11";
         ad.runLoop(new Login(new UserList()),new Scanner(inputs));
     }
