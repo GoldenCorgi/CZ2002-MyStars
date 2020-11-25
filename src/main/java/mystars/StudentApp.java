@@ -468,14 +468,14 @@ public class StudentApp {
 
                         // TODO Validate whether need to drop before add
                         // probably need to drop before add
-                        this.student.dropCourse(courseCode);
+                        dropCourse(courseCode);
                         SecondStudent.dropCourse(courseCode);
-                        this.CourseList.get(courseCode).getCourseIndexByIndexName(index1).dropStudent(SecondStudent);
-                        this.student.addCourse(courseCode, index2);
+                        CourseList.get(courseCode).getCourseIndexByIndexName(index1).dropStudent(SecondStudent);
+                        addCourse(courseCode, index2);
                         SecondStudent.addCourse(courseCode, index1);
-                        this.CourseList.get(courseCode).getCourseIndexByIndexName(index1).addStudent(SecondStudent);
-                        this.StudentList.remove(student2Username);
-                        this.StudentList.put(student2Username, SecondStudent);
+                        CourseList.get(courseCode).getCourseIndexByIndexName(index1).addStudent(SecondStudent);
+                        StudentList.remove(student2Username);
+                        StudentList.put(student2Username, SecondStudent);
                         System.out.println("Course index successfully swapped");
                     }
                     break;
