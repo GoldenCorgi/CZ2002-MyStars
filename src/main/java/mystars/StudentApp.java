@@ -470,7 +470,7 @@ public class StudentApp {
                         // probably need to drop before add
                         dropCourse(courseCode);
                         SecondStudent.dropCourse(courseCode);
-                        CourseList.get(courseCode).getCourseIndexByIndexName(index1).dropStudent(SecondStudent);
+                        CourseList.get(courseCode).getCourseIndexByIndexName(index2).dropStudent(SecondStudent);
                         addCourse(courseCode, index2);
                         SecondStudent.addCourse(courseCode, index1);
                         CourseList.get(courseCode).getCourseIndexByIndexName(index1).addStudent(SecondStudent);
