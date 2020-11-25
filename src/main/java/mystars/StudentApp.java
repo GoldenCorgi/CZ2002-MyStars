@@ -468,8 +468,9 @@ public class StudentApp {
 
                         // TODO Validate whether need to drop before add
                         // probably need to drop before add
-                        student.dropCourse(courseCode);
+                        dropCourse(courseCode);
                         SecondStudent.dropCourse(courseCode);
+                        CourseList.get(courseCode).getCourseIndexByIndexName(index2).dropStudent(SecondStudent);
                         addCourse(courseCode, index2);
                         SecondStudent.addCourse(courseCode, index1);
                         CourseList.get(courseCode).getCourseIndexByIndexName(index1).addStudent(SecondStudent);
