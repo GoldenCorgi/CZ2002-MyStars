@@ -475,6 +475,7 @@ public class StudentApp {
                         CourseList.get(courseCode).getCourseIndexByIndexName(index1).addStudent(SecondStudent);
                         StudentList.remove(student2Username);
                         StudentList.put(student2Username, SecondStudent);
+                        System.out.println("Course index successfully swapped");
                     }
                     break;
 
