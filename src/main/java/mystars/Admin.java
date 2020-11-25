@@ -157,8 +157,12 @@ public class Admin implements Serializable {
      * @return true if matric already exists
      */
     public boolean checkMatricNoExists(String matricNo) {
-        // true if exists
-        return (StudentList.get(matricNo) != null);
+        for (String student : StudentList.keySet()) {
+            if ((StudentList.get(student).getMatricNo()).equals(matricNo)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -313,6 +317,9 @@ public class Admin implements Serializable {
             }
             AcademicUnits = sc.nextInt();
             sc.nextLine();
+            if ((AcademicUnits <= 0) || (AcademicUnits > 4)) {
+                System.out.println("Invalid, please enter values from 1 to 4 only");
+            }
         } while ((AcademicUnits <= 0) || (AcademicUnits > 4));
 
         int courseVacancies;
@@ -472,8 +479,14 @@ public class Admin implements Serializable {
         System.out.println("Now updating course " + courseCode + " ...");
         System.out.println("Enter Course Name:");
         String courseName = sc.nextLine();
-        System.out.println("Enter Course School:");
-        String courseSchool = sc.nextLine();
+
+        String courseSchool;
+        do {
+            System.out.println("Enter Course School:");
+            courseSchool = sc.nextLine();
+            if (!verifyCourseSchool(courseSchool))
+                System.out.println("Invalid Course School, try again!");
+        } while (!verifyCourseSchool(courseSchool));
 
         int AcademicUnits;
         do {
@@ -708,7 +721,7 @@ public class Admin implements Serializable {
                         break;
                     }
                     // verify matric in correct format
-                    else if (!verifyMatricNoFormat(matricNo)) {
+                    if (!verifyMatricNoFormat(matricNo)) {
                         System.out.println("Invalid Matric No Format!");
                         break;
                     }
@@ -761,12 +774,12 @@ public class Admin implements Serializable {
                     System.out.println("Enter matricNo: ");
                     String matricNo1 = sc.nextLine();
                     // verify matric does not duplicate
-                    if (checkMatricNoExists(matricNo1)) {
+                    if (!checkMatricNoExists(matricNo1)) {
                         System.out.println("matricNo already exists!");
                         break;
                     }
                     // verify matric in correct format
-                    else if (!verifyMatricNoFormat(matricNo1)) {
+                    if (!verifyMatricNoFormat(matricNo1)) {
                         System.out.println("Invalid Matric No Format!");
                         break;
                     }
@@ -817,6 +830,7 @@ public class Admin implements Serializable {
                     String courseCode = sc.nextLine();
                     // verify coursecode
                     if (!verifyCourseCode(courseCode)) {
+                        System.out.println("Rejected - courseCode does not exist in CourseList");
                         break;
                     }
                     System.out.println("Enter courseIndex: ");
