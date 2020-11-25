@@ -10,7 +10,7 @@ import java.util.Properties;
 public class Mail {
 
     String emailAddress=  "incognitomaster2000@gmail.com";
-    String password = "shibamaster1!";
+    String password = "shibamaster2!";
 
 
 
