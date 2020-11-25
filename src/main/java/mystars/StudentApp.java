@@ -470,12 +470,12 @@ public class StudentApp {
                         // probably need to drop before add
                         this.student.dropCourse(courseCode);
                         SecondStudent.dropCourse(courseCode);
-                        CourseList.get(courseCode).getCourseIndexByIndexName(index1).dropStudent(SecondStudent);
+                        this.CourseList.get(courseCode).getCourseIndexByIndexName(index1).dropStudent(SecondStudent);
                         this.student.addCourse(courseCode, index2);
                         SecondStudent.addCourse(courseCode, index1);
-                        CourseList.get(courseCode).getCourseIndexByIndexName(index1).addStudent(SecondStudent);
-                        StudentList.remove(student2Username);
-                        StudentList.put(student2Username, SecondStudent);
+                        this.CourseList.get(courseCode).getCourseIndexByIndexName(index1).addStudent(SecondStudent);
+                        this.StudentList.remove(student2Username);
+                        this.StudentList.put(student2Username, SecondStudent);
                         System.out.println("Course index successfully swapped");
                     }
                     break;
