@@ -99,6 +99,7 @@ public class StudentApp {
         // god has forsaken this code, and so will i
         return CourseList.get(courseCode).getCourseIndexByIndexName(courseIndex).getNumberOfTotalVacancies();
     }
+
     /**
      * Verify if the course code exists
      *
@@ -313,13 +314,14 @@ public class StudentApp {
                     // verify if course is already in waitlist
 
                     // Validate whether course got vacancies etc -- validation done in addcourse itself.
-                    addCourse(courseCode, courseIndex);
                     // verify if there is vacancies in courseIndex
                     if (Objects.equals(checkVacancies(courseCode, courseIndex), 0)) {
+                        addCourse(courseCode, courseIndex);
                         System.out.println("Number of vacancies in courseIndex is 0. Student will be added to waitList.");
                     }
                     else {
-                    System.out.println("Course successfully added");}
+                        addCourse(courseCode, courseIndex);
+                        System.out.println("Course successfully added");}
 
                     break;
                 case "2":
@@ -412,13 +414,15 @@ public class StudentApp {
                     }
 
                     // Validate whether course got vacancies etc -- validation done in addcourse itself.
-                    addCourse(courseCode, courseIndex);
                     // verify if there is vacancies in courseIndex
                     if (Objects.equals(checkVacancies(courseCode, courseIndex), 0)) {
-                        System.out.println("Number of vacancies in courseIndex is 0. Student will be added to waitList.");
+                        addCourse(courseCode, courseIndex);
+                        System.out.println("Number of vacancies in new courseIndex is 0. Student will be added to waitList.");
                     }
                     else {
-                        System.out.println("Course index successfully changed.");}
+                        addCourse(courseCode, courseIndex);
+                        System.out.println("Course index successfully changed");}
+
 
                     break;
                 case "6":
