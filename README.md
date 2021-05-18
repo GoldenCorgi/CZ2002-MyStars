@@ -8,13 +8,16 @@
 <br />
 <p align="center">
   <a href="https://github.com/GoldenCorgi/">
-    <img src="https://github.com/GoldenCorgi/NTU--Mod--CZ2002-MyStars/blob/master/readme.png" alt="Logo" width="600">
+    <img src="https://github.com/GoldenCorgi/NTU--Mod--CZ2002-MyStars/blob/master/readme.png" alt="Logo">
   </a>
 
   <h3 align="center">CZ2002 Object-Oriented Design Principles</h3>
 
   <p align="center">
     "oh nooo, I deployed an entire application with full website documentation and unit testing, code coverage, and CI/CD, but noooo my concepts are too weak, A-"
+    <br />
+    <strong> subjective academic grading with no proper review/appeal procedure is bullshit for ANY high-cost college. </strong>
+    <br />
     <br />
     <a href="">2020</a>
     ·
