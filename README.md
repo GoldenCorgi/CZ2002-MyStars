@@ -4,6 +4,30 @@
 [![Netlify Status](https://api.netlify.com/api/v1/badges/122779ae-d183-46e9-beef-6e66a0d4db3f/deploy-status)](https://cz2002-mystars.netlify.app)
 [![codecov](https://codecov.io/gh/GoldenCorgi/CZ2002-MyStars/branch/master/graph/badge.svg?token=W928NWEEMJ)](https://codecov.io/gh/GoldenCorgi/CZ2002-MyStars)
 
+<!-- PROJECT LOGO -->
+<br />
+<p align="center">
+  <a href="https://github.com/GoldenCorgi/">
+    <img src="https://github.com/GoldenCorgi/NTU--Mod--CZ2002-MyStars/blob/master/readme.png" alt="Logo" width="600">
+  </a>
+
+  <h3 align="center">CZ2002 Object-Oriented Design Principles</h3>
+
+  <p align="center">
+    "oh nooo, I deployed an entire application with full website documentation and unit testing, code coverage, and CI/CD, but noooo my concepts are too weak, A-"
+    <br />
+    <a href="">2020</a>
+    ·
+    <a href="">Final Grade</a>
+    ·
+    <a href="">A-</a>
+    <br />
+    <br />
+  </p>
+</p>
+
+
+
 <p align="center">
   <img src="https://i.redd.it/5mfbi6v63ir41.jpg" width="70%" />
 </p>
